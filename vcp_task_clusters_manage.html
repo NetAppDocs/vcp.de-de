@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head class="at-element-marker">
+  <title>Verwalten von Clustern</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Verwalten von Clustern" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/de-de/vcp/vcp_task_clusters_manage.html" />
+	<meta property="og:description" content="Sie können dem Storage-Cluster mithilfe des Plug-ins einen Node hinzufügen." />
+  <meta property="og:image" content="https://docs.netapp.com/de-de/vcp/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Sie können dem Storage-Cluster mithilfe des Plug-ins einen Node hinzufügen.">
+  <meta name="keywords" content=" netapp, cluster, vcp, vcenter, element"><!-- Icons -->
+  <link rel="icon" href="/de-de/vcp/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/de-de/vcp/css/netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/de-de/vcp/css/landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/de-de/vcp/css/tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel='stylesheet' href='/de-de/vcp/css/na-feature.css' type='text/css'><!-- Top level site integrations --><script>
+    function addAdobeLaunch(adobeId) {
+      var head = document.getElementsByTagName('head')[0];
+      var adobe = document.createElement("script");
+      adobe.type = "text/plain";
+      adobe.className = "optanon-category-C0002";
+      adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/"+adobeId+".min.js";
+      head.appendChild(adobe);
+    }
+
+    function addGoogleAnalytics(gtagId) {
+      var google = document.createElement("script");
+      google.type = "text/plain";
+      google.className = "optanon-category-C0002";
+      google.src = "https://www.googletagmanager.com/gtag/js?id="+gtagId;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(google);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtagId);
+    }
+
+    function addConsent(consentId) {
+      var head = document.getElementsByTagName('head')[0];
+      var onetrustConsent = document.createElement("script");
+      onetrustConsent.type = "text/javascript";
+      onetrustConsent.src = "https://cdn.cookielaw.org/consent/"+consentId+"/OtAutoBlock.js";
+      head.appendChild(onetrustConsent);
+
+      var onetrustScript = document.createElement("script");
+      onetrustScript.type = "text/javascript";
+      onetrustScript.src = "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js";
+      onetrustScript.charset = "UTF-8";
+      onetrustScript.dataset.documentLanguage = "true";
+      onetrustScript.dataset.domainScript = consentId;
+      head.appendChild(onetrustScript);
+    }addConsent("72570c5c-fe30-465f-b0e0-b77f7fb4ae34");
+    addAdobeLaunch("launch-e9ff3acac59f");
+    addGoogleAnalytics("UA-81697994-3");function OptanonWrapper() { }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/de-de/vcp/js/na-search.js'></script><script src='/de-de/vcp/js/na-pagenav.js'></script><script src='/de-de/vcp/js/na-utility.js'></script>
+  <script src='/de-de/vcp/js/clouddocs.js'></script>
+  <script src='/de-de/vcp/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/de-de/vcp/js/toc.js'></script>
+  <script src='/de-de/vcp/js/customscripts.js'></script><script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+          $(".sidebar-nav-container").on("scroll", function() {
+            $.cookie("sidebarScroll", $(".sidebar-nav-container").scrollTop(), {
+              path    : "/de-de/vcp"  
+            });
+          });
+          $(function() {
+            if ($.cookie("sidebarScroll")) {
+              $(".sidebar-nav-container").scrollTop($.cookie("sidebarScroll"));
+            }
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script>
+  <script src='/de-de/vcp/js/custom-dropdown.js'></script>
+  <script src='/de-de/vcp/js/FileSaver.min.js'></script>
+  <script src='/de-de/vcp/js/jszip-utils.min.js'></script>
+  <script src='/de-de/vcp/js/jszip.min.js'></script>
+  <script src='/de-de/vcp/js/pdf-ux.js'></script>
+</head>
+
+
+  <body class role="document" data-flavor="">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  
+  <!-- Start Page Toolbar -->
+  
+  <div class="page-nav-toolbar"><div class="page-nav-contribute"><a target="_blank" href="https://github.com/NetAppDocs/vcp/issues/new?body=Page%3A%20[Verwalten von Clustern](https://docs.netapp.com/de-de/vcp/vcp_task_clusters_manage.html)&template=public-issue-template.md" class="page-nav-contribute-link" role="button"><img src="/de-de/vcp/images/discuss-sm.svg" alt="" class="github-icon" />Dokumentationsänderungen beantragen</a><a target="_blank" href="https://github.com/NetAppDocs/vcp/blob/main/vcp_task_clusters_manage.adoc" class="page-nav-contribute-link" role="button"><img src="/de-de/vcp/images/edit-sm.svg" alt="" class="github-icon" />In GitHub bearbeiten</a><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/de-de/vcp/images/article-sm.svg" alt="" class="github-icon" />Leitfaden für Beitragende</a></div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">AUF DIESER SEITE</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">Produkt und Lösungen</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">Support und Schulung</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">Cloud Central</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">Community</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">Blog</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">Kundenberichte</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/us/contact-us/index.aspx" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Kontakt</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/de-de/vcp/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/de-de/vcp/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/de-de/vcp/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" 
+          data-search-html="/de-de/vcp/search.html"
+          data-type="widget" 
+          data-placeholder="Dokumentation durchsuchen"
+          data-no-results-found="Keine Ergebnisse für {query} gefunden"
+          data-did-you-mean="Nach {suggestion} suchen."
+          data-no-results-found-did-you-mean="Keine Ergebnisse für {query} gefunden. Meinten Sie {suggestion}?"
+          data-results-found="{hitCount} Ergebnisse gefunden"
+          data-error-message="We're sorry, an issue occurred when fetching your results. Please try again."
+          data-error-reset="Reset Search"
+          data-sk-es-pf-indexes=""
+          data-flavor=""></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/de-de/vcp/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar">
+    <!-- Start Language Selector --><div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+      <div class="custom-dropdown-select custom-dropdown-select-lang">
+      <span class="lang-name">Deutsch</span>
+          <svg class="n-globe__icon" aria-labelledby="title">
+            <title>globe</title>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/de-de/vcp/common/svg/sprite.svg#globe"></use>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="custom-dropdown-menu"><li>
+          <a href="https://docs.netapp.com/de-de/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/us-en/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">English</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ja-jp/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-cn/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-tw/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ko-kr/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/fr-fr/vcp/vcp_task_clusters_manage.html" target="_self"><span translate="no" class="notranslate">Français</span></a>
+        </li></ul>
+    </div><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <script>
+    $(function(){
+        var currentLocalization = $('html').attr('lang');
+
+        var localizationsDictionary = {
+            "en-CA" : "https://www.netapp.com/search/index.aspx?for_cr=canada&",
+            "en-IN" : "https://www.netapp.com/search/index.aspx?for_cr=india&",
+            "nl-NL" : "https://www.netapp.com/search/index.aspx?for_cr=netherlands&",
+            "ru-RU" : "https://www.netapp.com/search/index.aspx?for_cr=russia&",
+            "sv-SE" : "https://www.netapp.com/search/index.aspx?for_cr=sweden&",
+            "it-IT" : "https://www.netapp.com/search/index.aspx?for_cr=italy&",
+            "he-IL" : "https://www.netapp.com/search/index.aspx?for_cr=israel&",
+            "ko-KR" : "https://www.netapp.com/search/index.aspx?for_cr=korea&",
+            "zh-TW" : "https://www.netapp.com/search/index.aspx?for_cr=taiwan&",
+            "en-GB" : "https://www.netapp.com/search/index.aspx?for_cr=unitedkingdom&",
+            "en-SG" : "https://www.netapp.com/search/index.aspx?for_cr=asean&",
+            "en-AU" : "https://www.netapp.com/search/index.aspx?for_cr=australia&",
+            "pt-BR" : "https://www.netapp.com/search/index.aspx?for_cr=brasil&",
+            "de-CH" : "https://www.netapp.com/search/index.aspx?for_cr=switzerland&",
+            "es-MX" : "https://www.netapp.com/search/index.aspx?for_cr=mexico&"
+        };
+
+        if($('html').hasClass('ntap-whitelisted') && localizationsDictionary.hasOwnProperty(currentLocalization)) {
+            $('.n-property-bar__property-link').attr('href', '/');
+        }
+    });
+  </script>
+  <!-- End property bar -->
+</header>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" id="sidebar-height">
+      <button id="btn-sidebar-collapse" onclick="hideSidebar()"><img src="/de-de/vcp/images/collapse.png" alt="Navigationsbereich reduzieren"></button>
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+    <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>verfügbare PDFs<span>
+    </span>
+  </a>
+</div>
+<div class="n-pdf-body-container">
+  <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+        
+        
+        
+        <a target="_blank" href="/de-de/vcp/pdfs/fullsite-sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_Dokumentation.pdf" >
+          <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>PDF dieser Dokumentationsseite</a>
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Versionshinweise.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Versionshinweise
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Konzepte.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Konzepte
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_5_0_oder_höher.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_4_10_oder_eine_frühere_Version.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_vCenter_Server_installieren_und_konfigurieren.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            NetApp Element-Plug-in für vCenter Server installieren und konfigurieren
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Management_von_Storage_mit_dem_vCenter_Plug_in.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Management von Storage mit dem vCenter Plug-in
+          </a>
+          
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Management_von_Cluster_Hardware_und_virtuellen_Netzwerken.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Management von Cluster-Hardware und virtuellen Netzwerken
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Überwachen_Sie_die_System_Performance.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Überwachen Sie die System-Performance
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Überwachen_Sie_Systemmeldungen.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Überwachen Sie Systemmeldungen
+          </a>
+          
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/de-de/vcp/pdfs/sidebar/Sicherung_von_Daten_mit_dem_vCenter_Plug_in.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf.png" alt="" width="16" height="16"/>
+            Sicherung von Daten mit dem vCenter Plug-in
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li></ul>
+  <div class="zip-pdf-link-container" style="display: none;">   
+    <a href="#" id="zipPdf">
+      <img src="/de-de/vcp/images/pdf-zip.png" alt="" width="16" height="16"/>
+      <pre>Sammlung separater PDF-Dokumente<span class="zip-size"></span></pre>
+    </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+</div>
+<script>
+  $("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+  });
+</script><div class="sidebar-nav-container" id="mysidebardiv">
+  <ul id="mysidebar" class="nav"><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server-Dokumentation"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/index.html">
+        NetApp Element Plug-in für VMware vCenter Server-Dokumentation
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Produktübersicht über das NetApp Element Plug-in für VMware vCenter Server"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/concept_vcp_product_overview.html">
+        Produktübersicht über das NetApp Element Plug-in für VMware vCenter Server
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Versionshinweise"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Versionshinweise</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Neuerungen im NetApp Element Plug-in für VMware vCenter Server"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/rn_whatsnew_vcp.html">
+        Neuerungen im NetApp Element Plug-in für VMware vCenter Server
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Weitere Release-Informationen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/rn_relatedrn_vcp.html">
+        Weitere Release-Informationen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Konzepte"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Konzepte</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überblick über die Remote Plug-in-Architektur"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_remote_plugin_architecture.html">
+        Überblick über die Remote Plug-in-Architektur
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Remote Plugin Erweiterungspunkt"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_remote_plugin_extension_point.html">
+        NetApp Element Remote Plugin Erweiterungspunkt
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erweiterter Punkt für die NetApp Element-Konfiguration"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_config_extension_point.html">
+        Erweiterter Punkt für die NetApp Element-Konfiguration
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erweiterter Punkt für das NetApp Element-Management"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_management_extension_point.html">
+        Erweiterter Punkt für das NetApp Element-Management
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benutzerkonten"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_accounts.html">
+        Benutzerkonten
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sicherungsdomänen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_protection_domains.html">
+        Sicherungsdomänen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Linked Mode und das vCenter Plug-in"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_linkedmode.html">
+        Linked Mode und das vCenter Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="QoSSIOC"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_qossioc.html">
+        QoSSIOC
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Virtuelle Volumes (VVols)"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_concept_vvols.html">
+        Virtuelle Volumes (VVols)
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Anforderungen vor der Implementierung"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/reference_requirements_vcp.html">
+        Anforderungen vor der Implementierung
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element-Plug-in für vCenter Server installieren und konfigurieren"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> NetApp Element-Plug-in für vCenter Server installieren und konfigurieren</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installation und Konfiguration von Element Plug-in 5.0 und höher für vCenter Server 7.0 und höher"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_getstarted_5_0.html">
+        Installation und Konfiguration von Element Plug-in 5.0 und höher für vCenter Server 7.0 und höher
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installieren und konfigurieren Sie Element Plug-in 4.10 und früher"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_getstarted.html">
+        Installieren und konfigurieren Sie Element Plug-in 4.10 und früher
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aktualisieren Sie das Plug-in"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/task_vcp_upgrades.html">
+        Aktualisieren Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Management von Storage mit dem vCenter Plug-in"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Management von Storage mit dem vCenter Plug-in</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verwalten von Clustern"
+      data-li-level="2#" 
+      class="  active "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_clusters_manage.html">
+        Verwalten von Clustern
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Managen von Datastores"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_datastores_manage.html">
+        Managen von Datastores
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Volumes managen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_volumes_manage.html">
+        Volumes managen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benutzerkonten erstellen und verwalten"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_create_manage_user_accounts.html">
+        Benutzerkonten erstellen und verwalten
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von Zugriffsgruppen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_create_manage_access_groups.html">
+        Erstellung und Management von Zugriffsgruppen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und Verwalten von Initiatoren"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_create_manage_initiators.html">
+        Erstellen und Verwalten von Initiatoren
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Einrichten und Managen von QoSSIOC für Element Volumes und VMware Datastores"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_qossioc.html">
+        Einrichten und Managen von QoSSIOC für Element Volumes und VMware Datastores
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von QoS-Richtlinien für Volumes"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_qos_policies.html">
+        Erstellung und Management von QoS-Richtlinien für Volumes
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Management von Cluster-Hardware und virtuellen Netzwerken"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Management von Cluster-Hardware und virtuellen Netzwerken</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Übersicht über Cluster-Hardware und virtuelle Netzwerke managen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_manage_cluster_overview.html">
+        Übersicht über Cluster-Hardware und virtuelle Netzwerke managen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Hinzufügen und Verwalten von Laufwerken"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_add_manage_drive.html">
+        Hinzufügen und Verwalten von Laufwerken
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Hinzufügen und Managen von Nodes"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_add_manage_nodes.html">
+        Hinzufügen und Managen von Nodes
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und managen Sie virtuelle Netzwerke"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_create_manage_vlans.html">
+        Erstellen und managen Sie virtuelle Netzwerke
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie die System-Performance"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Überwachen Sie die System-Performance</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie die System-Performance mit Berichtsoptionen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_intro.html">
+        Überwachen Sie die System-Performance mit Berichtsoptionen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_overview.html">
+        Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie Systemmeldungen"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="/de-de/vcp/vcp_task_reports_alerts.html">
+        <div class="na-navbar-padding"> Überwachen Sie Systemmeldungen</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Liste der Systemwarnmeldungen"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_reference_reports_alert_errors.html">
+        Liste der Systemwarnmeldungen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie Ereignisprotokolle zur Fehlerbehebung"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_event_logs.html">
+        Überwachen Sie Ereignisprotokolle zur Fehlerbehebung
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monitoring der Volume Performance"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_volume_performance.html">
+        Monitoring der Volume Performance
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_iscsi.html">
+        Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen der VM-Performance mit QoSSIOC-Ereignissen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_reports_qossioc.html">
+        Überwachen der VM-Performance mit QoSSIOC-Ereignissen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sicherung von Daten mit dem vCenter Plug-in"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Sicherung von Daten mit dem vCenter Plug-in</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sichern Sie Daten mit der Übersicht über das vCenter Plug-in"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_protect_overview.html">
+        Sichern Sie Daten mit der Übersicht über das vCenter Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von Volume Snapshots"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_protect_snapshots_volume.html">
+        Erstellung und Management von Volume Snapshots
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und Verwalten von Gruppen-Snapshots"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_protect_snapshots_group.html">
+        Erstellen und Verwalten von Gruppen-Snapshots
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen von Snapshot-Zeitplänen"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_protect_snapshots_schedules.html">
+        Erstellen von Snapshot-Zeitplänen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Remote-Replizierung zwischen Clustern"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_protect_remote_replication.html">
+        Remote-Replizierung zwischen Clustern
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Richten Sie virtuelle Volumes mit dem vCenter Plug-in ein und managen Sie sie"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_task_configure_manage_vvols.html">
+        Richten Sie virtuelle Volumes mit dem vCenter Plug-in ein und managen Sie sie
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Registrieren Sie das Plug-in"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/task_vcp_unregister.html">
+        Registrieren Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Entfernen Sie das Plug-in"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/task_vcp_remove.html">
+        Entfernen Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Fehler beim Plug-in beheben"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/vcp_reference_troubleshoot_vcp.html">
+        Fehler beim Plug-in beheben
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Frühere Versionen der NetApp Element-Plug-in-Dokumentation"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/reference_earlier_versions.html">
+        Frühere Versionen der NetApp Element-Plug-in-Dokumentation
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rechtliche Hinweise"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/de-de/vcp/legal-notices.html">
+        Rechtliche Hinweise
+      </a></li></ul>
+</div>
+<script>
+  window.onscroll = () => {
+    const value = -40 - (document.body.scrollHeight - (window.innerHeight + document.scrollingElement.scrollTop));
+    
+    document.getElementById("sidebar-height").style.bottom = Math.max(0,value) + "px";
+};
+</script>
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+<script>$("#mysidebar li.active").parents('ul').css("display","block");</script>
+
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <div class="ie-utility">
+  <button id="btn-sidebar-expand" onclick="showSidebar()"><img src="/de-de/vcp/images/expand.png" alt="Navigationsbereich erweitern"></button>
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">docs.netapp.com</a>
+        </li>
+        
+
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/de-de/vcp/">VCP</a>
+        </li>
+
+      </ul>
+    </div>
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+      <div class="ie-nmt-disclaimer">
+  <span>
+    <div class="ie-nmt-disclaimer-container">
+      <div class="ie-nmt-disclaimer-icon">
+        <svg class="luci-icon" aria-hidden="true">
+          <use xlink:href="/de-de/vcp/common/svg/sprite.svg#circle-info">
+        </svg>
+      </div>
+      <div class="ie-nmt-disclaimer-content">
+        <span> Die deutsche Sprachversion wurde als Serviceleistung für Sie durch maschinelle Übersetzung erstellt. Bei eventuellen Unstimmigkeiten hat die englische Sprachversion Vorrang. </span>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </span>
+</div><div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">Verwalten von Clustern</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2022-11-15 14:06:28 +0000">11/15/2022</time>
+    
+  
+
+<span>Beitragende
+</span>
+
+
+</p>
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>Sie können ein Cluster bearbeiten, auf dem Element Software ausgeführt wird, die SSH-Konfiguration managen, die Sicherung-Domänen-Überwachung festlegen und ein Cluster herunterfahren.</p>
+</div>
+<div class="ulist">
+<div class="title">Was Sie und#8217;ll benötigen</div>
+<ul>
+<li>
+<p>Mindestens ein Cluster muss hinzugefügt werden:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="vcp_task_getstarted_5_0.html#add-storage-clusters-for-use-with-the-plug-in">"Fügen Sie mit Element Plug-in für vCenter 5.0 und höher einen Cluster hinzu"</a></p>
+</li>
+<li>
+<p><a href="vcp_task_getstarted.html#add-storage-clusters-for-use-with-the-plug-in">"Fügen Sie mit Element Plug-in für vCenter 4.10 und früher einen Cluster hinzu"</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Sie müssen mindestens ein Cluster hinzufügen, um die Plug-in-Erweiterungspunktfunktionen verwenden zu können.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Aktuelle vollständige Cluster-Admin-Benutzeranmeldeinformationen für das Cluster.</p>
+</li>
+<li>
+<p>Firewall-Regeln ermöglichen eine offene Netzwerkkommunikation zwischen vCenter und dem Cluster MVIP auf den folgenden TCP-Ports:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beginnend mit dem Element Plug-in für vCenter 5.0, an den Ports 443, 8333 und 8443.</p>
+</li>
+<li>
+<p>Für Element Plug-in für vCenter 4.10 oder älter, in den Ports 443 und 8443.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Optionen</div>
+<ul>
+<li>
+<p>cluster details</p>
+</li>
+<li>
+<p>a cluster profile</p>
+</li>
+<li>
+<p>a cluster profile</p>
+</li>
+<li>
+<p>Encryption at Rest</p>
+</li>
+<li>
+<p>Encryption at Rest</p>
+</li>
+<li>
+<p>SSH</p>
+</li>
+<li>
+<p>the SSH time limit</p>
+</li>
+<li>
+<p>SSH</p>
+</li>
+<li>
+<p>protection domain monitoring</p>
+</li>
+<li>
+<p>down a cluster</p>
+</li>
+<li>
+<p>your NetApp HCI infrastructure</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="zeigen-sie-cluster-details-an">Zeigen Sie Cluster-Details an</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können Cluster-Details über die vCenter Plug-in-Erweiterung anzeigen.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie den Cluster, den Sie bearbeiten möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Details</strong>.</p>
+</li>
+<li>
+<p>Prüfen Sie die folgenden Informationen für alle Cluster:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Cluster Name</strong>: Der Name für den Cluster.</p>
+</li>
+<li>
+<p><strong>VCenter IP-Adresse</strong>: Die IP-Adresse oder FQDN des vCenter-Servers, dem der Cluster zugewiesen ist.</p>
+</li>
+<li>
+<p>* Unique ID*: Eindeutige ID für den Cluster.</p>
+</li>
+<li>
+<p><strong>Management Virtual IP</strong>: Die virtuelle Management-IP-Adresse (MVIP).</p>
+</li>
+<li>
+<p><strong>Speicher virtuell</strong>: Die virtuelle Speicher-IP-Adresse (SVIP).</p>
+</li>
+<li>
+<p><strong>Status</strong>: Der Status des Clusters.</p>
+</li>
+<li>
+<p><strong>VVols</strong>: Der Status der VVols-Funktionalität auf dem Cluster.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Prüfen Sie zusätzliche Details für einen einzelnen Cluster:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MVIP Node ID</strong>: Der Knoten, der die Master MVIP Adresse enthält.</p>
+</li>
+<li>
+<p><strong>SVIP Node ID</strong>: Der Knoten mit der Master SVIP Adresse.</p>
+</li>
+<li>
+<p><strong>Element Version</strong>: Die Version der NetApp Element Software, die der Cluster ausführt.</p>
+</li>
+<li>
+<p><strong>VASA 2 Status</strong>: Der Status des VASA Providers auf Element Cluster.</p>
+</li>
+<li>
+<p><strong>VASA Provider URL</strong>: Die URL des VASA Providers ist auf dem Element-Cluster aktiviert, sofern zutreffend.</p>
+</li>
+<li>
+<p><strong>Verschlüsselung im Ruhezustand Status</strong>: Mögliche Werte:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Aktivieren: Verschlüsselung im Ruhezustand wird aktiviert.</p>
+</li>
+<li>
+<p>Aktiviert: Verschlüsselung im Ruhezustand ist aktiviert.</p>
+</li>
+<li>
+<p>Deaktivieren: Verschlüsselung im Ruhezustand wird deaktiviert.</p>
+</li>
+<li>
+<p>Deaktiviert: Verschlüsselung im Ruhezustand ist deaktiviert.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Ensemble-Knoten</strong>: IPS der Knoten, die Teil des Datenbankensembles sind.</p>
+</li>
+<li>
+<p>* Gepaart mit*: Die Namen zusätzlicher Cluster, die mit dem lokalen Cluster gekoppelt sind.</p>
+</li>
+<li>
+<p><strong>SSH Status</strong>: Der Status der sicheren Shell. Wenn diese Option aktiviert ist, wird die verbleibende Zeit angezeigt.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bearbeiten-eines-clusterprofils">Bearbeiten eines Clusterprofils</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können die Cluster-Benutzer-ID und das Passwort vom Plug-in-Erweiterungspunkt ändern.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+In diesem Verfahren wird beschrieben, wie der vom Plug-in verwendete Benutzername und das Passwort für den Cluster-Admin geändert werden. Sie können die Anmeldedaten für den Cluster-Administrator nicht aus dem Plug-in ändern. Siehe <a href="https://docs.netapp.com/us-en/element-software/storage/concept_system_manage_manage_cluster_administrator_users.html" target="_blank" rel="noopener">"Verwalten von Benutzerkonten für Cluster-Administratoren"</a> Anweisungen zum Ändern der Anmeldedaten für ein Cluster-Administratorkonto finden Sie unter.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Bearbeiten</strong>.</p>
+</li>
+<li>
+<p>Ändern Sie Folgendes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Benutzer-ID: Der Cluster-Administratorname.</p>
+</li>
+<li>
+<p>Passwort: Das Cluster Administrator-Passwort.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Nachdem ein Cluster hinzugefügt wurde, können Sie die IP-Adresse oder den FQDN eines Clusters nicht ändern. Sie können auch den zugewiesenen verknüpften Modus-vCenter-Server für ein hinzugefügtes Cluster nicht ändern. Zum Ändern der Cluster-Adresse oder des zugehörigen vCenter-Servers müssen Sie den Cluster entfernen und ihn erneut hinzufügen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>OK</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="entfernen-eines-clusterprofils">Entfernen eines Clusterprofils</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können das Profil eines Clusters, das Sie nicht mehr über das vCenter Plug-in managen möchten, mit dem Plug-in-Erweiterungspunkt entfernen.</p>
+</div>
+<div class="paragraph">
+<p>Wenn Sie eine verknüpfte Modusgruppe einrichten und einem Cluster einem anderen vCenter Server zuweisen möchten, können Sie das Clusterprofil entfernen und es mit einer anderen verknüpften vCenter Server IP erneut hinzufügen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Beginnend mit dem Element vCenter Plug-in 5.0, zu nutzen <a href="vcp_concept_linkedmode.html">"VCenter Linked Mode"</a>, Sie registrieren das Element Plug-in über einen separaten Management-Node für jeden vCenter Server, der NetApp SolidFire Storage Cluster managt.</p>
+</li>
+<li>
+<p>Mit dem Element vCenter Plug-in 4.10 und früher werden Cluster-Ressourcen mithilfe von anderen vCenter Servern gemanagt <a href="vcp_concept_linkedmode.html">"VCenter Linked Mode"</a> Ist auf lokale Storage-Cluster beschränkt</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie den Cluster, den Sie entfernen möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Entfernen</strong>.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Aktion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="aktivieren-sie-verschlüsselung-für-daten-im-ruhezustand">Aktivieren Sie Verschlüsselung für Daten im Ruhezustand</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit dem Plug-in-Erweiterungspunkt können Sie die Verschlüsselung im Ruhezustand (EAR) manuell aktivieren.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie das Cluster aus, auf dem die Verschlüsselung im Ruhezustand aktiviert werden soll.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie im Menü Ergebnis die Option <strong>EAR</strong> aktivieren.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Aktion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deaktivieren-sie-verschlüsselung-für-daten-im-ruhezustand">Deaktivieren Sie Verschlüsselung für Daten im Ruhezustand</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit dem Plug-in-Erweiterungspunkt können Sie die Verschlüsselung im Ruhezustand (EAR) manuell deaktivieren.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Tabelle <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Aktivieren Sie das Kontrollkästchen für das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie im Menü Ergebnis die Option <strong>EAR deaktivieren</strong> aus.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Aktion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="aktivieren-sie-ssh">Aktivieren Sie SSH</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können eine SSH-Sitzung (Secure Shell) manuell über den Plug-in-Erweiterungspunkt aktivieren. Durch das Aktivieren von SSH können Techniker des NetApp Technical Support für die Fehlersuche auf Storage Nodes zugreifen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>SSH aktivieren</strong>.</p>
+</li>
+<li>
+<p>Geben Sie eine Dauer für die Aktivierung der SSH-Sitzung in Stunden bis maximal 720 Stunden ein.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Um fortzufahren, müssen Sie einen Wert eingeben.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Ja</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ändern-sie-das-ssh-zeitlimit">Ändern Sie das SSH-Zeitlimit</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können eine neue Dauer für eine SSH-Sitzung eingeben.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>SSH ändern</strong>.</p>
+<div class="paragraph">
+<p>Im Dialogfeld wird die verbleibende Zeit für die SSH-Sitzung angezeigt.</p>
+</div>
+</li>
+<li>
+<p>Geben Sie eine neue Dauer für die SSH-Sitzung in Stunden bis maximal 720 ein.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Um fortzufahren, müssen Sie einen Wert eingeben.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Ja</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deaktivieren-sie-ssh">Deaktivieren Sie SSH</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können den Secure Shell-(SSH-)Zugriff auf Knoten im Storage-Cluster manuell über den Plug-in-Erweiterungspunkt deaktivieren.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>SSH deaktivieren</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Ja</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="legen-sie-die-überwachung-der-schutzdomäne-fest">Legen Sie die Überwachung der Schutzdomäne fest</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können manuell aktivieren <a href="vcp_concept_protection_domains.html">"Protection Domain Monitoring"</a> Verwenden des Plug-in-Erweiterungspunkts. Sie können einen Schutz-Domain-Schwellenwert basierend auf Node- oder Chassis-Domänen auswählen.</p>
+</div>
+<div class="ulist">
+<div class="title">Was Sie und#8217;ll benötigen</div>
+<ul>
+<li>
+<p>Der ausgewählte Cluster muss von Element 11.0 oder höher überwacht werden, um die Überwachung der Schutzdomäne zu nutzen. Andernfalls stehen die Funktionen der Schutzdomäne nicht zur Verfügung.</p>
+</li>
+<li>
+<p>Ihr Cluster muss mehr als zwei Knoten haben, um die Funktion der Schutz-Domänen zu verwenden. Es ist keine Kompatibilität mit zwei-Node-Clustern verfügbar.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Set Protection Domain Monitoring</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie einen Fehlerschwellenwert aus:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Node</strong>: Der Schwellenwert, über den ein Cluster bei Hardwareausfällen auf Knotenebene keine unterbrechungsfreien Daten mehr bereitstellen kann. Der Node-Schwellenwert ist der Standard des Systems.</p>
+</li>
+<li>
+<p><strong>Chassis</strong>: Der Schwellenwert, über den ein Cluster bei Hardwareausfällen auf Gehäuseebene keine unterbrechungsfreien Daten mehr bereitstellen kann.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>OK</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Nachdem Sie die Überwachungseinstellungen festgelegt haben, können Sie die Schutzdomänen über den überwachen <a href="vcp_task_reports_overview.html#reporting-overview-page-data">"Berichterstellung"</a> Registerkarte des Erweiterungspunkts NetApp Element Management.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="herunterfahren-eines-clusters">Herunterfahren eines Clusters</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Mit dem Plug-in-Erweiterungspunkt können Sie alle aktiven Nodes in einem Storage-Cluster manuell herunterfahren.</p>
+</div>
+<div class="paragraph">
+<p>Wenn Sie möchten <a href="vcp_task_add_manage_nodes.html#restart-a-node">"Neustart"</a> Anstatt das Cluster herunterzufahren, können Sie alle Nodes auf der Cluster-Seite im Erweiterungspunkt des NetApp Element-Managements auswählen und einen Neustart durchführen.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Sie haben I/O angehalten und alle iSCSI-Sitzungen getrennt.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Herunterfahren</strong>.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Aktion.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="erweitern-sie-ihre-netapp-hci-infrastruktur">Erweitern Sie Ihre NetApp HCI Infrastruktur</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können Ihre NetApp HCI-Infrastruktur manuell erweitern, indem Sie Nodes mithilfe von NetApp HCI hinzufügen. Ein Link zur NetApp HCI-Benutzeroberfläche zur Skalierung Ihres Systems wird über das Plug-in-Erweiterungspunkt bereitgestellt.</p>
+</div>
+<div class="paragraph">
+<p>Weitere Links finden Sie auf den Seiten „erste Schritte“ und „Cluster“:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie NetApp Element Remote Plugin &gt; Management.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und frühere Versionen den NetApp Element Management Extension Point aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
+</td>
+<td class="content">
+Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Cluster</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Cluster</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Cluster</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Überprüfen Sie das Cluster.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>erweitern Sie Ihren NetApp HCI</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="weitere-informationen">Weitere Informationen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.netapp.com/us-en/hci/index.html" target="_blank" rel="noopener">"NetApp HCI-Dokumentation"</a></p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/data-storage/solidfire/documentation" target="_blank" rel="noopener">"Seite „SolidFire und Element Ressourcen“"</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/us/legal/copyright.aspx">© 2022 NetApp, Inc.</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Allgemeine Geschäftsbedingungen</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Richtlinie zu Datenschutz</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Richtlinie zu Cookies</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Cookie-Einstellungen</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="n-footer__bottom-right">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a target="_self" href="javascript:netapp_mailto()">Feedback zu dieser Seite senden</a>
+            </li>
+          </ul>
+        </div>
+        <div class="n-footer__social-links">
+          <ul class="n-footer__social-link-list">
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com"
+                target="_blank" title="blog" alt="blog">
+                <span class="n-footer__social-link-text">blog</span>
+                <svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+                  <title>blog@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#blog"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/"
+                target="_blank" title="community" alt="community">
+                <span class="n-footer__social-link-text">community</span>
+                <svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+                  <title>community@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#comments"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp"
+                target="_blank" title="twitter" alt="twitter">
+                <span class="n-footer__social-link-text">twitter</span>
+                <svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+                  <title>twitter@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#twitter"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp"
+                target="_blank" title="facebook" alt="facebook">
+                <span class="n-footer__social-link-text">facebook</span>
+                <svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+                  <title>facebook@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#facebook"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-linkedin"
+                href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+                <span class="n-footer__social-link-text">linkedin</span>
+                <svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+                  <title>linkedin@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#linkedin"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-youtube"
+                href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+                <span class="n-footer__social-link-text">youtube</span>
+                <svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+                  <title>youtube@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#youtube"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-slideshare"
+                href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+                <span class="n-footer__social-link-text">slideshare</span>
+                <svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+                  <title>slideshare@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/de-de/vcp/common/svg/sprite.svg#slideshare"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/de-de/vcp/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/de-de/vcp/js/prism.js'></script>
+      <script type="text/javascript" src='/de-de/vcp/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/de-de/vcp/js/www-ntap.js'></script>
+    <script src='/de-de/vcp/js/tabbed-blocks.js'></script>
+    <script src='/de-de/vcp/js/sidebar.js'></script>
+  </body></html>
