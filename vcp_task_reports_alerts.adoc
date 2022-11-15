@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_reports_alerts.html 
+summary: Überwachen Sie Warnmeldungen, die Informationen, Warnungen oder Fehler enthalten, die angeben, wie gut der Cluster ausgeführt wird, indem Sie die Berichtsseiten des NetApp Element Plug-ins für VMware vCenter Server verwenden. 
+keywords: netapp, hci, vcp, vcenter, element, monitor, report, alert, cluster, performance 
+---
+= Überwachen Sie Systemmeldungen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Warnungen überwachen, d. h. Informationen, Warnungen oder Fehler, die angeben, wie gut das Cluster ausgeführt wird.
+
+Warnmeldungen sind Cluster-Fehler oder -Fehler und werden bei Auftreten gemeldet. Die meisten Fehler lösen sich automatisch, bei manchen ist jedoch unter Umständen ein manuelles Eingreifen erforderlich. Das System meldet bei jeder Meldung auf der Seite „Meldungen“ Alarmfehlercodes. Fehlercodes helfen Ihnen dabei festzustellen, welche Komponente des Systems die Warnmeldung erfahren hat und warum die Warnmeldung generiert wurde. Siehe link:vcp_reference_reports_alert_errors.html["Liste der Systemwarnmeldungen"] Für eine Beschreibung und Schritte zur Problembehebung.
+
+Nachdem Sie das Problem behoben haben, fragt das System sich ab und identifiziert das Problem als gelöst. Anschließend werden alle Informationen über die Warnmeldung einschließlich des Datums, an dem sie behoben wurde, in die aufgelöste Ansicht verschoben.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
+. Wählen Sie *Reporting* > *Alerts*.
+. Überwachen Sie die folgenden Cluster-Warnungsinformationen:
++
+** *ID*: Eindeutige ID für eine Clusterwarnung.
+** *Severity*
++
+*** *Warnung*: Ein kleines Problem, das bald Aufmerksamkeit erfordert. System-Upgrades sind nach wie vor auf dieser Schweregrade zulässig.
+*** *Fehler*: Ein Ausfall, der zu Performance-Verschlechterung oder Verlust von Hochverfügbarkeit führen kann. Fehler sollten in der Regel den Dienst nicht anderweitig beeinträchtigen.
+*** *Kritisch*: Ein schwerwiegender Fehler, der den Dienst beeinträchtigt. Das System kann keine API- oder Client-I/O-Anfragen bereitstellen. Ein Betrieb in diesem Zustand kann zu einem potenziellen Datenverlust führen.
+*** *BestPractice*: Eine empfohlene Best Practice für die Systemkonfiguration wird nicht verwendet.
+
+
+** *Typ*
++
+*** *Knoten*: Fehler, der einen ganzen Knoten betrifft.
+*** *Drive*: Störung bei einem einzelnen Antrieb.
+*** *Cluster*: Fehler, die den gesamten Cluster betreffen.
+*** *Service*: Fehler, der einen Dienst auf dem Cluster betrifft.
+*** *Volumen*: Fehler, der ein Volumen auf dem Cluster beeinflusst.
+
+
+** *Knoten*: Knoten-ID für den Knoten, auf den sich dieser Fehler bezieht. Bei Knoten- und Laufwerkfehlern enthalten, andernfalls auf - (Dash) gesetzt.
+** *Laufwerk-ID*: Laufwerk-ID für das Laufwerk, auf das sich dieser Fehler bezieht. Bei Fahrfehlern enthalten, ansonsten auf - (Dash) eingestellt.
+** *Fehlercode*: Ein beschreibender Code, der angibt, was den Fehler verursacht hat.
+** *Details*: Detaillierte Beschreibung des Fehlers.
+** *Zeit*: Diese Überschrift ist nur in der Active Filteransicht sichtbar. Datum und Uhrzeit der Fehlerprotokollierung.
+** *Auflösungsdatum*: Diese Überschrift ist nur in der aufgelösten Filteransicht sichtbar. Datum und Uhrzeit, zu der der Fehler behoben wurde.
+
+
+. Um zu überprüfen, ob das Problem behoben wurde, suchen Sie in der Ansicht „gelöst“ nach dem Problem.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

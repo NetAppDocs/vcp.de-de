@@ -1,0 +1,238 @@
+---
+sidebar: sidebar 
+permalink: vcp_reference_troubleshoot_vcp.html 
+summary: Sie können sich über einige der häufigsten Probleme mit dem Plug-in und Schritte zur Behebung dieser Probleme informieren. 
+keywords: netapp, hci, vcp, vcenter, element, troubleshoot, monitor, report, alert, cluster, performance 
+---
+= Fehler beim vCenter Plug-in beheben
+:hardbreaks:
+:allow-uri-read: 
+:url-peak: https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_'Network_Down'_or_'Down'_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: media/
+
+
+[role="lead"]
+Beim NetApp Element Plug-in für VMware vCenter Server müssen Sie einige häufige Probleme kennen und die erforderlichen Schritte zur Behebung kennen.
+
+*  registration successful but icons do not appear in web client
+*  after NetApp Element Plug-in for VMware vCenter Server 4.8 or later upgrade with VMware vCenter Server 6.7U1
+*  registering plug-in using Registration UI
+*  updating plug-in using Registration UI
+*  message that NetApp extension cannot be upgraded
+*  plug-in completes successfully but icons remain
+*  cannot be unregistered or removed after admin password change
+*  management tasks fail or volumes are not accessible to ESXi host
+*  occurs during vCenter Plug-in use on Firefox 59.0.2 browsers
+*  datastore operation fails
+*  pair cannot connect using a pairing key
+*  message for QoSSIOC status
+*  service shown as available but is unavailable
+*  is enabled for datastore but unavailable
+* https://kb.netapp.com/Advice_and_Troubleshooting/Hybrid_Cloud_Infrastructure/NetApp_HCI/vCenter_plug-in_deployment_fails_after_upgrading_vCenter_to_version_7.0_U3["VCenter-Plug-in-Bereitstellung schlägt nach dem Upgrade auf VMware vSphere 7.0 Update 3 fehl"^]
+
+
+
+
+== Plug-in-Registrierung erfolgreich, aber Symbole werden nicht im Web-Client angezeigt
+
+Die Registrierung wird als erfolgreich angezeigt, die Plug-in-Symbole sind jedoch nicht im vSphere Web Client sichtbar.
+
+.Korrekturmaßnahme für das NetApp Element vCenter Plug-in 4.10 und früher
+* Melden Sie sich vom vSphere Web Client ab, und melden Sie sich erneut an. Möglicherweise müssen Sie den Browser schließen und erneut öffnen.
+* Löschen Sie den Browser-Cache.
+* Starten Sie vSphere Web Client Service von vCenter aus über das Menü Dienste in Windows Administrative Tools oder starten Sie vCenter neu.
+* Stellen Sie sicher, dass Sie über alle erforderlichen Standardberechtigungen verfügen, die mit der vCenter-Administratorrolle verknüpft sind.
+* Überprüfen Sie, ob die Plug-in-ZIP-Datei erfolgreich in vCenter heruntergeladen wurde:
++
+.. Offen `vsphere_client_virgo.log` Im vCenter: VCenter-Protokolldateien für Versionen 6.5 und 6.7 befinden sich an folgenden Orten:
++
+*** Flash-Installationen: `/var/log/vmware/vsphere-client/logs/vsphere_client_virgo.log`
+*** HTML5-Installationen: `/var/log/vmware/vsphere-ui/logs/vsphere_client_virgo.log`
+
+
+.. Wenn eine Fehlermeldung darauf hinweist, dass der ZIP-Download fehlgeschlagen ist, laden Sie den ZIP erneut herunter.
++
+
+NOTE: Möglicherweise müssen Sie eine nicht erreichbare oder fehlerhafte URL korrigieren. Aktualisieren Sie die Plug-in-Registrierung oder heben Sie die Registrierung ab und registrieren Sie das Plug-in erneut mit einer korrigierten URL. Wenn Sie eine HTTP-URL angegeben haben, ohne das zu ändern, kann es auch zu einem Ausfall des ZIP kommen `allowHTTP` Einstellung.
+
+
+
+* Netzwerkports überprüfen. Stellen Sie sicher, dass der Management-Node bidirektional über vCenter auf den erforderlichen Ports erreichbar ist.
+* Überprüfen Sie den MOB-Erweiterungsdatensatz des vCenter (https://<vcenterIP>/mob/?moid=ExtensionManager&doPath=extensionList["com.solidfire"].Server)die die URL des Downloadorts für das Plug-in ZIP enthält:
++
+.. Fügen Sie die URL in einen Browser ein.
+.. Stellen Sie sicher, dass das Plug-in ZIP heruntergeladen werden kann.
++
+*** Wenn das Plug-in ZIP heruntergeladen werden kann, fahren Sie mit dem nächsten Schritt fort.
+*** Wenn die Plug-in-ZIP nicht heruntergeladen werden kann, prüfen Sie, ob Netzwerkprobleme zwischen vCenter Server und dem Management-Node auftreten.
+
+
+.. Wenn das Plug-in nicht heruntergeladen werden kann, vergleichen Sie das `serverThumbprint` Im MOB-Datensatz mit dem Zertifikat SHA-1 für die ZIP-URL, die im Browser angezeigt wird:
++
+... Wenn der Registrierungseintrag im MOB eine falsche oder veraltete URL oder SHA-1 hat, heben Sie die Registrierung des Plug-ins auf und registrieren Sie das Plug-in erneut.
+... Wenn das Problem weiterhin besteht und die ZIP-Adresse nicht erreichbar ist, überprüfen Sie die ZIP-URL, um festzustellen, ob bei der verwendeten Management-Node-Adresse ein Problem auftritt. In einigen Fällen kann es erforderlich sein, eine URL mithilfe des Registrierungsprogramms für das Plug-in anzupassen, damit die ZIP-Datei heruntergeladen werden kann.
+
+
+
+
+
+
+
+
+== Fehler nach dem NetApp Element Plug-in für VMware vCenter Server 4.8 oder höher: Upgrade mit VMware vCenter Server 6.7U1
+
+Nach einem Upgrade auf Element vCenter Plug-in 4.8 oder höher mit VMware vCenter Server 6.7U1 können folgende Probleme auftreten:
+
+* Die Cluster werden im Abschnitt *Cluster* des Plug-in-Erweiterungspunkts nicht aufgeführt.
+* In den Abschnitten *Cluster* und *QoSSIOC Settings* erscheint ein Serverfehler.
+
+
+Wiederherstellung des Clusters und der QoSSIOC-Einstellungen:
+
+. Melden Sie sich von vCenter aus an.
+. Warten Sie nach dem Abmelden drei bis fünf Minuten, und melden Sie sich dann erneut an.
+. Wählen Sie in der aktuellen Ansicht von vSphere Client das Aktualisierungssymbol aus.
+. Deaktivieren Sie den Cache und aktualisieren Sie beispielsweise den Browser mit Strg+F5.
+. Überprüfen Sie, ob die Cluster- und QoSSIOC-Einstellungen wiederhergestellt sind.
++
+Wenn das Problem weiterhin besteht, müssen Sie dies tun link:vcp_task_getstarted_5_0.html#add-storage-clusters-for-use-with-the-plug-in["Fügen Sie die Cluster für Element Plug-in 5.0 oder höher erneut hinzu"] Oder link:vcp_task_getstarted.html#add-storage-clusters-for-use-with-the-plug-in["Fügen Sie die Cluster für Element Plug-in 4.10 oder früher erneut hinzu"].
+
+
+
+
+
+== Fehler beim Registrieren des Plug-ins über die Registrierungs-UI
+
+Bei Verwendung des Registrierungsprogramms liegt ein Fehler beim Registrieren des Plug-ins beim vCenter Server vor. Ein Plug-in mit dem Schlüssel `com.solidfire` Ist bereits installiert.
+
+Verwenden Sie im Registrierungs-Utility *Update Plug-in* anstelle von *Register Plug-in*.
+
+
+
+== Fehler beim Aktualisieren des Plug-ins mithilfe der Registrierungs-UI
+
+Bei Verwendung des Registrierungsprogramms ist ein Fehler beim Aktualisieren des Plug-ins gegen den vCenter Server aufgetreten. Ein Plug-in mit dem Schlüssel `com.solidfire` Ist für das Update nicht installiert.
+
+Verwenden Sie im Registrierungsdienstprogramm *Register Plug-in* statt *Update Plug-in*.
+
+
+
+== Fehlermeldung, dass eine Erweiterung von NetApp nicht aktualisiert werden kann
+
+.Nachricht
+[listing]
+----
+org.springframework.transaction.CannotCreateTransactionException: Could not open JPA EntityManager for transaction; nested exception is javax.persistence.PersistenceException: org.hibernate.exception.GenericJDBCException: Could not open connection.
+----
+Während eines Upgrades von Windows vCenter Server von Version 6.0 auf 6.5 wird eine Warnung angezeigt, dass die NetApp-Erweiterung nicht aktualisiert werden kann oder nicht mit dem neuen vCenter Server funktioniert. Nachdem Sie das Upgrade abgeschlossen und sich beim vSphere Web Client angemeldet haben, tritt der Fehler auf, wenn Sie einen vCenter Plug-in Erweiterungspunkt auswählen. Dieser Fehler tritt auf, weil sich das Verzeichnis, in dem die Laufzeitdatenbank gespeichert wird, von Version 6.0 auf 6.5 geändert hat. Das vCenter Plug-in kann die erforderlichen Dateien nicht zur Laufzeit erstellen.
+
+.Korrekturmaßnahme
+. Registrieren Sie das Plug-in.
+. Entfernen Sie Plug-in-Dateien.
+. Starten Sie vCenter neu.
+. Registrieren Sie das Plug-in.
+. Melden Sie sich beim vSphere Web Client an.
+
+
+
+
+== Das Entfernen des Plug-ins wurde erfolgreich abgeschlossen, die Symbole bleiben jedoch erhalten
+
+Das Entfernen von vCenter-Plug-in-Paketdateien wurde erfolgreich abgeschlossen, Plug-in-Symbole sind jedoch weiterhin im vSphere Web Client sichtbar.
+
+Melden Sie sich vom vSphere Web Client ab, und melden Sie sich erneut an. Möglicherweise muss Ihr Browser geschlossen und erneut geöffnet werden. Wenn das Problem durch das Abmelden von vSphere Web Client nicht behoben wird, müssen möglicherweise die Webservices des vCenter-Servers neu gestartet werden. Außerdem können andere Benutzer bereits vorhandene Sitzungen nutzen. Alle Benutzersitzungen müssen geschlossen werden.
+
+
+
+== Das Plug-in kann nach Änderung des Admin-Passworts nicht mehr registriert oder entfernt werden
+
+Nachdem das Admin-Passwort für das vCenter geändert wurde, mit dem das Plug-in registriert wurde, kann das vCenter-Plug-in nicht mehr registriert oder entfernt werden.
+
+Für Plug-in 2.6, gehen Sie auf die vCenter Plug-in *Register*/*Unregister* Seite. Klicken Sie auf die Schaltfläche *Update*, um die vCenter-IP-Adresse, die Benutzer-ID und das Passwort zu ändern.
+
+Aktualisieren Sie für Plug-in 2.7 oder höher das vCenter Administrator-Passwort in den mNode-Einstellungen im Plug-in.
+
+Aktualisieren Sie für Plug-in 4.4 oder höher das vCenter Administrator-Passwort in den QoSSIOC-Einstellungen im Plug-in.
+
+
+
+== Plug-in-Managementaufgaben sind nicht erfolgreich oder ESXi-Host hat keinen Zugriff auf Volumes
+
+Das Erstellen, Klonen und Freigeben von Datastore-Aufgaben ist fehlgeschlagen oder Volumes sind vom ESXi Host nicht zugänglich.
+
+.Korrekturmaßnahme
+* Vergewissern Sie sich, dass der iSCSI-Software-HBA auf dem ESXi-Host für Datastore-Vorgänge vorhanden und aktiviert ist.
+* Vergewissern Sie sich, dass das Volume nicht gelöscht oder einer falschen Volume-Zugriffsgruppe zugewiesen ist.
+* Überprüfen Sie, ob die Zugriffsgruppe des Volumes über den richtigen Host-IQN verfügt.
+* Überprüfen Sie, ob das zugehörige Konto über die richtigen CHAP-Einstellungen verfügt.
+* Prüfen Sie, ob der Volume-Status aktiv ist und der Volume-Zugriff darauf erfolgt `readWrite`, und `512e` Ist auf „true“ gesetzt.
+
+
+
+
+== Fehler tritt während der Verwendung des vCenter Plug-in auf Firefox 59.0.2 Browsern auf
+
+`Name:HttpErrorResponse Raw Message:Http failure response for https://vc6/ui/solidfire-war-4.2.0-SNAPSHOT/rest/vsphere//servers: 500 Internal Server Error Return Message:Server error. Please try again or contact NetApp support`
+
+Dieses Problem tritt in vSphere HTML5 Web Clients unter Verwendung von Firefox auf. Der vSphere Flash-Client ist nicht betroffen.
+
+Verwenden Sie den vollständigen FQDN in der Browser-URL. VMware erfordert eine vollständige vorwärts- und rückwärts Auflösung von IP, Kurzname und FQDN.
+
+
+
+== Der Vorgang zum Löschen des Datenspeichers ist fehlgeschlagen
+
+Ein Vorgang zum Löschen des Datenspeichers schlägt fehl.
+
+Vergewissern Sie sich, dass alle VMs aus dem Datastore gelöscht wurden. Sie müssen VMs aus einem Datenspeicher löschen, bevor der Datenspeicher gelöscht werden kann.
+
+
+
+== Das Cluster-Paar kann keine Verbindung über einen Kopplungsschlüssel herstellen
+
+Während der Paarung eines Clusters über einen Kopplungstaste tritt ein Verbindungsfehler auf. Die Fehlermeldung im Dialogfeld *Cluster Pairing* erzeugen zeigt an, dass keine Route zum Host vorhanden ist.
+
+Löschen Sie den auf dem lokalen Cluster erstellten Prozess manuell das nicht konfigurierte Cluster-Paar, und führen Sie die Cluster-Kopplung erneut aus.
+
+
+
+== Fehlermeldung für den QoSSIOC-Status
+
+Der QoSSIOC-Status für das Plug-in zeigt ein Warnsymbol und eine Fehlermeldung an.
+
+.Korrekturmaßnahme
+* `Unable to reach IP address`: Die IP-Adresse ist ungültig oder es werden keine Antworten empfangen. Vergewissern Sie sich, dass die Adresse korrekt ist und der Management-Node online und verfügbar ist.
+* `Unable to communicate`: Die IP-Adresse kann erreicht werden, aber Anrufe an die Adresse sind fehlgeschlagen. Dies kann darauf hindeuten, dass der QoSSIOC-Dienst nicht an der angegebenen Adresse ausgeführt wird oder eine Firewall den Datenverkehr blockiert.
+* `Unable to connect to the SIOC service`: Offen `sioc.log` In `/opt/solidfire/sioc/data/logs/` Auf dem Management-Node (`/var/log` Oder `/var/log/solidfire/` Auf älteren Managementknoten), um zu überprüfen, ob der SIOC-Service erfolgreich gestartet wurde. Das Starten des SIOC-Service kann 50 Sekunden oder länger dauern. Wenn der Dienst nicht erfolgreich gestartet wurde, versuchen Sie es erneut.
+
+
+
+
+== Der QoSSIOC-Service wird als verfügbar angezeigt, ist jedoch nicht verfügbar
+
+Die QoSSIOC-Diensteinstellungen werden als UP angezeigt, QoSSIOC ist jedoch nicht verfügbar.
+
+Wählen Sie auf der Registerkarte * QoSSIOC-Einstellungen* auf der Registerkarte NetApp Element Remote Plugin > Konfiguration die Schaltfläche Aktualisieren. Aktualisieren Sie die IP-Adresse oder die Authentifizierungsinformationen des Benutzers nach Bedarf.
+
+Wählen Sie auf der Registerkarte *QoSSIOC-Einstellungen* im Erweiterungspunkt NetApp Element-Konfiguration die Schaltfläche Aktualisieren. Aktualisieren Sie die IP-Adresse oder die Authentifizierungsinformationen des Benutzers nach Bedarf.
+
+
+
+== QoSSIOC ist für Datastore aktiviert, aber nicht verfügbar
+
+QoSSIOC ist für einen Datastore aktiviert, QoSSIOC ist jedoch nicht verfügbar.
+
+Überprüfen Sie, ob VMware SIOC auf dem Datenspeicher aktiviert ist:
+
+. Offen `sioc.log` In `/opt/solidfire/sioc/data/logs/` Auf dem Management-Node (`/var/log` Oder `/var/log/solidfire/` Auf älteren Management-Nodes).
+. Suche nach diesem Text:
++
+[listing]
+----
+SIOC is not enabled
+----
+. Siehe https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_'Network_Down'_or_'Down'_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)["Diesen Artikel"] Zu den für Ihr Problem spezifischen Korrekturmaßnahmen.
+

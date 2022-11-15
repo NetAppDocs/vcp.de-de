@@ -1,0 +1,166 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_create_manage_initiators.html 
+summary: Sie können Initiatoren mit dem Plug-in erstellen und verwalten. 
+keywords: netapp, storage, inititators, vcp, vcenter, element 
+---
+= Erstellen und Verwalten von Initiatoren
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Initiatoren ermöglichen den Zugriff auf externe Clients auf Volumes in einem Cluster. Diese dienen als Einstiegspunkt für die Kommunikation zwischen Clients und Volumes.
+
+Sie können Initiatoren erstellen, bearbeiten und löschen und ihnen freundliche Alias geben, um die Administration und den Zugriff auf Volumes zu vereinfachen. Wenn Sie einer Volume-Zugriffsgruppe einen Initiator hinzufügen, ermöglicht dieser Initiator den Zugriff auf alle Volumes in der Gruppe.
+
+.Optionen
+*  an initiator
+*  an initiator
+*  initiators to an access group
+*  an initiator
+
+
+
+
+== Erstellen eines Initiators
+
+Sie können iSCSI- oder Fibre Channel-Initiatoren erstellen und diese optional Aliase zuweisen.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Initiatoren* aus.
+. Wählen Sie *Initiator Erstellen*.
+. So erstellen Sie einen einzelnen Initiator:
++
+.. Wählen Sie *Einen einzelnen Initiator erstellen* aus.
+.. Geben Sie im Feld *IQN/WWPN* den IQN oder WWPN für den Initiator ein.
++
+Das akzeptierte Format eines Initiator-IQN lautet `iqn.yyyy-mm` Wobei y und m Ziffern sind, gefolgt von Text, der nur Ziffern, Kleinbuchstaben, einen Punkt enthalten darf (`.`), Doppelpunkt (`:`), oder Bindestrich (`-`). Ein Beispiel für das Format:
+
++
+[listing]
+----
+iqn.2010-01.com.solidfire:c2r9.fc0.2100000e1e09bb8b
+----
++
+Das akzeptierte Format eines Fibre Channel Initiator-WWPN `:Aa:bB:CC:dd:11:22:33:44` Oder `AabBCCdd11223344`. Ein Beispiel für das Format:
+
++
+[listing]
+----
+5f:47:ac:c0:5c:74:d4:02
+----
+.. Geben Sie im Feld *Alias* einen Anzeigenamen für den Initiator ein.
+
+
+. So erstellen Sie mehrere Initiatoren:
++
+.. Wählen Sie *Mehrere Initiatoren Erstellen* Aus.
+.. Führen Sie einen der folgenden Schritte aus:
++
+*** Klicken Sie auf *Hosts scannen*, um vSphere Hosts nach Initiatorwerten zu scannen, die im NetApp Element-Cluster nicht definiert sind.
+*** Geben Sie im Textfeld eine Liste von IQNs oder WWPNs ein und wählen Sie *Initiatoren hinzufügen* aus.
+
+
+.. (Optional) Wählen Sie unter der Überschrift *Alias* das Feld für jeden Eintrag aus, um einen Alias hinzuzufügen.
+.. (Optional) Entfernen Sie ggf. einen Initiator aus der Liste.
+
+
+. Klicken Sie auf *OK*, um den Initiator zu erstellen.
+
+
+
+
+== Bearbeiten Sie einen Initiator
+
+Sie können den Alias eines bestehenden Initiators ändern oder einen Alias hinzufügen, wenn einer noch nicht vorhanden ist.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Initiatoren* aus.
+. Aktivieren Sie das Kontrollkästchen für den Initiator, den Sie bearbeiten möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Geben Sie im Feld *Alias* einen neuen Alias für den Initiator ein.
+. Klicken Sie auf *OK*.
+
+
+
+
+== Fügen Sie Initiatoren zu einer Zugriffsgruppe hinzu
+
+Sie können Initiatoren zu einer Zugriffsgruppe hinzufügen, um den Zugriff auf Volumes in der Zugriffsgruppe des Volumes ohne CHAP-Authentifizierung zu ermöglichen. Wenn Sie einer Volume-Zugriffsgruppe einen Initiator hinzufügen, hat der Initiator Zugriff auf alle Volumes in dieser Volume-Zugriffsgruppe.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Initiatoren* aus.
+. Aktivieren Sie die Kontrollkästchen für die Initiatoren, die einer Zugriffsgruppe hinzugefügt werden sollen.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *zur Zugriffsgruppe hinzufügen* aus.
+. Wählen Sie im Dialogfeld *zur Zugriffsgruppe hinzufügen* eine Zugriffsgruppe aus der Dropdown-Liste aus.
+. Klicken Sie auf *OK*.
+
+
+
+
+== Löschen eines Initiators
+
+Sie können einen Initiator löschen, nachdem er nicht mehr benötigt wird. Wenn Sie einen Initiator löschen, wird dieser vom System aus einer zugehörigen Volume-Zugriffsgruppe entfernt. Verbindungen, die den Initiator verwenden, bleiben gültig, bis die Verbindung zurückgesetzt wird.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Initiatoren* aus.
+. Aktivieren Sie das Kontrollkästchen für die Initiatoren, die Sie löschen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

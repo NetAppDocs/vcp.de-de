@@ -1,0 +1,61 @@
+---
+permalink: legal-notices.html 
+sidebar: sidebar 
+keywords:  
+summary:  
+---
+= Rechtliche Hinweise
+:allow-uri-read: 
+:icons: font
+:imagesdir: ./media/
+
+
+[role="lead"]
+Rechtliche Hinweise ermöglichen den Zugriff auf Copyright-Erklärungen, Marken, Patente und mehr.
+
+
+
+== Urheberrecht
+
+http://www.netapp.com/us/legal/copyright.aspx[]
+
+
+
+== Marken
+
+NetApp, das NETAPP Logo und die auf der NetApp Markenseite aufgeführten Marken sind Marken von NetApp Inc. Andere Firmen- und Produktnamen können Marken der jeweiligen Eigentümer sein.
+
+http://www.netapp.com/us/legal/netapptmlist.aspx[]
+
+
+
+== Patente
+
+Eine aktuelle Liste der NetApp Patente finden Sie unter:
+
+https://www.netapp.com/us/media/patents-page.pdf[]
+
+
+
+== Datenschutzrichtlinie
+
+https://www.netapp.com/us/legal/privacypolicy/index.aspx[]
+
+
+
+== Open Source
+
+In den Benachrichtigungsdateien finden Sie Informationen zu Urheberrechten und Lizenzen von Drittanbietern, die in der NetApp Software verwendet werden.
+
+* link:media/mgmt_svcs_2.22_notice.pdf["Hinweis zu Management Services 2.22.7 (NetApp Element-Plug-in für VMware vCenter Server 5.0.37)"^]
+* link:media/mgmt_svcs_2.21_notice.pdf["Hinweis zu Management Services 2.21.61 (NetApp Element Plug-in für VMware vCenter Server 4.10.12)"^]
+* link:media/mgmt_svcs_2.20_notice.pdf["Hinweis zu Management Services 2.20.69 (NetApp Element-Plug-in für VMware vCenter Server 4.9.14)"^]
+* link:media/mgmt_svcs_2.19_notice.pdf["Hinweis zu Management Services 2.19.48 (NetApp Element-Plug-in für VMware vCenter Server 4.8.34)"^]
+* link:media/mgmt_svcs_2.18_notice.pdf["Hinweis zu Management Services 2.18.91 (NetApp Element-Plug-in für VMware vCenter Server 4.7.10)"^]
+* link:media/mgmt_svcs_2.17.56_notice.pdf["Hinweis zu Management Services 2.17.56 (NetApp Element-Plug-in für VMware vCenter Server 4.6.32)"^]
+* link:media/mgmt_svcs_2.17_notice.pdf["Hinweis zu Management Services 2.17.52 (NetApp Element-Plug-in für VMware vCenter Server 4.6.29)"^]
+* link:media/mgmt_svcs_2.16_notice.pdf["Hinweis zu Management Services 2.16 (NetApp Element-Plug-in für VMware vCenter Server 4.6.29)"^]
+* link:media/mgmt_svcs_2.14_notice.pdf["Hinweis zu Management Services 2.14 (NetApp Element-Plug-in für VMware vCenter Server 4.5.42)"^]
+* link:media/mgmt_svcs_2.13_notice.pdf["Hinweis zu Management Services 2.13 (NetApp Element-Plug-in für VMware vCenter Server 4.5.42)"^]
+* link:media/mgmt_svcs_2.11_notice.pdf["Hinweis zu Management Services 2.11 (NetApp Element-Plug-in für VMware vCenter Server 4.4.72)"^]
+

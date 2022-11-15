@@ -1,0 +1,99 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_reports_overview.html 
+summary: Informationen zu den Komponenten und der Performance des Clusters finden Sie auf den Berichtsseiten des NNetApp Element Plug-ins für VMware vCenter Server. 
+keywords: netapp, hci, vcp, vcenter, element, monitor, report 
+---
+= Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können allgemeine Cluster-Informationen für den ausgewählten Cluster anzeigen, einschließlich Gesamtkapazität, Effizienz und Performance. Sie finden sie auf der Seite Übersicht der Registerkarte Berichterstellung über den Erweiterungspunkt NetApp Element Management des NetApp Element Plug-ins für VMware vCenter Server.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Reporting*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Reporting*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Reporting* aus.
+
+
+. Überwachen Sie die Daten auf der Seite *Übersicht*.
+
+
+
+
+== Berichtsübersicht Seitendaten
+
+Die folgenden Daten werden auf der Seite Berichtsübersicht angezeigt:
+
+* *Clusterkapazität*: Die verbleibende Kapazität für Block-Speicher, Metadaten und bereitgestellten Speicherplatz. Bewegen Sie den Zeiger über den Fortschrittsbalken, um Informationen zu Schwellenwerten anzuzeigen.
+* *Clusterinformationen*: Für den Cluster spezifische Informationen wie Clustername, Version der auf dem Cluster ausgeführten NetApp Element-Software, MVIP- und SVIP-Adressen sowie Anzahl der Knoten, 4k IOPS, Volumes und Sitzungen auf dem Cluster.
++
+** *Cluster Name*: Der Name für den Cluster.
+** *Speicher-IP (SVIP)*: Die virtuelle Speicher-IP-Adresse (SVIP).
+** *Management-IP (MVIP)*: Die virtuelle Management-IP-Adresse (MVIP).
+** *SVIP VLAN Tag*: Die VLAN-Kennung für die Master-SVIP-Adresse.
+** *MVIP VLAN Tag*: Die VLAN-Kennung für die Master MVIP-Adresse.
+** *Knotenanzahl*: Die Anzahl der aktiven Knoten im Cluster.
+** *Cluster 4K IOPS*: Die Anzahl der 4096 (4K) Blöcke, die vom Cluster in einer Sekunde gelesen/geschrieben werden können.
+** *Element OS Version*: Die Version der NetApp Element Software, die der Cluster ausführt.
+** *Anzahl der Volumes*: Die Gesamtzahl der Volumes, ohne virtuelle Volumes, auf dem Cluster.
+** *Anzahl virtueller Volumes*: Die Gesamtzahl der virtuellen Volumes auf dem Cluster.
+** *ISCSI-Sitzungen*: Die iSCSI-Sitzungen, die mit dem Cluster verbunden sind.
+** *Fibre Channel-Sitzungen*: Die Fibre Channel-Sitzungen, die mit dem Cluster verbunden sind.
+
+
+* *Cluster-Effizienz*: Insgesamt genutzte Systemkapazität unter Berücksichtigung von Thin Provisioning, Deduplizierung und Komprimierung. Der berechnete Vorteil für das Cluster wird durch einen Vergleich der Kapazitätsauslastung auf einem herkömmlichen Storage-System ohne Thin Provisioning, Deduplizierung und Komprimierung berechnet.
+* *Protection Domains*: Eine Zusammenfassung der Schutz-Domänen-Überwachung für den Cluster.
++
+
+NOTE: Die Funktion der Sicherungsdomänen ist nicht mit Clustern mit zwei Knoten kompatibel.
+
++
+** *Protection Domains Monitoring Level*: Die vom Benutzer ausgewählten Schutz-Domain-Resiliency-Level. Mögliche Werte sind Chassis oder Node. Grün zeigt an, dass das Cluster in der Lage ist, die ausgewählte Überwachungsstufe zu erreichen. Rot zeigt an, dass das Cluster nicht mehr in der Lage ist, den ausgewählten Monitoring-Level zu überwachen und dass eine Korrekturmaßnahme erforderlich ist.
+** *Verbleibende Blockkapazität*: Gibt den Prozentsatz der Blockkapazität an, die zur Aufrechterhaltung des ausgewählten Stabilitätsniveaus verbleibt.
+** *Metadatenkapazität*: Gibt an, ob es genügend Metadaten-Kapazität zur Heilung nach einem Ausfall gibt, während gleichzeitig die Datenverfügbarkeit nicht unterbrochen wird. „Normal“ (grün) zeigt an, dass das Cluster über ausreichende Metadaten verfügt, um die ausgewählte Überwachungsebene beizubehalten. Voll (rot) zeigt an, dass das Cluster nicht mehr in der Lage ist, den ausgewählten Monitoring-Level zu überwachen und dass eine Korrekturmaßnahme erforderlich ist.
+
+
+* *Bereitgestellte IOPS*: Eine Zusammenfassung, wie die IOPS des Volumes auf dem Cluster überprovisioniert werden können. Bereitgestellte IOPS-Berechnungen basieren auf der Summe der minimalen IOPS-Werte, der maximalen IOPS-Werte und des IOPS-Burst für alle Volumes im Cluster geteilt durch die für das Cluster ermittelten maximalen IOPS-Werte.
++
+
+NOTE: Wenn beispielsweise vier Volumes im Cluster vorhanden sind, jedes mit einem Minimum von 500 IOPS, einem Maximum an IOPS von 15,000 und einem Burst-IOPS von 15,000, würde die Gesamtzahl der IOPS-Minimum 2,000 beträgt, die maximale IOPS insgesamt 60,000 und der IOPS-Burst insgesamt 60,000. Wenn der Cluster mit einem maximalen IOPS von 50,000 bewertet wird, dann wären die Berechnungen folgendes: *Minimum IOPS*: 2000/50000 = 0.04x *maximale IOPS*: 60000/50000 = 1,20x *Burst IOPS*: 60000/50000 = 1.20x 1.00x 1.00x ist die Baseline, mit der bereitgestellte IOPS den bewerteten IOPS für den Cluster entsprechen.
+
+* *Clusterzustand*: Die Hardware, Kapazität und Sicherheitskomponenten des Funktionszustands des Clusters. Farbcodes zeigen Folgendes an:
++
+** *Grün*: Gesund
+** *Gelb*: Kritisch
+** *Rot*: Fehler
+
+
+* *Cluster Input/Output*: Der I/O, der derzeit auf dem Cluster läuft. Die Werte werden auf Basis der vorherigen E/A-Messung mit den aktuellen E/A-Messungen berechnet. Dies sind die im Diagramm angezeigten Messungen:
++
+** *Gesamt*: Die kombinierten Lese- und Schreib-IOPS im System.
+** *Read*: Die Anzahl der Lese-IOPS.
+** *Schreiben*: Die Anzahl der Schreib-IOPS.
+
+
+* *Clusterdurchsatz*: Die Bandbreitenaktivität für Lese-, Schreib- und Gesamtbandbreite auf dem Cluster:
++
+** *Gesamt*: Die Gesamtzahl der MB/s, die für Lese- und Schreibaktivität im Cluster verwendet werden.
+** *Lesen*: Die Leseaktivität in MB/s für den Cluster.
+** *Write*: Die Schreibaktivität in MB/s für den Cluster.
+
+
+* *Performance-Auslastung*: Der Prozentsatz der verbrauchten Cluster-IOPS. Ein 250.000 IOPS-Cluster mit 100.000 IOPS würde einen Verbrauch von 40 % belegen.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

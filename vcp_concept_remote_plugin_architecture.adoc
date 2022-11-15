@@ -1,0 +1,75 @@
+---
+sidebar: sidebar 
+permalink: vcp_concept_remote_plugin_architecture.html 
+summary: Erfahren Sie mehr über das Remote NetApp Element Plug-in für vCenter Server-Architektur. 
+keywords: netapp, vcp, vcenter, plugin, element, remote, architecture 
+---
+= Überblick über die Remote Plug-in-Architektur
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Ab dem NetApp Element Plug-in für vCenter Server 5.0 ändert sich die Plug-in-Architektur von lokal zu Remote. Mit Einführung der Remote-Architektur wird das Plug-in nicht mehr innerhalb eines vCenter Servers bereitgestellt. Bei dem Element Plug-in für vCenter Server 4.10 oder einer älteren Version bleibt die Plug-in-Implementierung für den vCenter Server, für den er registriert ist, lokal.
+
+Auf dieser Seite wird die Implementierung des Remote NetApp Element Plug-ins für vCenter Server beschrieben.
+
+Die Remote Plug-in-Architektur von vSphere Client wurde entwickelt, um Plug-in-Funktionen in den vSphere Client zu integrieren, ohne im vCenter Server ausgeführt zu werden. Die Remote-Plug-in-Architektur unterstützt die Plug-in-Isolierung, ermöglicht die horizontale Skalierung von Plug-ins in großen vSphere Umgebungen und bietet folgende Vorteile:
+
+* Das Plug-in ist vor Störungen durch instabile oder kompromittierte Plug-ins geschützt, die auf demselben vSphere Client geladen sind.
+* Die Plug-in-Kompatibilität ist für vCenter Server Upgrades robust.
+* Ein inkompatibles Plug-in stört den Betrieb von vCenter Server nicht.
+* Sie können eine Reihe von Plug-in-Versionen in derselben vSphere Umgebung implementieren.
+* Die Remote-Plug-in-Benutzeroberfläche muss nur mit einem einzelnen Back-End-Server kommunizieren.
+* Eine implementierte Plug-in-Topologie ist klar definiert und leicht verständlich, welche die Fehlerbehebung unterstützt.
+
+
+
+
+== Remote Element Plug-in für allgemeine Architektur von vCenter Server
+
+Mithilfe von NetApp Hybrid Cloud Control wird das Remote Element Plug-in in in einem Docker Container innerhalb eines Management-Node zusammen mit den Managementservices implementiert.
+
+image:vcp_remote_plugin_high_level_architecture.png["Remote Plug-in High-Level-Architektur"]
+
+Der Remote Element Plug-in vCenter Server, der Registrierungsservice und der Storage I/O Control (SIOC)-Service nutzen denselben Docker-Service, lassen sich aber über verschiedene Ports anhören.
+
+[cols="50,25"]
+|===
+| Beschreibung | Port 
+
+
+| Remote Element Plug-in für vCenter Server | 8333 
+
+
+| Registrierungsservice | 9443 
+
+
+| SIOC-Service | 8443 
+|===
+
+
+== Übersicht der Kommunikationspfade für Remote-Element Plug-in
+
+Sie müssen das Remote-Plug-in zunächst mit dem vCenter Server registrieren, indem Sie den Registrierungsdienst verwenden, der auf einem Management-Node ausgeführt wird (`https://<mnode-ip>:9443/`). Auf der Registrierungsseite sehen Sie den Benutzernamen, das Kennwort und den vCenter-Server `plugin.json` Pfad der Manifest-Datei
+
+
+NOTE: Der Standardpfad wird in der UI ausgefüllt. Es ist keine Aktion erforderlich.
+
+Wenn die Angaben korrekt sind, registriert der Registrierungsservice das Plug-in bei vCenter Server und gibt die vCenter-Details in die Plug-in-Serverdatenbank ein.
+
+Nach Abschluss der Registrierung lädt der Plug-in-Server den herunter `plugin.json` Manifest-Datei und initiiert die Remote-Plug-in-Bereitstellung, bei der das Remote-Plug-in als Erweiterung mit dem konfiguriert wird `vsphere-ui` Client: Nach Abschluss der Bereitstellung können Sie über den auf den Erweiterungspunkt *NetApp Element Remote Plugin* zugreifen `vsphere-ui` Web-Client:
+
+Die gesamte Kommunikation über die Plug-in-UI erfolgt über den vCenter Server, auf dem ein Reverse-Proxy-Service mit Hilfe des HTTPS-Protokolls ausgeführt wird. Dies ist für die Weiterleitung der Anforderungen an den Remote-Plug-in-Service verantwortlich. Der Plug-in-Server interagiert mit dem SIOC-Service über eine grundlegende HTTPS-Authentifizierung und ein Element-Cluster mithilfe des Element Java Software Development Kit (SDK).
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

@@ -1,0 +1,366 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_getstarted.html 
+summary: Sie können das Element Plug-in für vCenter Server 4.10 und eine frühere Version zur Verwendung mit Element Storage installieren und konfigurieren. 
+keywords: netapp, hci, vcp, vcenter, element, install, setup 
+---
+= Installieren und konfigurieren Sie Element Plug-in 4.10 und früher
+:hardbreaks:
+:allow-uri-read: 
+:url-peak: https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_%27Network_Down%27_or_%27Down%27_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Sie können das NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version direkt in Ihrem vCenter installieren und mit dem vSphere Web Client auf das Plug-in zugreifen.
+
+Nach Abschluss der Installation können Sie die Servicequalität auf Basis des Storage I/O Control Service (QoSSIOC) sowie anderer Services des vCenter Plug-ins nutzen.
+
+Lesen und führen Sie jeden Schritt durch, um das Plug-in zu installieren und zu verwenden:
+
+*  for installation
+*  the management node
+*  the plug-in with vCenter
+*  vCenter properties for a dark site HTTP server
+*  the plug-in and verify successful installation
+*  storage clusters for use with the plug-in
+*  QoSSIOC settings using the plug-in
+*  user accounts
+*  datastores and volumes
+
+
+
+
+== Installation vorbereiten
+
+Bevor Sie mit der Installation beginnen, lesen Sie die Prüfung durch link:reference_requirements_vcp.html["Anforderungen vor der Implementierung"].
+
+
+
+== Installieren Sie den Management-Node
+
+Sie können es manuell ausführen https://docs.netapp.com/us-en/hci/docs/task_mnode_install.html["Installieren Sie den Management-Node"^] Verwenden Sie für Ihr Cluster, auf dem NetApp Element Software ausgeführt wird, das entsprechende Image für Ihre Konfiguration.
+
+Dieses Handbuch richtet sich an SolidFire All-Flash-Storage-Administratoren und NetApp HCI-Administratoren, die die NetApp Deployment Engine nicht zur Installation der Management-Nodes verwenden.
+
+
+
+== Registrieren Sie das Plug-in mit vCenter
+
+Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Paket als Erweiterung auf vCenter Server registriert. Nach Abschluss der Registrierung ist das Plug-in für jeden vSphere Web Client verfügbar, der eine Verbindung zu Ihrer vSphere Umgebung herstellt.
+
+.Was Sie und#8217;ll benötigen
+* Stellen Sie für vSphere 6.5 und 6.7 sicher, dass Sie sich vom vSphere Web Client abgemeldet haben. Der Web-Client für diese Versionen erkennt Updates, die während dieses Prozesses an Ihrem Plug-in vorgenommen wurden, wenn Sie sich nicht abmelden. Für vSphere 7.0 müssen Sie sich nicht vom Web-Client abmelden.
+* Sie haben die Berechtigungen für vCenter Administrator, um ein Plug-in zu registrieren.
+* Sie haben einen Management-Node OVA mit Element Software ab Version 11.3 implementiert.
+* Der Management-Node wird mit seiner IP-Adresse oder der DHCP-Adresse eingeschaltet.
+* Sie verwenden einen SSH-Client oder einen Webbrowser (Chrome 56 oder höher oder Firefox 52 oder höher).
+* Ihre Firewall-Regeln lassen das Öffnen zu link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Storage-Cluster MVIP auf TCP-Ports 443, 8443 und 9443. Port 9443 wird für die Registrierung verwendet und kann nach Abschluss der Registrierung geschlossen werden. Wenn Sie die Funktionen für virtuelle Volumes auf dem Cluster aktiviert haben, stellen Sie sicher, dass der TCP-Port 8444 auch für den Zugriff von VASA Providern geöffnet ist.
+
+
+Sie müssen das vCenter Plug-in auf jedem vCenter Server registrieren, auf dem Sie das Plug-in verwenden müssen.
+
+Für Linked-Modus-Umgebungen muss das Plug-in bei jedem vCenter-Server in der Umgebung registriert werden, um MOB-Daten synchron zu halten und das Plug-in aktualisieren zu können. Wenn ein vSphere Web Client eine Verbindung zu einem vCenter Server herstellt, auf dem Ihr Plug-in nicht registriert ist, ist das Plug-in für den Client nicht sichtbar.
+
+
+NOTE: Verwenden des NetApp Element Plug-ins für vCenter Server zum Managen von Clusterressourcen über andere vCenter Server mithilfe von link:vcp_concept_linkedmode.html["VCenter Linked Mode"] Ist auf lokale Storage-Cluster beschränkt
+
+.Schritte
+. Geben Sie die IP-Adresse für den Management-Node in einem Browser ein, einschließlich des TCP-Ports für die Registrierung:
++
+`\https://<managementNodeIP>:9443`
+
++
+Die Registrierungs-UI zeigt die Seite QoSSIOC-Serviceanmeldeinformationen verwalten für das Plug-in an.
+
++
+image::vcp_registration_ui_qossioc.png[Registrierungs-Dienstprogramm UI QoSSIOC Seite]
+
+. *Optional*: Ändern Sie das Passwort für den QoSSIOC-Dienst, bevor Sie das vCenter Plug-in registrieren:
++
+.. Geben Sie für das alte Kennwort das aktuelle Kennwort des QoSSIOC-Dienstes ein. Wenn Sie noch kein Passwort zugewiesen haben, geben Sie das Standardpasswort ein:
++
+`solidfire`
+
+.. Wählen Sie *Änderungen Senden*.
++
+
+NOTE: Nachdem Sie Änderungen gesendet haben, wird der QoSSIOC-Dienst automatisch neu gestartet.
+
+
+
+. Wählen Sie *vCenter Plug-in Registrierung*.
++
+image::vcp_registration_ui.png[Benutzeroberfläche des Registrierungsprogramms]
+
+. Geben Sie die folgenden Informationen ein:
++
+** Die IPv4-Adresse oder der FQDN des vCenter-Dienstes, auf dem Sie Ihr Plug-in registrieren.
+** Der vCenter Administrator-Benutzername.
++
+
+NOTE: Der von Ihnen eingegebene Benutzername und das Kennwort müssen für einen Benutzer mit den Berechtigungen der vCenter Administrator-Rolle verwendet werden.
+
+** Das vCenter Administrator-Passwort.
+** (Für interne Server/dunkle Sites) Eine benutzerdefinierte URL für das Plug-in ZIP.
++
+
+NOTE: Bei den meisten Installationen wird der Standardpfad verwendet. Um die URL anzupassen, wenn Sie einen HTTP- oder HTTPS-Server (dunkle Site) verwenden oder den ZIP-Dateinamen oder die Netzwerkeinstellungen geändert haben, wählen Sie *Benutzerdefinierte URL* aus. Weitere Schritte, wenn Sie eine URL anpassen möchten, finden Sie unter  vCenter properties for a dark site HTTP server,Ändern Sie die vCenter-Eigenschaft für einen HTTP-Server mit dunklem Standort.
+
+
+
+. Wählen Sie *Registrieren*.
+. (Optional) Registrierungsstatus überprüfen:
++
+.. Wählen Sie *Registrierungsstatus*.
+.. Geben Sie die folgenden Informationen ein:
++
+*** Die IPv4-Adresse oder der FQDN des vCenter-Dienstes, auf dem Sie das Plug-in registrieren
+*** Der vCenter Administrator-Benutzername
+*** Das vCenter Administrator-Passwort
+
+
+.. Wählen Sie *Status überprüfen*, um zu überprüfen, ob die neue Version des Plug-ins auf dem vCenter Server registriert ist.
+
+
+. (Für vSphere 6.5- und 6.7-Benutzer) Melden Sie sich als vCenter-Administrator beim vSphere Web Client an.
++
+
+NOTE: Mit dieser Aktion wird die Installation im vSphere Web Client abgeschlossen. Wenn die vCenter-Plug-in-Symbole von vSphere nicht angezeigt werden, lesen Sie link:vcp_reference_troubleshoot_vcp.html#plug-in-registration-successful-but-icons-do-not-appear-in-web-client["Dokumentation zur Fehlerbehebung"].
+
+. Suchen Sie im vSphere Web Client nach den folgenden abgeschlossenen Aufgaben im Task Monitor, um sicherzustellen, dass die Installation abgeschlossen wurde: `Download plug-in` Und `Deploy plug-in`.
+
+
+
+
+== Ändern Sie die vCenter-Eigenschaften für einen HTTP-Server mit dunkler Site
+
+Wenn Sie während der vCenter Plug-in-Registrierung eine URL für einen internen HTTP-Server (Dark Site) anpassen möchten, müssen Sie die Eigenschaftendatei von vSphere Web Client ändern `webclient.properties`. Sie können die Änderungen mit vCSA oder Windows vornehmen.
+
+Berechtigungen zum Herunterladen von Software von der NetApp Support-Website.
+
+.Schritte mit vCSA
+. SSH im vCenter Server:
++
+[listing]
+----
+Connected to service
+    * List APIs: "help api list"
+    * List Plugins: "help pi list"
+    * Launch BASH: "shell"
+Command>
+----
+. Eingabe `shell` In der Eingabeaufforderung für den Zugriff auf das Root:
++
+[listing]
+----
+Command> shell
+Shell access is granted to root
+----
+. Beenden Sie den VMware vSphere Web Client Service:
++
+[listing]
+----
+service-control --stop vsphere-client
+service-control --stop vsphere-ui
+----
+. Telefonbuch ändern:
++
+[listing]
+----
+cd /etc/vmware/vsphere-client
+----
+. Bearbeiten Sie das `webclient.properties` Datei und Hinzufügen `allowHttp=true`.
+. Telefonbuch ändern:
++
+[listing]
+----
+cd /etc/vmware/vsphere-ui
+----
+. Bearbeiten Sie das `webclient.properties` Datei und Hinzufügen `allowHttp=true`.
+. Starten Sie den VMware vSphere Web Client-Dienst:
++
+[listing]
+----
+service-control --start vsphere-client
+service-control --start vsphere-ui
+----
++
+
+NOTE: Nachdem Sie den Registrierungsvorgang abgeschlossen haben, können Sie ihn entfernen `allowHttp=true` Aus den von Ihnen geänderten Dateien.
+
+. VCenter neu starten
+
+
+.Schritte mit Windows
+. Ändern Sie das Verzeichnis in einer Eingabeaufforderung:
++
+[listing]
+----
+cd c:\Program Files\VMware\vCenter Server\bin
+----
+. Beenden Sie den VMware vSphere Web Client Service:
++
+[listing]
+----
+service-control --stop vsphere-client
+service-control --stop vsphere-ui
+----
+. Telefonbuch ändern:
++
+[listing]
+----
+cd c:\ProgramData\VMware\vCenterServer\cfg\vsphere-client
+----
+. Bearbeiten Sie das `webclient.properties` Datei und Hinzufügen `allowHttp=true`.
+. Telefonbuch ändern:
++
+[listing]
+----
+cd  c:\ProgramData\VMware\vCenterServer\cfg\vsphere-ui
+----
+. Bearbeiten Sie das `webclient.properties` Datei und Hinzufügen `allowHttp=true`.
+. Ändern Sie das Verzeichnis in einer Eingabeaufforderung:
++
+[listing]
+----
+cd c:\Program Files\VMware\vCenter Server\bin
+----
+. Starten Sie den VMware vSphere Web Client-Dienst:
++
+[listing]
+----
+service-control --start vsphere-client
+service-control --start vsphere-ui
+----
++
+
+NOTE: Nachdem Sie den Registrierungsvorgang abgeschlossen haben, können Sie ihn entfernen `allowHttp=true` Aus den von Ihnen geänderten Dateien.
+
+. VCenter neu starten
+
+
+
+
+== Greifen Sie auf das Plug-in zu und überprüfen Sie die erfolgreiche Installation
+
+Nach erfolgreicher Installation oder Aktualisierung werden die Erweiterungspunkte für NetApp Element-Konfiguration und -Verwaltung auf der Registerkarte „Verknüpfungen“ des vSphere Web Clients und im Seitenfenster angezeigt.
+
+image::vcp_plugin_icons_home_page.png[Die Plug-in-Erweiterungspunkte werden in vSphere angezeigt]
+
+
+NOTE: Wenn die vCenter-Plug-in-Symbole nicht angezeigt werden, lesen Sie den link:vcp_reference_troubleshoot_vcp.html#plug-in-registration-successful-but-icons-do-not-appear-in-web-client["Dokumentation zur Fehlerbehebung"].
+
+
+
+== Fügen Sie Storage-Cluster zur Verwendung mit dem Plug-in hinzu
+
+Sie können einen Cluster mit Element Software über den NetApp Element Configuration Extension Point hinzufügen, sodass er vom Plug-in gemanagt werden kann.
+
+Nachdem eine Verbindung zum Cluster hergestellt wurde, kann der Cluster dann mit dem NetApp Element Management Extension Point verwaltet werden.
+
+.Was Sie und#8217;ll benötigen
+* Mindestens ein Cluster muss verfügbar sein und seine IP- oder FQDN-Adresse bekannt sein.
+* Aktuelle vollständige Cluster-Admin-Benutzeranmeldeinformationen für das Cluster.
+* Firewall-Regeln lassen offen link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Cluster MVIP auf TCP-Ports 443 und 8443.
+
+
+
+NOTE: Sie müssen mindestens einen Cluster hinzufügen, um die NetApp Element-Management-Erweiterungspunktfunktionen verwenden zu können.
+
+In diesem Verfahren wird beschrieben, wie ein Cluster-Profil hinzugefügt wird, sodass das Cluster durch das Plug-in gemanagt werden kann. Sie können die Anmeldedaten des Cluster-Administrators nicht mit dem Plug-in ändern.
+
+Siehe https://docs.netapp.com/us-en/element-software/storage/concept_system_manage_manage_cluster_administrator_users.html["Verwalten von Benutzerkonten für Cluster-Administratoren"^] Anweisungen zum Ändern der Anmeldedaten für ein Cluster-Administratorkonto finden Sie unter.
+
+
+IMPORTANT: Der vSphere HTML5 Web-Client und der Flash Web-Client haben separate Datenbanken, die nicht kombiniert werden können. Cluster, die in einem Client hinzugefügt wurden, sind im anderen nicht sichtbar. Wenn Sie beabsichtigen, beide Clients zu verwenden, fügen Sie Ihre Cluster in beiden.
+
+.Schritte
+. Wählen Sie *NetApp Element-Konfiguration > Cluster*.
+. Wählen Sie *Cluster Hinzufügen*.
+. Geben Sie die folgenden Informationen ein:
++
+** *IP-Adresse/FQDN*: Geben Sie die Cluster-MVIP-Adresse ein.
+** *Benutzer-ID*: Geben Sie einen Cluster-Administrator-Benutzernamen ein.
+** *Passwort*: Geben Sie ein Cluster Administrator Passwort ein.
+** *VCenter Server*: Wenn Sie eine verknüpfte Modusgruppe einrichten, wählen Sie den vCenter Server aus, auf den Sie auf das Cluster zugreifen möchten. Wenn Sie den verknüpften Modus nicht verwenden, ist der aktuelle vCenter Server die Standardeinstellung.
++
+[NOTE]
+====
+*** Die Hosts für ein Cluster exklusiv für jeden vCenter Server. Stellen Sie sicher, dass der ausgewählte vCenter-Server Zugriff auf die gewünschten Hosts hat. Sie können ein Cluster entfernen, es einem anderen vCenter Server zuweisen und es erneut hinzufügen, wenn Sie später andere Hosts verwenden möchten.
+*** Verwenden des NetApp Element Plug-ins für vCenter Server zum Managen von Clusterressourcen über andere vCenter Server mithilfe von link:vcp_concept_linkedmode.html["VCenter Linked Mode"] Ist auf lokale Storage-Cluster beschränkt
+
+
+====
+
+
+. Wählen Sie *OK*.
+
+
+Wenn der Prozess abgeschlossen ist, wird das Cluster in der Liste der verfügbaren Cluster angezeigt und kann im Erweiterungspunkt NetApp Element Management verwendet werden.
+
+
+
+== Konfigurieren Sie die QoSSIOC-Einstellungen mithilfe des Plug-ins
+
+Sie können eine automatische Servicequalität basierend auf der Storage-I/O-Steuerung einrichten link:vcp_concept_qossioc.html["(QoSSIOC)"] Für einzelne Volumes und vom Plug-in kontrollierte Datastores. Dazu müssen Sie die QoSSIOC- und vCenter-Anmeldeinformationen konfigurieren, die es dem QoSSIOC-Service ermöglichen, mit vCenter zu kommunizieren.
+
+Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfiguriert haben, werden diese Einstellungen als Standard verwendet. Die QoSSIOC-Einstellungen werden auf die letzten bekannten gültigen QoSSIOC-Einstellungen zurückgesetzt, bis Sie gültige QoSSIOC-Einstellungen für einen neuen Managementknoten bereitstellen. Sie müssen die QoSSIOC-Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die QoSSIOC-Anmeldeinformationen für einen neuen Management-Node festlegen.
+
+.Schritte
+. Wählen Sie *NetApp Element-Konfiguration > QoSSIOC-Einstellungen*.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Konfigurieren* aus.
+. Geben Sie im Dialogfeld * QoSSIOC-Einstellungen* konfigurieren die folgenden Informationen ein:
++
+** *MNode IP-Adresse/FQDN*: Die IP-Adresse des Management-Node für den Cluster, der den QoSSIOC-Dienst enthält.
+** *MNode Port*: Die Port-Adresse für den Management-Node, der den QoSSIOC-Service enthält. Der Standardport ist 8443.
+** *QoSSIOC Benutzer-ID*: Die Benutzer-ID für den QoSSIOC-Dienst. Die Standard-Benutzer-ID des QoSSIOC-Dienstes lautet admin. Bei NetApp HCI ist die Benutzer-ID dieselbe, die bei der Installation mit der NetApp Deployment Engine eingegeben wurde.
+** *QoSSIOC Passwort*: Das Passwort für das Element QoSSIOC Service. Das Standardpasswort für den QoSSIOC-Dienst lautet `solidfire`. Wenn Sie kein benutzerdefiniertes Passwort erstellt haben, können Sie eines über die Benutzeroberfläche des Registrierungsprogramms erstellen (`https://[management node IP]:9443`).
+** *VCenter-Benutzer-ID*: Der Benutzername für den vCenter-Administrator mit vollen Administratorrechten.
+** *VCenter Passwort*: Das Passwort für den vCenter Admin mit vollen Administratorrechten.
+
+
+. Wählen Sie *OK*.
++
+Das Feld * QoSSIOC Status* wird angezeigt `UP` Wenn das Plug-in erfolgreich mit dem Dienst kommunizieren kann.
+
++
+[NOTE]
+====
+In diesem {url-Peak}[KB^] finden Sie Informationen zur Fehlerbehebung, falls der Status eines der folgenden ist:
+
+** `Down`: QoSSIOC ist nicht aktiviert.
+** `Not Configured`: Die QoSSIOC-Einstellungen wurden nicht konfiguriert.
+** `Network Down`: VCenter kann nicht mit dem QoSSIOC-Dienst im Netzwerk kommunizieren. Der mNode- und SIOC-Service wird möglicherweise weiterhin ausgeführt.
+
+
+====
++
+Nachdem der QoSSIOC-Service aktiviert wurde, können Sie die QoSSIOC-Performance auf einzelnen Datastores konfigurieren.
+
+
+
+
+
+== Benutzerkonten konfigurieren
+
+Um den Zugriff auf Volumes zu aktivieren, müssen Sie mindestens einen erzeugen link:vcp_task_create_manage_user_accounts.html#create-an-account["Benutzerkonto"].
+
+
+
+== Erstellen von Datastores und Volumes
+
+Sie können erstellen link:vcp_task_datastores_manage.html#create-a-datastore["Datastores und Element Volumes"] Um mit der Zuweisung von Speicher zu beginnen.
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* http://mysupport.netapp.com/hci/resources["Ressourcen-Seite zu NetApp HCI"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

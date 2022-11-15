@@ -1,0 +1,123 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_add_manage_drive.html 
+summary: Laufwerke können über das Plug-in zum Cluster hinzugefügt und gemanagt werden. 
+keywords: netapp, drives, add, manage, remove, view vcp, vcenter, element 
+---
+= Hinzufügen und Verwalten von Laufwerken
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit dem Plug-in-Erweiterungspunkt können Sie einem Cluster Laufwerke hinzufügen, vorhandene Laufwerke anzeigen und Laufwerke entfernen.
+
+*  available drives to a cluster
+*  drive details
+*  a drive
+
+
+
+
+== Fügen Sie einem Cluster verfügbare Laufwerke hinzu
+
+Mit dem Plug-in-Erweiterungspunkt können Sie einem Cluster Laufwerke hinzufügen. Wenn Sie dem Cluster einen Node hinzufügen oder neue Laufwerke in einem vorhandenen Node installieren, werden die Laufwerke automatisch als registriert `Available`. Sie müssen die Laufwerke dem Cluster hinzufügen, bevor jedes Laufwerk am Cluster teilnehmen kann.
+
+Laufwerke werden nicht in der Liste verfügbar angezeigt, wenn die folgenden Bedingungen vorliegen:
+
+* Laufwerke befinden sich in einem `Active`, `Removing`, `Erasing`, Oder `Failed` Bundesland.
+* Der Knoten, in dem das Laufwerk ein Teil ist, befindet sich `Pending` Bundesland.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie auf der Unterregisterkarte *Laufwerke* aus der Dropdown-Liste die Option *verfügbar* aus, um die Liste der verfügbaren Laufwerke anzuzeigen.
+. Laufwerke wie folgt hinzufügen:
++
+.. Aktivieren Sie das Kontrollkästchen für jedes Laufwerk, das Sie hinzufügen möchten.
+.. Klicken Sie Auf *Laufwerke Hinzufügen*.
+
+
+. Überprüfen Sie die Details der Laufwerke, die hinzugefügt werden sollen, und bestätigen Sie die Aktion.
+
+
+
+
+== Zeigen Sie Laufwerkdetails an
+
+Über die Plug-in-Erweiterung können Sie eine Liste der aktiven Laufwerke im Cluster mithilfe der Ansicht aktiv auf der Seite Laufwerke der Registerkarte Cluster anzeigen. Sie können die Ansicht ändern, indem Sie die verfügbaren Optionen mithilfe des Dropdown-Filters auswählen.
+
+Beim ersten Initialisieren eines Clusters ist die Liste der aktiven Laufwerke leer. Sie können Laufwerke hinzufügen, die einem Cluster nicht zugewiesen sind und auf der Registerkarte verfügbar aufgeführt sind, nachdem ein neues Cluster erstellt wurde.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Laufwerke* aus.
+. Wählen Sie die Ansicht *aktiv* aus.
+. Zeigen Sie Details zu den Laufwerken an, die aktuell im System aktiv sind.
++
+Sie können Informationen wie Laufwerk-IDs, die Kapazität und den Status jedes Laufwerks sowie Informationen zum Node anzeigen, in dem sich das Laufwerk befindet.
+
+
+
+
+
+== Entfernen Sie ein Laufwerk
+
+Mit dem Plug-in-Erweiterungspunkt können Sie ein Laufwerk aus einem Cluster entfernen. Dies können Sie tun, wenn Sie die Cluster-Kapazität reduzieren oder sich darauf vorbereiten, Laufwerke auszutauschen, die sich dem Ende ihrer Lebensdauer nähern. Durch das Entfernen eines Laufwerks kann das Laufwerk offline geschaltet werden. Alle Daten auf dem Laufwerk werden entfernt und auf andere Laufwerke im Cluster migriert, bevor das Laufwerk aus dem Cluster entfernt wird. Die Datenmigration auf andere aktive Laufwerke im System kann abhängig von Kapazitätsauslastung und aktiver I/O im Cluster einige Minuten bis eine Stunde dauern.
+
+Wenn Sie ein Laufwerk in einem entfernen `Failed` Status: Das Laufwerk wird nicht zu zurückgegeben `Available` Oder `Active` staaten. Stattdessen ist das Laufwerk nicht zur Verwendung im Cluster verfügbar.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie in der Dropdown-Liste * All* aus, um die komplette Liste der Laufwerke anzuzeigen.
+. Entfernen Sie Laufwerke wie folgt:
++
+.. Aktivieren Sie das Kontrollkästchen für jedes Laufwerk, das Sie entfernen möchten.
+.. Klicken Sie Auf *Laufwerke Entfernen*.
+
+
+. Bestätigen Sie die Aktion.
++
+
+NOTE: Falls nicht genügend Kapazität zum Entfernen aktiver Laufwerke vor dem Entfernen eines Node vorhanden ist, wird beim Bestätigen des Entfernens des Laufwerks eine Fehlermeldung angezeigt.
+
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

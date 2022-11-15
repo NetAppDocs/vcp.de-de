@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: vcp_concept_protection_domains.html 
+summary:  
+keywords: netapp, vcp, element, plugin, plug-in, protection, domain 
+---
+= Sicherungsdomänen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Eine Sicherungsdomäne ist ein Knoten oder eine Gruppe von Knoten, die so gruppiert werden, dass jeder Knoten oder alle Knoten in der Domäne ausfallen kann, ohne dass die Datenverfügbarkeit im Cluster verloren geht. Mit der Funktion „Sicherungsdomänen“ können Sie die Ressourcenkapazität eines Clusters überwachen, um sicherzustellen, dass nach einem Ausfall das Cluster weiterhin heilungsfähig ist. Sie können die Überwachung auf Node- oder Chassis-Domänenebene auswählen:
+
+* *Node Level* definiert jede Schutzdomäne pro einzelnen Knoten, wobei jeder Knoten sich potenziell über das Gehäuse befinden kann.
+* *Gehäuseebene* definiert jede Schutzdomäne durch Knoten, die sich ein Gehäuse teilen.
+
+
+Eine Chassis-Domäne erfordert mehr potenzielle Kapazitätsressourcen als eine Node-Domäne, um gegen Ausfälle zu ausfallsicher zu sein. Wenn der Schwellenwert einer Sicherungsdomäne überschritten wird, verfügt ein Cluster nicht mehr über ausreichende Kapazität zur Heilung nach einem Ausfall, während gleichzeitig die Datenverfügbarkeit nicht unterbrochen wird.
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

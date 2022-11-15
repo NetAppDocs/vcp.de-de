@@ -1,0 +1,253 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_qossioc.html 
+summary: 'Sie können Volume-QoS und Datastore-SIOC (QoSSIOC) für bereitgestellten Storage in Ihrem Cluster einrichten und ändern.' 
+keywords: netapp, qossioc, quality of service, qos, sioc, vcp, vcenter, element 
+---
+= Einrichten und Managen von QoSSIOC für Element Volumes und VMware Datastores
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Sie können eine QoSSIOC-Automatisierung für einzelne Volumes und Datastores einrichten, die über das Plug-in gesteuert werden. link:vcp_concept_qossioc.html["QoSSIOC"] Automatische Servicequalität (https://docs.netapp.com/us-en/hci/docs/concept_hci_performance.html["QoS"^]) Basierend auf Storage I/O Control (https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.resmgmt.doc/GUID-7686FEC3-1FAC-4DA7-B698-B808C44E5E96.html["SIOC"^]) Einstellungen aller VMs auf einem Standard-Datastore.
+
+Der QoSSIOC Service auf dem Management-Node kommuniziert mit vCenter und überwacht die VM-Aktivitäten auf Datastores. QoSSIOC passt QoS-Werte auf Standardelement-Volumes an, wenn Ereignisse virtueller Maschinen auftreten, z. B. Ereignisse zum ein- oder Ausschalten des Gast, Neustarts oder Neukonfigurationen. QoSSIOC ist eine optionale Funktion und ist für das Plug-in zum Management von Storage-Clustern nicht erforderlich.
+
+QoSSIOC ist nur mit standardmäßigen Datastores verfügbar. Dies funktioniert nicht mit Virtual Volumes (VVols).
+
+
+NOTE: Auf der Seite „QoSSIOC Settings“ können Virtual Volumes (VVols) nicht aktiviert oder VVols für vSphere bereitgestellt werden. Weitere Informationen zur Konfiguration der VVols Funktionalität finden Sie in der vCenter Server Dokumentation zum Element Plug-in.
+
+Im verknüpften Modus werden alle vCenter Server im Element vCenter Plug-in unter Verwendung der QoSSIOC-Einstellungen registriert, die Sie auf einem einzelnen vCenter Server zur Verfügung stellen.
+
+Mit dem vCenter Plug-in können Sie QoSSIOC konfigurieren und verwalten, indem Sie die folgenden Aufgaben ausführen:
+
+
+
+== Setup-Aufgaben
+
+* link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie die QoSSIOC-Einstellungen"]
+*  QoSSIOC automation on datastores
+
+
+
+
+== Managementaufgaben
+
+* link:vcp_task_reports_qossioc.html["Überwachen Sie das VM Performance Tiering mit QoSSIOC-Ereignissen"^]
+*  QoSSIOC settings
+*  the QoSSIOC service password
+*  QoSSIOC automation for a datastore
+*  QoSSIOC settings
+
+
+
+
+== QoSSIOC-Automatisierung auf Datastores aktivieren
+
+Sie können die QoSSIOC-Automatisierung aktivieren und die Performance-Level der Virtual Machine Disk (VMDK) für Datenspeicher anpassen, nachdem Sie den QoSSIOC-Service für das Plug-in aktiviert haben.
+
+Sie haben die Einstellungen für den QoSSIOC-Dienst auf der Seite QoSSIOC-Einstellungen konfiguriert und das Feld *QoSSIOC-Status* wird angezeigt `UP`.
+
+* link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
+* link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 4.10 und früher konfigurieren"]
+
+
+QoSSIOC ist nur mit standardmäßigen Datastores verfügbar. Dies funktioniert nicht mit Virtual Volumes (VVols). QoSSIOC passt QoS-Werte auf Standardelement-Volumes an, wenn Ereignisse virtueller Maschinen auftreten, z. B. Ereignisse zum ein- oder Ausschalten des Gast, Neustarts oder Neukonfigurationen.
+
+
+IMPORTANT: Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoSSIOC überschreibt und passt die QoS-Werte für alle Volume QoS-Einstellungen unabhängig von der Richtlinie an.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie in der Spalte *QoSSIOC Automation* für den ausgewählten Datenspeicher auf die Status-Schaltfläche.
++
+
+TIP: Vergewissern Sie sich, dass die QoSSIOC-Integration auf einem anderen vCenter nicht aktiviert ist, um unerwartete QoS-Änderungen zu vermeiden.
+
+. Wählen Sie *QoS & SIOC aktivieren*.
+. Konfigurieren Sie den *Burst Factor*.
++
+Der Burst-Faktor besteht aus einer Mehrfacheinstellung der IOPS-Grenze (SIOC) für die VMDK. Wenn Sie die Standardeinstellung ändern, stellen Sie sicher, dass Sie einen Burst-Faktor-Wert verwenden, der das maximale Burst-Limit für ein auf NetApp Element Software basierendes Volume nicht überschreitet, wenn der Burst-Faktor-Wert mit dem IOPS-Limit für eine VMDK multipliziert wird.
+
+. (Optional) Wählen Sie *Standard QoS* überschreiben und konfigurieren Sie die Einstellungen.
++
+Wenn die Einstellung „Standard-QoS überschreiben“ für den Datastore deaktiviert ist, werden die Werte für Shares und IOPS-Limit automatisch auf Basis der SIOC-Standardeinstellungen jeder VM festgelegt.
+
++
+
+TIP: Passen Sie das SIOC-Freigablimit nicht an, ohne das SIOC-IOPS-Limit anzupassen.
+
++
+
+TIP: Standardmäßig sind die maximalen SIOC-Festplattenfreigaben auf unbegrenzt festgelegt. In einer großen VM-Umgebung wie VDI kann dies zu einer Überprovisionierung der maximalen IOPS auf dem Cluster führen. Wenn Sie QoSSIOC aktivieren, prüfen Sie immer die Standard-QoS überschreiben und legen Sie die Option IOPS-Limit auf einen angemessenen Wert fest.
+
+. Klicken Sie auf *OK*.
++
+Wenn Sie die QoSSIOC Automation für einen Datastore aktivieren, wird die Schaltfläche von geändert `Disabled` Bis `Enabled`.
+
+
+
+
+
+== QoSSIOC-Einstellungen bearbeiten
+
+Sie können die QoSSIOC- und vCenter-Anmeldedaten eines aktiven Element Management-Knotens ändern.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *QoSSIOC-Einstellungen*:
++
+** Beginnend mit Element vCenter Plug-in 5.0, wählen Sie *NetApp Element Remote Plugin > Konfiguration > QoSSIOC-Einstellungen*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Konfiguration > QoSSIOC-Einstellungen* aus.
+
+
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Ändern Sie im Dialogfeld *QoSSIOC-Einstellungen* bearbeiten die folgenden Einstellungen:
++
+** *QoSSIOC Benutzer-ID*: Die Benutzer-ID für den QoSSIOC-Dienst. Die Standard-Benutzer-ID des QoSSIOC-Dienstes lautet `admin`. Bei NetApp HCI ist die Benutzer-ID dieselbe, die bei der Installation mit der NetApp Deployment Engine eingegeben wurde.
+** *QoSSIOC Passwort*: Das Passwort für das Element QoSSIOC Service. Das Standardpasswort für den QoSSIOC-Dienst lautet `solidfire`. Wenn Sie kein benutzerdefiniertes Passwort erstellt haben, können Sie eines über die Benutzeroberfläche des Registrierungsprogramms erstellen (`https://[management node IP]:9443`).
++
+
+NOTE: Bei NetApp HCI-Implementierungen wird das Standardpasswort während der Installation zufällig generiert. Informationen zum Festlegen des Passworts finden Sie in diesem Abschnitt unter Verfahren 4 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_%27Network_Down%27_or_%27Down%27_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)["KB"^] Artikel:
+
+** *VCenter-Benutzer-ID*: Der Benutzername für den vCenter-Administrator mit vollen Administratorrechten.
+** *VCenter Passwort*: Das Passwort für den vCenter Admin mit vollen Administratorrechten.
+
+
+. Wählen Sie *OK*. Das Feld „QoSSIOC-Status“ wird angezeigt `UP` Wenn das Plug-in erfolgreich mit dem Dienst kommunizieren kann.
++
+
+NOTE: Siehe das https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_%27Network_Down%27_or_%27Down%27_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)["KB"^] Um zu beheben, wenn der Status eines der folgenden ist: * `Down`: QoSSIOC ist nicht aktiviert. * `Not Configured`: Die QoSSIOC-Einstellungen wurden nicht konfiguriert. * `Network Down`: VCenter kann nicht mit dem QoSSIOC-Dienst im Netzwerk kommunizieren. Der mNode- und SIOC-Service wird möglicherweise weiterhin ausgeführt.
+
++
+
+NOTE: Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfiguriert haben, werden diese Einstellungen als Standard verwendet. Die QoSSIOC-Einstellungen werden auf die letzten bekannten gültigen QoSSIOC-Einstellungen zurückgesetzt, bis Sie gültige QoSSIOC-Einstellungen für einen neuen Managementknoten bereitstellen. Sie müssen die QoSSIOC-Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die QoSSIOC-Anmeldeinformationen für einen neuen Management-Node festlegen.
+
+
+
+
+
+== Ändern Sie das Passwort für den QoSSIOC-Dienst
+
+Sie können das Passwort für den QoSSIOC-Dienst auf dem Managementknoten über die Benutzeroberfläche des Registrierungsprogramms ändern.
+
+.Was Sie und#8217;ll benötigen
+* Der Management-Node ist eingeschaltet.
+
+
+In diesem Prozess wird beschrieben, wie Sie nur das QoSSIOC-Passwort ändern. Wenn Sie den QoSSIOC-Benutzernamen ändern möchten, können Sie dies über tun  QoSSIOC settings,QoSSIOC-Einstellungen Seite.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *QoSSIOC-Einstellungen*:
++
+** Beginnend mit Element vCenter Plug-in 5.0, wählen Sie *NetApp Element Remote Plugin > Konfiguration > QoSSIOC-Einstellungen*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Konfiguration > QoSSIOC-Einstellungen* aus.
+
+
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
++
+Das Feld * QoSSIOC Status* wird angezeigt `Not Configured` Nach Abschluss des Vorgangs.
+
+. Geben Sie die IP-Adresse für den Management-Node in einem Browser ein, einschließlich des TCP-Ports für die Registrierung: `https://[management node IP]:9443`.
++
+Die Registrierungs-Utility-UI zeigt die Seite * QoSSIOC Service Credentials* verwalten für das Plug-in an.
+
++
+image::vcp_registration_ui_qossioc.png[Menü NetApp Element Plug-in für vCenter Server Registration Utility]
+
+. Geben Sie die folgenden Informationen ein:
++
+.. *Altes Passwort*: Das aktuelle Passwort des QoSSIOC-Dienstes. Wenn Sie noch kein Passwort zugewiesen haben, geben Sie das Standardpasswort von ein `solidfire`.
++
+
+NOTE: Bei NetApp HCI-Implementierungen wird das Standardpasswort während der Installation zufällig generiert. Informationen zum Festlegen des Passworts finden Sie in diesem Abschnitt unter Verfahren 4 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/Element_Plug-in_for_vCenter_server/mNode_Status_shows_as_%27Network_Down%27_or_%27Down%27_in_the_mNode_Settings_tab_of_the_Element_Plugin_for_vCenter_(VCP)["KB"^] Artikel:
+
+.. *Neues Passwort*: Das neue Passwort für den QoSSIOC-Dienst.
+.. *Passwort bestätigen*: Geben Sie das neue Passwort erneut ein.
+
+
+. Wählen Sie *Änderungen Senden*.
++
+
+NOTE: Der QoSSIOC-Dienst wird automatisch neu gestartet, nachdem Sie Änderungen übermittelt haben.
+
+. Wählen Sie in Ihrem vSphere Web Client die Option *NetApp Element-Konfiguration > QoSSIOC-Einstellungen* aus.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Konfigurieren* aus.
+. Geben Sie im Dialogfeld * QoSSIOC-Einstellungen* konfigurieren das neue Passwort im Feld *QoSSIOC-Passwort* ein.
+. Wählen Sie *OK*.
++
+Das Feld * QoSSIOC Status* wird angezeigt `UP` Wenn das Plug-in erfolgreich mit dem Dienst kommunizieren kann.
+
+
+
+
+
+== Deaktivieren Sie die QoSSIOC-Automatisierung für einen Datenspeicher
+
+Sie können die QoSSIOC-Integration für einen Datastore deaktivieren.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Schaltfläche in der Spalte *QoSSIOC Automation* für den ausgewählten Datenspeicher.
+. Deaktivieren Sie das Kontrollkästchen *QoS & SIOC* aktivieren, um die Integration zu deaktivieren.
++
+Wenn Sie das Kontrollkästchen QoS & SIOC aktivieren deaktivieren, wird die Option Standard-QoS überschreiben automatisch deaktiviert.
+
+. Wählen Sie *OK*.
+
+
+
+
+== Löschen Sie die QoSSIOC-Einstellungen
+
+Sie können die QoSSIOC-Konfigurationsdetails für den Element Storage Management Node (mNode) löschen. Sie müssen die Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die Anmeldeinformationen für einen neuen Management-Node konfigurieren oder das Passwort für den QoSSIOC-Service ändern. Durch das Löschen der QoSSIOC-Einstellungen werden aktive QoSSIOC vom vCenter, Cluster und Datastores entfernt.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *QoSSIOC-Einstellungen*:
++
+** Beginnend mit Element vCenter Plug-in 5.0, wählen Sie *NetApp Element Remote Plugin > Konfiguration > QoSSIOC-Einstellungen*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Konfiguration > QoSSIOC-Einstellungen* aus.
+
+
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
++
+Das Feld * QoSSIOC Status* wird angezeigt `Not Configured` Nach Abschluss des Vorgangs.
+
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

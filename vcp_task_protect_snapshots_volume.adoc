@@ -1,0 +1,393 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_protect_snapshots_volume.html 
+summary: Sie können sicherstellen, dass Kopien Ihrer Daten erstellt und dort gespeichert werden, wo Sie sie benötigen. 
+keywords: netapp, hci, vcp, vcenter, element, protect, snapshots, clone, backup, amazon, s3, openstack, swift 
+---
+= Erstellung und Management von Volume Snapshots in vCenter Server
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Erstellen eines https://docs.netapp.com/us-en/hci/docs/concept_hci_dataprotection.html#volume-snapshots-for-data-protection["Volume-Snapshot"] Erstellt eine zeitpunktgenaue Kopie eines Volumes Dieser Prozess nimmt nur eine geringe Menge an System-Ressourcen und Platz in Anspruch, wodurch die Erstellung von Snapshots schneller als das Klonen erfolgt.
+
+Sie können Snapshots verwenden, um ein Volume wieder in den Zustand zu versetzen, in dem es zum Zeitpunkt der Snapshot-Erstellung war. Da es sich jedoch bei Snapshots lediglich um Replikate von Volume-Metadaten handelt, können Sie nicht mounten oder darauf schreiben.
+
+.Optionen
+*  a volume snapshot
+*  volume snapshot details
+*  a volume from a snapshot
+*  back a volume to a snapshot
+*  up a volume snapshot to an external object store
+*  a volume snapshot
+
+
+
+
+== Erstellen eines Volume-Snapshots
+
+Sie können einen Snapshot eines aktiven Volumes erstellen, um das Volume Image zu einem beliebigen Zeitpunkt beizubehalten.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das Volume, das für den Snapshot verwendet werden soll.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Snapshot erstellen* aus.
+. (Optional): Geben Sie im Dialogfeld Snapshot erstellen einen Namen für den Snapshot ein.
++
+
+TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist besonders wichtig, wenn in Ihrer Umgebung mehrere Cluster oder vCenter Server verwendet werden. Wenn Sie keinen Namen eingeben, erstellt das System einen Standardnamen für den Snapshot unter Verwendung des Datums und der Uhrzeit, zu der der Snapshot erstellt wurde.
+
+. (Optional) Aktivieren Sie das Kontrollkästchen *Snapshot in Replikation einschließen bei Paarung*, um sicherzustellen, dass der Snapshot beim Pairing des übergeordneten Volumes repliziert wird.
+. Wählen Sie eine der folgenden Optionen als Aufbewahrungszeitraum für den Snapshot aus:
++
+** *Keep Forever*: Behält die Momentaufnahme auf dem System auf unbestimmte Zeit.
+** *Aufbewahrungszeitraum festlegen*: Legen Sie eine Länge (Tage, Stunden oder Minuten) fest, bis das System den Snapshot behält.
++
+
+NOTE: Wenn Sie einen Aufbewahrungszeitraum festlegen, wählen Sie einen Zeitraum aus, der zum aktuellen Zeitpunkt beginnt. (Die Aufbewahrung wird nicht aus der Erstellungszeit der Snapshots berechnet.)
+
+
+
+. Um einen einzigen, sofortigen Schnappschuss zu machen, wählen Sie *Snapshot jetzt aufnehmen*.
+. Führen Sie die folgenden Schritte aus, um die Ausführung des Snapshots für einen späteren Zeitpunkt zu planen:
++
+.. Wählen Sie *Snapshot-Zeitplan erstellen*.
+.. Geben Sie einen Terminplannamen ein.
+.. Wählen Sie einen Zeitplantyp aus, und konfigurieren Sie die Terminplandetails.
+.. (Optional) Aktivieren Sie das Kontrollkästchen für *wiederkehrende Planung*, um den geplanten Snapshot regelmäßig zu wiederholen.
+
+
+. Wählen Sie *OK*.
+
+
+
+
+== Details zu Volume Snapshots anzeigen
+
+Sie möchten möglicherweise überprüfen, ob der Snapshot hinzugefügt wurde.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Snapshots* aus.
+. (Optional) Wählen Sie einen der folgenden Filter aus:
++
+** *Individuell*: Volumen-Snapshots, die nicht Mitglieder eines Gruppenschnappschusses sind.
+** *Mitglieder*: Volume Snapshots, die Mitglieder eines Gruppen-Snapshots sind.
+** *Inaktiv*: Volumen-Snapshots, die aus Volumen erzeugt wurden, die gelöscht, aber noch nicht gelöscht wurden.
+
+
+. Zeigen Sie die Snapshot-Details an.
+
+
+
+
+== Klonen eines Volumes aus einem Snapshot
+
+Sie können ein neues Volume aus einem Snapshot eines Volumes erstellen. Das wird verwendet, um ein neues Volume mithilfe der Snapshot-Informationen zu klonen. Dabei werden die Daten auf dem Volume zum Zeitpunkt der Erstellung des Snapshots verwendet. Dieser Prozess speichert auch Informationen zu anderen Snapshots des Volumes im neu erstellten Volume.
+
+.Schritte
+. Öffnen Sie vom vCenter Plug-in, rom das vCenter Plug-in, die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Snapshots* aus.
+. Wählen Sie eine von zwei Ansichten aus:
++
+** *Einzeln*: Listet Volume-Snapshots auf, die nicht Mitglieder eines Gruppen-Snapshots sind.
+** *Mitglieder*: Listet Volume-Snapshots auf, die Mitglieder eines Gruppen-Snapshots sind.
+
+
+. Aktivieren Sie das Kontrollkästchen für den Volume-Snapshot, der als Volume geklont werden soll.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Volume aus Snapshot* klonen.
+. Geben Sie einen Volume-Namen, die Gesamtgröße und wählen Sie entweder GB oder gib für das neue Volume aus.
+. Wählen Sie einen Zugriffstyp für das Volume aus:
++
+** *Nur Lesen*: Nur Leseoperationen sind erlaubt.
+** *Lesen/Schreiben*: Lese- und Schreibvorgänge sind erlaubt.
+** *Gesperrt*: Es sind keine Lese- oder Schreiboperationen erlaubt.
+** *Replikationsziel*: Als Zielvolume in einem replizierten Volume-Paar bestimmt.
+
+
+. Wählen Sie ein Benutzerkonto aus, das dem neuen Volume zugeordnet werden soll.
+. Wählen Sie *OK*.
+. Neues Volume validieren:
++
+.. Öffnen Sie die Registerkarte * Management*:
++
+*** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+*** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
+.. Wählen Sie die Unterregisterkarte *Volumes* aus.
+.. Bestätigen Sie in der *Active*-Ansicht, dass das neue Volume aufgelistet ist.
++
+
+TIP: Aktualisieren Sie die Seite bei Bedarf.
+
+
+
+
+
+
+
+== Führen Sie ein Rollback eines Volumes zu einem Snapshot durch
+
+Sie können ein Volume jederzeit als Rollback für einen Snapshot erstellen. Dadurch werden alle Änderungen am Volume rückgängig gemacht, seit der Snapshot erstellt wurde.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Snapshots* aus.
+. Wählen Sie eine von zwei Ansichten aus:
++
+** *Einzeln*: Listet Volume-Snapshots auf, die nicht Mitglieder eines Gruppen-Snapshots sind.
+** *Mitglieder*: Listet Volume-Snapshots auf, die Mitglieder eines Gruppen-Snapshots sind.
+
+
+. Aktivieren Sie das Kontrollkästchen für den Volume-Snapshot, den Sie für das Volume-Rollback verwenden möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis *Rollback Volume to Snapshot* aus.
+. (Optional) zum Speichern des aktuellen Status des Volumes vor dem Rollback zum Snapshot:
++
+.. Wählen Sie im Dialogfeld „Rollback to Snapshot“ den aktuellen Status des Volumes als Snapshot speichern* aus.
+.. Geben Sie einen Namen für den neuen Snapshot ein.
+
+
+. Wählen Sie *OK*.
+
+
+
+
+== Sichern Sie einen Volume Snapshot auf einem externen Objektspeicher
+
+Sie können die integrierte Backup-Funktion verwenden, um einen Volume-Snapshot zu sichern. Sie können ein Backup von Snapshots aus einem Cluster mit NetApp Element Software auf einem externen Objektspeicher oder auf einem anderen Element-basierten Cluster erstellen.
+
+Wenn Sie einen Snapshot in einem externen Objektspeicher sichern, müssen Sie über eine Verbindung zum Objektspeicher verfügen, der Lese-/Schreibvorgänge ermöglicht.
+
+*  up a volume snapshot to an Amazon S3 object store
+*  up a volume snapshot to an OpenStack Swift object store
+*  up a volume snapshot to a cluster running Element software
+
+
+
+
+=== Sichern Sie einen Volume Snapshot in einem Amazon S3-Objektspeicher
+
+Sie können ein Backup von NetApp Element Snapshots auf externen Objektspeichern erstellen, die mit Amazon S3 kompatibel sind.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Snapshots* aus.
+. Aktivieren Sie das Kontrollkästchen für den Volume-Snapshot, den Sie sichern möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Sicherung nach* aus.
+. Wählen Sie im Dialogfeld unter *Lautstärke sichern in* *Amazon S3* aus.
+. Wählen Sie eine Option unter *mit dem folgenden Datenformat* aus:
++
+** *Native*: Ein komprimiertes Format, das nur von NetApp Element Software-basierten Speichersystemen lesbar ist.
+** *Unkomprimiert*: Ein unkomprimiertes Format, das mit anderen Systemen kompatibel ist.
+
+
+. Geben Sie die Details ein:
++
+** *Hostname*: Geben Sie einen Hostnamen ein, mit dem Sie auf den Objektspeicher zugreifen können.
+** *Zugriffsschlüssel-ID*: Geben Sie eine Zugriffsschlüssel-ID für das Konto ein.
+** *Geheimer Zugriffsschlüssel*: Geben Sie den geheimen Zugriffsschlüssel für das Konto ein.
+** *Amazon S3 Bucket*: Geben Sie den S3-Bucket ein, in dem die Sicherung gespeichert werden soll.
+** *Präfix*: (Optional) Geben Sie ein Präfix für den Backup-Namen ein.
+** *Nametag*: (Optional) Geben Sie einen Nametag ein, um das Präfix anzuhängen.
+
+
+. Wählen Sie *OK*.
+
+
+
+
+=== Sichern Sie einen Volume Snapshot in einem OpenStack Swift Objektspeicher
+
+Sie können ein Backup von NetApp Element Snapshots auf sekundären Objektspeichern erstellen, die mit OpenStack Swift kompatibel sind.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Snapshots* aus.
+. Aktivieren Sie das Kontrollkästchen für den Volume-Snapshot, den Sie sichern möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Sicherung nach* aus.
+. Wählen Sie im Dialogfeld unter *Backup Volume to* die Option *OpenStack Swift* aus.
+. Wählen Sie eine Option unter *mit dem folgenden Datenformat* aus:
++
+** *Native*: Ein komprimiertes Format, das nur von NetApp Element Software-basierten Speichersystemen lesbar ist.
+** *Unkomprimiert*: Ein unkomprimiertes Format, das mit anderen Systemen kompatibel ist.
+
+
+. Geben Sie die Details ein:
++
+** *URL*: Geben Sie eine URL für den Zugriff auf den Objektspeicher ein.
+** *Benutzername*: Geben Sie den Benutzernamen für das Konto ein.
+** *Authentifizierungsschlüssel*: Geben Sie den Authentifizierungsschlüssel für das Konto ein.
+** *Container*: Geben Sie den Container ein, in dem die Sicherung gespeichert werden soll.
+** *Präfix*: (Optional) Geben Sie ein Präfix für den Namen des Backup-Volumes ein.
+** *Nametag*: (Optional) Geben Sie ein Namensschild ein, um das Präfix anzuhängen.
+
+
+. Wählen Sie *OK*.
+
+
+
+
+=== Sichern Sie einen Volume Snapshot auf einem Cluster, auf dem Element Software ausgeführt wird
+
+Sie können einen Volume Snapshot, der sich auf einem Cluster befindet, auf dem die NetApp Element Software ausgeführt wird, in einem Remote Element Cluster sichern.
+
+Sie müssen ein Volume auf dem Ziel-Cluster von gleicher oder größerer Größe wie der Snapshot erstellen, den Sie für das Backup verwenden.
+
+Wenn Sie ein Backup von einem Cluster auf ein anderes durchführen, generiert das System einen Schlüssel, der als Authentifizierung zwischen den Clustern verwendet werden soll. Mit diesem Massenvolumen-Schreibschlüssel kann sich das Quellcluster mit dem Ziel-Cluster authentifizieren und bietet beim Schreiben auf das Ziel-Volume Sicherheit. Im Rahmen des Backup- oder Wiederherstellungsprozesses müssen Sie vor dem Start des Vorgangs einen Schreibschlüssel für das Massenvolumen vom Zielvolume generieren.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie das Kontrollkästchen für das Zielvolume.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *aus* wiederherstellen.
+. Wählen Sie im Dialogfeld unter *Wiederherstellen von* die Option *NetApp Element* aus.
+. Wählen Sie eine Option unter *mit dem folgenden Datenformat* aus:
++
+** *Native*: Ein komprimiertes Format, das nur von NetApp Element Software-basierten Speichersystemen lesbar ist.
+** *Unkomprimiert*: Ein unkomprimiertes Format, das mit anderen Systemen kompatibel ist.
+
+
+. Wählen Sie *Schlüssel generieren*, um einen Massenvolumenschreibschlüssel für das Zielvolumen zu generieren.
+. Kopieren Sie den Schreibschlüssel des Massenvolumes in die Zwischenablage, um sie auf spätere Schritte im Quellcluster anzuwenden.
+. Öffnen Sie über das vCenter, das den Quellcluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Aktivieren Sie das Kontrollkästchen für den Snapshot, den Sie für die Sicherung verwenden.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Sicherung nach* aus.
+. Wählen Sie im Dialogfeld unter *Lautstärke sichern in* die Option *NetApp Element* aus.
+. Wählen Sie die gleiche Option wie das Ziel-Cluster unter *mit dem folgenden Datenformat* aus.
+. Geben Sie die Details ein:
++
+** *Remote Cluster MVIP*: Geben Sie die virtuelle Management-IP-Adresse des Cluster des Ziel-Volumes ein.
+** *Remote-Cluster-Benutzerpasswort*: Geben Sie den Remote-Cluster-Benutzernamen ein.
+** *Remote-Benutzer-Passwort*: Geben Sie das Remote-Cluster-Passwort ein.
+** *Bulk Volume Write key*: Fügen Sie den Schlüssel, den Sie auf dem Ziel-Cluster früher generiert haben, ein.
+
+
+. Wählen Sie *OK*.
+
+
+
+
+== Löschen Sie einen Volume-Snapshot
+
+Sie können einen Volume-Snapshot von einem Cluster löschen, auf dem NetApp Element Software ausgeführt wird, mit dem Plug-in-Erweiterungspunkt. Wenn Sie einen Snapshot löschen, entfernt das System ihn sofort.
+
+Sie können Snapshots löschen, die aus dem Quellcluster repliziert werden. Wenn ein Snapshot beim Löschen mit dem Zielcluster synchronisiert wird, wird die synchrone Replikation abgeschlossen und der Snapshot wird aus dem Quellcluster gelöscht. Der Snapshot wird nicht aus dem Ziel-Cluster gelöscht.
+
+Sie können auch Snapshots löschen, die vom Zielcluster zum Ziel repliziert wurden. Der gelöschte Snapshot wird in einer Liste von gelöschten Snapshots auf dem Ziel aufbewahrt, bis das System erkennt, dass Sie den Snapshot auf dem Quell-Cluster gelöscht haben. Nachdem das Ziel erkannt hat, dass Sie den Quell-Snapshot gelöscht haben, stoppt das Ziel die Replikation des Snapshots.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie auf der Unterregisterkarte *Snapshots* eine der folgenden Ansichten aus:
++
+** *Einzeln*: Eine Liste von Volume-Snapshots, die nicht Teil eines Gruppen-Snapshots sind.
+** *Inaktiv*: Eine Liste von Volume-Snapshots, die aus Volumes erstellt wurden, die gelöscht, aber noch nicht gelöscht wurden.
+
+
+. Aktivieren Sie das Kontrollkästchen für den Volume-Snapshot, den Sie löschen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

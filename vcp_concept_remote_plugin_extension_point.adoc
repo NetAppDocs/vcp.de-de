@@ -1,0 +1,96 @@
+---
+sidebar: sidebar 
+permalink: vcp_concept_remote_plugin_extension_point.html 
+summary:  
+keywords: netapp, vcp, element, plugin, plug-in, management, extension point, remote 
+---
+= NetApp Element Remote Plugin Erweiterungspunkt
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Ab dem NetApp Element vCenter Plug-in 5.0 können Sie über den NetApp Element Remote Plug-in Extension Point auf das Remote Element Plug-in zugreifen. So können Sie Cluster, Nodes und Laufwerke konfigurieren und managen sowie Cluster-Informationen anzeigen.
+
+Die folgenden Registerkarten sind über den NetApp Element Remote Plugin Erweiterungspunkt verfügbar:
+
+*  Started
+* 
+* 
+* 
+
+
+
+
+== Erste Schritte
+
+Auf der Registerkarte erste Schritte werden die Erweiterungspunkte für das Plug-in und die Aktionen vorgestellt, die durchgeführt werden können. Sie können die Startseiten auf jeder Seite ausblenden oder sie über die Registerkarte *Info* wiederherstellen.
+
+
+
+== Konfiguration
+
+Auf der Registerkarte *Configuration* können Sie Cluster hinzufügen und verwalten sowie Management-Knoten-Einstellungen für QoSSIOC konfigurieren.
+
+
+NOTE: Ihr vSphere Web Client kann sich abhängig von der installierten Version von vSphere leicht von der im folgenden Bild angezeigten Abbildung unterscheiden.
+
+image::vcp_config_tab.png[Registerkarte Konfiguration]
+
+Die folgenden Registerkarten stehen auf der Registerkarte *Konfiguration* zur Verfügung:
+
+* *Cluster*: Verwaltet die NetApp Element Cluster, die über das Plug-in gesteuert werden. Sie können außerdem Cluster-spezifische Funktionen aktivieren, deaktivieren oder konfigurieren.
+* *QoSSIOC Settings*: Konfiguriert Ihre Anmeldeinformationen für den QoSSIOC-Dienst auf dem Management-Knoten, um mit vCenter zu kommunizieren.
+* *QoSSIOC Ereignisse*: Zeigt Informationen über alle erkannten QoSSIOC-Ereignisse an.
+
+
+
+
+== Vereinfachtes
+
+Über die Registerkarte * Management* können Sie die folgenden Aktivitäten ausführen:
+
+* Anzeigen von Cluster-Informationen
+* Managen von Datastores, Volumes, Benutzerkonten, Zugriffsgruppen und Initiatoren
+* Managen Sie Snapshots einzelner Gruppen und fügen Sie Laufwerke und Nodes hinzu und managen Sie sie
+
+
+
+NOTE: Ihr vSphere Web Client kann sich abhängig von der installierten Version von vSphere leicht von der im folgenden Bild angezeigten Abbildung unterscheiden.
+
+image::vcp_management_tab.png[Registerkarte Verwaltung]
+
+Über die Cluster-Navigationsleiste können Sie im Handumdrehen zwischen Clustern wechseln, die dem Plug-in hinzugefügt wurden:
+
+* *Cluster*: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für Verwaltungsaufgaben verwenden möchten, in der Navigationsleiste ausgewählt ist. Wählen Sie in der Dropdown-Liste weitere hinzugefügte Cluster aus.
+* *MVIP*: Die virtuelle Management-IP-Adresse des ausgewählten Clusters.
+* *SVIP*: Die virtuelle Speicher-IP-Adresse des ausgewählten Clusters.
+* *VCenter*: Der vCenter Server, auf den der ausgewählte Cluster zugreifen kann. Dem Cluster wird Zugriff auf einen vCenter Server zugewiesen, wenn das Cluster zum Plug-in hinzugefügt wird.
+
+
+Die folgenden Registerkarten stehen auf der Registerkarte * Management* zur Verfügung:
+
+* *Reporting*: Zeigt Informationen zu Clusterkomponenten an und gibt einen Überblick über die Clusterleistung. Auf der Registerkarte finden Sie zudem Informationen zu Ereignissen, Warnmeldungen, iSCSI-Sitzungen, zum Ausführen von Aufgaben und zu Performance-Volumes.
+* *Management*: Erstellen und Verwalten von Datastores, Volumes, Benutzerkonten, Zugriffsgruppen und Initiatoren. Sie können außerdem Backup-Vorgänge, Klone und Snapshots durchführen. QoS-Richtlinien können mithilfe der NetApp Element Software 10 oder höher erstellt und gemanagt werden.
+* *Schutz*: Verwalten Sie einzelne und Gruppen-Snapshots. Außerdem lassen sich Zeitpläne für die Snapshot Erstellung erstellen, Cluster für die Echtzeitreplizierung kombinieren und Volume-Paare managen.
+* *Cluster*: Hinzufügen und Verwalten von Laufwerken und Knoten. Sie können auch VLANs erstellen und verwalten.
+* *VVols*: Managen Sie virtuelle Volumes und die zugehörigen Storage-Container, Protokollendpunkte und Bindungen.
+
+
+
+
+== Info
+
+Zeigt Informationen zur Plug-in-Version an und bietet eine Download-Option für Service-Bundles.
+
+[discrete]
+== Weitere Informationen
+
+* link:concept_vcp_product_overview.html["Übersicht über das NetApp Element Plug-in für vCenter Server"]
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

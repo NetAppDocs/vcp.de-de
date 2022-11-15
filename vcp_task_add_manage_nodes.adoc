@@ -1,0 +1,210 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_add_manage_nodes.html 
+summary: Sie können Nodes in der Cluster-Konfiguration mit dem Plug-in erstellen und managen. 
+keywords: netapp, nodes, create, manage, delete, view vcp, vcenter, element 
+---
+= Hinzufügen und Managen von Nodes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Über das Plug-in können Sie hinzufügen https://docs.netapp.com/us-en/hci/docs/concept_hci_nodes.html#storage-nodes["Storage-Nodes"] Wenn ein Cluster erstellt wird oder mehr Storage benötigt wird. Sie können auch Storage-Nodes hinzufügen, auf denen die Element Software ausgeführt wird. Außerhalb des Plug-in in vSphere müssen NetApp HCI Computing-Nodes hinzugefügt werden.
+
+*  a node to a cluster
+*  node details
+*  a node
+*  down a node
+*  a node from a cluster
+
+
+
+
+== Fügen Sie einem Cluster einen Node hinzu
+
+Mit dem vCenter Plug-in können Sie Ihrem Cluster Storage Nodes hinzufügen.
+
+.Was Sie und#8217;ll benötigen
+* Der Node, den Sie hinzufügen, wurde eingerichtet, eingeschaltet und konfiguriert.
+* Die Major- oder Minor-Versionsnummern der Software auf jedem Knoten eines Clusters müssen mit der Kompatibilität der Software übereinstimmen. Beispielsweise ist Element 9.0 nicht mit Version 9.1 kompatibel.
+
+
+
+NOTE: Wenn der dem hinzuzufügenden Node eine andere größere oder kleinere Version der NetApp Element-Software als die Version auf dem Cluster hat, aktualisiert das Cluster den Node asynchron auf die Version der NetApp Element-Software, die auf dem Cluster-Master ausgeführt wird. Nach der Aktualisierung des Node wird er sich automatisch dem Cluster hinzugefügt. Während dieses asynchronen Prozesses liegt der Node in einem `pendingActive` Bundesland.
+
+Nodes müssen die Erstkonfiguration erfordern, wenn sie zum ersten Mal eingeschaltet sind. Wenn der Knoten eingerichtet und konfiguriert wurde, registriert er sich auf dem Cluster, der identifiziert wurde, wenn der Knoten konfiguriert wurde, und erscheint in der Liste der ausstehenden Knoten auf der Seite *Cluster > Knoten* des Plugin Erweiterungspunkts.
+
+Sie können einem vorhandenen Cluster Nodes mit kleineren oder größeren Kapazitäten hinzufügen.
+
+Das Verfahren ist identisch mit dem Hinzufügen von FC Nodes oder Storage-Nodes, auf denen die NetApp Element Software ausgeführt wird.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Knoten*.
+. Wählen Sie in der Dropdown-Liste * Ausstehend* aus, um die Liste der Knoten anzuzeigen.
+. So fügen Sie einen oder mehrere Knoten hinzu:
++
+.. Aktivieren Sie das Kontrollkästchen für jeden Knoten, den Sie hinzufügen möchten.
+.. Klicken Sie Auf *Knoten Hinzufügen*.
+
+
+. Überprüfen Sie die Details der Knoten, die Sie hinzufügen möchten, und bestätigen Sie die Aktion.
++
+Nach Abschluss der Aktion wird der Node in der Liste der aktiven Nodes für das Cluster angezeigt.
+
+
+
+
+
+== Zeigen Sie Node-Details an
+
+Vom Plug-in-Erweiterungspunkt können Sie eine Liste der Nodes im Cluster auf der Seite Nodes der Registerkarte Cluster anzeigen. Sie müssen die Ansicht „aktiv“ auswählen, um die Liste der aktiven Nodes anzuzeigen. Sie können die Ansicht ändern, indem Sie auswählen `Pending`, `PendingActive`, und `All` Optionen mit dem Dropdown-Filter.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Nodes* aus.
+. Wählen Sie die Ansicht *aktiv* aus.
+. Details zu den Nodes im Storage-Cluster anzeigen
++
+Sie können Informationen wie Node-IDs, den Namen und Status jedes Nodes, die konfigurierten IOPS, den Node-Typ, die Anzahl der aktiven Laufwerke pro Node und Netzwerkinformationen zu den einzelnen Nodes anzeigen.
+
+
+
+
+
+== Starten Sie einen Node neu
+
+Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster neu starten.
+
+Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.
+
+Zum Neustart des Clusters können Sie alle Cluster-Nodes auswählen und einen Neustart durchführen.
+
+
+IMPORTANT: Mit dieser Methode werden alle Netzwerkdienste auf einem Node neu gestartet, was zu einem vorübergehenden Verlust der Netzwerkverbindung führt.
+
+
+NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Nodes* aus.
++
+.. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für jeden Knoten, den Sie neu starten möchten.
+.. Klicken Sie Auf *Aktionen*.
+.. Wählen Sie *Neustart*.
+
+
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Fahren Sie einen Node herunter
+
+Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster herunterfahren. Zum Herunterfahren des Clusters können Sie alle Cluster-Nodes auswählen und gleichzeitig das Herunterfahren durchführen.
+
+Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.
+
+.Über diese Aufgabe
+
+NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Nodes* aus.
++
+.. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für jeden Knoten, den Sie herunterfahren möchten.
+.. Klicken Sie Auf *Aktionen*.
+.. Wählen Sie *Herunterfahren*.
+
+
+. Bestätigen Sie die Aktion.
+
+
+
+NOTE: Wenn ein Node unter jeder Art von Herunterfahren länger als 5.5 Minuten ausgefallen ist, bestimmt die NetApp Element Software, dass der Node nicht wieder dem Cluster beitreten wird. Bei der Double Helix Datensicherung wird das Schreiben einzelner replizierter Blöcke auf einem anderen Node zum Replizieren der Daten gestartet. Je nach Länge des Herunterfahrens eines Node müssen dessen Laufwerke möglicherweise wieder dem Cluster hinzugefügt werden, nachdem der Node wieder in den Online-Modus versetzt wurde.
+
+
+
+== Entfernen eines Node aus einem Cluster
+
+Sie können Nodes aus einem Cluster ohne Serviceunterbrechungen entfernen, wenn ihr Storage nicht mehr benötigt wird oder Wartungsmaßnahmen erforderlich sind.
+
+Sie haben alle Laufwerke im Node aus dem Cluster entfernt. Sie können den Node bis zum nicht entfernen `RemoveDrives` Der Prozess ist abgeschlossen, und alle Daten wurden vom Node migriert.
+
+Mindestens zwei FC Nodes sind für FC-Konnektivität in einem NetApp Element Cluster erforderlich. Wenn nur ein FC-Node verbunden ist, löst das System im Ereignisprotokoll Warnmeldungen aus, bis Sie dem Cluster weitere FC-Node hinzufügen, obwohl der gesamte FC-Netzwerk-Traffic weiterhin mit nur einem FC-Node ausgeführt wird.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Cluster* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Nodes* aus.
+. So entfernen Sie einen oder mehrere Knoten:
++
+.. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für jeden Knoten, den Sie entfernen möchten.
+.. Klicken Sie Auf *Aktionen*.
+.. Wählen Sie *Entfernen*.
+
+
+. Bestätigen Sie die Aktion.
++
+Alle aus einem Cluster entfernten Nodes werden in der Liste der ausstehenden Nodes angezeigt.
+
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

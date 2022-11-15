@@ -1,0 +1,53 @@
+---
+sidebar: sidebar 
+permalink: vcp_concept_management_extension_point.html 
+summary:  
+keywords: netapp, vcp, element, plugin, plug-in, management, extension point 
+---
+= Erweiterter Punkt für das NetApp Element-Management
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+Mit dem Erweiterungspunkt für die NetApp Element-Verwaltung können Sie Cluster-Informationen anzeigen, Datastores, Volumes, Benutzerkonten, Zugriffsgruppen, Und Initiatoren, managen Snapshots einzelner Gruppen und fügen Laufwerke und Nodes hinzu und managen.
+
+
+NOTE: Verwenden des NetApp Element Plug-ins für VMware vCenter Server zum Managen von Clusterressourcen von anderen vCenter Servern mithilfe von link:vcp_concept_linkedmode.html["VCenter Linked Mode"] Ist auf lokale Storage-Cluster beschränkt
+
+
+NOTE: Ihr vSphere Web Client kann sich abhängig von der installierten Version von vSphere leicht von der im folgenden Bild angezeigten Abbildung unterscheiden.
+
+image::vcp_management_extension_point.png[Management-Erweiterungspunkt]
+
+Über die Cluster-Navigationsleiste können Sie im Handumdrehen zwischen Clustern wechseln, die dem Plug-in hinzugefügt wurden:
+
+* *Cluster*: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für Verwaltungsaufgaben verwenden möchten, in der Navigationsleiste ausgewählt ist. Wählen Sie in der Dropdown-Liste weitere hinzugefügte Cluster aus.
+* *MVIP*: Die virtuelle Management-IP-Adresse des ausgewählten Clusters.
+* *SVIP*: Die virtuelle Speicher-IP-Adresse des ausgewählten Clusters.
+* *VCenter*: Der vCenter Server, auf den der ausgewählte Cluster zugreifen kann. Dem Cluster wird Zugriff auf einen vCenter Server zugewiesen, wenn das Cluster zum Plug-in hinzugefügt wird.
+
+
+Die folgenden Registerkarten sind über den Erweiterungspunkt für die NetApp Element-Verwaltung verfügbar:
+
+* *Erste Schritte*: Stellt die Erweiterungspunkte für das Plug-in und die Aktionen vor, die durchgeführt werden können. Sie können Startseiten von jeder Seite aus ausblenden oder sie auf der Registerkarte *über* im Erweiterungspunkt der NetApp Element-Verwaltung wiederherstellen.
+* *Reporting*: Zeigt Informationen zu Clusterkomponenten an und gibt einen Überblick über die Clusterleistung. Auf der Registerkarte finden Sie zudem Informationen zu Ereignissen, Warnmeldungen, iSCSI-Sitzungen, zum Ausführen von Aufgaben und zur Volume-Performance.
+* *Management*: Erstellen und Verwalten von Datastores, Volumes, Benutzerkonten, Zugriffsgruppen und Initiatoren. Sie können außerdem Backup-Vorgänge, Klone und Snapshots durchführen. QoS-Richtlinien können mithilfe der NetApp Element Software 10 oder höher erstellt und gemanagt werden.
+* *Schutz*: Verwalten Sie einzelne und Gruppen-Snapshots. Außerdem lassen sich Zeitpläne für die Snapshot Erstellung erstellen, Cluster für die Echtzeitreplizierung kombinieren und Volume-Paare managen.
+* *Cluster*: Hinzufügen und Verwalten von Laufwerken und Knoten. Sie können auch VLANs erstellen und verwalten.
+* *VVols*: Managen Sie virtuelle Volumes und die zugehörigen Storage-Container, Protokollendpunkte und Bindungen.
+
+
+
+
+== Weitere Informationen
+
+* link:vcp_concept_config_extension_point["Erweiterter Punkt für die NetApp Element-Konfiguration"]
+* link:concept_vcp_product_overview.html["NetApp Element Plug-in für VMware vCenter Server – Übersicht"]
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

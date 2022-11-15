@@ -1,0 +1,536 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_datastores_manage.html 
+summary: Über das Plug-in können Sie Datastores hinzufügen, die auf Element Volumes erstellt werden. 
+keywords: netapp, datastore, vcp, vcenter, element 
+---
+= Managen von Datastores
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit dem NetApp Element Plug-in für VMware vCenter Server können Sie Datastores managen, die von Element Volumes unterstützt werden. Sie können Datastores erstellen, erweitern, klonen, freigeben oder löschen. Sie können auch VAAI UNMAP verwenden, um einem Cluster zu ermöglichen, freigegebenen Speicherplatz von in Thin Provisioning bereitgestellten VMFS-Datenspeichern zurückzugewinnen.
+
+.Was Sie und#8217;ll benötigen
+* Um Datastores zu erstellen und zu verwalten, müssen Sie zuerst mindestens ein Benutzerkonto erstellen.
+* Um den QoSSIOC-Dienst mit Datastores zu verwenden, müssen Sie zuerst Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren.
++
+** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+
+
+* Da Datastores mit der höchsten vom ausgewählten ESXi Host unterstützten VMFS-Version erstellt werden, sollten alle Cluster-Mitglieder dieselbe Version von vSphere und ESXi ausführen, um Probleme mit der VMFS-Kompatibilität zu vermeiden.
+
+
+.Optionen
+*  a datastore
+*  the datastore list
+*  a datastore
+*  a datastore
+*  a datastore
+*  VAAI UNMAP
+*  a datastore
+
+
+
+TIP: Überwachen Sie den Datastore-Betrieb bis zum Abschluss mithilfe von Task-Monitoring in vSphere.
+
+
+
+== Erstellen eines Datenspeichers
+
+Sie können einen Datastore aus der Plug-in-Erweiterung erstellen.
+
+.Was Sie und#8217;ll benötigen
+* Mindestens ein Host muss mit dem vCenter Server verbunden sein.
+* Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
++
+
+NOTE: Wenn Sie den verknüpften vCenter-Modus verwenden, stellen Sie sicher, dass Sie das Cluster mit dem richtigen vCenter-Server hinzugefügt haben.
+
+* Mindestens ein Benutzerkonto muss erstellt werden.
+* Um den QoSSIOC-Dienst mit Datastores zu verwenden, müssen Sie zuerst Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren:
++
+** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+
+
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie auf der Seite Datastore die Option *Create Datastore* aus.
+. Geben Sie einen Namen für den Datastore ein.
++
+
+TIP: Verwenden Sie für jeden Datenspeicher in einem Datacenter einen eindeutigen Namen. Verwenden Sie für mehrere Cluster- oder vCenter Server-Umgebungen beschreibende Best Practices für die Benennung.
+
+. Wählen Sie *Weiter*.
+. Wählen Sie einen oder mehrere erforderliche Hosts für den Datastore aus.
++
+
+NOTE: Sie benötigen mindestens einen verbundenen Host, bevor Sie einen neuen Datastore erstellen können. Wenn Ihr Host über mehrere Initiatoren verfügt, wählen Sie einen Initiator oder den Host aus, um alle Initiatoren auszuwählen. Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswählen, die dem vCenter-Server zur Verfügung stehen, dem das Cluster zugewiesen ist.
+
+. Wählen Sie *Weiter*.
+. Wählen Sie im Fensterbereich *Volume konfigurieren* ein vorhandenes Volume aus und fahren Sie mit dem nächsten Schritt fort, oder erstellen Sie ein neues Volume für den neuen Datenspeicher:
++
+
+NOTE: Wenn Sie ein vorhandenes Volume auswählen, um einen neuen Datenspeicher zu erstellen, gehen die vorhandenen Daten verloren. Informationen zu vorhandenen VMFS-Volumes finden Sie in der VMware Dokumentation über https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.storage.doc/GUID-EEFEB765-A41F-4B6D-917C-BB9ABB80FC80.html["Mounten einer VMFS-Datastore-Kopie"^] Und https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.storage.doc/GUID-EBAB0D5A-3C77-4A9B-9884-3D4AD69E28DC.html["Managen doppelter VMFS-Datenspeicher"^].
+
++
+.. Geben Sie einen Namen für das Volume ein, das den Datenspeicher unterstützt.
+.. Wählen Sie in der Kontoliste ein Benutzerkonto aus.
+.. Geben Sie die Gesamtgröße des Volumes ein, die erstellt werden sollen.
++
+
+NOTE: Die standardmäßige Auswahl der Volume-Größe ist in GB. Sie können Volumes mit Größen erstellen, die in GB oder gib gemessen wurden: 1 GB = 1 000 000 000 Byte 1 gib = 1 073 741 824 Byte
+
++
+Standardmäßig ist die 512-Byte-Emulation für alle neuen Volumes auf ON festgelegt.
+
+.. Führen Sie im Bereich * Quality of Service* einen der folgenden Schritte aus:
++
+... Wählen Sie unter *Richtlinie* eine vorhandene QoS-Richtlinie aus.
+... Legen Sie unter *Benutzerdefinierte Einstellungen* benutzerdefinierte Mindest-, Maximum- und Burst-Werte für IOPS fest oder verwenden Sie die Standard-QoS-Werte.
++
+
+TIP: QoS-Richtlinien eignen sich am besten für Serviceumgebungen, beispielsweise mit Datenbank-, Applikations- oder Infrastrukturservern, die selten neu gestartet werden und den konstanten Zugriff auf den Storage benötigen. Die individuelle QoSSIOC-Automatisierung eignet sich am besten für Light Use VMs, wie z. B. Virtual Desktops oder spezielle VMs vom Kiosk-Typ, die täglich neu gestartet, eingeschaltet oder ausgeschaltet werden können. QoSSIOC-Automatisierungs- und QoS-Richtlinien sollten nicht gemeinsam genutzt werden.
+
++
+
+TIP: Volumes mit einem IOPS-Wert von max oder Burst über 20,000 IOPS erfordern möglicherweise eine hohe Warteschlangentiefe oder mehrere Sitzungen, um diesen IOPS-Level auf einem einzelnen Volume zu erreichen.
+
+
+
+
+
+. Wählen Sie *Weiter*.
+. Konfigurieren Sie den Berechtigungstyp für den Host-Zugriff, indem Sie eine der folgenden Optionen auswählen:
++
+** *Volume Access Group verwenden*: Wählen Sie aus, um die Anzahl der Initiatoren, die Volumes sehen können, ausdrücklich einzuschränken.
+** *CHAP verwenden*: Wählen Sie für sicheren geheimen Zugriff ohne Einschränkungen für Initiatoren.
+
+
+. Wählen Sie *Weiter*.
+. Wenn Sie *Volume Access Group* verwenden ausgewählt haben, konfigurieren Sie die Volume Access Groups für die ausgewählten Hosts.
++
+Die unter *von ausgewählten Initiatoren* aufgeführten Volume-Zugriffsgruppen sind bereits einem oder mehreren der in einem früheren Schritt ausgewählten Host-Initiatoren zugeordnet
+
++
+.. Wählen Sie zusätzliche Volume-Zugriffsgruppen aus, oder erstellen Sie neue, die den verfügbaren Initiatoren zugeordnet werden sollen:
++
+*** *Verfügbar*: Weitere Volume Access Group Optionen im Cluster.
+*** *Neue Zugriffsgruppe erstellen*: Geben Sie den Namen der neuen Zugriffsgruppe ein und wählen Sie *Hinzufügen*.
+
+
+.. Wählen Sie *Weiter*.
+.. Verbinden Sie im Fensterbereich *Hostzugriff konfigurieren* verfügbare Hostinitiatoren (IQN oder WWPN) mit den im vorherigen Fensterbereich ausgewählten Volume-Zugriffsgruppen. Wenn ein Host-Initiator bereits einer Volume-Zugriffsgruppe zugeordnet ist, ist das Feld für diesen Initiator schreibgeschützt. Wenn ein Host-Initiator nicht über eine Zuordnung der Zugriffsgruppen für Volumes verfügt, wählen Sie eine Option aus der Liste neben dem Initiator aus.
+.. Wählen Sie *Weiter*.
+
+
+. Wenn Sie die QoSSIOC-Automatisierung aktivieren möchten, aktivieren Sie *QoS & SIOC* und konfigurieren Sie dann die QoSSIOC-Einstellungen.
++
+--
+
+TIP: Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoSSIOC überschreibt und passt die QoS-Werte für Volume QoS-Einstellungen an.
+
+Wenn der QoSSIOC-Dienst nicht verfügbar ist, müssen Sie zuerst die QoSSIOC-Einstellungen konfigurieren:
+
+** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+
+
+--
++
+.. Wählen Sie *QoS & SIOC aktivieren*.
+.. Konfigurieren Sie den *Burst Factor*.
++
+
+NOTE: Der Burst-Faktor besteht aus einer Mehrfacheinstellung der IOPS-Grenze (SIOC) für die VMDK. Wenn Sie die Standardeinstellung ändern, stellen Sie sicher, dass Sie einen Burst-Faktor-Wert verwenden, der das maximale Burst-Limit für ein Element Volume nicht überschreitet, wenn der Burst-Faktor-Wert mit dem IOPS-Limit für eine VMDK multipliziert wird.
+
+.. (Optional) Wählen Sie *Standard QoS* überschreiben und konfigurieren Sie die Einstellungen.
++
+
+NOTE: Wenn die Einstellung „Standard-QoS überschreiben“ für den Datastore deaktiviert ist, werden die Werte für Shares und IOPS-Limit automatisch auf Basis der SIOC-Standardeinstellungen jeder VM festgelegt.
+
++
+
+TIP: Passen Sie das SIOC-Freigablimit nicht an, ohne das SIOC-IOPS-Limit anzupassen.
+
++
+
+TIP: Standardmäßig sind die maximalen SIOC-Festplattenfreigaben auf festgelegt `Unlimited`. In einer großen VM-Umgebung wie VDI kann dies zu einer Überprovisionierung der maximalen IOPS auf dem Cluster führen. Wenn Sie QoSSIOC aktivieren, prüfen Sie immer die Standard-QoS überschreiben und legen Sie die Option IOPS-Limit auf einen angemessenen Wert fest.
+
+
+
+. Wählen Sie *Weiter*.
+. Bestätigen Sie die Auswahl und klicken Sie auf *Fertig stellen*.
+. Um den Fortschritt der Aufgabe anzuzeigen, verwenden Sie Task Monitoring in vSphere. Wenn der Datastore nicht in der Liste angezeigt wird, aktualisieren Sie die Ansicht.
+
+
+
+
+== Zeigen Sie die Liste der Datenspeicher an
+
+Sie können verfügbare Datastores auf der Seite Datastores von einem Plug-in-Erweiterungspunkt anzeigen.
+
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Prüfen Sie die Liste der Datenspeicher.
++
+
+NOTE: Datastores, die mehrere Volumes (gemischte Datastores) umfassen, werden nicht aufgeführt. Datastore-Ansichten zeigen nur Datastores an, die auf ESXi Hosts aus dem ausgewählten NetApp Element-Cluster verfügbar sind.
+
+. Überprüfen Sie die folgenden Informationen:
++
+** *Name*: Der Name, der dem Datenspeicher zugewiesen ist.
+** *Hostname*: Die Adresse jedes zugeordneten Host-Geräts.
+** *Status*: Die möglichen Werte `Accessible` Oder `Inaccessible` Geben Sie an, ob der Datastore derzeit mit vSphere verbunden ist.
+** *Typ*: Der Datenspeichertyp des VMware-Dateisystems.
+** *Volume Name*: Der Name, der dem zugeordneten Volume zugewiesen wurde.
+** *Volume NAA*: Weltweit eindeutige SCSI-Gerätekennung für das zugehörige Volumen im NAA IEEE Registered Extended Format.
+** *Gesamtkapazität (GB)*: Gesamte formatierte Kapazität des Datastore.
+** *Freie Kapazität (GB)*: Platz, der für den Datastore verfügbar ist.
+** *QoSSIOC Automation*: Gibt an, ob die QoSSIOC-Automatisierung aktiviert ist oder nicht. Mögliche Werte:
++
+*** `Enabled`: QoSSIOC ist aktiviert.
+*** `Disabled`: QoSSIOC ist nicht aktiviert.
+*** `Max Exceeded`: Volume Max QoS hat den angegebenen Grenzwert überschritten.
+
+
+
+
+
+
+
+
+== Erweitern Sie einen Datenspeicher
+
+Sie können einen Datastore erweitern, um die Volume-Größe mithilfe des Plug-in-Erweiterungspunkts zu erhöhen. Wenn der Datenspeicher erweitert wird, wird auch das VMFS Volume in Bezug auf diesen Datastore erweitert.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Aktivieren Sie auf der Seite Datenspeicher das Kontrollkästchen für den zu weitenden Datenspeicher.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *erweitern*.
+. Geben Sie im Feld Neue Datenspeichergröße die erforderliche Größe für den neuen Datenspeicher ein, und wählen Sie GB oder gib aus.
++
+
+NOTE: Bei der Erweiterung des Datenspeichers wird die Größe des gesamten Volumes belegt. Die neue Datastore-Größe darf den im ausgewählten Cluster verfügbaren nicht bereitgestellten Speicherplatz oder die maximal zulässige Volume-Größe des Clusters nicht überschreiten.
+
+. Wählen Sie *OK*.
+. Aktualisieren Sie die Seite.
+
+
+
+
+== Klonen eines Datenspeichers
+
+Sie können Datenspeicher mit dem Plug-in klonen, das das Mounten des neuen Datastores auf den gewünschten ESXi Server oder Cluster beinhaltet. Sie können einen Namen für den Datastore-Klon festlegen und seine Einstellungen für QoSSIOC, Volume, Host und Autorisierungstyp konfigurieren.
+
+Wenn im Quell-Datastore virtuelle Maschinen vorhanden sind, werden virtuelle Maschinen im Klon-Datastore mit neuen Namen in das Inventar gebracht.
+
+Die Volume-Größe für den Klon-Datastore entspricht der Größe des Volumes, das den Quell-Datastore zugrunde liegt. Standardmäßig ist die 512-Byte-Emulation für alle neuen Volumes auf ON festgelegt.
+
+.Was Sie und#8217;ll benötigen
+* Mindestens ein Host muss mit vCenter Server verbunden sein.
+* Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
++
+
+NOTE: Wenn Sie den verknüpften vCenter-Modus verwenden, stellen Sie sicher, dass Sie das Cluster mit dem richtigen vCenter-Server hinzugefügt haben.
+
+* Der verfügbare nicht bereitgestellte Speicherplatz muss der Größe des Quell-Volume entsprechen oder größer sein.
+* Mindestens ein Benutzerkonto muss erstellt werden.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Aktivieren Sie auf der Seite *Datastores* das Kontrollkästchen für den Datenspeicher, den Sie klonen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Klonen* aus.
++
+
+NOTE: Wenn Sie versuchen, einen Datenspeicher zu klonen, der virtuelle Maschinen mit angeschlossenen Festplatten enthält, die sich nicht auf dem ausgewählten Datastore befinden, werden Kopien der virtuellen Maschinen im geklonten Datenspeicher nicht zur virtuellen Maschineninventar hinzugefügt.
+
+. Geben Sie einen Datenspeichernamen ein.
++
+
+TIP: Verwenden Sie für jeden Datenspeicher in einem Datacenter einen eindeutigen Namen. Verwenden Sie für mehrere Cluster- oder vCenter Server-Umgebungen beschreibende Best Practices für die Benennung.
+
+. Wählen Sie *Weiter*.
+. Wählen Sie einen oder mehrere erforderliche Hosts für den Datastore aus.
++
+
+NOTE: Sie benötigen mindestens einen verbundenen Host, bevor Sie einen neuen Datastore erstellen können. Wenn Ihr Host über mehrere Initiatoren verfügt, wählen Sie einen Initiator oder den Host aus, um alle Initiatoren auszuwählen. Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswählen, die dem vCenter-Server zur Verfügung stehen, dem das Cluster zugewiesen ist.
+
+. Wählen Sie *Weiter*.
+. Gehen Sie im Fensterbereich *Lautstärke konfigurieren* wie folgt vor:
++
+.. Geben Sie einen Namen für das neue NetApp Element Volume ein, das den Klon-Datenspeicher erstellt.
+.. Wählen Sie in der Kontoliste ein Benutzerkonto aus.
++
+
+NOTE: Sie benötigen mindestens ein vorhandenes Benutzerkonto, bevor Sie ein Volume erstellen können.
+
+.. Führen Sie im Bereich * Quality of Service* einen der folgenden Schritte aus:
++
+*** Wählen Sie unter *Richtlinie* eine vorhandene QoS-Richtlinie aus, sofern verfügbar.
+*** Legen Sie unter *Benutzerdefinierte Einstellungen* benutzerdefinierte Mindest-, Maximum- und Burst-Werte für IOPS fest oder verwenden Sie die Standard-QoS-Werte.
++
+
+TIP: QoS-Richtlinien eignen sich am besten für Serviceumgebungen, beispielsweise mit Datenbank-, Applikations- oder Infrastrukturservern, die selten neu gestartet werden und den konstanten Zugriff auf den Storage benötigen. Die individuelle QoSSIOC-Automatisierung eignet sich am besten für Light Use VMs, wie z. B. Virtual Desktops oder spezielle VMs vom Kiosk-Typ, die täglich neu gestartet, eingeschaltet oder ausgeschaltet werden können. QoSSIOC-Automatisierungs- und QoS-Richtlinien sollten nicht gemeinsam genutzt werden.
+
++
+
+TIP: Volumes mit einem IOPS-Wert von max oder Burst über 20,000 IOPS erfordern möglicherweise eine hohe Warteschlangentiefe oder mehrere Sitzungen, um diesen IOPS-Level auf einem einzelnen Volume zu erreichen.
+
+
+
+
+
+. Wählen Sie *Weiter*.
+. Konfigurieren Sie den Berechtigungstyp für den Host-Zugriff, indem Sie eine der folgenden Optionen auswählen:
++
+** *Volume Access Group verwenden*: Wählen Sie aus, um die Anzahl der Initiatoren, die Volumes sehen können, ausdrücklich einzuschränken.
+** *CHAP verwenden*: Wählen Sie für sicheren geheimen Zugriff ohne Einschränkungen für Initiatoren.
+
+
+. Wählen Sie *Weiter*.
+. Wenn Sie *Volume Access Group* verwenden ausgewählt haben, konfigurieren Sie die Volume Access Groups für die ausgewählten Hosts.
++
+Die unter *von ausgewählten Initiatoren* aufgeführten Volume-Zugriffsgruppen sind bereits einem oder mehreren der in einem früheren Schritt ausgewählten Host-Initiatoren zugeordnet.
+
++
+.. Wählen Sie zusätzliche Volume-Zugriffsgruppen aus, oder erstellen Sie neue, die den verfügbaren Initiatoren zugeordnet werden sollen:
++
+*** *Verfügbar*: Weitere Volume Access Group Optionen im Cluster.
+*** *Neue Zugriffsgruppe erstellen*: Geben Sie den Namen der neuen Zugriffsgruppe ein und klicken Sie auf *Hinzufügen*.
+
+
+.. Wählen Sie *Weiter*.
+.. Verbinden Sie im Fensterbereich *Hostzugriff konfigurieren* verfügbare Hostinitiatoren (IQN oder WWPN) mit den im vorherigen Fensterbereich ausgewählten Volume-Zugriffsgruppen.
++
+Wenn ein Host-Initiator bereits einer Volume-Zugriffsgruppe zugeordnet ist, ist das Feld für diesen Initiator schreibgeschützt. Wenn ein Host-Initiator keine Zuordnung zu Volume-Zugriffsgruppen besitzt, wählen Sie eine Option aus der Dropdown-Liste neben dem Initiator aus.
+
+.. Wählen Sie *Weiter*.
+
+
+. Wenn Sie die QoSSIOC-Automatisierung aktivieren möchten, aktivieren Sie das Kontrollkästchen *QoS & SIOC* aktivieren und konfigurieren Sie dann die QoSSIOC-Einstellungen.
++
+--
+
+IMPORTANT: Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoSSIOC überschreibt und passt die QoS-Werte für Volume QoS-Einstellungen an.
+
+Wenn der QoSSIOC-Dienst nicht verfügbar ist, müssen Sie zuerst die Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren:
+
+** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+
+
+--
++
+.. Wählen Sie *QoS & SIOC aktivieren*.
+.. Konfigurieren Sie den *Burst Factor*.
++
+
+NOTE: Der Burst-Faktor besteht aus einer Mehrfacheinstellung der IOPS-Grenze (SIOC) für die VMDK. Wenn Sie die Standardeinstellung ändern, stellen Sie sicher, dass Sie einen Burst-Faktor-Wert verwenden, der das maximale Burst-Limit für ein NetApp Element Volume nicht überschreitet, wenn der Burst-Faktor-Wert mit dem IOPS-Limit für eine VMDK multipliziert wird.
+
+.. *Optional*: Wählen Sie *Standard QoS* überschreiben und konfigurieren Sie die Einstellungen.
++
+Wenn die Einstellung „Standard-QoS überschreiben“ für den Datastore deaktiviert ist, werden die Werte für Shares und IOPS-Limit automatisch auf Basis der SIOC-Standardeinstellungen jeder VM festgelegt.
+
++
+
+TIP: Passen Sie das SIOC-Freigablimit nicht an, ohne das SIOC-IOPS-Limit anzupassen.
+
++
+
+TIP: Standardmäßig sind die maximalen SIOC-Festplattenfreigaben auf festgelegt `Unlimited`. In einer großen VM-Umgebung wie VDI kann dies zu einer Überprovisionierung der maximalen IOPS auf dem Cluster führen. Wenn Sie QoSSIOC aktivieren, prüfen Sie immer die Standard-QoS überschreiben und legen Sie die Option IOPS-Limit auf einen angemessenen Wert fest.
+
+
+
+. Wählen Sie *Weiter*.
+. Bestätigen Sie die Auswahl und wählen Sie *Fertig*.
+. Aktualisieren Sie die Seite.
+
+
+
+
+== Gemeinsam nutzen Sie einen Datenspeicher
+
+Sie können einen Datastore über den Plug-in-Erweiterungspunkt für einen oder mehrere Hosts freigeben.
+
+Datenspeicher können nur von Hosts im selben Datacenter gemeinsam genutzt werden.
+
+.Was Sie und#8217;ll benötigen
+* Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
++
+
+NOTE: Wenn Sie den verknüpften vCenter-Modus verwenden, stellen Sie sicher, dass Sie das Cluster mit dem richtigen vCenter-Server hinzugefügt haben.
+
+* Unter dem ausgewählten Rechenzentrum muss mehr als ein Host vorhanden sein.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Aktivieren Sie auf der Seite *Datastores* das Kontrollkästchen für den Datenspeicher, den Sie freigeben möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Teilen* aus.
+. Konfigurieren Sie den Berechtigungstyp für den Host-Zugriff, indem Sie eine der folgenden Optionen auswählen:
++
+** *Volume Access Group verwenden*: Wählen Sie diese Option aus, um die Anzahl der Initiatoren, die Volumes sehen können, ausdrücklich zu begrenzen.
+** *CHAP verwenden*: Wählen Sie diese Option für sicheren geheimen Zugriff ohne Einschränkungen für Initiatoren.
+
+
+. Wählen Sie *Weiter*.
+. Wählen Sie einen oder mehrere erforderliche Hosts für den Datastore aus.
++
+
+NOTE: Sie benötigen mindestens einen verbundenen Host, bevor Sie einen neuen Datastore erstellen können. Wenn Ihr Host über mehrere Initiatoren verfügt, wählen Sie einen Initiator oder alle Initiatoren aus, indem Sie den Host auswählen. Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswählen, die dem vCenter-Server zur Verfügung stehen, dem das Cluster zugewiesen ist.
+
+. Wählen Sie *Weiter*.
+. Wenn Sie die Option Use *Volume Access Group* ausgewählt haben, konfigurieren Sie die Volume Access Groups für die ausgewählten Hosts.
++
+Die unter *von ausgewählten Initiatoren* aufgeführten Volume-Zugriffsgruppen sind bereits einem oder mehreren der in einem früheren Schritt ausgewählten Host-Initiatoren zugeordnet.
+
++
+.. Wählen Sie zusätzliche Volume-Zugriffsgruppen aus, oder erstellen Sie neue, die den verfügbaren Initiatoren zugeordnet werden sollen:
++
+*** *Verfügbar*: Weitere Volume Access Group Optionen im Cluster.
+*** *Neue Zugriffsgruppe erstellen*: Geben Sie den Namen der neuen Zugriffsgruppe ein und klicken Sie auf *Hinzufügen*.
+
+
+.. Wählen Sie *Weiter*.
+.. Verbinden Sie im Fensterbereich *Hostzugriff konfigurieren* verfügbare Hostinitiatoren (IQN oder WWPN) mit den im vorherigen Fensterbereich ausgewählten Volume-Zugriffsgruppen.
++
+Wenn ein Host-Initiator bereits einer Volume-Zugriffsgruppe zugeordnet ist, ist das Feld für diesen Initiator schreibgeschützt. Wenn ein Host-Initiator keine Zuordnung zu Volume-Zugriffsgruppen besitzt, wählen Sie eine Option aus der Dropdown-Liste neben dem Initiator aus.
+
+
+
+. Bestätigen Sie die Auswahl und wählen Sie *Fertig*.
+. Aktualisieren Sie die Seite.
+
+
+
+
+== Führen Sie VAAI UNMAP aus
+
+Wenn Sie möchten, dass ein Cluster freigegebenen Block-Speicherplatz aus per Thin Provisioning bereitgestellten VMFS5-Datastores zurückgewinnen möchte, verwenden Sie die VAAI UNMAP Funktion.
+
+.Was Sie und#8217;ll benötigen
+* Stellen Sie sicher, dass der für die Aufgabe verwendete Datenspeicher VMFS5 oder eine frühere Version ist. VAAI UNMAP ist für VMFS6 nicht verfügbar, da ESXi die Aufgabe automatisch durchführt
+* Stellen Sie sicher, dass die ESXi-Hostsystemeinstellungen für VAAI UNMAP aktiviert sind:
++
+`esxcli system settings advanced list -o/VMFS3/EnableBlockDelete`
+
++
+Der ganzzahlige Wert muss auf 1 gesetzt werden, um zu aktivieren.
+
+* Wenn die ESXi-Hostsystemeinstellungen für VAAI UNMAP nicht aktiviert sind, setzen Sie den ganzzahligen Wert mit diesem Befehl auf 1:
++
+`esxcli system settings advanced set -i 1 -o /VMFS3/EnableBlockDelete`
+
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Aktivieren Sie auf der Seite *Datastores* das Kontrollkästchen für den Datastore, auf dem Sie VAAI UNMAP verwenden möchten.
+. Wählen Sie im Menü Ergebnis die Option *Aktionen* aus.
+. Wählen Sie *VAAI Unmap*.
+. Wählen Sie einen Host nach Namen oder IP-Adresse aus.
+. Geben Sie den Benutzernamen und das Kennwort des Hosts ein.
+. Bestätigen Sie die Auswahl und wählen Sie *OK*.
+
+
+
+
+== Löschen Sie einen Datenspeicher
+
+Sie können einen Datastore mit dem Plug-in-Erweiterungspunkt löschen. Durch diesen Vorgang werden alle Dateien gelöscht, die den VMs auf dem Datastore zugeordnet sind, den Sie löschen möchten. Das Plug-in löscht keine Datenspeicher, die registrierte VMs enthalten.
+
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, wählen Sie den Cluster aus, den Sie in der Navigationsleiste verwenden möchten.
+
+. Aktivieren Sie auf der Seite *Datastores* das Kontrollkästchen für den zu löschenden Datenspeicher.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. (Optional) Wenn Sie das dem Datastore zugeordnete NetApp Element-Volume löschen möchten, aktivieren Sie das Kontrollkästchen *assoziiertes Volume löschen*.
++
+
+NOTE: Sie können auch wählen, ob das Volume beibehalten und es später einem anderen Datenspeicher zuordnen kann.
+
+. Wählen Sie *Ja*.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

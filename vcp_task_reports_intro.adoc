@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_reports_intro.html 
+summary: Zeigen Sie Informationen zu den Komponenten und der Performance des Clusters mithilfe der Berichtsseiten des NetApp Element Plug-ins für VMware vCenter Server an. 
+keywords: netapp, hci, vcp, vcenter, element, monitor, report, cluster, performance 
+---
+= Überwachung der Systemleistung mit Berichtsoptionen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Informationen über die Komponenten und die Performance des Clusters mithilfe der Berichtsseiten des NetApp Element Plug-ins für VMware vCenter Server anzeigen.
+
+Mit dem vCenter Plug-in können Sie Clusterkomponenten und die Performance auf folgende Weise überwachen:
+
+* link:vcp_task_reports_overview.html["Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht"]
+* link:vcp_task_reports_alerts.html["Überwachen Sie Systemmeldungen"]
+* link:vcp_task_reports_event_logs.html["Überwachen Sie Ereignisprotokolle zur Fehlerbehebung"]
+* link:vcp_task_reports_volume_performance.html["Monitoring der Volume Performance"]
+* link:vcp_task_reports_iscsi.html["Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln"]
+* link:vcp_task_reports_qossioc.html["Überwachen Sie das VM Performance Tiering mit QoSSIOC-Ereignissen"]
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

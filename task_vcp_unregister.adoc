@@ -1,0 +1,80 @@
+---
+sidebar: sidebar 
+permalink: task_vcp_unregister.html 
+summary: Sie können das NetApp Element Plug-in für VMware vCenter Server über vCenter aus registrieren. 
+keywords: netapp, vcp, vcenter, plugin, element, unregister 
+---
+= Lösen Sie das vCenter Plug-in
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können das NetApp Element-Plug-in für VMware vCenter Server über vCenter mithilfe einer der folgenden Verfahren aus der Registrierung lösen.
+
+.Was Sie und#8217;ll benötigen
+* Die Berechtigungen der vCenter-Administratorrolle, um die Registrierung eines Plug-ins rückgängig zu machen.
+* Die IP-Adresse des Management-Node.
+* URL und Zugangsdaten für das vCenter, von dem aus Sie das Plug-in abmelden.
+
+
+Bei vSphere 6.7 und älteren Versionen hat die Deinstallation des Plug-ins die gleiche Wirkung wie das Deaktivieren des Plug-ins, entfernt jedoch nicht alle lokal installierten Dateien und Ordner. Informationen zum Entfernen aller Plug-in-Dateien finden Sie in den Anweisungen auf link:task_vcp_remove.html["Entfernen des Plug-ins"].
+
+Bei vSphere 7.0 werden alle Dateien automatisch entfernt, nachdem Sie das Plugin unregistriert haben.
+
+.Schritte
+. So lösen Sie das Plug-in ab:
++
+** Heben Sie für vCenter Plug-in 3.0 oder höher die Registrierung des Plug-ins mithilfe des vCenter Plug-in-Registrierungsprogramms auf:
++
+... Geben Sie die IP-Adresse für den Management-Node in einem Browser ein, einschließlich des TCP-Ports für die Registrierung: `https://<ManagementNodeIP>:9443`.
+... Navigieren Sie zu *Registrieren Plug-in aufheben*.
+... Geben Sie Folgendes ein:
++
+.... Die IP-Adresse oder der FQDN-Servername des vCenter-Dienstes, auf dem Sie Ihr Plug-in registriert haben.
+.... Der vCenter Administrator-Benutzername.
+.... Das vCenter Administrator-Passwort.
+
+
+... Wählen Sie *Registrierung Aufheben*.
+
+
+** Für vCenter-Plug-in 2.7 auf 2.7.1:
++
+*** Registrieren Sie sich manuell über die vCenter Managed Object Browser (MOB)-Schnittstelle in Ihrem Browser:
++
+.... Geben Sie die MOB-URL ein: `https://<vcenter>/mob`
+.... Wählen Sie *Content > Extension Manager > UnregisterExtension* aus.
+.... Eingabe `com.solidfire`.
+.... Wählen Sie *Methode Aufrufen*.
+
+
+*** Registrierung mit PowerCLI aufheben:
++
+[listing]
+----
+Connect-VIServer -Server $vcenter -User administrator@vsphere.local -Password xxxxXXx -Force -ErrorAction Stop -SaveCredentials
+$em = Get-View ExtensionManager
+$em.ExtensionList | ft -property Key
+$em.UnregisterExtension("com.solidfire")
+$em.UpdateViewData()
+$em.ExtensionList | ft -property Key
+Disconnect-VIServer * -Confirm:$false
+----
+
+
+
+
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

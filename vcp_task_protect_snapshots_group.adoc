@@ -1,0 +1,216 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_protect_snapshots_group.html 
+summary: Erstellen eines Gruppen-Snapshots eines Volume-Satzes zur Aufbewahrung einer zeitpunktgenauen Kopie der Metadaten für jedes Volume 
+keywords: netapp, hci, vcp, vcenter, element, protect, snapshots, clone, backup, amazon, s3, openstack, swift 
+---
+= Erstellung und Management von Gruppen-Snapshots in vCenter Server
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können einen Gruppen-Snapshot einer verwandten Gruppe von Volumes erstellen, um eine zeitpunktgenaue Kopie der Metadaten für jedes Volume aufzubewahren. Sie können den Gruppen-Snapshot als Backup oder Rollback verwenden, um den Zustand der Volume-Gruppe zu einem gewünschten Zeitpunkt wiederherzustellen.
+
+.Optionen
+*  a group snapshot
+*  group snapshot details
+*  volumes from a group snapshot
+*  back volumes to a group snapshot
+*  a group snapshot
+
+
+
+
+== Erstellen Sie einen Gruppen-Snapshot
+
+Sie können sofort einen Snapshot einer Gruppe von Volumes erstellen oder einen Zeitplan zur Automatisierung künftiger Snapshots der Gruppe von Volumes erstellen. Ein Snapshot einer einzelnen Gruppe kann konsistent bis zu 32 Volumen gleichzeitig erstellen.
+
+Sie können die Replikationseinstellungen oder den Aufbewahrungszeitraum für einen Gruppen-Snapshot später ändern. Die von Ihnen angegebene Aufbewahrungsdauer beginnt, wenn Sie das neue Intervall eingeben. Wenn Sie einen Aufbewahrungszeitraum festlegen, können Sie einen Zeitraum auswählen, der zum aktuellen Zeitpunkt beginnt (die Aufbewahrung wird nicht aus der Snapshot-Erstellungszeit berechnet). Sie können Intervalle in Minuten, Stunden und Tagen festlegen.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Volumes*.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das Volume, das für den Snapshot verwendet werden soll.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *GruppenSnapshot erstellen* aus.
+. (Optional) Geben Sie im Dialogfeld Snapshot erstellen einen Namen für den Snapshot ein.
++
+
+TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist besonders wichtig, wenn in Ihrer Umgebung mehrere Cluster oder vCenter Server verwendet werden. Wenn Sie keinen Namen eingeben, erstellt das System einen Standardnamen für den Gruppen-Snapshot unter Verwendung des Datums und der Uhrzeit, zu der der Snapshot erstellt wurde.
+
+. (Optional) Aktivieren Sie das Kontrollkästchen *Snapshot in Replikation einschließen bei Paarung*, um sicherzustellen, dass der Snapshot beim Pairing des übergeordneten Volumes repliziert wird.
+. Wählen Sie eine der folgenden Optionen als Aufbewahrungszeitraum für den Snapshot aus:
++
+** *Keep Forever*: Behält die Momentaufnahme auf dem System auf unbestimmte Zeit.
+** *Aufbewahrungszeitraum festlegen*: Legen Sie eine Länge (Tage, Stunden oder Minuten) fest, bis das System den Snapshot behält.
++
+
+NOTE: Wenn Sie einen Aufbewahrungszeitraum festlegen, wählen Sie einen Zeitraum aus, der zum aktuellen Zeitpunkt beginnt. (Die Aufbewahrung wird nicht aus der Erstellungszeit der Snapshots berechnet.)
+
+
+
+. Um einen einzigen, sofortigen Snapshot zu erstellen, wählen Sie *Gruppenschnappschuß jetzt aufnehmen*.
+. Führen Sie die folgenden Schritte aus, um die Ausführung des Snapshots für einen späteren Zeitpunkt zu planen:
++
+.. Wählen Sie *Snapshot-Zeitplan erstellen*.
+.. Geben Sie einen Terminplannamen ein.
+.. Wählen Sie einen Zeitplantyp aus, und konfigurieren Sie die Terminplandetails.
+.. (Optional) Aktivieren Sie das Kontrollkästchen für *wiederkehrende Planung*, um den geplanten Snapshot regelmäßig zu wiederholen.
+
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Zeigen Sie Details zum Gruppen-Snapshot an
+
+Sie möchten möglicherweise überprüfen, ob der Snapshot hinzugefügt wurde.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Snapshots gruppieren*.
+. Überprüfen Sie die Snapshot Details:
++
+** *Erstellungsdatum*: Das Datum und die Uhrzeit, zu der der GruppenSnapshot erstellt wurde.
+** *Status*: Zeigt den Status des Snapshots auf dem Remote-Cluster an, auf dem die NetApp Element-Software ausgeführt wird:
++
+*** *Vorbereiten*: Der Schnappschuss wird zur Verwendung vorbereitet und ist noch nicht beschreibbar.
+*** *Fertig*: Dieser Schnappschuss hat die Vorbereitung abgeschlossen und ist nun verwendbar.
+*** *Active*: Der Schnappschuss ist der aktive Zweig.
+
+
+** *Anzahl der Volumen*: Anzahl der Volumen in der Gruppe Snapshot.
+
+
+
+
+
+
+== Volumes aus einem Gruppen-Snapshot klonen
+
+Sie können eine Gruppe von Volumes aus einem zeitpunktgenauen Snapshot in Gruppen klonen. Nachdem Sie die Volumes erstellt haben, können Sie sie wie jedes andere Volume im System verwenden.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Snapshots gruppieren*.
+. Aktivieren Sie das Kontrollkästchen für den Gruppen-Snapshot, der für die Volume-Klone verwendet werden soll.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Volumes aus GruppenSnapshot* klonen.
+. (Optional) Geben Sie ein neues Präfix für den Volume-Namen ein, das auf alle Volumes angewendet wird, die aus dem Gruppen-Snapshot erstellt wurden.
+. (Optional) Wählen Sie ein anderes Konto aus, zu dem der Klon gehören soll. Wenn Sie kein Konto auswählen, weist das System dem aktuellen Volume-Konto die neuen Volumes zu.
+. Wählen Sie eine andere Zugriffsmethode für die Volumes im Klon aus. Wenn Sie keine Methode auswählen, verwendet das System den aktuellen Volumenzugriff:
++
+** *Nur Lesen*: Nur Leseoperationen sind erlaubt.
+** *Lesen/Schreiben*: Alle Lese- und Schreiboperationen werden akzeptiert.
+** *Gesperrt*: Nur Administratorzugriff ist erlaubt.
+** *Replikationsziel*: Als Zielvolume in einem replizierten Volume-Paar bestimmt.
+
+
+. Klicken Sie auf *OK*.
++
+
+NOTE: Die Volume-Größe und die aktuelle Cluster-Last beeinflussen die Zeit, die zum Abschließen eines Klonvorgangs erforderlich ist.
+
+
+
+
+
+== Rollback von Volumes zu einem Gruppen-Snapshot
+
+Sie können eine Gruppe aktiver Volumes als Rollback zu einem Gruppen-Snapshot durchführen. Dadurch werden alle zugeordneten Volumes in einem Gruppen-Snapshot zum Zeitpunkt der Erstellung des Gruppen-Snapshots in den Zustand versetzt. Mit diesem Verfahren werden auch die Volume-Größen auf die Größe des ursprünglichen Snapshots wiederhergestellt. Wenn das System ein Volume bereinigt hat, wurden auch alle Snapshots des entsprechenden Volumes zum Zeitpunkt der Löschung gelöscht. Das System stellt keine gelöschten Volume-Snapshots wieder her.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Snapshots gruppieren*.
+. Aktivieren Sie das Kontrollkästchen für den Gruppen-Snapshot, der für das Rollback des Volumes verwendet werden soll.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Ergebnismenü *Rollback-Volumes in Gruppenaufnahme* aus.
+. (Optional) zum Speichern des aktuellen Status der Volumes vor dem Rollback zum Snapshot:
++
+.. Wählen Sie im Dialogfeld *Rollback to Snapshot* den aktuellen Status von *Volumes speichern als GruppenSnapshot* aus.
+.. Geben Sie einen Namen für den neuen Snapshot ein.
+
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Löschen eines Gruppen-Snapshots
+
+Sie können einen Gruppen-Snapshot aus dem System löschen. Wenn Sie den Gruppen-Snapshot löschen, können Sie auswählen, ob alle mit der Gruppe verknüpften Snapshots als einzelne Snapshots gelöscht oder beibehalten werden.
+
+Wenn Sie ein Volume oder einen Snapshot löschen, das Mitglied eines Gruppen-Snapshots ist, können Sie nicht mehr zum Gruppen-Snapshot zurückkehren. Sie können jedoch jedes Volume einzeln zurück verschieben.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Aktivieren Sie das Kontrollkästchen für den GruppenSnapshot, den Sie löschen möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Wählen Sie eine der folgenden Optionen:
++
+** *GruppenMomentaufnahme und Mitglieder löschen*: Löscht den Gruppenschnappschuß und alle Mitgliederschnappschüsse.
+** *Mitglieder beibehalten*: Löscht den Gruppenschnappschuß, behält aber alle Momentaufnahmen der Mitglieder.
+
+
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

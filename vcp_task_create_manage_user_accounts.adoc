@@ -1,0 +1,141 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_create_manage_user_accounts.html 
+summary: Mit dem Plug-in können Sie Benutzerkonten erstellen und verwalten. 
+keywords: netapp, storage, accounts, vcp, vcenter, element 
+---
+= Benutzerkonten erstellen und verwalten
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+link:vcp_concept_accounts.html["Benutzerkonten"] Werden zur Steuerung des Zugriffs auf die Storage-Ressourcen in einem softwarebasierten Netzwerk von NetApp Element verwendet.
+
+.Optionen
+*  an account
+*  an account
+*  an account
+
+
+
+
+== Erstellen Sie ein Konto
+
+Sie können ein eindeutiges Benutzerkonto erstellen, um den Zugriff auf Speicher-Volumes zu ermöglichen.
+
+.Was Sie und#8217;ll benötigen
+* Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Konten*.
+. Wählen Sie *Konto Erstellen*.
+. Geben Sie einen Benutzernamen ein.
++
+
+TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist besonders wichtig, wenn in Ihrer Umgebung mehrere Cluster oder vCenter Server verwendet werden.
+
+. Im Abschnitt *CHAP-Einstellungen*:
++
+.. Geben Sie den Initiator-Schlüssel für die CHAP-Node-Sitzungsauthentifizierung ein.
+.. Geben Sie den Zielschlüssel für die CHAP-Knoten-Sitzungsauthentifizierung ein.
++
+
+NOTE: Initiator- und Zielgeheimnisse müssen unterschiedlich sein. Wenn diese Felder leer bleiben, generiert das System die Authentifizierungsdaten.
+
+
+
+. Klicken Sie auf *OK*, um das Konto zu erstellen.
+
+
+
+
+== Bearbeiten Sie ein Konto
+
+Sie können ein Benutzerkonto bearbeiten, um den Status oder die CHAP-Schlüssel zu ändern. Das Ändern der CHAP-Einstellungen kann zu einem Verbindungsverlust zwischen einem Host und seinen zugehörigen Volumes führen.
+
+Wenn Sie persistente Volumes mit dem Management-Node verwenden, ändern Sie den Kontonamen des Kontos, der diesen Volumes zugeordnet ist, nicht.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Konten*.
+. Aktivieren Sie das Kontrollkästchen für das Konto, das Sie bearbeiten möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Ändern Sie bei Bedarf Folgendes:
++
+.. Bearbeiten Sie den Zugriffsstatus des Kontos.
++
+
+IMPORTANT: Wenn Sie den Zugriff auf *gesperrt* ändern, werden alle iSCSI-Verbindungen zum Konto beendet, und das Konto kann nicht mehr aufgerufen werden. Volumes, die mit dem Konto verbunden sind, werden gepflegt. Die Volumes sind jedoch nicht über iSCSI sichtbar.
+
+.. Bearbeiten Sie den Initiator-Geheimschlüssel oder die Zielgeheimnisse, die für die Authentifizierung der Node-Session verwendet werden.
++
+
+NOTE: Wenn Sie die Anmeldedaten nicht ändern, bleiben diese unverändert. Wenn Sie die Felder für die Anmeldeinformationen leer lassen, generiert das System neue Passwörter.
+
+
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Löschen Sie ein Konto
+
+Sie können Benutzerkonten mit dem Plug-in-Erweiterungspunkt löschen.
+
+Löschen und löschen Sie alle Volumes, die mit dem Konto verknüpft sind, oder weisen Sie die Volumes einem anderen Konto erneut zu.
+
+
+IMPORTANT: Wenn Sie persistente Volumes mit dem Management-Node verwenden, löschen Sie das mit diesen Volumes verknüpfte Konto nicht.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Konten*.
+. Aktivieren Sie das Kontrollkästchen für das Konto, das Sie löschen möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

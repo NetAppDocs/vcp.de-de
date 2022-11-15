@@ -1,0 +1,204 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_protect_snapshots_schedules.html 
+summary: Erstellen Sie mithilfe des Plug-ins einen Snapshot-Zeitplan. 
+keywords: netapp, hci, vcp, vcenter, element, protect, snapshots, schedule 
+---
+= Erstellen von Snapshot-Zeitplänen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können einen Snapshot eines Volumes so planen, dass er automatisch zu bestimmten Datum- und Zeitintervallen erfolgt. Sie können entweder einzelne Volume-Snapshots planen oder Snapshots gruppieren, um automatisch auszuführen.
+
+Wenn Sie Snapshot Zeitpläne erstellen, können Sie die resultierenden Snapshots auf einem Remote NetApp Element Storage-System speichern, wenn das Volume repliziert wird.
+
+
+NOTE: Zeitpläne werden mit UTC+0 Time erstellt. Sie müssen möglicherweise die tatsächliche Zeit anpassen, die ein Snapshot basierend auf Ihrer Zeitzone ausgeführt wird.
+
+*  a snapshot schedule
+*  snapshot schedule details
+*  a snapshot schedule
+*  a snapshot schedule
+*  a snapshot schedule
+
+
+
+
+== Erstellen eines Snapshot-Zeitplans
+
+Sie können einen Snapshot eines Volumes oder Volumes so planen, dass er automatisch in festgelegten Intervallen erfolgt.
+
+Wenn Sie einen Snapshot-Zeitplan konfigurieren, können Sie zwischen verschiedenen Zeitabständen wählen, die auf Wochentagen oder Tagen des Monats basieren. Sie können auch Tage, Stunden und Minuten festlegen, bevor der nächste Snapshot erstellt wird.
+
+Wenn Sie einen Snapshot für einen Zeitraum planen, der nicht durch 5 Minuten teilbar ist, wird der Snapshot zum nächsten Zeitraum ausgeführt, der durch 5 Minuten teilbar ist. Wenn Sie beispielsweise einen Snapshot für die Ausführung um 12:42:00 UTC planen, wird dieser um 12:45:00 UTC ausgeführt. Ein Snapshot kann nicht in Intervallen von weniger als 5 Minuten ausgeführt werden.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Zeitpläne* aus.
+. Wählen Sie *Zeitplan Erstellen*.
+. Geben Sie im Feld *Volume IDs CSV* eine einzelne Volume-ID oder eine kommagetrennte Liste von Volume-IDs ein, die in den Snapshot-Zeitplan aufgenommen werden sollen.
+. Geben Sie einen Terminplannamen ein.
+. Wählen Sie einen Zeitplantyp aus, und konfigurieren Sie die Details.
+. (Optional) um den Zeitplan für unbestimmte Zeit zu wiederholen, überprüfen Sie *wiederkehrender Zeitplan*.
+. (Optional) Geben Sie im Feld Neuer Snapshot-Name einen Namen für den neuen Snapshot ein.
++
+
+NOTE: Wenn Sie keinen Namen eingeben, erstellt das System einen Standard-Snapshot-Namen unter Verwendung des Datums und der Uhrzeit, zu der der Snapshot erstellt wurde.
+
+. (Optional) Überprüfen *beim Pairing einen Snapshot einschließen*, um sicherzustellen, dass der Snapshot beim Pairing des übergeordneten Volumes repliziert wird.
+. Wählen Sie eine der folgenden Optionen als Aufbewahrungszeitraum für den Snapshot aus:
++
+** *Keep Forever*: Behält die Momentaufnahme auf dem System auf unbestimmte Zeit.
+** *Aufbewahrungszeitraum festlegen*: Legen Sie eine Länge (Tage, Stunden oder Minuten) fest, bis das System den Snapshot behält.
++
+
+NOTE: Wenn Sie einen Aufbewahrungszeitraum festlegen, wählen Sie einen Zeitraum aus, der zum aktuellen Zeitpunkt beginnt. (Die Aufbewahrung wird nicht aus der Erstellungszeit der Snapshots berechnet.)
+
+
+
+. Wählen Sie *OK*.
+
+
+
+
+== Details zum Snapshot-Zeitplan anzeigen
+
+Sie möchten die Einzelheiten zum Snapshot-Zeitplan überprüfen.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie anzeigen möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Seite *Zeitpläne* aus.
+. Überprüfen Sie die Terminplandetails.
+
+
+
+
+== Bearbeiten eines Snapshot-Zeitplans
+
+Sie können vorhandene Snapshot-Zeitpläne ändern. Nach der Änderung verwendet der Zeitplan bei der nächsten Ausführung die aktualisierten Attribute. Alle durch den ursprünglichen Zeitplan erstellten Snapshots verbleiben im Storage-System.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Zeitpläne*.
+. Aktivieren Sie das Kontrollkästchen für den Snapshot-Zeitplan, den Sie bearbeiten möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Ändern Sie im Feld *Volume IDs CSV* die Einzel-Volume-ID oder die kommagetrennte Liste der Volume-IDs, die derzeit im Snapshot-Vorgang enthalten sind.
+. (Optional) um einen aktiven Zeitplan anzuhalten oder einen angehaltenen Zeitplan fortzusetzen, aktivieren Sie das Kontrollkästchen *Zeitplan manuell anhalten*.
+. (Optional) Geben Sie im Feld *Neuer Terminplanname* einen anderen Namen für den Zeitplan ein.
+. (Optional) Ändern Sie den aktuellen Zeitplantyp auf eine der folgenden Optionen:
++
+.. *Tage der Woche*: Wählen Sie einen von mehreren Tagen der Woche und eine Tageszeit, um einen Snapshot zu erstellen.
+.. *Tage des Monats*: Wählen Sie einen von mehreren Tagen des Monats und eine Tageszeit, um einen Snapshot zu erstellen.
+.. *Zeitintervall*: Wählen Sie ein Intervall für den Zeitplan aus, das ausgeführt werden soll, basierend auf der Anzahl der Tage, Stunden und Minuten zwischen den Snapshots.
+
+
+. (Optional) Wählen Sie *wiederkehrender Zeitplan* aus, um den Snapshot-Zeitplan auf unbestimmte Zeit zu wiederholen.
+. (Optional) Geben Sie im Feld *New Snapshot Name* den Namen für die Snapshots ein, die vom Zeitplan definiert wurden.
++
+
+NOTE: Wenn Sie das Feld leer lassen, verwendet das System die Uhrzeit und das Datum der Erstellung des Snapshots als Namen.
+
+. (Optional) Aktivieren Sie das Kontrollkästchen *Snapshots in Replikation einschließen bei Paarung*, um sicherzustellen, dass die Snapshots bei der Replikation erfasst werden, wenn das übergeordnete Volume gekoppelt ist.
+. (Optional) Wählen Sie als Aufbewahrungszeitraum für den Snapshot eine der folgenden Optionen aus:
++
+** *Keep Forever*: Behält die Momentaufnahme auf dem System auf unbestimmte Zeit.
+** *Aufbewahrungszeitraum festlegen*: Legen Sie eine Länge (Tage, Stunden oder Minuten) fest, bis das System den Snapshot behält.
++
+
+NOTE: Wenn Sie einen Aufbewahrungszeitraum festlegen, wählen Sie einen Zeitraum aus, der zum aktuellen Zeitpunkt beginnt (die Aufbewahrung wird nicht aus der Snapshot-Erstellungszeit berechnet).
+
+
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Snapshot-Zeitplan kopieren
+
+Sie können eine Kopie eines Snapshot-Zeitplans erstellen und diesen neuen Volumes zuweisen oder für andere Zwecke verwenden.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Zeitpläne*.
+. Aktivieren Sie das Kontrollkästchen für den Snapshot-Zeitplan, den Sie kopieren möchten.
+. Klicken Sie Auf *Aktionen*.
+. Klicken Sie im Menü Ergebnis auf *Kopieren*. Das Dialogfeld „Plan kopieren“ wird mit den aktuellen Attributen des Zeitplans angezeigt.
+. (Optional) Geben Sie einen Namen ein und aktualisieren Sie Attribute für die Kopie des Zeitplans.
+. Klicken Sie auf *OK*.
+
+
+
+
+== Löschen Sie einen Snapshot-Zeitplan
+
+Sie können einen Snapshot-Zeitplan löschen. Nach dem Löschen des Zeitplans werden keine zukünftigen geplanten Snapshots ausgeführt. Alle Snapshots, die nach diesem Zeitplan erstellt wurden, verbleiben im Storage-System.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Zeitpläne*.
+. Aktivieren Sie das Kontrollkästchen für den Snapshot-Zeitplan, den Sie löschen möchten.
+. Klicken Sie Auf *Aktionen*.
+. Klicken Sie im Menü Ergebnis auf *Löschen*.
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

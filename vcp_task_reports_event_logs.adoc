@@ -1,0 +1,104 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_reports_event_logs.html 
+summary: Ereignisprotokolle im NetApp Element Plug-in für VMware vCenter Server prüfen, in denen die auf dem Cluster durchgeführten Vorgänge sowie Fehler im Cluster aufgeführt werden. 
+keywords: netapp, hci, vcp, vcenter, element, monitor, report, event, log, cluster, performance 
+---
+= Überwachen Sie Ereignisprotokolle zur Fehlerbehebung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können Ereignisprotokolle zusammen mit eventuell auftretenden Cluster-Fehlern auf Vorgänge prüfen, die am ausgewählten Cluster durchgeführt werden. Die meisten Fehler werden automatisch vom System behoben. Für andere Fehler ist unter Umständen ein manuelles Eingreifen erforderlich.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
+. Wählen Sie *Berichterstellung* > *Ereignisprotokoll*.
+. Um Details zu überprüfen, wählen Sie ein Ereignis aus und klicken Sie auf *Details*.
+. Überprüfen Sie die Ereignisinformationen, einschließlich der folgenden:
++
+** *Ereignistyp*: Die Art des protokollierten Ereignisses, z. B. API-Ereignisse oder Klonereignisse.
+** *Service-ID*: Die ID des Dienstes, der das Ereignis gemeldet hat (falls zutreffend). Der Wert ist Null, wenn der Fehler nicht einem Dienst zugeordnet ist.
+** *Node* oder *Drive ID*: Die ID des Knotens oder Laufwerks, der das Ereignis gemeldet hat (falls zutreffend).
+
+
+
+
+
+
+== Ereignistypen
+
+Das System meldet mehrere Ereignistypen. Jedes Ereignis ist ein Vorgang, den das System abgeschlossen hat. Ereignisse können Routine-, normale Ereignisse oder Ereignisse sein, die vom Administrator beachtet werden müssen. Die Spalte Ereignistyp auf der Seite Ereignisprotokoll gibt an, in welchem Teil des Systems das Ereignis aufgetreten ist.
+
+
+NOTE: Das System protokolliert keine schreibgeschützten API-Befehle im Ereignisprotokoll.
+
+In der folgenden Liste werden die Arten von Ereignissen beschrieben, die im Ereignisprotokoll angezeigt werden können.
+
+* *ApiEvent*: Ereignisse, die von einem Benutzer über eine API oder eine Web-Benutzeroberfläche initiiert werden, die Einstellungen ändern.
+* *BinAssignmentsEreignis*: Ereignisse im Zusammenhang mit der Zuweisung von Datenfächern. Fächer sind im Wesentlichen Container, in denen Daten gespeichert und über das gesamte Cluster hinweg zugeordnet sind.
+* *BinSyncEvent*: Systemereignisse, die sich auf eine Neuzuweisung von Daten zwischen Blockdiensten beziehen.
+* *BsCheckEvent*: Systemereignisse im Zusammenhang mit Blockservice-Prüfungen.
+* *BsKillEvent*: Systemereignisse im Zusammenhang mit Blockterminationen.
+* *BulkOpEvent*: Ereignisse im Zusammenhang mit Operationen, die auf einem ganzen Volume ausgeführt werden, wie z.B. Backup, Wiederherstellung, Snapshot oder Klon.
+* *CloneEvent*: Ereignisse im Zusammenhang mit Volume Cloning.
+* *ClusterMasterEvent*: Ereignisse, die bei der Clusterinitialisierung oder bei Konfigurationsänderungen am Cluster auftreten, wie das Hinzufügen oder Entfernen von Knoten.
+* *CsumEvent*: Ereignisse im Zusammenhang mit ungültigen Daten-Prüfsummen auf der Platte.
+* *DataEvent*: Ereignisse zum Lesen und Schreiben von Daten.
+* *DbEvent*: Ereignisse im Zusammenhang mit der globalen Datenbank, die von Ensemble-Knoten im Cluster gepflegt werden.
+* *DriveEvent*: Ereignisse im Zusammenhang mit dem Fahrbetrieb.
+* *VerschlüsselungAtRestEvent*: Ereignisse im Zusammenhang mit dem Verschlüsselungsvorgang auf einem Cluster.
+* *EnsembleEvent*: Ereignisse im Zusammenhang mit der Erhöhung oder Verringerung der Anzahl der Knoten in einem Ensemble.
+* *Fiber ChannelEvent*: Ereignisse im Zusammenhang mit der Konfiguration und Verbindungen zu den Knoten.
+* *GcEvent*: Ereignisse im Zusammenhang mit Prozessen laufen alle 60 Minuten, um Speicher auf Blocklaufwerken zurückzugewinnen. Dieser Prozess wird auch als Garbage Collection bezeichnet.
+* *IeEvent*: Interner Systemfehler.
+* *InstallEvent*: Automatische Softwareinstallationsereignisse. Die Software wird automatisch auf einem ausstehenden Node installiert.
+* *ISCSIEvent*: Ereignisse im Zusammenhang mit iSCSI-Problemen im System.
+* *LimitEvent*: Ereignisse im Zusammenhang mit der Anzahl von Volumes oder virtuellen Volumes in einem Konto oder im Cluster, die sich dem maximal zulässigen Wert nähern.
+* *MaincenanceModeEvent*: Ereignisse im Zusammenhang mit dem Node-Wartungsmodus, z. B. Deaktivieren des Node.
+* *NetworkEvent*: Ereignisse zum Status virtueller Netzwerke.
+* *HardwareHardware-Event*: Veranstaltungen zu Problemen, die auf Hardware-Geräten erkannt werden.
+* *RemoteClusterEvent*: Ereignisse im Zusammenhang mit der Remote-Cluster-Kopplung.
+* *SchedulerEvent*: Ereignisse im Zusammenhang mit geplanten Snapshots.
+* *ServiceEvent*: Ereignisse im Zusammenhang mit dem System-Service-Status.
+* *SliceEvent*: Ereignisse im Zusammenhang mit dem Slice Server, z. B. Entfernen eines Metadatenlaufwerks oder -Volumes.
++
+Es gibt drei Arten von Ereignissen zur Umverteilung in Schichten, die Informationen über den Service enthalten, dem ein Volume zugewiesen wird:
+
+* Umdrehen: Ändern des primären Dienstes zu einem neuen primären Service
++
+`sliceID oldPrimaryServiceID->newPrimaryServiceID`
+
+* Verschieben: Ändern des sekundären Service zu einem neuen sekundären Service
++
+`sliceID {oldSecondaryServiceID(s)}->{newSecondaryServiceID(s)}`
+
+* Beschneidung: Entfernen eines Volumes aus einer Gruppe von Diensten
++
+`sliceID {oldSecondaryServiceID(s)}`
+
+* *SnmpTrapEvent*: Veranstaltungen im Zusammenhang mit SNMP-Traps.
+* *StatEvent*: Ereignisse im Zusammenhang mit Systemstatistiken.
+* *TsEvent*: Veranstaltungen im Zusammenhang mit dem Systemtransportdienst.
+* *UnexpectedException*: Ereignisse im Zusammenhang mit unerwarteten Systemausnahmen.
+* *UreEvent*: Ereignisse im Zusammenhang mit nicht behebbaren Lesefehlern, die beim Lesen vom Speichergerät auftreten.
+* *VasaProviderEvent*: Veranstaltungen in Verbindung mit einem VASA-Provider (vSphere APIs for Storage Awareness).
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

@@ -1,0 +1,184 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_qos_policies.html 
+summary: Sie können QoS-Richtlinien einrichten und ändern, um sie auf Volumes im Storage-Cluster anzuwenden. 
+keywords: netapp, qos policy, quality of service, qos policies, vcp, vcenter, element 
+---
+= Erstellung und Management von QoS-Richtlinien für Volumes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Mit einer QoS-Richtlinie (Quality of Service) können Sie eine standardisierte Quality-of-Service-Einstellung erstellen und speichern, die auf viele Volumes angewendet werden kann. Der ausgewählte Cluster muss zur Verwendung von QoS-Richtlinien Element 10.0 oder höher sein. Anderenfalls sind QoS-Richtlinienfunktionen nicht verfügbar.
+
+Über den Plug-in-Erweiterungspunkt können Sie QoSSIOC konfigurieren und verwalten, indem Sie die folgenden Aufgaben ausführen:
+
+*  a QoS policy
+*  a QoS policy to volumes
+*  the QoS policy association of a volume
+*  a QoS policy
+*  a QoS policy
+
+
+
+
+== Erstellen einer QoS-Richtlinie
+
+Sie können QoS-Richtlinien erstellen und auf Volumes anwenden, die eine vergleichbare Performance aufweisen sollten.
+
+
+NOTE: QoSSIOC-Automatisierungs- und QoS-Richtlinien sollten nicht gemeinsam genutzt werden. Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoSSIOC überschreibt und passt die QoS-Werte für Volume QoS-Einstellungen an.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *QoS Policies*.
+. Klicken Sie auf *QoS-Richtlinie erstellen*.
+. Geben Sie den *Policy Name* ein.
++
+
+TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist besonders wichtig, wenn in Ihrer Umgebung mehrere Cluster oder vCenter Server verwendet werden.
+
+. Geben Sie die Werte für IOPS-Minimum, IOPS-Maximum und IOPS-Burst ein.
+. Klicken Sie auf *OK*.
+
+
+
+
+== Wenden Sie eine QoS-Richtlinie auf Volumes an
+
+Sie können eine vorhandene QoS-Richtlinie auf mehrere Volumes anwenden. Verwenden Sie diesen Vorgang, wenn Sie eine Police auf ein oder mehrere Volumes anwenden möchten.
+
+Die QoS-Richtlinie, die Sie für große Mengen anwenden möchten, wurde bereits angewendet  a QoS policy,Erstellt.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Volumes*.
+. Aktivieren Sie das Kontrollkästchen für jedes Volume, auf das Sie eine QoS-Richtlinie anwenden möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *QoS-Richtlinie anwenden* aus.
+. Wählen Sie im Dialogfeld die QoS-Richtlinie aus der Dropdown-Liste aus, die auf die ausgewählten Volumes angewendet werden soll.
+. Klicken Sie auf *OK*.
+
+
+
+
+== Ändern Sie die QoS-Richtlinienzuordnung eines Volumes
+
+Sie können eine QoS-Richtlinienzuordnung aus einem Volume entfernen oder eine andere QoS-Richtlinie oder für benutzerdefinierte QoS auswählen.
+
+Das Volume, das Sie ändern möchten, ist  a QoS policy to volumes,Zugeordnet Mit einer QoS-Richtlinie
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *Volumes*.
+. Aktivieren Sie das Kontrollkästchen für ein Volume, das eine QoS-Richtlinie enthält, die Sie ändern möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Wählen Sie im Dialogfeld unter *Quality of Service* eine neue QoS-Richtlinie oder benutzerdefinierte Einstellungen aus, die auf das Volume angewendet werden sollen.
+. Wenn Sie benutzerdefinierte Einstellungen ausgewählt haben, ändern Sie die Werte *Min IOPS*, *Max IOPS* und *Burst IOPS*.
++
+
+NOTE: Sie können auch auf *Standard-QoS zurücksetzen* klicken, um die standardmäßigen IOPS-Werte wiederherzustellen.
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Bearbeiten einer QoS-Richtlinie
+
+Sie können den Namen einer vorhandenen QoS-Richtlinie ändern oder die mit der Richtlinie verknüpften Werte bearbeiten. Das Ändern von Performance-Werten für die QoS-Richtlinie wirkt sich auf die QoS aller mit der Richtlinie verknüpften Volumes aus.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *QoS Policies*.
+. Aktivieren Sie das Kontrollkästchen für die QoS-Richtlinie, die Sie bearbeiten möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Bearbeiten*.
+. Ändern Sie im Dialogfeld *QoS-Richtlinie bearbeiten* die folgenden Eigenschaften nach Bedarf:
++
+** *Policy Name*: Der benutzerdefinierte Name für die QoS-Richtlinie.
+** *Minimum IOPS*: Die Mindestzahl an IOPS für das Volume garantiert.
+** *Maximale IOPS*: Die maximale Anzahl von IOPS für das Volume zulässig.
+** *Burst IOPS*: Die maximale Anzahl an IOPS über einen kurzen Zeitraum für das Volume zulässig. Standard = 15,000.
++
+
+NOTE: Sie können auch auf Standard-QoS zurücksetzen klicken, um die standardmäßigen IOPS-Werte wiederherzustellen.
+
+
+
+. Klicken Sie auf *OK*.
+
+
+
+
+== Löschen einer QoS-Richtlinie
+
+Die QoS-Richtlinie kann gelöscht werden, wenn sie nicht mehr benötigt wird. Wenn Sie eine QoS-Richtlinie löschen, erhalten alle mit der Richtlinie verknüpften Volumes die zuvor von der Richtlinie definierten QoS-Werte, jedoch als individuelle Volume-QoS. Jede Zuordnung zur Richtlinie „Gelöschte QoS“ wird entfernt.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Klicken Sie auf die Unterregisterkarte *QoS Policies*.
+. Aktivieren Sie das Kontrollkästchen für die QoS-Richtlinie, die Sie löschen möchten.
+. Klicken Sie Auf *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

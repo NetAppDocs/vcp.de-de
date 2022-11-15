@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: vcp_concept_accounts.html 
+summary:  
+keywords: netapp, vcp, element, plugin, plug-in, account 
+---
+= Benutzerkonten
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Benutzerkonten steuern den Zugriff auf die Speicherressourcen in einem softwarebasierten Netzwerk von NetApp Element. Mindestens ein Benutzerkonto ist erforderlich, bevor ein Volume erstellt werden kann.
+
+Wenn Sie ein Volume erstellen, wird es einem Konto zugewiesen. Wenn Sie ein virtuelles Volume erstellt haben, ist das Konto der Speichercontainer. Das Konto enthält die CHAP-Authentifizierung, die für den Zugriff auf die ihm zugewiesenen Volumes erforderlich ist.
+
+Einem Konto können bis zu 2000 Volumes zugewiesen sein, aber ein Volume kann nur zu einem Konto gehören.
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

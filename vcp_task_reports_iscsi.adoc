@@ -1,0 +1,52 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_reports_iscsi.html 
+summary: Im NetApp Element-Plug-in für VMware vCenter Server können Sie Informationen zu iSCSI-Sitzungen anzeigen, die mit dem ausgewählten Cluster verbunden sind. 
+keywords: netapp, hci, vcp, vcenter, element, monitor, report, iscsi, connection 
+---
+= Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im NetApp Element-Plug-in für VMware vCenter Server können Sie Informationen zu iSCSI-Sitzungen anzeigen, die mit dem ausgewählten Cluster verbunden sind.
+
+.Schritte
+. Öffnen Sie über das vCenter Plug-in die Registerkarte *Reporting*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Reporting*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Reporting* aus.
+
+
+. Wählen Sie *iSCSI-Sitzungen*.
+
+
+
+
+== ISCSI-Sitzungsdaten
+
+* *Node*: Der Node, der die primäre Metadatenpartition für das Volume hostet.
+* *Konto*: Der Name des Kontos, der das Volumen besitzt. Wenn der Wert leer ist, wird ein Bindestrich (-) angezeigt.
+* *Volume*: Der auf dem Knoten angegebene Volumenname.
+* *Volumen-ID*: ID des Volumes, das mit dem Ziel-IQN verknüpft ist.
+* *Initiator-ID*: Eine vom System generierte ID für den Initiator.
+* *Initiator Alias*: Ein optionaler Name für den Initiator, der das Finden des Initiators in einer langen Liste erleichtert.
+* *Initiator-IP*: Die IP-Adresse des Endpunkts, der die Sitzung initiiert.
+* *Initiator IQN*: Der IQN des Endpunkts, der die Sitzung initiiert.
+* *Ziel-IP*: Die IP-Adresse des Knotens, der das Volume hostet.
+* *Ziel-IQN*: Der IQN des Volumens.
+* *Erstellt am*: Datum der Gründung der Sitzung.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

@@ -1,0 +1,725 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_protect_remote_replication.html 
+summary: Durch die Echtzeitreplizierung können Remote-Kopien von Volume-Daten schnell erstellt werden. 
+keywords: netapp, hci, vcp, vcenter, element, protect, replication, remote, cluster 
+---
+= Remote-Replizierung zwischen Clustern
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für Cluster mit NetApp Element Software ermöglicht Echtzeitreplizierung die schnelle Erstellung von Remote-Kopien von Volume-Daten. Ein Storage-Cluster kann mit bis zu vier anderen Storage-Clustern gekoppelt werden.
+
+Sie können Volume-Daten für Failover- und Failback-Szenarien synchron oder asynchron von einem Cluster in einem Cluster-Paar replizieren. Zunächst müssen zwei NetApp Element Cluster gekoppelt werden und dann Volumes auf jedem Cluster gekoppelt werden, um die Echtzeitreplizierung nutzen zu können.
+
+.Was Sie und#8217;ll benötigen
+* Stellen Sie sicher, dass Sie dem Plug-in mindestens einen Cluster hinzugefügt haben.
+* Stellen Sie sicher, dass alle Node-IP-Adressen in Management- und Storage-Netzwerken für gepaarte Cluster miteinander verbunden sind.
+* Stellen Sie sicher, dass die MTU aller gekoppelten Nodes gleich ist und End-to-End-Unterstützung zwischen den Clustern bietet.
+* Stellen Sie sicher, dass der Unterschied zwischen den NetApp Element Softwareversionen auf den Clustern nicht größer als eine Hauptversion ist. Wenn der Unterschied größer ist, muss ein Cluster aktualisiert werden, um die Datenreplizierung durchzuführen.
+
+
+
+NOTE: WAN Accelerator Appliances wurden von NetApp bei der Datenreplizierung nicht für den Einsatz qualifiziert. Diese Appliances beeinträchtigen die Komprimierung und Deduplizierung, wenn sie zwischen zwei Clustern, bei denen Daten repliziert werden, bereitgestellt werden. Stellen Sie sicher, dass Sie die Auswirkungen jeder WAN Accelerator Appliance vollständig qualifizieren, bevor Sie sie in einer Produktionsumgebung bereitstellen.
+
+.Schritte
+.  clusters
+.  volumes
+.  volume replication
+.  a volume relationship after replication
+.  volume relationships
+
+
+
+
+== Paar Cluster
+
+Sie müssen zwei Cluster als ersten Schritt mit der Echtzeitreplizierungsfunktion koppeln. Nachdem Sie zwei Cluster miteinander verbunden haben, können Sie aktive Volumes auf einem Cluster konfigurieren, sodass sie kontinuierlich zu einem zweiten Cluster repliziert werden. Dadurch profitieren Sie von kontinuierlicher Datensicherung (CDP).
+
+Sie können ein Quell- und Zielcluster mithilfe des MVIP des Zielclusters koppeln, wenn Cluster Admin Zugriff auf beide Cluster hat. Wenn der Cluster-Admin-Zugriff nur auf einem Cluster in einem Cluster-Paar verfügbar ist, kann auf dem Ziel-Cluster ein Kopplungsschlüssel verwendet werden, um die Cluster-Paarung abzuschließen.
+
+.Was Sie und#8217;ll benötigen
+* Sie benötigen Cluster-Administratorrechte für ein oder beide Cluster, die gekoppelt werden.
+* Vergewissern Sie sich, dass zwischen Clustern weniger als 2000 ms Latenz für die hin- und Rückfahrt vorhanden ist.
+* Stellen Sie sicher, dass der Unterschied zwischen den NetApp Element Softwareversionen auf den Clustern nicht größer als eine Hauptversion ist.
+* Stellen Sie sicher, dass alle Node-IPs auf gepaarten Clustern miteinander verbunden sind.
+
+
+
+NOTE: Die Cluster-Paarung erfordert eine vollständige Konnektivität zwischen den Nodes im Managementnetzwerk. Zur Replizierung ist die Verbindung zwischen den einzelnen Nodes im Storage-Cluster-Netzwerk erforderlich.
+
+Ein NetApp Element Cluster kann mit bis zu vier anderen Clustern zur Replizierung von Volumes gekoppelt werden. Sie können Cluster auch innerhalb der Cluster-Gruppe miteinander kombinieren.
+
+Wählen Sie eine der folgenden Methoden:
+
+*  clusters using known credentials
+*  clusters with a pairing key
+
+
+
+
+=== Cluster mit bekannten Anmeldedaten koppeln
+
+Sie können zwei Cluster für die Echtzeitreplikation koppeln, indem Sie das MVIP eines Clusters verwenden, um eine Verbindung mit dem anderen Cluster herzustellen. Der Cluster-Admin-Zugriff auf beiden Clustern ist erforderlich, um diese Methode zu verwenden.
+
+Der Cluster Admin-Benutzername und das Passwort werden verwendet, um den Clusterzugriff zu authentifizieren, bevor die Cluster gekoppelt werden können.
+
+Wenn der MVIP nicht bekannt ist oder der Zugriff auf das Cluster nicht verfügbar ist, können Sie das Cluster koppeln, indem Sie einen Kopplschlüssel generieren und den Schlüssel zum Pairing der beiden Cluster verwenden. Anweisungen hierzu finden Sie unter  clusters with a pairing key.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Protection*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Konfiguration > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Konfiguration > Schutz* aus.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+
+
+. Wählen Sie die Unterregisterkarte *Cluster-Paare* aus.
+. Wählen Sie *Cluster Pairing Erstellen*.
+. Wählen Sie eine der folgenden Optionen:
++
+** *Registrierter Cluster*: Wenn der Remote-Cluster der Paarung von der gleichen Instanz des Element vCenter Plug-ins gesteuert wird, wählen Sie dieses aus.
+** *Bondentialed Cluster*: Wenn der Remote-Cluster bekannte Anmeldeinformationen hat, die sich außerhalb der Element vCenter-Plug-in-Konfiguration befinden, wählen Sie diese Option aus.
+
+
+. Wenn Sie *Registrierter Cluster* ausgewählt haben, wählen Sie aus der Liste der verfügbaren Cluster einen Cluster aus und klicken Sie auf *Pair*.
+. Wenn Sie *Bondentialed Cluster* ausgewählt haben, gehen Sie wie folgt vor:
++
+.. Geben Sie die MVIP-Adresse des Remote-Clusters ein.
+.. Geben Sie einen Benutzernamen für den Cluster-Administrator ein.
+.. Geben Sie ein Cluster-Administrator-Passwort ein.
+.. Wählen Sie *Pairing Starten*.
+
+
+. Nachdem die Aufgabe abgeschlossen ist und die Seite „Cluster-Paare“ angezeigt wird, überprüfen Sie, ob das Cluster-Paar verbunden ist.
+. (Optional) Stellen Sie auf dem Remote-Cluster sicher, dass das Cluster-Paar über die Element-UI oder die Plug-in-Erweiterungspunkte verbunden ist:
++
+** Beginnend mit Element vCenter Plug-in 5.0, wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz > Cluster-Paare*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz > Cluster-Paare* aus.
+
+
+
+
+
+
+=== Koppeln Sie Cluster mit einem Kopplschlüssel
+
+Wenn Sie Cluster-Admin-Zugriff auf ein lokales Cluster, nicht jedoch auf das Remote-Cluster haben, können Sie die Cluster mit einem Kopplschlüssel koppeln. Ein Kopplungsschlüssel wird auf einem lokalen Cluster generiert und dann sicher an einen Clusteradministrator an einem Remote-Standort gesendet, um eine Verbindung herzustellen und die Cluster-Paarung zur Echtzeitreplizierung abzuschließen.
+
+Dieses Verfahren beschreibt die Cluster-Paarung zwischen zwei Clustern mithilfe von vCenter am lokalen und Remote-Standort. Alternativ können Sie für Cluster nutzen, die nicht über das vCenter Plug-in gesteuert werden https://docs.netapp.com/us-en/element-software/storage/task_replication_pair_cluster_using_pairing_key.html["Starten oder Abschließen der Cluster-Paarung"] Verwenden der Element Web UI.
+
+[[open_protection_tab]]
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+
+
+. Wählen Sie die Unterregisterkarte *Cluster-Paare* aus.
+. Wählen Sie *Cluster Pairing Erstellen*.
+. Wählen Sie *Unzugänglicher Cluster* Aus.
+. Wählen Sie *Schlüssel Generieren*.
++
+
+NOTE: Diese Aktion generiert einen Textschlüssel für das Pairing und erstellt ein nicht konfiguriertes Clusterpaar auf dem lokalen Cluster. Wenn Sie den Vorgang nicht abschließen, müssen Sie das Cluster-Paar manuell löschen.
+
+. Kopieren Sie den Cluster-Kopplungsschlüssel in die Zwischenablage.
+. Wählen Sie *Schließen*.
+. Der Kopplungsschlüssel kann dem Clusteradministrator am Remote-Cluster-Standort zugänglich gemacht werden.
++
+
+NOTE: Der Cluster-Kopplungsschlüssel enthält eine Version des MVIP, Benutzernamen, Kennwort und Datenbankinformationen, um Volume-Verbindungen für die Remote-Replikation zu ermöglichen. Dieser Schlüssel sollte sicher behandelt werden und nicht so gespeichert werden, dass ein versehentlicher oder ungesicherter Zugriff auf den Benutzernamen oder das Kennwort möglich wäre.
+
++
+
+IMPORTANT: Ändern Sie keine Zeichen im Kopplungsschlüssel. Der Schlüssel wird ungültig, wenn er geändert wird.
+
+. Von vCenter, das den Remote-Cluster enthält, ,Öffnen Sie die Registerkarte Schutz.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
++
+
+NOTE: Alternativ können Sie die Paarung über die Element-Benutzeroberfläche abschließen.
+
+. Wählen Sie die Unterregisterkarte *Cluster-Paare* aus.
+. Wählen Sie * Complete Cluster Pairing* Aus.
++
+
+NOTE: Warten Sie, bis der Ladespinner verschwindet, bevor Sie mit dem nächsten Schritt fortfahren. Wenn während des Pairing-Prozesses ein unerwarteter Fehler auftritt, überprüfen und löschen Sie alle nicht konfigurierten Cluster-Paare auf dem lokalen oder Remote-Cluster manuell, und führen Sie die Kopplung erneut aus.
+
+. Fügen Sie den Kopplschlüssel aus dem lokalen Cluster in das Feld * Cluster Pairing Key* ein.
+. Wählen Sie *Cluster-Paar*.
+. Nachdem die Aufgabe abgeschlossen ist und Sie die Seite *Cluster-Paar* sehen, überprüfen Sie, ob das Cluster-Paar verbunden ist.
+. Um zu überprüfen, ob das Cluster-Paar verbunden ist, verwenden Sie das Remote-Cluster ,Öffnen Sie die Registerkarte Schutz Oder die Element UI verwenden.
+
+
+
+
+=== Überprüfen Sie die Cluster-Paarverbindungen
+
+Nach Abschluss der Cluster-Paarung möchten Sie möglicherweise die Verbindung zum Cluster-Paar überprüfen, um den Erfolg der Replizierung zu gewährleisten.
+
+.Schritte
+. Wählen Sie auf dem lokalen Cluster die Option *Data Protection* > *Cluster Pairs* aus.
+. Vergewissern Sie sich, dass das Cluster-Paar verbunden ist.
+. Navigieren Sie zurück zum lokalen Cluster und dem Fenster *Cluster-Paare*, und überprüfen Sie, ob das Cluster-Paar verbunden ist.
+
+
+
+
+== Paar Volumes
+
+Nachdem Sie eine Verbindung zwischen den Clustern in einem Cluster-Paar hergestellt haben, können Sie ein Volume auf einem Cluster mit einem Volume auf dem anderen Cluster des Paars koppeln.
+
+Sie können das Volume mit einer der folgenden Methoden koppeln:
+
+*  volumes using known credentials: Bekannte Anmeldeinformationen für beide Cluster verwenden
+*  volumes using a pairing key: Verwenden Sie einen Kopplungsschlüssel, wenn Cluster-Anmeldeinformationen nur auf dem Quellcluster verfügbar sind.
+*  target volumes and pair them with local volumes: Wenn Sie die Anmeldeinformationen für beide Cluster kennen, erstellen Sie ein Replikationsziel-Volume auf dem Remote-Cluster, um es mit dem Quellcluster zu koppeln.
+
+
+Nachdem eine Verbindung zur Volume-Kopplung hergestellt wurde, müssen Sie ermitteln, welches Volume das Replikationsziel ist:
+
+*  a replication source and target to paired volumes
+
+
+.Was Sie und#8217;ll benötigen
+* Sie sollten eine Verbindung zwischen Clustern in einem Cluster-Paar hergestellt haben.
+* Sie müssen über Administratorrechte für einen oder beide Cluster verfügen, die gekoppelt werden.
+
+
+
+
+=== Paarung von Volumes mit bekannten Anmeldedaten
+
+Sie können ein lokales Volume mit einem anderen Volume auf einem Remote-Cluster kombinieren. Verwenden Sie diese Methode, wenn auf beiden Clustern Zugriff auf Clusteradministrator besteht, auf denen Volumes gekoppelt werden sollen. Diese Methode verwendet die Volume-ID des Volume des Remote-Clusters, um eine Verbindung zu initiieren.
+
+.Bevor Sie beginnen
+* Sie haben die Anmeldedaten für den Cluster-Admin für das Remote-Cluster.
+* Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, gekoppelt sind.
+* Sie kennen die Remote-Volume-ID, es sei denn, Sie beabsichtigen, während dieses Prozesses ein neues Volume zu erstellen.
+* Wenn Sie beabsichtigen, dass das lokale Volume die Quelle ist, stellen Sie sicher, dass der Zugriffsmodus des Volumes auf Lesen/Schreiben eingestellt ist.
+
+
+.Schritte
+. Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das Volume, das Sie koppeln möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Volume Pairing*.
+. Wählen Sie eine der folgenden Optionen:
++
+** *Volume Creation*: Um ein Replikationszielvolume auf dem Remote Cluster zu erstellen, wählen Sie dieses aus. Diese Methode kann nur auf Remote-Clustern verwendet werden, die über ein Element vCenter Plug-in gesteuert werden.
+** *Volume Selection*: Wenn der Remote Cluster für das Zielvolume über ein Element vCenter Plug-in gesteuert wird, wählen Sie dieses aus.
+** *Volume ID*: Wenn der Remote-Cluster für das Ziel-Volume bereits bekannte Anmeldedaten hat, die sich außerhalb der Element vCenter-Plug-in-Konfiguration befinden, wählen Sie diese Option aus.
+
+
+. Wählen Sie einen Replikationsmodus aus:
++
+** *Real-Time (Synchronous)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.
+** *Echtzeit (Asynchron)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.
+** *Nur Snapshots*: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.
+
+
+. Wenn Sie als Kopplungsmodus *Volume Creation* ausgewählt haben, gehen Sie folgendermaßen vor:
++
+.. Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.
++
+
+NOTE: Durch diese Aktion werden die verfügbaren Konten auf dem Cluster ausgefüllt, der im nächsten Schritt ausgewählt werden soll.
+
+.. Wählen Sie für das Replikationsziel-Volume ein Konto im Zielcluster aus.
+.. Geben Sie einen Namen für das Replikationsziel ein.
++
+
+NOTE: Die Volume-Größe kann während dieses Prozesses nicht angepasst werden.
+
+
+
+. Wenn Sie als Option „Kopplungsmodus“ * ausgewählt haben, gehen Sie wie folgt vor:
++
+.. Wählen Sie ein gekoppeltes Cluster aus.
++
+
+NOTE: Durch diese Aktion werden die verfügbaren Volumes auf dem Cluster ausgefüllt, die im nächsten Schritt ausgewählt werden sollen.
+
+.. (Optional) Wählen Sie die Option *Remote-Volume auf Replikationsziel setzen* aus, wenn Sie das Remote-Volume als Ziel in der Volume-Kopplung festlegen möchten. Wenn das lokale Volume auf Lesen/Schreiben eingestellt ist, wird es zur Quelle im Paar.
++
+
+IMPORTANT: Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+
++
+
+NOTE: Sie können im Pairing-Prozess auch die Replikationsquelle und das Ziel später von *Volumes* > *Aktionen* > *Bearbeiten* zuweisen. Sie müssen eine Quelle und ein Ziel zuweisen, um die Kopplung abzuschließen.
+
+.. Wählen Sie ein Volume aus der Liste der verfügbaren Volumes aus.
+
+
+. Wenn Sie *Volume ID* als Kopplungsmodus ausgewählt haben, gehen Sie wie folgt vor:
++
+.. Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.
+.. Wenn das Cluster nicht beim Plug-in registriert ist, geben Sie eine Benutzer-ID des Cluster-Administrators und ein Cluster-Administrator-Passwort ein.
+.. Geben Sie eine Volume-ID ein.
+.. Wählen Sie die Option *Remote-Volume auf Replikationsziel setzen* aus, wenn Sie das Remote-Volume als Ziel in der Volume-Kopplung festlegen möchten. Wenn das lokale Volume auf Lesen/Schreiben eingestellt ist, wird es zur Quelle im Paar.
++
+
+IMPORTANT: Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+
++
+
+NOTE: Sie können im Pairing-Prozess auch die Replikationsquelle und das Ziel später von *Volumes* > *Aktionen* > *Bearbeiten* zuweisen. Sie müssen eine Quelle und ein Ziel zuweisen, um die Kopplung abzuschließen.
+
+
+
+. Wählen Sie *Paar*.
++
+
+NOTE: Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status auf der Seite Volume-Paare sehen.
+
++
+
+NOTE: Wenn Sie noch kein Volume als Replikationsziel zugewiesen haben, ist die Pairing-Konfiguration nicht abgeschlossen. Das Volume-Paar zeigt PausedMisfigured an, bis die Quelle und das Ziel des Volume-Paars zugewiesen sind. Sie müssen eine Quelle und ein Ziel zuweisen, um die Volume-Kopplung abzuschließen.
+
+. Wählen Sie auf einem Cluster * Schutz* > *Volume Pairs* aus.
+. Überprüfen Sie den Status der Volume-Kopplung.
+
+
+
+
+=== Koppeln von Volumes mithilfe eines Kopplschlüssels
+
+Sie können ein lokales Volume mithilfe eines Kopplschlüssels mit einem anderen Volume auf einem Remote-Cluster koppeln. Verwenden Sie diese Methode, wenn nur auf den Quell-Cluster Zugriff auf den Cluster auf den Cluster besteht. Diese Methode generiert einen Kopplungsschlüssel, der auf dem Remote-Cluster zum Abschließen des Volume-Paars verwendet werden kann.
+
+.Bevor Sie beginnen
+* Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, gekoppelt sind.
+* *Best Practices*: Legen Sie das Quellvolume auf Lesen/Schreiben und das Zielvolume auf Replikationsziel fest. Das Ziel-Volume sollte keine Daten enthalten und genau die Merkmale des Quell-Volume aufweisen, wie beispielsweise die Größe, die 512-e-Einstellung und die QoS-Konfiguration. Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Das Zielvolumen ist möglicherweise größer oder gleich dem Quellvolume, kann aber nicht kleiner sein.
+
+
+Dieses Verfahren beschreibt die Volume-Paarung zwischen zwei Volumes mithilfe von vCenter am lokalen und Remote-Standort. Bei Volumes, die nicht vom vCenter Plug-in gesteuert werden, können Sie die Volume-Paarung abwechselnd über die Element Web-Benutzeroberfläche starten oder abschließen.
+
+Anweisungen zum Starten oder Abschließen der Volume-Kopplung über die Element Web-Benutzeroberfläche finden Sie unter https://docs.netapp.com/us-en/element-software/storage/task_replication_pair_volumes_using_a_pairing_key.html["NetApp Element Softwaredokumentation"^].
+
+
+NOTE: Der Kopplungsschlüssel für das Volume enthält eine verschlüsselte Version der Volume-Informationen und kann vertrauliche Informationen enthalten. Teilen Sie diesen Schlüssel nur auf sichere Weise.
+
+[[open_management]]
+.Schritte
+. Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das Volume, das Sie koppeln möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Volume Pairing*.
+. Wählen Sie *Unzugänglicher Cluster* Aus.
+. Wählen Sie einen Replikationsmodus aus:
++
+** *Real-Time (Synchronous)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.
+** *Echtzeit (Asynchron)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.
+** *Nur Snapshots*: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.
+
+
+. Wählen Sie *Schlüssel Generieren*.
++
+
+NOTE: Diese Aktion generiert einen Textschlüssel für das Koppeln und erstellt ein nicht konfiguriertes Volume-Paar auf dem lokalen Cluster. Wenn Sie dies nicht tun, müssen Sie das Volume-Paar manuell löschen.
+
+. Kopieren Sie den Kopplungsschlüssel in die Zwischenablage.
+. Wählen Sie *Schließen*.
+. Der Kopplungsschlüssel kann dem Clusteradministrator am Remote-Cluster-Standort zugänglich gemacht werden.
++
+
+NOTE: Der Volume-Kopplungsschlüssel sollte sicher behandelt und nicht so gespeichert werden, dass ein versehentlicher oder ungesicherter Zugriff möglich wäre.
+
++
+
+IMPORTANT: Ändern Sie keine Zeichen im Kopplungsschlüssel. Der Schlüssel wird ungültig, wenn er geändert wird.
+
+. Von vCenter, das den Remote-Cluster enthält, ,Öffnen Sie die Registerkarte Verwaltung.
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für die Lautstärke, die Sie koppeln möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Volume Pairing*.
+. Wählen Sie * Complete Cluster Pairing* Aus.
+. Fügen Sie den Kopplschlüssel aus dem anderen Cluster in die Box *Pairing Key* ein.
+. Wählen Sie * Pairing Abschließen*.
++
+
+NOTE: Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status der Seite Volume-Paare sehen. Wenn während des Pairing-Prozesses ein unerwarteter Fehler auftritt, überprüfen und löschen Sie alle nicht konfigurierten Cluster-Paare auf dem lokalen oder Remote-Cluster manuell, und führen Sie die Kopplung erneut aus.
+
++
+
+IMPORTANT: Wenn Sie noch kein Volume als Replikationsziel zugewiesen haben, ist die Pairing-Konfiguration nicht abgeschlossen. Das Volume-Paar zeigt „PausedMisfigured“ an, bis die Quelle und das Ziel des Volume-Paars zugewiesen sind. Sie müssen eine Quelle und ein Ziel zuweisen, um die Volume-Kopplung abzuschließen.
+
+. Wählen Sie auf einem Cluster * Schutz* > *Volume Pairs* aus.
+. Überprüfen Sie den Status der Volume-Kopplung.
++
+
+NOTE: Volumes, die über einen Kopplungschlüssel gekoppelt werden, werden angezeigt, nachdem der Pairing-Prozess am Remote-Standort abgeschlossen wurde.
+
+
+
+
+
+=== Erstellung von Ziel-Volumes und Kopplung mit lokalen Volumes
+
+Sie können zwei oder mehr lokale Volumes mit den zugehörigen Ziel-Volumes auf einem Remote-Cluster kombinieren. Bei diesem Prozess wird für jedes ausgewählte lokale Quell-Volume ein Replikationsziel-Volume auf dem Remote-Cluster erstellt. Verwenden Sie diese Methode, wenn auf beiden Clustern, auf denen Volumes gekoppelt werden sollen, der Remote-Cluster über das Plug-in gesteuert wird, Zugriff erhält.
+
+Diese Methode verwendet die Volume-ID jedes Volumes im Remote-Cluster, um eine oder mehrere Verbindungen zu initiieren.
+
+.Bevor Sie beginnen
+* Stellen Sie sicher, dass Sie über die Anmeldedaten für den Cluster-Admin für das Remote-Cluster verfügen.
+* Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, mit dem Plug-in gekoppelt sind.
+* Stellen Sie sicher, dass das Remote-Cluster über das Plug-in gesteuert wird.
+* Stellen Sie sicher, dass der Zugriffsmodus jedes lokalen Volumes auf Lesen/Schreiben eingestellt ist.
+
+
+.Schritte
+. Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte *Management*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Wählen Sie aus der *Active*-Ansicht zwei oder mehr Volumes aus, die Sie koppeln möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Volume Pairing*.
+. Wählen Sie einen *Replikationsmodus* aus:
++
+** *Real-Time (Synchronous)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.
+** *Echtzeit (Asynchron)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.
+** *Nur Snapshots*: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.
+
+
+. Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.
+. Wählen Sie für das Replikationsziel-Volume ein Konto im Zielcluster aus.
+. (Optional) Geben Sie ein Präfix oder Suffix für die neuen Volume-Namen auf dem Ziel-Cluster ein.
++
+
+NOTE: Ein Beispiel für einen Volume-Namen mit dem geänderten Namen wird angezeigt.
+
+. Wählen Sie *Paare Erstellen*.
++
+
+NOTE: Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status auf der Seite Volume-Paare sehen. Nach Abschluss des Prozesses werden neue Ziel-Volumes auf dem Remote-Cluster erstellt und verbunden.
+
+. Wählen Sie auf einem Cluster * Schutz* > *Volume Pairs* aus.
+. Überprüfen Sie den Status der Volume-Kopplung.
+
+
+
+
+=== Weisen Sie gepaarten Volumes eine Replikationsquelle und ein Replikationsziel zu
+
+Wenn Sie während der Volume-Paarung kein Volume zum Replikationsziel zugewiesen haben, ist die Konfiguration nicht abgeschlossen. Mit diesem Verfahren können Sie ein Quell-Volume und sein Replikationsziel-Volume zuweisen. Eine Replikationsquelle oder ein Replikationsziel kann ein Volume in einem Volume-Paar sein.
+
+Darüber hinaus können Sie diese Vorgehensweise zum Umleiten von Daten von einem Quell-Volume zu einem Remote-Ziel-Volume verwenden, falls das Quell-Volume nicht mehr verfügbar ist.
+
+Sie haben Zugriff auf die Cluster, die die Quell- und Ziel-Volumes enthalten.
+
+Dieses Verfahren beschreibt das Zuweisen von Quell- und Replikations-Volumes zwischen zwei Clustern mit vCenter an den lokalen und Remote-Standorten. Alternativ können Sie für Volumes, die nicht über das vCenter Plug-in gesteuert werden, auch diese Volumes verwenden https://docs.netapp.com/us-en/element-software/storage/task_replication_assign_replication_source_and_target_to_paired_volumes.html["Weisen Sie ein Quell- oder Replikationsvolume zu"] Verwenden der Element Web UI.
+
+Ein Replikationsquellvolume hat Lese-/Schreibzugriff auf ein Konto. Auf ein Replikationsziel kann nur von der Replikationsquelle als Lese-/Schreibzugriff zugegriffen werden.
+
+*Best Practices*: Das Zielvolume sollte keine Daten enthalten und die genauen Eigenschaften des Quellvolumens aufweisen, wie Größe, 512e Einstellung und QoS-Konfiguration. Das Zielvolumen ist möglicherweise größer oder gleich dem Quellvolume, kann aber nicht kleiner sein.
+
+.Schritte
+. Wählen Sie den Cluster aus, der das gepaarte Volume enthält, das Sie als Replikationsquelle verwenden möchten, und wählen Sie den Erweiterungspunkt des Plug-in aus:
++
+** Beginnend mit dem Element vCenter Plug-in 5.0 vom *NetApp Remote Plugin > Management*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher *NetApp Element Management* aus.
+
+
+. Wählen Sie im Erweiterungspunkt für Ihre Element Plug-in für vCenter Server Version die Registerkarte *Management* aus.
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das zu bearbeitende Volume.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Bearbeiten*.
+. Wählen Sie aus der Dropdown-Liste Zugriff die Option *Lesen/Schreiben* aus.
++
+
+IMPORTANT: Wenn Sie die Quell- und Zielzuweisung umkehren, führt diese Aktion dazu, dass das Volume-Paar „PausedMisfigured“ anzeigt, bis ein neues Replikationsziel zugewiesen ist. Durch das Ändern des Zugriffs wird die Volume-Replizierung angehalten, und die Datenübertragung wird beendet. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+
+. Wählen Sie *OK*.
+. Wählen Sie den Cluster aus, der das gepaarte Volume enthält, das Sie als Replikationsziel verwenden möchten:
++
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Verwaltung > Verwaltung* aus.
+** Beginnend mit dem Element vCenter Plug-in 5.0 vom *NetApp Remote Plugin > Management > Management*.
+
+
+. Wählen Sie die Unterregisterkarte *Volumes* aus.
+. Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für das zu bearbeitende Volumen.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Bearbeiten*.
+. Wählen Sie in der Dropdown-Liste *Zugriff* die Option *Replikationsziel* aus.
++
+
+IMPORTANT: Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+
+. Wählen Sie *OK*.
+
+
+
+
+== Volume-Replizierung validieren
+
+Nach der Replizierung eines Volumes sollten Sie sicherstellen, dass die Quell- und Ziel-Volumes aktiv sind. Im aktiven Zustand werden Volumes gekoppelt. Die Daten werden vom Quell- auf das Ziel-Volume gesendet, und die Daten werden im synchronen Modus gespeichert.
+
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volume Pairs* aus.
+. Vergewissern Sie sich, dass der Volume-Status aktiv ist.
+
+
+
+
+== Löschen einer Volume-Beziehung nach der Replikation
+
+Nach Abschluss der Replikation können Sie die Volume-Pairing-Beziehung nicht mehr benötigen, um die Volume-Beziehung zu löschen.
+
+Siehe  a volume pair.
+
+
+
+== Managen Sie Volume-Beziehungen
+
+Sie können Volume-Beziehungen auf unterschiedliche Weise verwalten, z. B. die Unterbrechung der Replikation, das Umkehren der Volume-Paarung, das Ändern des Replikationsmodus, das Löschen eines Volume-Paares oder das Löschen eines Cluster-Paars.
+
+*  replication
+*  the mode of replication
+*  a volume pair
+*  a cluster pair
+
+
+
+
+=== Unterbrechen Sie die Replikation
+
+Sie können die Eigenschaften des Volume-Paars bearbeiten, um die Replikation manuell anzuhalten.
+
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volume Pairs* aus.
+. Aktivieren Sie das Kontrollkästchen für das Volume-Paar, das Sie bearbeiten möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Bearbeiten*.
+. Starten Sie den Replikationsprozess manuell.
++
+
+IMPORTANT: Wenn Sie die Volume-Replikation manuell unterbrechen oder fortsetzen, wird die Übertragung der Daten beendet oder fortgesetzt. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+
+. Wählen Sie *Änderungen Speichern*.
+
+
+
+
+=== Ändern Sie den Modus der Replikation
+
+Sie können die Volume-Paar-Eigenschaften bearbeiten, um Änderungen am Replikationsmodus der Volume-Paar-Beziehung vorzunehmen.
+
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volume Pairs* aus.
+. Aktivieren Sie das Kontrollkästchen für das Volume-Paar, das Sie bearbeiten möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Bearbeiten*.
+. Wählen Sie einen neuen Replikationsmodus aus:
++
+
+IMPORTANT: Wenn Sie den Modus der Replikation ändern, ändert sich der Modus sofort. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+
++
+** *Real-Time (Synchronous)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie sowohl auf den Quell- als auch auf den Ziel-Clustern festgelegt sind.
+** *Echtzeit (Asynchron)*: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.
+** *Nur Snapshots*: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.
+
+
+. Wählen Sie *Änderungen Speichern*.
+
+
+
+
+=== Löschen Sie ein Volume-Paar
+
+Sie können ein Volume-Paar löschen, wenn Sie eine Paarverbindung zwischen zwei Volumes entfernen möchten.
+
+Dieses Verfahren beschreibt das Löschen einer Volume-Pairing-Beziehung zwischen zwei Volumes, die vCenter auf den lokalen und Remote-Standorten verwenden.
+
+Für Volumes, die nicht über das vCenter Plug-in gesteuert werden, steht eine andere Möglichkeit zur Verfügung link:https://docs.netapp.com/us-en/element-software/storage/task_replication_delete_volume_relationship_after_replication.html["Löschen eines Volume-Paares Ende"] Verwenden der Element Web UI.
+
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Volume Pairs* aus.
+. Wählen Sie ein oder mehrere Volume-Paare aus, die Sie löschen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Löschen*.
+. Bestätigen Sie die Details der einzelnen Volume-Paare.
++
+
+NOTE: Bei Clustern, die nicht vom Plug-in verwaltet werden, wird mit dieser Aktion nur das Volume-Paar gelöscht, das auf dem lokalen Cluster endet. Sie müssen das Ende des Volume-Paars manuell vom Remote-Cluster löschen, um die Pairing-Beziehung vollständig zu entfernen.
+
+. (Optional für Cluster, die vom Plug-in verwaltet werden) Aktivieren Sie das Kontrollkästchen für *Replikationszielzugriff auf* ändern und wählen Sie einen neuen Zugriffsmodus für das Replikationsziel-Volume aus. Dieser neue Zugriffsmodus wird angewendet, nachdem die Volume-Pairing-Beziehung entfernt wurde.
+. Wählen Sie *Ja*.
+
+
+
+
+=== Löschen eines Cluster-Paares
+
+Sie können eine Cluster-Pairing-Beziehung zwischen zwei Clustern mithilfe von vCenter an den lokalen und Remote-Standorten löschen. Um eine Cluster-Pairing-Beziehung vollständig zu entfernen, müssen Sie das Cluster-Paar-Ende sowohl vom lokalen als auch vom Remote-Cluster entfernen.
+
+Mit dem vCenter Plug-in können Sie ein Cluster-Paar-Ende löschen
+
+Alternativ können Sie für Cluster nutzen, die nicht über das vCenter Plug-in gesteuert werden link:https://docs.netapp.com/us-en/element-software/storage/task_replication_delete_cluster_pair.html["Löschen eines Clusterpaars Ende"] Verwenden der Element Web UI.
+
+.Schritte
+. Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte *Schutz*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Verwaltung > Schutz*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Verwaltung > Schutz* aus.
+
+
+. Wählen Sie die Unterregisterkarte *Cluster-Paare* aus.
+. Aktivieren Sie das Kontrollkästchen für das Cluster-Paar, das Sie löschen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie *Löschen*.
+. Bestätigen Sie die Aktion.
++
+
+NOTE: Durch diese Aktion wird nur das Cluster-Paar gelöscht, das auf dem lokalen Cluster endet. Sie müssen das Cluster-Paarende manuell vom Remote-Cluster löschen, um die Pairing-Beziehung vollständig zu entfernen.
+
+. Wiederholen Sie die Schritte aus dem Remote-Cluster in der Cluster-Paarung.
+
+
+
+
+== Meldungen und Warnungen zum Volume-Pairing
+
+Sie können die Informationen für Volumes anzeigen, die gekoppelt wurden oder sich gerade im Prozess der Kopplung befinden, auf der Seite Volume Pairs auf der Registerkarte Schutz über das Plug-in-Erweiterungspunkt. Beginnend mit dem Element vCenter Plug-in 5.0, wählen Sie die Registerkarte Verwaltung aus dem NetApp Element Remote Plugin Erweiterungspunkt. Wählen Sie für Element vCenter Plug-in 4.10 und frühere Versionen den NetApp Element Management Extension Point aus.
+
+Das System zeigt Pairing- und Fortschrittsmeldungen in der Spalte Volume-Status an.
+
+*  pairing messages
+*  pairing warnings
+
+
+
+
+=== Meldungen zur Volume-Kopplung
+
+Sie können Meldungen während des ersten Pairing-Prozesses auf der Seite Volume Pairs auf der Registerkarte Schutz vom Plug-in-Erweiterungspunkt anzeigen. Diese Meldungen werden in der Spalte „Volume Status“ angezeigt und können sowohl am Quell- als auch am Zielende der Kopplung angezeigt werden.
+
+* *PausedDisconnected*: Quell-Replikation oder Sync-RPCs ist abgelaufen. Die Verbindung zum Remote-Cluster wurde unterbrochen. Überprüfen Sie die Netzwerkverbindungen mit dem Cluster.
+* *ResumingConnected**: Die Synchronisierung der Remote-Replikation ist jetzt aktiv. Mit dem Synchronisierungsprozess beginnen und auf Daten warten.
+* *ResumingRRSync**: Eine einzige Helix-Kopie der Volume-Metadaten wird auf dem gepaarten Cluster erstellt.
+* *ResumingLocalSync**: Eine doppelte Helix-Kopie der Volume-Metadaten wird auf das gepaarte Cluster erstellt.
+* *ResumingDataTransfer**: Die Datenübertragung wurde wieder aufgenommen.
+* *Active*: Volumen werden gekoppelt und Daten werden vom Quell- zum Zielvolume gesendet und die Daten sind synchron.
+* *Idle*: Es findet keine Replikationsaktivität statt.
+
+
+*Dieser Prozess wird vom Zielvolumen angetrieben und wird möglicherweise nicht auf dem Quellvolumen angezeigt.
+
+
+
+=== Warnungen zum Volume-Pairing
+
+Sie können Warnmeldungen anzeigen, nachdem Sie Volumes auf der Seite Volume Pairs auf der Registerkarte Schutz über den Plug-in-Erweiterungspunkt gepaart haben. Diese Meldungen werden in der Spalte „Volume Status“ angezeigt und können sowohl am Quell- als auch am Zielende der Kopplung angezeigt werden.
+
+Diese Meldungen können an den Quell- und Zielenden der Kopplung angezeigt werden, sofern nichts anderes angegeben ist.
+
+* *PausedClusterFull*: Da der Zielcluster voll ist, können die Quellreplikation und die Massendatenübertragung nicht fortgesetzt werden. Die Meldung wird nur am Quellende des Paares angezeigt.
+* *PausedExceedMaxSnapshotCount*: Das Ziel-Volume hat bereits die maximale Anzahl an Snapshots und kann keine zusätzlichen Snapshots replizieren.
+* *PausedManual*: Die lokale Lautstärke wurde manuell angehalten. Sie muss aufgehoben werden, bevor die Replikation fortgesetzt wird.
+* *PausedManualRemote*: Fernlautstärke befindet sich im manuellen Pausenmodus. Um das Remote-Volume vor dem Fortschreiten der Replikation zu unterbrechen, ist ein manueller Eingriff erforderlich.
+* *PausedUnkonfiguriert*: Warten auf eine aktive Quelle und Ziel. Manuelle Eingriffe sind erforderlich, um die Replikation fortzusetzen.
+* *PausedQoS*: Ziel-QoS konnte eingehende I/O nicht aufrechterhalten. Automatische Wiederaufnahme der Replikation. Die Meldung wird nur am Quellende des Paares angezeigt.
+* *PausedSlowLink*: Langsame Verbindung erkannt und gestoppt Replikation. Automatische Wiederaufnahme der Replikation. Die Meldung wird nur am Quellende des Paares angezeigt.
+* *PausedVolumeSizeMatch*: Das Zielvolumen ist kleiner als das Quellvolumen.
+* *PausedXCopy*: Ein SCSI XCOPY Befehl wird an ein Quell-Volume ausgegeben. Der Befehl muss abgeschlossen sein, bevor die Replikation fortgesetzt werden kann. Die Meldung wird nur am Quellende des Paares angezeigt.
+* *StoppedMisfigured*: Es wurde ein permanenter Konfigurationsfehler erkannt. Das entfernte Volume wurde gelöscht oder entpaart. Es ist keine Korrekturmaßnahme möglich; es muss eine neue Paarung eingerichtet werden.
+
+
+[discrete]
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+

@@ -1,0 +1,323 @@
+---
+sidebar: sidebar 
+permalink: vcp_task_configure_manage_vvols.html 
+summary: Sie können virtuelle Volumes für provisionierten Storage in Ihrem Cluster einrichten. 
+keywords: netapp, set up vvol, configure vvol, virtual volume, vcp, vcenter, element, vasa provider 
+---
+= Konfiguration und Management virtueller Volumes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie können VMware vSphere aktivieren link:vcp_concept_vvols.html["Virtuelle Volumes (VVols)"] Funktionalität und Einrichtung einer Konfiguration virtueller Volumes auf einem NetApp Element Storage-Cluster Das Element Plug-in für vCenter Server überwacht die Performance und bietet Optionen zum Managen virtueller Volumes, link:vcp_concept_vvols.html#storage-containers["Storage-Container"], link:vcp_concept_vvols.html#protocol-endpoints["Protokollendpunkte"], Und Hosts aus dem Plug-in-Erweiterungspunkt.
+
+.Was Sie und#8217;ll benötigen
+* Sie verwenden einen NetApp Element 10 oder höher Cluster, der mit einer ESXi 6.5 oder höher Umgebung mit VVols Kompatibilität verbunden ist.
+* Sie verwenden vCenter 6.5 oder höher.
+
+
+
+
+== Setup-Aufgaben
+
+Sie müssen erste Konfigurationsschritte durchführen, um Virtual Volumes (VVols) im NetApp Element Plug-in für vCenter Server zu verwenden.
+
+.Schritte
+.  virtual volumes functionality on the NetApp Element cluster
+.  the VASA provider with vCenter
+.  a storage container and associated VVol datastore
+
+
+
+
+== Managementaufgaben
+
+*  virtual volume resources
+*  a VVol datastore for a storage container
+*  a storage container
+
+
+
+
+== Aktivieren der Funktion virtueller Volumes auf dem NetApp Element Cluster
+
+Sie müssen die Funktion von vSphere Virtual Volumes (VVols) manuell über den Plug-in-Erweiterungspunkt aktivieren. Im Element System ist die VVols-Funktion standardmäßig deaktiviert und wird nicht automatisch im Rahmen einer neuen Installation oder eines Upgrades aktiviert. Die Aktivierung der VVols-Funktion ist eine einmalige Konfigurationsaufgabe.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Konfiguration > Cluster*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element-Konfiguration > Cluster* aus.
+
+
+. Wählen Sie ein Cluster aus der Liste aus, die Sie aktivieren möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *VVols aktivieren* aus.
++
+
+IMPORTANT: Nach Aktivierung der VVols Funktion kann diese nicht mehr deaktiviert werden. Durch die Aktivierung der Funktion von vSphere Virtual Volumes wird die Konfiguration der NetApp Element Software dauerhaft geändert. Die VVols Funktionalität sollten nur aktiviert werden, wenn das Cluster mit einer mit VMware ESXi VVols kompatiblen Umgebung verbunden ist. Sie können die VVols-Funktion nur deaktivieren und die Standardeinstellungen wiederherstellen, indem Sie das Cluster wieder auf das Werkseinstellungen zurücksetzen.
+
+. Wählen Sie *Ja*, um die Änderung der virtuellen Volumes-Konfiguration zu bestätigen.
++
+
+NOTE: Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VASA Provider, öffnet Port 8444 für den VASA Traffic und erstellt Protokollendpunkte, die von vCenter und allen ESXi Hosts erkannt werden können.
+
+. Wählen Sie *Actions* für den ausgewählten Cluster aus.
+. Wählen Sie im Menü Ergebnis die Option *Details* aus.
+. Kopieren Sie die VASA Provider-URL aus dem Feld *VASA Provider URL*. Sie verwenden diese URL, um den VASA Provider in vCenter zu registrieren.
+. Siehe  the VASA provider with vCenter Für die nächsten Schritte.
+
+
+
+
+== Registrieren Sie den VASA Provider mit vCenter
+
+Sie müssen den NetApp Element VASA Provider über vCenter registrieren, damit vCenter die VVol Funktionen auf dem Cluster erkennt. Die Registrierung des VASA Providers in vCenter ist eine einmalige Konfigurationsaufgabe.
+
+.Was Sie und#8217;ll benötigen
+* Sie haben die VVols Funktion für den Cluster aktiviert.
+
+
+Dieses Verfahren beschreibt die in Version 6.7 von vSphere verfügbaren Schritte. Ihre vSphere-Benutzeroberfläche kann sich je nach installierter Version von vSphere leicht von der Beschreibung unterscheiden. Weitere Hilfe finden Sie in der Dokumentation zu VMware vCenter.
+
+
+IMPORTANT: Einen NetApp Element VASA Provider nicht bei mehr als einer vCenter Instanz registrieren. Der NetApp Element VASA Provider kann nur bei einem einzelnen vCenter registriert werden, da Einschränkungen bei der SSL-Verarbeitung von vCenter auftreten. Ein einzelnes vCenter kann mehrere NetApp Element Cluster enthalten, ein Cluster kann jedoch nicht zwischen zwei Instanzen von vCenter gemeinsam genutzt werden.
+
+
+IMPORTANT: Registrieren Sie bei Element Software 12.5 und früher nicht mehr als einen NetApp Element VASA Provider in einer einzelnen vCenter Instanz. Wenn ein zweiter NetApp Element VASA Provider hinzugefügt wird, macht das alle VVOL Datastores unzugänglich.
+
+
+NOTE: VASA-Unterstützung für bis zu 10 vCenters steht als Upgrade-Patch zur Verfügung, wenn Sie bereits einen VASA Provider bei vCenter registriert haben. Folgen Sie zur Installation den Anweisungen im VASA39-Manifest und laden Sie die Datei .tar.gz aus dem herunter link:https://mysupport.netapp.com/site/products/all/details/element-software/downloads-tab/download/62654/vasa39["NetApp Software-Downloads"] Standort. Der NetApp Element VASA Provider verwendet ein NetApp Zertifikat. Bei diesem Patch wird das Zertifikat von vCenter nicht verändert, um mehrere vCenters für die Verwendung von VASA und VVols zu unterstützen. Ändern Sie das Zertifikat nicht. Benutzerdefinierte SSL-Zertifikate werden von VASA nicht unterstützt.
+
+.Schritte
+. Wählen Sie in vSphere Client Home *Hosts und Cluster* aus.
+. Wählen Sie eine vCenter-Instanz aus, auf der der NetApp Element VASA Provider registriert werden soll.
+. Wählen Sie *Configure > Storage Providers* Aus.
+. Wählen Sie unter *Speicheranbieter* das Add-Symbol aus.
+. Geben Sie die folgenden Informationen in das Dialogfeld *Neuer Speicheranbieter* ein:
++
+** VASA Provider-Name:
+** VASA Provider-URL:
++
+
+NOTE: Wenn Sie VVols im vCenter Plug-in aktivieren, erhalten Sie die VASA Provider-URL. Die URL finden Sie auch unter Clusterdetails (*NetApp Element Konfiguration > Cluster* oder *NetApp Element Remote Plugin > Konfiguration > Cluster*) oder über Clustereinstellungen in der Element UI (`https://<MVIP>/cluster`).
+
+** Administratorkonto Benutzername für den NetApp Element-Cluster
+** Administratorpasswort für das NetApp Element-Cluster.
+
+
+. Wählen Sie *OK*, um den VASA Provider hinzuzufügen.
+. Genehmigen Sie den Fingerabdruck des SSL-Zertifikaten, wenn Sie dazu aufgefordert werden. Der NetApp Element-VASA-Provider sollte jetzt mit dem Status registriert werden `Connected`.
++
+
+NOTE: Aktualisieren Sie gegebenenfalls den Speicheranbieter, um den aktuellen Status des Providers nach der ersten Registrierung des Providers anzuzeigen. Sie können auch überprüfen, ob der Anbieter unter *NetApp Element Konfiguration > Cluster* oder *NetApp Element Remote Plugin > Konfiguration > Cluster* aktiviert ist. Wählen Sie *Aktionen* für den Cluster, den Sie aktivieren, und wählen Sie *Details*.
+
+. Siehe  a storage container and associated VVol datastore Für die nächsten Schritte.
+
+
+
+
+== Erstellung eines Storage-Containers und zugehöriger VVol Datastore
+
+Sie können Storage-Container über die Registerkarte VVols im Plug-in-Erweiterungspunkt erstellen. Sie müssen mindestens einen Storage-Container erstellen, um mit der Bereitstellung der auf VVol basierenden Virtual Machines zu beginnen.
+
+.Bevor Sie beginnen
+* Sie haben die VVols Funktion für den Cluster aktiviert.
+* Sie haben den NetApp Element VASA Provider für virtuelle Volumes mit vCenter registriert.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *VVols*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > VVols*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element Management > VVols* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Unterregisterkarte *Storage Container* aus.
+. Wählen Sie *Storage Container Erstellen*.
+. Geben Sie im Dialogfeld *Erstellen eines neuen Speicherbehälters* Informationen zum Speichercontainer ein:
++
+.. Geben Sie einen Namen für den Speichercontainer ein.
++
+
+TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist besonders wichtig, wenn in Ihrer Umgebung mehrere Cluster oder vCenter Server verwendet werden.
+
+.. Konfigurieren Sie Initiator- und Zielschlüssel für CHAP.
++
+
+TIP: Lassen Sie die Felder für CHAP-Einstellungen leer, um automatisch Schlüssel zu generieren.
+
+.. Geben Sie einen Namen für den Datastore ein. Das Kontrollkästchen *Create a Datastore* ist standardmäßig aktiviert.
++
+
+NOTE: Zur Verwendung des Storage-Containers in vSphere ist ein VVol Datastore erforderlich.
+
+.. Wählen Sie einen oder mehrere Hosts für den Datastore aus.
++
+
+NOTE: Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswählen, die dem vCenter-Server zur Verfügung stehen, dem das Cluster zugewiesen ist.
+
+.. Wählen Sie *OK*.
+
+
+. Überprüfen Sie, ob der neue Speichercontainer in der Liste auf der Unterregisterkarte *Storage Container* angezeigt wird. Da eine NetApp Element-Konto-ID automatisch erstellt und dem Storage-Container zugewiesen wird, muss kein Konto manuell erstellt werden.
+. Überprüfen Sie, ob der zugeordnete Datastore auch auf dem ausgewählten Host in vCenter erstellt wurde.
+
+
+
+
+== Überwachen Sie die Ressourcen virtueller Volumes
+
+Sie können die Leistung und Einstellungen der Komponenten des virtuellen Volumes über die Plug-in-Erweiterung überprüfen:
+
+*  VVols
+*  storage containers
+*  protocol endpoints
+
+
+
+
+=== Monitoring von VVols
+
+Sie können allgemeine Daten für alle aktiven virtuellen Volumes im Cluster oder detaillierte Daten für jedes virtuelle Volume prüfen. Das Plug-in überwacht die Effizienz, Performance, Ereignisse und QoS des virtuellen Volumes sowie zugehörige Snapshots, VMs und Bindungen.
+
+.Was Sie und#8217;ll benötigen
+* Sie haben VMs eingeschaltet, sodass Details zum virtuellen Volume angezeigt werden können.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *VVols*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > VVols*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element Management > VVols* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Über die Registerkarte *Virtual Volumes* können Sie nach einem bestimmten virtuellen Volume suchen.
+. Aktivieren Sie das Kontrollkästchen für das virtuelle Volume, das Sie überprüfen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Details* aus.
+
+
+
+
+=== Monitoring von Storage-Containern
+
+Sie können allgemeine Daten für alle aktiven Storage Container im Cluster oder detaillierte Daten für jeden Storage Container überprüfen. Das Plug-in überwacht die Effizienz, Performance und die zugehörigen virtuellen Volumes der Storage-Container.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *VVols*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > VVols*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element Management > VVols* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Registerkarte *Storage Container* aus.
+. Aktivieren Sie das Kontrollkästchen für den Storage-Container, den Sie überprüfen möchten.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Details* aus.
+
+
+
+
+=== Überwachen von Protokollendpunkten
+
+Allgemeine Daten für alle Protokollendpunkte im Cluster können überprüft werden.
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *VVols*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > VVols*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element Management > VVols* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Registerkarte *Protokollendpunkte* aus.
+. Aktivieren Sie das Kontrollkästchen für den zu prüfenden Protokollendpunkt.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Details* aus.
+
+
+
+
+== Erstellen eines VVol Datastore für einen Storage-Container
+
+Nachdem Sie einen Storage Container erstellt haben, müssen Sie auch einen Datastore für virtuelle Volumes erstellen, der den Storage-Container im NetApp Element-Cluster in vCenter darstellt. Dieses Verfahren kann als Alternative zur Erstellung eines Datenspeichers aus dem verwendet werden  a storage container and associated VVol datastore,Storage Container Erstellen assistent. Sie müssen mindestens einen VVol Datastore erstellen, um mit der Bereitstellung von VVol-gestützten Virtual Machines zu beginnen.
+
+.Was Sie und#8217;ll benötigen
+* Ein vorhandener Storage-Container in der virtuellen Umgebung.
++
+
+NOTE: Möglicherweise müssen Sie den NetApp Element Storage in vCenter erneut scannen, um Storage Container zu entdecken.
+
+
+
+.Schritte
+. Klicken Sie in der Navigator-Ansicht in vCenter mit der rechten Maustaste auf einen Speicher-Cluster und wählen Sie *Storage > Datastores > New Datastore*.
+. Wählen Sie im Dialogfeld *New Datastore* *VVol* als Datenspeichertyp aus, der erstellt werden soll.
+. Geben Sie im Feld *Datenspeichername* einen Namen für den Datenspeicher ein.
+. Wählen Sie den NetApp Element-Speicher-Container aus der Liste Backing Storage Container aus.
++
+
+NOTE: Sie müssen keine Protokoll-Endpunkt-LUNs (PE) manuell erstellen. Sie werden bei der Erstellung des Datenspeichers automatisch den ESXi-Hosts zugeordnet.
+
+. Wählen Sie die Hosts aus, die Zugriff auf den Datenspeicher benötigen.
+. Wählen Sie *Weiter*.
+. Prüfen Sie die Konfigurationen und wählen Sie *Fertig*, um den VVol Datastore zu erstellen.
+
+
+
+
+== Löschen eines Speichercontainers
+
+Sie können Speichercontainer aus dem Plug-in-Erweiterungspunkt löschen.
+
+.Was Sie und#8217;ll benötigen
+* Alle Volumes wurden aus dem Storage-Container entfernt.
+
+
+.Schritte
+. Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *VVols*:
++
+** Ab Element vCenter Plug-in 5.0 wählen Sie *NetApp Element Remote Plugin > Management > VVols*.
+** Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option *NetApp Element Management > VVols* aus.
+
+
++
+
+NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+
+. Wählen Sie die Registerkarte *Storage Container* aus.
+. Aktivieren Sie das Kontrollkästchen für den zu löschenden Speichercontainer.
+. Wählen Sie *Aktionen*.
+. Wählen Sie im Menü Ergebnis die Option *Löschen* aus.
+. Bestätigen Sie die Aktion.
+. Aktualisieren Sie die Liste der Speichercontainer auf der Unterregisterkarte *Speichercontainer*, um zu bestätigen, dass der Speichercontainer entfernt wurde.
+
+
+
+
+== Weitere Informationen
+
+* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
+* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
+
