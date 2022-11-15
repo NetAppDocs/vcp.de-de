@@ -21,7 +21,7 @@ Mit dem NetApp Element Plug-in für VMware vCenter Server können Sie Datastores
 * Um den QoSSIOC-Dienst mit Datastores zu verwenden, müssen Sie zuerst Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren.
 +
 ** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
-** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 4.10 und früher konfigurieren"]
 
 
 * Da Datastores mit der höchsten vom ausgewählten ESXi Host unterstützten VMFS-Version erstellt werden, sollten alle Cluster-Mitglieder dieselbe Version von vSphere und ESXi ausführen, um Probleme mit der VMFS-Kompatibilität zu vermeiden.
@@ -151,7 +151,7 @@ TIP: Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoSSIOC �
 Wenn der QoSSIOC-Dienst nicht verfügbar ist, müssen Sie zuerst die QoSSIOC-Einstellungen konfigurieren:
 
 ** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
-** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 4.10 und früher konfigurieren"]
 
 
 --
@@ -364,7 +364,7 @@ IMPORTANT: Wenn Sie QoS-Richtlinien verwenden, aktivieren Sie QoSSIOC nicht. QoS
 Wenn der QoSSIOC-Dienst nicht verfügbar ist, müssen Sie zuerst die Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren:
 
 ** link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
-** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie Einstellungen mit Element vCenter Plug-in 4.10 und früher"]
+** link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 4.10 und früher konfigurieren"]
 
 
 --
