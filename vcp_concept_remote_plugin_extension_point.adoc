@@ -18,10 +18,10 @@ Ab dem NetApp Element vCenter Plug-in 5.0 können Sie über den NetApp Element R
 
 Die folgenden Registerkarten sind über den NetApp Element Remote Plugin Erweiterungspunkt verfügbar:
 
-*  Started
-* 
-* 
-* 
+* <<Erste Schritte>>
+* <<Konfiguration>>
+* <<Vereinfachtes>>
+* <<Info>>
 
 
 

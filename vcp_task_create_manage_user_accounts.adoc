@@ -17,9 +17,9 @@ keywords: netapp, storage, accounts, vcp, vcenter, element
 link:vcp_concept_accounts.html["Benutzerkonten"] Werden zur Steuerung des Zugriffs auf die Storage-Ressourcen in einem softwarebasierten Netzwerk von NetApp Element verwendet.
 
 .Optionen
-*  an account
-*  an account
-*  an account
+* <<Erstellen Sie ein Konto>>
+* <<Bearbeiten Sie ein Konto>>
+* <<Löschen Sie ein Konto>>
 
 
 
@@ -28,7 +28,7 @@ link:vcp_concept_accounts.html["Benutzerkonten"] Werden zur Steuerung des Zugrif
 
 Sie können ein eindeutiges Benutzerkonto erstellen, um den Zugriff auf Speicher-Volumes zu ermöglichen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 
 
@@ -69,6 +69,7 @@ NOTE: Initiator- und Zielgeheimnisse müssen unterschiedlich sein. Wenn diese Fe
 
 Sie können ein Benutzerkonto bearbeiten, um den Status oder die CHAP-Schlüssel zu ändern. Das Ändern der CHAP-Einstellungen kann zu einem Verbindungsverlust zwischen einem Host und seinen zugehörigen Volumes führen.
 
+.Über diese Aufgabe
 Wenn Sie persistente Volumes mit dem Management-Node verwenden, ändern Sie den Kontonamen des Kontos, der diesen Volumes zugeordnet ist, nicht.
 
 .Schritte
@@ -109,6 +110,7 @@ NOTE: Wenn Sie die Anmeldedaten nicht ändern, bleiben diese unverändert. Wenn 
 
 Sie können Benutzerkonten mit dem Plug-in-Erweiterungspunkt löschen.
 
+.Was Sie benötigen
 Löschen und löschen Sie alle Volumes, die mit dem Konto verknüpft sind, oder weisen Sie die Volumes einem anderen Konto erneut zu.
 
 

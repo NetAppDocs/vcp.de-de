@@ -19,11 +19,11 @@ A link:https://docs.netapp.com/us-en/hci/docs/concept_hci_volume_access_groups.h
 Sie können Zugriffsgruppen erstellen, indem Sie iSCSI-Initiator-IQNs oder FC-WWPNs in einer Sammlung von Volumes zuordnen. Jeder IQN, den Sie einer Zugriffsgruppe hinzufügen, kann auf jedes Volume in der Gruppe zugreifen, ohne dass eine CHAP-Authentifizierung erforderlich ist. Jeder WWPN, den Sie einer Zugriffsgruppe hinzufügen, ermöglicht den FC-Netzwerkzugriff auf die Volumes in der Zugriffsgruppe.
 
 .Optionen
-*  an access group
-*  an access group
-*  volumes to an access group
-*  volumes from an access group
-*  an access group
+* <<Erstellen Sie eine Zugriffsgruppe>>
+* <<Bearbeiten Sie eine Zugriffsgruppe>>
+* <<Fügen Sie einer Zugriffsgruppe Volumes hinzu>>
+* <<Volumes aus einer Zugriffsgruppe entfernen>>
+* <<Löschen Sie eine Zugriffsgruppe>>
 
 
 
@@ -98,7 +98,7 @@ NOTE: Wenn Sie einen Initiator entfernen, klicken Sie auf das Papierkorb-Symbol,
 
 Sie können Volumes zu einer Volume-Zugriffsgruppe hinzufügen. Jedes Volume kann mehr als einer Volume-Zugriffsgruppe angehören. Sie sehen die Gruppen, zu denen jedes Volume gehört, aus der Ansicht „Aktive Volumes“.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 * Mindestens eine Zugriffsgruppe ist vorhanden.
 * Mindestens ein aktives Volume ist vorhanden.

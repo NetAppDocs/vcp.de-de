@@ -16,7 +16,7 @@ keywords: netapp, vcp, vcenter, plugin, element, upgrade
 [role="lead"]
 Bei vCenter Plug-in 4.0 bis 4.10, das in vSphere 6.7 oder früher eingesetzt wird, müssen Sie den folgenden Prozess durchführen, um alle dem Plug-in zugeordneten Dateien manuell aus vCenter Server zu entfernen. Bei vSphere 7.0 und höher ist es nicht erforderlich, Dateien zu entfernen, nachdem Sie das Plug-in registriert haben.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * VCenter Plug-in 4.0 bis 4.10
 * VSphere 6.7 oder früher
 * Das ist schon link:task_vcp_unregister.html["Nicht registriert"] Das vorhandene Plug-in und verfügen über SSH, RDP oder andere geeignete Verbindungen zu vCSA oder vCenter Server.

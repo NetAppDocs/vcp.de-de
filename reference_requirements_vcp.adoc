@@ -22,8 +22,10 @@ Bevor Sie zum Managen Ihres NetApp HCI oder SolidFire All-Flash-Array-Storage da
 --
 Vergewissern Sie sich, dass Ihr System die Anforderungen für die Verwendung von Element vCenter Plug-in 5.0 oder höher erfüllt.
 
+.Voraussetzungen für VMware vSphere
 Zur Verwendung des Element vCenter Plug-ins ist VMware vSphere 8.0 und 7.0 erforderlich, einschließlich vCenter und ESXi mit konfiguriertem iSCSI-Netzwerkadapter.
 
+.Vom Plug-in unterstützte VMware vSphere Versionen
 Das Plug-in unterstützt die folgenden gängigen Versionen von VMware Software:
 
 * VSphere 8.0 einschließlich vCenter Server, ESXi, VMFS5 und VMFS6 Datastores
@@ -38,8 +40,10 @@ IMPORTANT: VMware vSphere 6.5 und 6.7 haben den Support-Status am 15. Oktober 20
 --
 Vergewissern Sie sich, dass Ihr System die Anforderungen für die Verwendung von Element vCenter Plug-in 4.10 oder früher erfüllt.
 
+.Voraussetzungen für VMware vSphere
 Zur Verwendung des Element vCenter Plug-ins ist VMware vSphere 7.0, 6.7 oder 6.5 erforderlich, einschließlich vCenter und ESXi mit konfiguriertem iSCSI-Software-Adapter und iSCSI-Networking.
 
+.Vom Plug-in unterstützte VMware vSphere Versionen
 Das Plug-in unterstützt die folgenden gängigen Versionen von VMware Software:
 
 * VSphere 7.0 und 7.0 Update 1 und 2, einschließlich vCenter Server, ESXi und VMFS5 und VMFS6 Datastores

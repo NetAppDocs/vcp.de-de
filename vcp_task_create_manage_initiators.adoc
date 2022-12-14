@@ -19,10 +19,10 @@ Initiatoren ermöglichen den Zugriff auf externe Clients auf Volumes in einem Cl
 Sie können Initiatoren erstellen, bearbeiten und löschen und ihnen freundliche Alias geben, um die Administration und den Zugriff auf Volumes zu vereinfachen. Wenn Sie einer Volume-Zugriffsgruppe einen Initiator hinzufügen, ermöglicht dieser Initiator den Zugriff auf alle Volumes in der Gruppe.
 
 .Optionen
-*  an initiator
-*  an initiator
-*  initiators to an access group
-*  an initiator
+* <<Erstellen eines Initiators>>
+* <<Bearbeiten Sie einen Initiator>>
+* <<Fügen Sie Initiatoren zu einer Zugriffsgruppe hinzu>>
+* <<Löschen eines Initiators>>
 
 
 

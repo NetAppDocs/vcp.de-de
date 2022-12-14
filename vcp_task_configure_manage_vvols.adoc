@@ -16,7 +16,7 @@ keywords: netapp, set up vvol, configure vvol, virtual volume, vcp, vcenter, ele
 [role="lead"]
 Sie können VMware vSphere aktivieren link:vcp_concept_vvols.html["Virtuelle Volumes (VVols)"] Funktionalität und Einrichtung einer Konfiguration virtueller Volumes auf einem NetApp Element Storage-Cluster Das Element Plug-in für vCenter Server überwacht die Performance und bietet Optionen zum Managen virtueller Volumes, link:vcp_concept_vvols.html#storage-containers["Storage-Container"], link:vcp_concept_vvols.html#protocol-endpoints["Protokollendpunkte"], Und Hosts aus dem Plug-in-Erweiterungspunkt.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Sie verwenden einen NetApp Element 10 oder höher Cluster, der mit einer ESXi 6.5 oder höher Umgebung mit VVols Kompatibilität verbunden ist.
 * Sie verwenden vCenter 6.5 oder höher.
 
@@ -28,18 +28,18 @@ Sie können VMware vSphere aktivieren link:vcp_concept_vvols.html["Virtuelle Vol
 Sie müssen erste Konfigurationsschritte durchführen, um Virtual Volumes (VVols) im NetApp Element Plug-in für vCenter Server zu verwenden.
 
 .Schritte
-.  virtual volumes functionality on the NetApp Element cluster
-.  the VASA provider with vCenter
-.  a storage container and associated VVol datastore
+. <<Aktivieren der Funktion virtueller Volumes auf dem NetApp Element Cluster>>
+. <<Registrieren Sie den VASA Provider mit vCenter>>
+. <<Erstellung eines Storage-Containers und zugehöriger VVol Datastore>>
 
 
 
 
 == Managementaufgaben
 
-*  virtual volume resources
-*  a VVol datastore for a storage container
-*  a storage container
+* <<Überwachen Sie die Ressourcen virtueller Volumes>>
+* <<Erstellen eines VVol Datastore für einen Storage-Container>>
+* <<Löschen eines Speichercontainers>>
 
 
 
@@ -70,7 +70,7 @@ NOTE: Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VAS
 . Wählen Sie *Actions* für den ausgewählten Cluster aus.
 . Wählen Sie im Menü Ergebnis die Option *Details* aus.
 . Kopieren Sie die VASA Provider-URL aus dem Feld *VASA Provider URL*. Sie verwenden diese URL, um den VASA Provider in vCenter zu registrieren.
-. Siehe  the VASA provider with vCenter Für die nächsten Schritte.
+. Siehe <<Registrieren Sie den VASA Provider mit vCenter>> Für die nächsten Schritte.
 
 
 
@@ -79,10 +79,11 @@ NOTE: Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VAS
 
 Sie müssen den NetApp Element VASA Provider über vCenter registrieren, damit vCenter die VVol Funktionen auf dem Cluster erkennt. Die Registrierung des VASA Providers in vCenter ist eine einmalige Konfigurationsaufgabe.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Sie haben die VVols Funktion für den Cluster aktiviert.
 
 
+.Über diese Aufgabe
 Dieses Verfahren beschreibt die in Version 6.7 von vSphere verfügbaren Schritte. Ihre vSphere-Benutzeroberfläche kann sich je nach installierter Version von vSphere leicht von der Beschreibung unterscheiden. Weitere Hilfe finden Sie in der Dokumentation zu VMware vCenter.
 
 
@@ -117,7 +118,7 @@ NOTE: Wenn Sie VVols im vCenter Plug-in aktivieren, erhalten Sie die VASA Provid
 
 NOTE: Aktualisieren Sie gegebenenfalls den Speicheranbieter, um den aktuellen Status des Providers nach der ersten Registrierung des Providers anzuzeigen. Sie können auch überprüfen, ob der Anbieter unter *NetApp Element Konfiguration > Cluster* oder *NetApp Element Remote Plugin > Konfiguration > Cluster* aktiviert ist. Wählen Sie *Aktionen* für den Cluster, den Sie aktivieren, und wählen Sie *Details*.
 
-. Siehe  a storage container and associated VVol datastore Für die nächsten Schritte.
+. Siehe <<Erstellung eines Storage-Containers und zugehöriger VVol Datastore>> Für die nächsten Schritte.
 
 
 
@@ -179,9 +180,9 @@ NOTE: Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts a
 
 Sie können die Leistung und Einstellungen der Komponenten des virtuellen Volumes über die Plug-in-Erweiterung überprüfen:
 
-*  VVols
-*  storage containers
-*  protocol endpoints
+* <<Monitoring von VVols>>
+* <<Monitoring von Storage-Containern>>
+* <<Überwachen von Protokollendpunkten>>
 
 
 
@@ -190,7 +191,7 @@ Sie können die Leistung und Einstellungen der Komponenten des virtuellen Volume
 
 Sie können allgemeine Daten für alle aktiven virtuellen Volumes im Cluster oder detaillierte Daten für jedes virtuelle Volume prüfen. Das Plug-in überwacht die Effizienz, Performance, Ereignisse und QoS des virtuellen Volumes sowie zugehörige Snapshots, VMs und Bindungen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Sie haben VMs eingeschaltet, sodass Details zum virtuellen Volume angezeigt werden können.
 
 
@@ -261,9 +262,9 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 == Erstellen eines VVol Datastore für einen Storage-Container
 
-Nachdem Sie einen Storage Container erstellt haben, müssen Sie auch einen Datastore für virtuelle Volumes erstellen, der den Storage-Container im NetApp Element-Cluster in vCenter darstellt. Dieses Verfahren kann als Alternative zur Erstellung eines Datenspeichers aus dem verwendet werden  a storage container and associated VVol datastore,Storage Container Erstellen assistent. Sie müssen mindestens einen VVol Datastore erstellen, um mit der Bereitstellung von VVol-gestützten Virtual Machines zu beginnen.
+Nachdem Sie einen Storage Container erstellt haben, müssen Sie auch einen Datastore für virtuelle Volumes erstellen, der den Storage-Container im NetApp Element-Cluster in vCenter darstellt. Dieses Verfahren kann als Alternative zur Erstellung eines Datenspeichers aus dem verwendet werden <<Erstellung eines Storage-Containers und zugehöriger VVol Datastore,Storage Container Erstellen>> assistent. Sie müssen mindestens einen VVol Datastore erstellen, um mit der Bereitstellung von VVol-gestützten Virtual Machines zu beginnen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Ein vorhandener Storage-Container in der virtuellen Umgebung.
 +
 
@@ -291,7 +292,7 @@ NOTE: Sie müssen keine Protokoll-Endpunkt-LUNs (PE) manuell erstellen. Sie werd
 
 Sie können Speichercontainer aus dem Plug-in-Erweiterungspunkt löschen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Alle Volumes wurden aus dem Storage-Container entfernt.
 
 

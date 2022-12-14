@@ -16,7 +16,7 @@ keywords: netapp, cluster, vcp, vcenter, element
 [role="lead"]
 Sie können ein Cluster bearbeiten, auf dem Element Software ausgeführt wird, die SSH-Konfiguration managen, die Sicherung-Domänen-Überwachung festlegen und ein Cluster herunterfahren.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt werden:
 +
 ** link:vcp_task_getstarted_5_0.html#add-storage-clusters-for-use-with-the-plug-in["Fügen Sie mit Element Plug-in für vCenter 5.0 und höher einen Cluster hinzu"]
@@ -37,17 +37,17 @@ NOTE: Sie müssen mindestens ein Cluster hinzufügen, um die Plug-in-Erweiterung
 
 
 .Optionen
-*  cluster details
-*  a cluster profile
-*  a cluster profile
-*  Encryption at Rest
-*  Encryption at Rest
-*  SSH
-*  the SSH time limit
-*  SSH
-*  protection domain monitoring
-*  down a cluster
-*  your NetApp HCI infrastructure
+* <<Zeigen Sie Cluster-Details an>>
+* <<Bearbeiten eines Clusterprofils>>
+* <<Entfernen eines Clusterprofils>>
+* <<Aktivieren Sie Verschlüsselung für Daten im Ruhezustand>>
+* <<Deaktivieren Sie Verschlüsselung für Daten im Ruhezustand>>
+* <<Aktivieren Sie SSH>>
+* <<Ändern Sie das SSH-Zeitlimit>>
+* <<Deaktivieren Sie SSH>>
+* <<Legen Sie die Überwachung der Schutzdomäne fest>>
+* <<Herunterfahren eines Clusters>>
+* <<Erweitern Sie Ihre NetApp HCI Infrastruktur>>
 
 
 
@@ -285,7 +285,7 @@ NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
 
 Sie können manuell aktivieren link:vcp_concept_protection_domains.html["Protection Domain Monitoring"] Verwenden des Plug-in-Erweiterungspunkts. Sie können einen Schutz-Domain-Schwellenwert basierend auf Node- oder Chassis-Domänen auswählen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Der ausgewählte Cluster muss von Element 11.0 oder höher überwacht werden, um die Überwachung der Schutzdomäne zu nutzen. Andernfalls stehen die Funktionen der Schutzdomäne nicht zur Verfügung.
 * Ihr Cluster muss mehr als zwei Knoten haben, um die Funktion der Schutz-Domänen zu verwenden. Es ist keine Kompatibilität mit zwei-Node-Clustern verfügbar.
 
@@ -322,6 +322,7 @@ Wenn Sie möchten link:vcp_task_add_manage_nodes.html#restart-a-node["Neustart"]
 
 NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
 
+.Was Sie benötigen
 Sie haben I/O angehalten und alle iSCSI-Sitzungen getrennt.
 
 .Schritte

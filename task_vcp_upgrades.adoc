@@ -23,6 +23,7 @@ Sie können ein Upgrade des NetApp Element Plug-ins für vCenter Server durchfü
 
 
 ====
+.Schritte
 Befolgen Sie zum Aktualisieren des Plug-ins die Anweisungen in der Upgrade-Dokumentation für Ihr Produkt:
 
 * https://docs.netapp.com/us-en/hci/docs/task_vcp_upgrade_plugin.html["Führen Sie ein Upgrade Ihres NetApp HCI Systems durch"^]

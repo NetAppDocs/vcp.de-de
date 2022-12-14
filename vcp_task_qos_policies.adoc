@@ -18,11 +18,11 @@ Mit einer QoS-Richtlinie (Quality of Service) können Sie eine standardisierte Q
 
 Über den Plug-in-Erweiterungspunkt können Sie QoSSIOC konfigurieren und verwalten, indem Sie die folgenden Aufgaben ausführen:
 
-*  a QoS policy
-*  a QoS policy to volumes
-*  the QoS policy association of a volume
-*  a QoS policy
-*  a QoS policy
+* <<Erstellen einer QoS-Richtlinie>>
+* <<Wenden Sie eine QoS-Richtlinie auf Volumes an>>
+* <<Ändern Sie die QoS-Richtlinienzuordnung eines Volumes>>
+* <<Bearbeiten einer QoS-Richtlinie>>
+* <<Löschen einer QoS-Richtlinie>>
 
 
 
@@ -62,7 +62,8 @@ TIP: Verwenden Sie beschreibende Best Practices für die Benennung. Dies ist bes
 
 Sie können eine vorhandene QoS-Richtlinie auf mehrere Volumes anwenden. Verwenden Sie diesen Vorgang, wenn Sie eine Police auf ein oder mehrere Volumes anwenden möchten.
 
-Die QoS-Richtlinie, die Sie für große Mengen anwenden möchten, wurde bereits angewendet  a QoS policy,Erstellt.
+.Was Sie benötigen
+Die QoS-Richtlinie, die Sie für große Mengen anwenden möchten, wurde bereits angewendet <<Erstellen einer QoS-Richtlinie,Erstellt>>.
 
 .Schritte
 . Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:
@@ -89,7 +90,8 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 Sie können eine QoS-Richtlinienzuordnung aus einem Volume entfernen oder eine andere QoS-Richtlinie oder für benutzerdefinierte QoS auswählen.
 
-Das Volume, das Sie ändern möchten, ist  a QoS policy to volumes,Zugeordnet Mit einer QoS-Richtlinie
+.Was Sie benötigen
+Das Volume, das Sie ändern möchten, ist <<Wenden Sie eine QoS-Richtlinie auf Volumes an,Zugeordnet>> Mit einer QoS-Richtlinie
 
 .Schritte
 . Öffnen Sie über das vCenter Plug-in die Registerkarte *Management*:

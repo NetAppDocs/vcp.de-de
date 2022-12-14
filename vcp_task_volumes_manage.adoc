@@ -17,14 +17,14 @@ keywords: netapp, volumes, vcp, vcenter, element,
 Mit dem NetApp Element Plug-in für VMware vCenter Server können Sie Klonen, Sichern und Wiederherstellen von Volumes für Benutzerkonten Außerdem lassen sich Volumes in einem Cluster managen und Volumes in Volume-Zugriffsgruppen hinzufügen oder entfernen.
 
 .Optionen
-*  a volume
-*  volume details
-*  a volume
-*  a volume
-*  up or restore volumes
-*  volumes
-*  volumes
-*  deleted volumes
+* <<Erstellen eines Volumes>>
+* <<Zeigen Sie Volume-Details an>>
+* <<Bearbeiten Sie ein Volume>>
+* <<Klonen Sie ein Volume>>
+* <<Backup und Restore von Volumes>>
+* <<Volumes löschen>>
+* <<Volumes löschen>>
+* <<Gelöschte Volumes werden wiederhergestellt>>
 
 
 
@@ -35,7 +35,7 @@ Sie können ein neues Volume erstellen und das Volume einem bestimmten Konto zuo
 
 VMware erfordert 512 e für Festplattenressourcen. Wenn 512e nicht aktiviert ist, kann kein VMFS erstellt werden.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 * Ein Benutzerkonto wurde erstellt.
 
@@ -125,11 +125,11 @@ Mögliche Werte:
 
 . Prüfen Sie die Details für ein bestimmtes Volume, wie in den folgenden Abschnitten aufgelistet:
 +
-**  Details section
-**  section
-**  section
-**  of Service section
-**  section
+** <<Abschnitt „Allgemeine Details“>>
+** <<Abschnitt „Effizienz“>>
+** <<Abschnitt „Performance“>>
+** <<Bereich „Quality of Service“>>
+** <<Abschnitt „Snapshots“>>
 
 
 
@@ -284,13 +284,14 @@ Volumes mit einem IOPS-Wert von max oder Burst über 20,000 IOPS erfordern mögl
 
 Sie können einen Klon eines Volumes erstellen, um eine zeitpunktgenaue Kopie der Daten zu erstellen. Wenn Sie ein Volume klonen, erstellt das System einen Snapshot des Volume und erstellt dann eine Kopie der Daten, auf die der Snapshot verweist. Dies ist ein asynchroner Prozess und die erforderliche Zeit hängt von der Größe des zum Klonen benötigten Volumes und der aktuellen Cluster-Last ab.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 * Mindestens ein Volume muss erstellt werden.
 * Mindestens ein Benutzerkonto muss erstellt werden.
 * Der verfügbare nicht bereitgestellte Speicherplatz muss der Größe des Quell-Volume entsprechen oder größer sein.
 
 
+.Über diese Aufgabe
 Das Cluster unterstützt bis zu zwei aktuell laufende Klonanforderungen pro Volume und bis zu 8 aktive Volume-Klonvorgänge gleichzeitig. Anforderungen, die über diese Grenzen hinausgehen, werden zur späteren Verarbeitung in die Warteschlange gestellt.
 
 

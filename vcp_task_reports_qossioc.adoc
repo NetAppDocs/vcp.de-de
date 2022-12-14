@@ -27,7 +27,7 @@ QoSSIOC-Ereignisse werden von lokal hinzugefügten Clustern angezeigt. Melden Si
 
 
 ====
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 * Der QoSSIOC-Dienst muss über die Seite QoSSIOC-Einstellungen für das Plug-in konfiguriert und verifiziert werden.
 * Mindestens ein Datastore muss die QoSSIOC-Automatisierung aktiviert haben.

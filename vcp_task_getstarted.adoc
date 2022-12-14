@@ -21,15 +21,15 @@ Nach Abschluss der Installation können Sie die Servicequalität auf Basis des S
 
 Lesen und führen Sie jeden Schritt durch, um das Plug-in zu installieren und zu verwenden:
 
-*  for installation
-*  the management node
-*  the plug-in with vCenter
-*  vCenter properties for a dark site HTTP server
-*  the plug-in and verify successful installation
-*  storage clusters for use with the plug-in
-*  QoSSIOC settings using the plug-in
-*  user accounts
-*  datastores and volumes
+* <<Installation vorbereiten>>
+* <<Installieren Sie den Management-Node>>
+* <<Registrieren Sie das Plug-in mit vCenter>>
+* <<Ändern Sie die vCenter-Eigenschaften für einen HTTP-Server mit dunkler Site>>
+* <<Greifen Sie auf das Plug-in zu und überprüfen Sie die erfolgreiche Installation>>
+* <<Fügen Sie Storage-Cluster zur Verwendung mit dem Plug-in hinzu>>
+* <<Konfigurieren Sie die QoSSIOC-Einstellungen mithilfe des Plug-ins>>
+* <<Benutzerkonten konfigurieren>>
+* <<Erstellen von Datastores und Volumes>>
 
 
 
@@ -52,7 +52,7 @@ Dieses Handbuch richtet sich an SolidFire All-Flash-Storage-Administratoren und 
 
 Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Paket als Erweiterung auf vCenter Server registriert. Nach Abschluss der Registrierung ist das Plug-in für jeden vSphere Web Client verfügbar, der eine Verbindung zu Ihrer vSphere Umgebung herstellt.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Stellen Sie für vSphere 6.5 und 6.7 sicher, dass Sie sich vom vSphere Web Client abgemeldet haben. Der Web-Client für diese Versionen erkennt Updates, die während dieses Prozesses an Ihrem Plug-in vorgenommen wurden, wenn Sie sich nicht abmelden. Für vSphere 7.0 müssen Sie sich nicht vom Web-Client abmelden.
 * Sie haben die Berechtigungen für vCenter Administrator, um ein Plug-in zu registrieren.
 * Sie haben einen Management-Node OVA mit Element Software ab Version 11.3 implementiert.
@@ -61,6 +61,7 @@ Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Pak
 * Ihre Firewall-Regeln lassen das Öffnen zu link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Storage-Cluster MVIP auf TCP-Ports 443, 8443 und 9443. Port 9443 wird für die Registrierung verwendet und kann nach Abschluss der Registrierung geschlossen werden. Wenn Sie die Funktionen für virtuelle Volumes auf dem Cluster aktiviert haben, stellen Sie sicher, dass der TCP-Port 8444 auch für den Zugriff von VASA Providern geöffnet ist.
 
 
+.Über diese Aufgabe
 Sie müssen das vCenter Plug-in auf jedem vCenter Server registrieren, auf dem Sie das Plug-in verwenden müssen.
 
 Für Linked-Modus-Umgebungen muss das Plug-in bei jedem vCenter-Server in der Umgebung registriert werden, um MOB-Daten synchron zu halten und das Plug-in aktualisieren zu können. Wenn ein vSphere Web Client eine Verbindung zu einem vCenter Server herstellt, auf dem Ihr Plug-in nicht registriert ist, ist das Plug-in für den Client nicht sichtbar.
@@ -108,7 +109,7 @@ NOTE: Der von Ihnen eingegebene Benutzername und das Kennwort müssen für einen
 ** (Für interne Server/dunkle Sites) Eine benutzerdefinierte URL für das Plug-in ZIP.
 +
 
-NOTE: Bei den meisten Installationen wird der Standardpfad verwendet. Um die URL anzupassen, wenn Sie einen HTTP- oder HTTPS-Server (dunkle Site) verwenden oder den ZIP-Dateinamen oder die Netzwerkeinstellungen geändert haben, wählen Sie *Benutzerdefinierte URL* aus. Weitere Schritte, wenn Sie eine URL anpassen möchten, finden Sie unter  vCenter properties for a dark site HTTP server,Ändern Sie die vCenter-Eigenschaft für einen HTTP-Server mit dunklem Standort.
+NOTE: Bei den meisten Installationen wird der Standardpfad verwendet. Um die URL anzupassen, wenn Sie einen HTTP- oder HTTPS-Server (dunkle Site) verwenden oder den ZIP-Dateinamen oder die Netzwerkeinstellungen geändert haben, wählen Sie *Benutzerdefinierte URL* aus. Weitere Schritte, wenn Sie eine URL anpassen möchten, finden Sie unter <<Ändern Sie die vCenter-Eigenschaften für einen HTTP-Server mit dunkler Site,Ändern Sie die vCenter-Eigenschaft für einen HTTP-Server mit dunklem Standort>>.
 
 
 
@@ -140,6 +141,7 @@ NOTE: Mit dieser Aktion wird die Installation im vSphere Web Client abgeschlosse
 
 Wenn Sie während der vCenter Plug-in-Registrierung eine URL für einen internen HTTP-Server (Dark Site) anpassen möchten, müssen Sie die Eigenschaftendatei von vSphere Web Client ändern `webclient.properties`. Sie können die Änderungen mit vCSA oder Windows vornehmen.
 
+.Was Sie benötigen
 Berechtigungen zum Herunterladen von Software von der NetApp Support-Website.
 
 .Schritte mit vCSA
@@ -262,7 +264,7 @@ Sie können einen Cluster mit Element Software über den NetApp Element Configur
 
 Nachdem eine Verbindung zum Cluster hergestellt wurde, kann der Cluster dann mit dem NetApp Element Management Extension Point verwaltet werden.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss verfügbar sein und seine IP- oder FQDN-Adresse bekannt sein.
 * Aktuelle vollständige Cluster-Admin-Benutzeranmeldeinformationen für das Cluster.
 * Firewall-Regeln lassen offen link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Cluster MVIP auf TCP-Ports 443 und 8443.
@@ -271,6 +273,7 @@ Nachdem eine Verbindung zum Cluster hergestellt wurde, kann der Cluster dann mit
 
 NOTE: Sie müssen mindestens einen Cluster hinzufügen, um die NetApp Element-Management-Erweiterungspunktfunktionen verwenden zu können.
 
+.Über diese Aufgabe
 In diesem Verfahren wird beschrieben, wie ein Cluster-Profil hinzugefügt wird, sodass das Cluster durch das Plug-in gemanagt werden kann. Sie können die Anmeldedaten des Cluster-Administrators nicht mit dem Plug-in ändern.
 
 Siehe https://docs.netapp.com/us-en/element-software/storage/concept_system_manage_manage_cluster_administrator_users.html["Verwalten von Benutzerkonten für Cluster-Administratoren"^] Anweisungen zum Ändern der Anmeldedaten für ein Cluster-Administratorkonto finden Sie unter.
@@ -308,6 +311,7 @@ Wenn der Prozess abgeschlossen ist, wird das Cluster in der Liste der verfügbar
 
 Sie können eine automatische Servicequalität basierend auf der Storage-I/O-Steuerung einrichten link:vcp_concept_qossioc.html["(QoSSIOC)"] Für einzelne Volumes und vom Plug-in kontrollierte Datastores. Dazu müssen Sie die QoSSIOC- und vCenter-Anmeldeinformationen konfigurieren, die es dem QoSSIOC-Service ermöglichen, mit vCenter zu kommunizieren.
 
+.Über diese Aufgabe
 Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfiguriert haben, werden diese Einstellungen als Standard verwendet. Die QoSSIOC-Einstellungen werden auf die letzten bekannten gültigen QoSSIOC-Einstellungen zurückgesetzt, bis Sie gültige QoSSIOC-Einstellungen für einen neuen Managementknoten bereitstellen. Sie müssen die QoSSIOC-Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die QoSSIOC-Anmeldeinformationen für einen neuen Management-Node festlegen.
 
 .Schritte

@@ -50,6 +50,7 @@ NOTE: Sie können nur die Speichercluster anzeigen und verwalten, die dem ausgew
 
 
 
+.Beispiel
 Sie haben vCenter1 und vCenter2 im verknüpften Modus und Storage-cluster1 und Storage-cluster2. VCenter1 soll Cluster1 und vCenter2 verwalten, um Cluster2 zu verwalten.
 
 image:two_vcenter_topology.PNG["Zeigt die vCenter- und Cluster-Topologie"]
@@ -83,6 +84,7 @@ Durch die Anmeldung wird die Installation des Plug-ins auf dem Web-Client gestar
 . Fügen Sie den Storage-Cluster zum Inventar des Element Plug-in hinzu.
 
 
+.Beispiel
 Sie haben vCenter1 und vCenter2 im verknüpften Modus und Storage-cluster1 und Storage-cluster2. VCenter1 soll Cluster1 und vCenter2 verwalten, um Cluster2 zu verwalten. So richten Sie das Storage-Cluster-Management ein, nachdem Sie das Plug-in bei jedem vCenter Server registriert haben, führen Sie die folgenden Schritte aus:
 
 . Melden Sie sich beim vCenter1-Webclient an.

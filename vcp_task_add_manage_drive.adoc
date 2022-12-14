@@ -16,9 +16,9 @@ keywords: netapp, drives, add, manage, remove, view vcp, vcenter, element
 [role="lead"]
 Mit dem Plug-in-Erweiterungspunkt können Sie einem Cluster Laufwerke hinzufügen, vorhandene Laufwerke anzeigen und Laufwerke entfernen.
 
-*  available drives to a cluster
-*  drive details
-*  a drive
+* <<Fügen Sie einem Cluster verfügbare Laufwerke hinzu>>
+* <<Zeigen Sie Laufwerkdetails an>>
+* <<Entfernen Sie ein Laufwerk>>
 
 
 
@@ -27,6 +27,7 @@ Mit dem Plug-in-Erweiterungspunkt können Sie einem Cluster Laufwerke hinzufüge
 
 Mit dem Plug-in-Erweiterungspunkt können Sie einem Cluster Laufwerke hinzufügen. Wenn Sie dem Cluster einen Node hinzufügen oder neue Laufwerke in einem vorhandenen Node installieren, werden die Laufwerke automatisch als registriert `Available`. Sie müssen die Laufwerke dem Cluster hinzufügen, bevor jedes Laufwerk am Cluster teilnehmen kann.
 
+.Über diese Aufgabe
 Laufwerke werden nicht in der Liste verfügbar angezeigt, wenn die folgenden Bedingungen vorliegen:
 
 * Laufwerke befinden sich in einem `Active`, `Removing`, `Erasing`, Oder `Failed` Bundesland.
@@ -60,6 +61,7 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 Über die Plug-in-Erweiterung können Sie eine Liste der aktiven Laufwerke im Cluster mithilfe der Ansicht aktiv auf der Seite Laufwerke der Registerkarte Cluster anzeigen. Sie können die Ansicht ändern, indem Sie die verfügbaren Optionen mithilfe des Dropdown-Filters auswählen.
 
+.Über diese Aufgabe
 Beim ersten Initialisieren eines Clusters ist die Liste der aktiven Laufwerke leer. Sie können Laufwerke hinzufügen, die einem Cluster nicht zugewiesen sind und auf der Registerkarte verfügbar aufgeführt sind, nachdem ein neues Cluster erstellt wurde.
 
 .Schritte
@@ -87,6 +89,7 @@ Sie können Informationen wie Laufwerk-IDs, die Kapazität und den Status jedes 
 
 Mit dem Plug-in-Erweiterungspunkt können Sie ein Laufwerk aus einem Cluster entfernen. Dies können Sie tun, wenn Sie die Cluster-Kapazität reduzieren oder sich darauf vorbereiten, Laufwerke auszutauschen, die sich dem Ende ihrer Lebensdauer nähern. Durch das Entfernen eines Laufwerks kann das Laufwerk offline geschaltet werden. Alle Daten auf dem Laufwerk werden entfernt und auf andere Laufwerke im Cluster migriert, bevor das Laufwerk aus dem Cluster entfernt wird. Die Datenmigration auf andere aktive Laufwerke im System kann abhängig von Kapazitätsauslastung und aktiver I/O im Cluster einige Minuten bis eine Stunde dauern.
 
+.Über diese Aufgabe
 Wenn Sie ein Laufwerk in einem entfernen `Failed` Status: Das Laufwerk wird nicht zu zurückgegeben `Available` Oder `Active` staaten. Stattdessen ist das Laufwerk nicht zur Verwendung im Cluster verfügbar.
 
 .Schritte

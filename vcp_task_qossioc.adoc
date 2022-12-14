@@ -32,7 +32,7 @@ Mit dem vCenter Plug-in können Sie QoSSIOC konfigurieren und verwalten, indem S
 == Setup-Aufgaben
 
 * link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Konfigurieren Sie die QoSSIOC-Einstellungen"]
-*  QoSSIOC automation on datastores
+* <<QoSSIOC-Automatisierung auf Datastores aktivieren>>
 
 
 
@@ -40,10 +40,10 @@ Mit dem vCenter Plug-in können Sie QoSSIOC konfigurieren und verwalten, indem S
 == Managementaufgaben
 
 * link:vcp_task_reports_qossioc.html["Überwachen Sie das VM Performance Tiering mit QoSSIOC-Ereignissen"^]
-*  QoSSIOC settings
-*  the QoSSIOC service password
-*  QoSSIOC automation for a datastore
-*  QoSSIOC settings
+* <<QoSSIOC-Einstellungen bearbeiten>>
+* <<Ändern Sie das Passwort für den QoSSIOC-Dienst>>
+* <<Deaktivieren Sie die QoSSIOC-Automatisierung für einen Datenspeicher>>
+* <<Löschen Sie die QoSSIOC-Einstellungen>>
 
 
 
@@ -52,12 +52,14 @@ Mit dem vCenter Plug-in können Sie QoSSIOC konfigurieren und verwalten, indem S
 
 Sie können die QoSSIOC-Automatisierung aktivieren und die Performance-Level der Virtual Machine Disk (VMDK) für Datenspeicher anpassen, nachdem Sie den QoSSIOC-Service für das Plug-in aktiviert haben.
 
+.Was Sie benötigen
 Sie haben die Einstellungen für den QoSSIOC-Dienst auf der Seite QoSSIOC-Einstellungen konfiguriert und das Feld *QoSSIOC-Status* wird angezeigt `UP`.
 
 * link:vcp_task_getstarted_5_0.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 5.0 und höher konfigurieren"]
 * link:vcp_task_getstarted.html#configure-qossioc-settings-using-the-plug-in["Einstellungen mit Element vCenter Plug-in 4.10 und früher konfigurieren"]
 
 
+.Über diese Aufgabe
 QoSSIOC ist nur mit standardmäßigen Datastores verfügbar. Dies funktioniert nicht mit Virtual Volumes (VVols). QoSSIOC passt QoS-Werte auf Standardelement-Volumes an, wenn Ereignisse virtueller Maschinen auftreten, z. B. Ereignisse zum ein- oder Ausschalten des Gast, Neustarts oder Neukonfigurationen.
 
 
@@ -146,11 +148,12 @@ NOTE: Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfi
 
 Sie können das Passwort für den QoSSIOC-Dienst auf dem Managementknoten über die Benutzeroberfläche des Registrierungsprogramms ändern.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Der Management-Node ist eingeschaltet.
 
 
-In diesem Prozess wird beschrieben, wie Sie nur das QoSSIOC-Passwort ändern. Wenn Sie den QoSSIOC-Benutzernamen ändern möchten, können Sie dies über tun  QoSSIOC settings,QoSSIOC-Einstellungen Seite.
+.Über diese Aufgabe
+In diesem Prozess wird beschrieben, wie Sie nur das QoSSIOC-Passwort ändern. Wenn Sie den QoSSIOC-Benutzernamen ändern möchten, können Sie dies über tun <<QoSSIOC-Einstellungen bearbeiten,QoSSIOC-Einstellungen>> Seite.
 
 .Schritte
 . Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *QoSSIOC-Einstellungen*:

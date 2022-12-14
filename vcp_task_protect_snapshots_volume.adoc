@@ -19,12 +19,12 @@ Erstellen eines https://docs.netapp.com/us-en/hci/docs/concept_hci_dataprotectio
 Sie können Snapshots verwenden, um ein Volume wieder in den Zustand zu versetzen, in dem es zum Zeitpunkt der Snapshot-Erstellung war. Da es sich jedoch bei Snapshots lediglich um Replikate von Volume-Metadaten handelt, können Sie nicht mounten oder darauf schreiben.
 
 .Optionen
-*  a volume snapshot
-*  volume snapshot details
-*  a volume from a snapshot
-*  back a volume to a snapshot
-*  up a volume snapshot to an external object store
-*  a volume snapshot
+* <<Erstellen eines Volume-Snapshots>>
+* <<Details zu Volume Snapshots anzeigen>>
+* <<Klonen eines Volumes aus einem Snapshot>>
+* <<Führen Sie ein Rollback eines Volumes zu einem Snapshot durch>>
+* <<Sichern Sie einen Volume Snapshot auf einem externen Objektspeicher>>
+* <<Löschen Sie einen Volume-Snapshot>>
 
 
 
@@ -204,9 +204,9 @@ Sie können die integrierte Backup-Funktion verwenden, um einen Volume-Snapshot 
 
 Wenn Sie einen Snapshot in einem externen Objektspeicher sichern, müssen Sie über eine Verbindung zum Objektspeicher verfügen, der Lese-/Schreibvorgänge ermöglicht.
 
-*  up a volume snapshot to an Amazon S3 object store
-*  up a volume snapshot to an OpenStack Swift object store
-*  up a volume snapshot to a cluster running Element software
+* <<Sichern Sie einen Volume Snapshot in einem Amazon S3-Objektspeicher>>
+* <<Sichern Sie einen Volume Snapshot in einem OpenStack Swift Objektspeicher>>
+* <<Sichern Sie einen Volume Snapshot auf einem Cluster, auf dem Element Software ausgeführt wird>>
 
 
 
@@ -297,8 +297,10 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 Sie können einen Volume Snapshot, der sich auf einem Cluster befindet, auf dem die NetApp Element Software ausgeführt wird, in einem Remote Element Cluster sichern.
 
+.Was Sie benötigen
 Sie müssen ein Volume auf dem Ziel-Cluster von gleicher oder größerer Größe wie der Snapshot erstellen, den Sie für das Backup verwenden.
 
+.Über diese Aufgabe
 Wenn Sie ein Backup von einem Cluster auf ein anderes durchführen, generiert das System einen Schlüssel, der als Authentifizierung zwischen den Clustern verwendet werden soll. Mit diesem Massenvolumen-Schreibschlüssel kann sich das Quellcluster mit dem Ziel-Cluster authentifizieren und bietet beim Schreiben auf das Ziel-Volume Sicherheit. Im Rahmen des Backup- oder Wiederherstellungsprozesses müssen Sie vor dem Start des Vorgangs einen Schreibschlüssel für das Massenvolumen vom Zielvolume generieren.
 
 .Schritte
@@ -357,6 +359,7 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 Sie können einen Volume-Snapshot von einem Cluster löschen, auf dem NetApp Element Software ausgeführt wird, mit dem Plug-in-Erweiterungspunkt. Wenn Sie einen Snapshot löschen, entfernt das System ihn sofort.
 
+.Über diese Aufgabe
 Sie können Snapshots löschen, die aus dem Quellcluster repliziert werden. Wenn ein Snapshot beim Löschen mit dem Zielcluster synchronisiert wird, wird die synchrone Replikation abgeschlossen und der Snapshot wird aus dem Quellcluster gelöscht. Der Snapshot wird nicht aus dem Ziel-Cluster gelöscht.
 
 Sie können auch Snapshots löschen, die vom Zielcluster zum Ziel repliziert wurden. Der gelöschte Snapshot wird in einer Liste von gelöschten Snapshots auf dem Ziel aufbewahrt, bis das System erkennt, dass Sie den Snapshot auf dem Quell-Cluster gelöscht haben. Nachdem das Ziel erkannt hat, dass Sie den Quell-Snapshot gelöscht haben, stoppt das Ziel die Replikation des Snapshots.

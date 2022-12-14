@@ -16,11 +16,11 @@ keywords: netapp, nodes, create, manage, delete, view vcp, vcenter, element
 [role="lead"]
 Über das Plug-in können Sie hinzufügen https://docs.netapp.com/us-en/hci/docs/concept_hci_nodes.html#storage-nodes["Storage-Nodes"] Wenn ein Cluster erstellt wird oder mehr Storage benötigt wird. Sie können auch Storage-Nodes hinzufügen, auf denen die Element Software ausgeführt wird. Außerhalb des Plug-in in vSphere müssen NetApp HCI Computing-Nodes hinzugefügt werden.
 
-*  a node to a cluster
-*  node details
-*  a node
-*  down a node
-*  a node from a cluster
+* <<Fügen Sie einem Cluster einen Node hinzu>>
+* <<Zeigen Sie Node-Details an>>
+* <<Starten Sie einen Node neu>>
+* <<Fahren Sie einen Node herunter>>
+* <<Entfernen eines Node aus einem Cluster>>
 
 
 
@@ -29,7 +29,7 @@ keywords: netapp, nodes, create, manage, delete, view vcp, vcenter, element
 
 Mit dem vCenter Plug-in können Sie Ihrem Cluster Storage Nodes hinzufügen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Der Node, den Sie hinzufügen, wurde eingerichtet, eingeschaltet und konfiguriert.
 * Die Major- oder Minor-Versionsnummern der Software auf jedem Knoten eines Clusters müssen mit der Kompatibilität der Software übereinstimmen. Beispielsweise ist Element 9.0 nicht mit Version 9.1 kompatibel.
 
@@ -37,6 +37,7 @@ Mit dem vCenter Plug-in können Sie Ihrem Cluster Storage Nodes hinzufügen.
 
 NOTE: Wenn der dem hinzuzufügenden Node eine andere größere oder kleinere Version der NetApp Element-Software als die Version auf dem Cluster hat, aktualisiert das Cluster den Node asynchron auf die Version der NetApp Element-Software, die auf dem Cluster-Master ausgeführt wird. Nach der Aktualisierung des Node wird er sich automatisch dem Cluster hinzugefügt. Während dieses asynchronen Prozesses liegt der Node in einem `pendingActive` Bundesland.
 
+.Über diese Aufgabe
 Nodes müssen die Erstkonfiguration erfordern, wenn sie zum ersten Mal eingeschaltet sind. Wenn der Knoten eingerichtet und konfiguriert wurde, registriert er sich auf dem Cluster, der identifiziert wurde, wenn der Knoten konfiguriert wurde, und erscheint in der Liste der ausstehenden Knoten auf der Seite *Cluster > Knoten* des Plugin Erweiterungspunkts.
 
 Sie können einem vorhandenen Cluster Nodes mit kleineren oder größeren Kapazitäten hinzufügen.
@@ -99,8 +100,10 @@ Sie können Informationen wie Node-IDs, den Namen und Status jedes Nodes, die ko
 
 Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster neu starten.
 
+.Was Sie benötigen
 Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.
 
+.Über diese Aufgabe
 Zum Neustart des Clusters können Sie alle Cluster-Nodes auswählen und einen Neustart durchführen.
 
 
@@ -136,6 +139,7 @@ NOTE: Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass 
 
 Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster herunterfahren. Zum Herunterfahren des Clusters können Sie alle Cluster-Nodes auswählen und gleichzeitig das Herunterfahren durchführen.
 
+.Was Sie benötigen
 Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.
 
 .Über diese Aufgabe
@@ -172,8 +176,10 @@ NOTE: Wenn ein Node unter jeder Art von Herunterfahren länger als 5.5 Minuten a
 
 Sie können Nodes aus einem Cluster ohne Serviceunterbrechungen entfernen, wenn ihr Storage nicht mehr benötigt wird oder Wartungsmaßnahmen erforderlich sind.
 
+.Was Sie benötigen
 Sie haben alle Laufwerke im Node aus dem Cluster entfernt. Sie können den Node bis zum nicht entfernen `RemoveDrives` Der Prozess ist abgeschlossen, und alle Daten wurden vom Node migriert.
 
+.Über diese Aufgabe
 Mindestens zwei FC Nodes sind für FC-Konnektivität in einem NetApp Element Cluster erforderlich. Wenn nur ein FC-Node verbunden ist, löst das System im Ereignisprotokoll Warnmeldungen aus, bis Sie dem Cluster weitere FC-Node hinzufügen, obwohl der gesamte FC-Netzwerk-Traffic weiterhin mit nur einem FC-Node ausgeführt wird.
 
 .Schritte

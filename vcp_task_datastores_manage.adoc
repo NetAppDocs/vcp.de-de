@@ -16,7 +16,7 @@ keywords: netapp, datastore, vcp, vcenter, element
 [role="lead"]
 Mit dem NetApp Element Plug-in für VMware vCenter Server können Sie Datastores managen, die von Element Volumes unterstützt werden. Sie können Datastores erstellen, erweitern, klonen, freigeben oder löschen. Sie können auch VAAI UNMAP verwenden, um einem Cluster zu ermöglichen, freigegebenen Speicherplatz von in Thin Provisioning bereitgestellten VMFS-Datenspeichern zurückzugewinnen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Um Datastores zu erstellen und zu verwalten, müssen Sie zuerst mindestens ein Benutzerkonto erstellen.
 * Um den QoSSIOC-Dienst mit Datastores zu verwenden, müssen Sie zuerst Einstellungen auf der Seite QoSSIOC-Einstellungen vom Plug-in-Erweiterungspunkt konfigurieren.
 +
@@ -28,13 +28,13 @@ Mit dem NetApp Element Plug-in für VMware vCenter Server können Sie Datastores
 
 
 .Optionen
-*  a datastore
-*  the datastore list
-*  a datastore
-*  a datastore
-*  a datastore
-*  VAAI UNMAP
-*  a datastore
+* <<Erstellen eines Datenspeichers>>
+* <<Zeigen Sie die Liste der Datenspeicher an>>
+* <<Erweitern Sie einen Datenspeicher>>
+* <<Klonen eines Datenspeichers>>
+* <<Gemeinsam nutzen Sie einen Datenspeicher>>
+* <<Führen Sie VAAI UNMAP aus>>
+* <<Löschen Sie einen Datenspeicher>>
 
 
 
@@ -46,7 +46,7 @@ TIP: Überwachen Sie den Datastore-Betrieb bis zum Abschluss mithilfe von Task-M
 
 Sie können einen Datastore aus der Plug-in-Erweiterung erstellen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Host muss mit dem vCenter Server verbunden sein.
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 +
@@ -263,7 +263,7 @@ Wenn im Quell-Datastore virtuelle Maschinen vorhanden sind, werden virtuelle Mas
 
 Die Volume-Größe für den Klon-Datastore entspricht der Größe des Volumes, das den Quell-Datastore zugrunde liegt. Standardmäßig ist die 512-Byte-Emulation für alle neuen Volumes auf ON festgelegt.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Host muss mit vCenter Server verbunden sein.
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 +
@@ -402,7 +402,7 @@ Sie können einen Datastore über den Plug-in-Erweiterungspunkt für einen oder 
 
 Datenspeicher können nur von Hosts im selben Datacenter gemeinsam genutzt werden.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss hinzugefügt und ausgeführt werden.
 +
 
@@ -466,7 +466,7 @@ Wenn ein Host-Initiator bereits einer Volume-Zugriffsgruppe zugeordnet ist, ist 
 
 Wenn Sie möchten, dass ein Cluster freigegebenen Block-Speicherplatz aus per Thin Provisioning bereitgestellten VMFS5-Datastores zurückgewinnen möchte, verwenden Sie die VAAI UNMAP Funktion.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Stellen Sie sicher, dass der für die Aufgabe verwendete Datenspeicher VMFS5 oder eine frühere Version ist. VAAI UNMAP ist für VMFS6 nicht verfügbar, da ESXi die Aufgabe automatisch durchführt
 * Stellen Sie sicher, dass die ESXi-Hostsystemeinstellungen für VAAI UNMAP aktiviert sind:
 +

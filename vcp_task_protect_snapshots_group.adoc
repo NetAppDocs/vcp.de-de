@@ -17,11 +17,11 @@ keywords: netapp, hci, vcp, vcenter, element, protect, snapshots, clone, backup,
 Sie können einen Gruppen-Snapshot einer verwandten Gruppe von Volumes erstellen, um eine zeitpunktgenaue Kopie der Metadaten für jedes Volume aufzubewahren. Sie können den Gruppen-Snapshot als Backup oder Rollback verwenden, um den Zustand der Volume-Gruppe zu einem gewünschten Zeitpunkt wiederherzustellen.
 
 .Optionen
-*  a group snapshot
-*  group snapshot details
-*  volumes from a group snapshot
-*  back volumes to a group snapshot
-*  a group snapshot
+* <<Erstellen Sie einen Gruppen-Snapshot>>
+* <<Zeigen Sie Details zum Gruppen-Snapshot an>>
+* <<Volumes aus einem Gruppen-Snapshot klonen>>
+* <<Rollback von Volumes zu einem Gruppen-Snapshot>>
+* <<Löschen eines Gruppen-Snapshots>>
 
 
 

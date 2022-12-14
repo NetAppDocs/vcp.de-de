@@ -21,11 +21,11 @@ Wenn Sie Snapshot Zeitpläne erstellen, können Sie die resultierenden Snapshots
 
 NOTE: Zeitpläne werden mit UTC+0 Time erstellt. Sie müssen möglicherweise die tatsächliche Zeit anpassen, die ein Snapshot basierend auf Ihrer Zeitzone ausgeführt wird.
 
-*  a snapshot schedule
-*  snapshot schedule details
-*  a snapshot schedule
-*  a snapshot schedule
-*  a snapshot schedule
+* <<Erstellen eines Snapshot-Zeitplans>>
+* <<Details zum Snapshot-Zeitplan anzeigen>>
+* <<Bearbeiten eines Snapshot-Zeitplans>>
+* <<Snapshot-Zeitplan kopieren>>
+* <<Löschen Sie einen Snapshot-Zeitplan>>
 
 
 

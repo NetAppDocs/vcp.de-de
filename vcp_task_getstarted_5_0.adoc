@@ -21,14 +21,14 @@ Nach Abschluss der Installation können Sie die Servicequalität auf Basis des S
 
 Lesen und führen Sie jeden Schritt durch, um das Plug-in zu installieren und zu verwenden:
 
-*  for installation
-*  the management node
-*  the plug-in with vCenter
-*  the plug-in and verify successful installation
-*  storage clusters for use with the plug-in
-*  QoSSIOC settings using the plug-in
-*  user accounts
-*  datastores and volumes
+* <<Installation vorbereiten>>
+* <<Installieren Sie den Management-Node>>
+* <<Registrieren Sie das Plug-in mit vCenter>>
+* <<Greifen Sie auf das Plug-in zu und überprüfen Sie die erfolgreiche Installation>>
+* <<Fügen Sie Storage-Cluster zur Verwendung mit dem Plug-in hinzu>>
+* <<Konfigurieren Sie die QoSSIOC-Einstellungen mithilfe des Plug-ins>>
+* <<Benutzerkonten konfigurieren>>
+* <<Erstellen von Datastores und Volumes>>
 
 
 
@@ -51,7 +51,7 @@ Dieses Handbuch richtet sich an SolidFire All-Flash-Storage-Administratoren und 
 
 Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Paket als Erweiterung auf vCenter Server registriert. Nach Abschluss der Registrierung ist das Plug-in für jeden vSphere Web Client verfügbar, der eine Verbindung zu Ihrer vSphere Umgebung herstellt.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Sie haben die Berechtigungen für vCenter Administrator, um ein Plug-in zu registrieren.
 * Sie haben einen Management-Node OVA mit Element Software ab Version 12.3.x implementiert.
 * Der Management-Node wird mit seiner IP-Adresse oder der DHCP-Adresse eingeschaltet.
@@ -59,6 +59,7 @@ Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Pak
 * Ihre Firewall-Regeln lassen das Öffnen zu link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Storage-Cluster MVIP auf TCP-Ports 443, 8443, 8333 und 9443. Port 9443 wird für die Registrierung verwendet und kann nach Abschluss der Registrierung geschlossen werden. Wenn Sie die Funktionen für virtuelle Volumes auf dem Cluster aktiviert haben, stellen Sie sicher, dass der TCP-Port 8444 auch für den Zugriff von VASA Providern geöffnet ist.
 
 
+.Über diese Aufgabe
 Sie müssen das vCenter Plug-in auf jedem vCenter Server registrieren, auf dem Sie das Plug-in verwenden müssen.
 
 Für Linked-Mode-Umgebungen müssen Sie separate Plug-ins für jeden vCenter-Server in der Umgebung registrieren, um MOB-Daten synchron zu halten und das Plug-in aktualisieren zu können. Wenn ein vSphere Web Client eine Verbindung zu einem vCenter Server herstellt, auf dem Ihr Plug-in nicht registriert ist, ist das Plug-in für den Client nicht sichtbar.
@@ -139,7 +140,7 @@ NOTE: Wenn die vCenter-Plug-in-Symbole nicht angezeigt werden, lesen Sie den lin
 
 Über den NetApp Element Remote Plugin Extension Point können Sie Cluster mit Element Software hinzufügen und managen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * Mindestens ein Cluster muss verfügbar sein und seine IP- oder FQDN-Adresse bekannt sein.
 * Aktuelle vollständige Cluster-Admin-Benutzeranmeldeinformationen für das Cluster.
 * Firewall-Regeln lassen offen link:reference_requirements_vcp.html["Netzwerkkommunikation"] Zwischen vCenter und dem Cluster MVIP auf TCP-Ports 443, 8333 und 8443.
@@ -148,6 +149,7 @@ NOTE: Wenn die vCenter-Plug-in-Symbole nicht angezeigt werden, lesen Sie den lin
 
 NOTE: Sie müssen mindestens einen Cluster hinzufügen, um Verwaltungsfunktionen verwenden zu können.
 
+.Über diese Aufgabe
 In diesem Verfahren wird beschrieben, wie ein Cluster-Profil hinzugefügt wird, sodass das Cluster durch das Plug-in gemanagt werden kann. Sie können die Anmeldedaten des Cluster-Administrators nicht mit dem Plug-in ändern.
 
 Siehe https://docs.netapp.com/us-en/element-software/storage/concept_system_manage_manage_cluster_administrator_users.html["Verwalten von Benutzerkonten für Cluster-Administratoren"^] Anweisungen zum Ändern der Anmeldedaten für ein Cluster-Administratorkonto finden Sie unter.
@@ -182,6 +184,7 @@ Wenn der Prozess abgeschlossen ist, wird das Cluster in der Liste der verfügbar
 
 Sie können eine automatische Servicequalität basierend auf der Storage-I/O-Steuerung einrichten link:vcp_concept_qossioc.html["(QoSSIOC)"] Für einzelne Volumes und vom Plug-in kontrollierte Datastores. Dazu müssen Sie die QoSSIOC- und vCenter-Anmeldeinformationen konfigurieren, die es dem QoSSIOC-Service ermöglichen, mit vCenter zu kommunizieren.
 
+.Über diese Aufgabe
 Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfiguriert haben, werden diese Einstellungen als Standard verwendet. Die QoSSIOC-Einstellungen werden auf die letzten bekannten gültigen QoSSIOC-Einstellungen zurückgesetzt, bis Sie gültige QoSSIOC-Einstellungen für einen neuen Managementknoten bereitstellen. Sie müssen die QoSSIOC-Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die QoSSIOC-Anmeldeinformationen für einen neuen Management-Node festlegen.
 
 .Schritte

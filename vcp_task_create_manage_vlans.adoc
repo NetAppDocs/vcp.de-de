@@ -16,10 +16,10 @@ keywords: netapp, VLANs, create, manage, delete, view vcp, vcenter, element
 [role="lead"]
 Sie können einer Cluster-Konfiguration ein neues virtuelles Netzwerk hinzufügen, um eine mandantenfähige Umgebungsverbindung zu einem Cluster mit NetApp Element Software zu ermöglichen und das virtuelle Netzwerk mit dem vCenter Plug-in zu managen.
 
-*  a virtual network
-*  virtual network details
-*  a virtual network
-*  a virtual network
+* <<Erstellen Sie ein virtuelles Netzwerk>>
+* <<Details zum virtuellen Netzwerk anzeigen>>
+* <<Bearbeiten eines virtuellen Netzwerks>>
+* <<Löschen Sie ein virtuelles Netzwerk>>
 
 
 
@@ -28,7 +28,7 @@ Sie können einer Cluster-Konfiguration ein neues virtuelles Netzwerk hinzufüge
 
 Sie können einem neuen virtuellen Netzwerk zu einer Cluster-Konfiguration hinzufügen.
 
-.Was Sie und#8217;ll benötigen
+.Was Sie benötigen
 * ESXi Hosts verfügen über einen einzelnen iSCSI-Software-Adapter.
 * Hosts oder Switches sind für das VLAN konfiguriert.
 * Sie haben den Block von IP-Adressen identifiziert, der den virtuellen Netzwerken auf den Clusterknoten zugewiesen wird.
@@ -45,6 +45,7 @@ Bei dieser Konfiguration sollten die folgenden Kriterien berücksichtigt werden:
 
 
 ====
+.Über diese Aufgabe
 Wenn ein virtuelles Netzwerk hinzugefügt wird, wird für jeden Node eine Schnittstelle erstellt und jeder benötigt eine virtuelle Netzwerk-IP-Adresse. Die Anzahl der IP-Adressen, die Sie beim Erstellen eines neuen virtuellen Netzwerks angeben, muss der Anzahl der Nodes im Cluster entsprechen oder größer sein. Virtuelle Netzwerkadressen werden von einzelnen Nodes automatisch bereitgestellt und ihnen zugewiesen. Sie müssen den Nodes im Cluster keine virtuellen Netzwerkadressen manuell zuweisen.
 
 .Schritte
@@ -132,6 +133,7 @@ Sie können Informationen anzeigen, wie z. B. die ID und den Namen jedes VLANs, 
 
 Sie können VLAN-Attribute wie VLAN-Name, Netzmaske und Größe der IP-Adressblöcke ändern.
 
+.Über diese Aufgabe
 VLAN-Tag und SVIP können für ein VLAN nicht geändert werden. Das Gateway-Attribut kann nur für VRF-VLANs geändert werden. Wenn iSCSI-, Remote-Replikation- oder andere Netzwerksitzungen vorhanden sind, kann die Änderung fehlschlagen.
 
 .Schritte
