@@ -1196,7 +1196,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 14:06:28 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:12:38 +0000">12/14/2022</time>
     
   
 
@@ -1212,7 +1212,7 @@
 <p>Sie können VMware vSphere aktivieren <a href="vcp_concept_vvols.html">"Virtuelle Volumes (VVols)"</a> Funktionalität und Einrichtung einer Konfiguration virtueller Volumes auf einem NetApp Element Storage-Cluster Das Element Plug-in für vCenter Server überwacht die Performance und bietet Optionen zum Managen virtueller Volumes, <a href="vcp_concept_vvols.html#storage-containers">"Storage-Container"</a>, <a href="vcp_concept_vvols.html#protocol-endpoints">"Protokollendpunkte"</a>, Und Hosts aus dem Plug-in-Erweiterungspunkt.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Sie verwenden einen NetApp Element 10 oder höher Cluster, der mit einer ESXi 6.5 oder höher Umgebung mit VVols Kompatibilität verbunden ist.</p>
@@ -1234,13 +1234,13 @@
 <div class="title">Schritte</div>
 <ol class="arabic">
 <li>
-<p>virtual volumes functionality on the NetApp Element cluster</p>
+<p><a href="#aktivieren-der-funktion-virtueller-volumes-auf-dem-netapp-element-cluster">Aktivieren der Funktion virtueller Volumes auf dem NetApp Element Cluster</a></p>
 </li>
 <li>
-<p>the VASA provider with vCenter</p>
+<p><a href="#registrieren-sie-den-vasa-provider-mit-vcenter">Registrieren Sie den VASA Provider mit vCenter</a></p>
 </li>
 <li>
-<p>a storage container and associated VVol datastore</p>
+<p><a href="#erstellung-eines-storage-containers-und-zugehöriger-vvol-datastore">Erstellung eines Storage-Containers und zugehöriger VVol Datastore</a></p>
 </li>
 </ol>
 </div>
@@ -1252,13 +1252,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p>virtual volume resources</p>
+<p><a href="#überwachen-sie-die-ressourcen-virtueller-volumes">Überwachen Sie die Ressourcen virtueller Volumes</a></p>
 </li>
 <li>
-<p>a VVol datastore for a storage container</p>
+<p><a href="#erstellen-eines-vvol-datastore-für-einen-storage-container">Erstellen eines VVol Datastore für einen Storage-Container</a></p>
 </li>
 <li>
-<p>a storage container</p>
+<p><a href="#löschen-eines-speichercontainers">Löschen eines Speichercontainers</a></p>
 </li>
 </ul>
 </div>
@@ -1332,7 +1332,7 @@ Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VASA Prov
 <p>Kopieren Sie die VASA Provider-URL aus dem Feld <strong>VASA Provider URL</strong>. Sie verwenden diese URL, um den VASA Provider in vCenter zu registrieren.</p>
 </li>
 <li>
-<p>Siehe  the VASA provider with vCenter Für die nächsten Schritte.</p>
+<p>Siehe <a href="#registrieren-sie-den-vasa-provider-mit-vcenter">Registrieren Sie den VASA Provider mit vCenter</a> Für die nächsten Schritte.</p>
 </li>
 </ol>
 </div>
@@ -1345,7 +1345,7 @@ Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VASA Prov
 <p>Sie müssen den NetApp Element VASA Provider über vCenter registrieren, damit vCenter die VVol Funktionen auf dem Cluster erkennt. Die Registrierung des VASA Providers in vCenter ist eine einmalige Konfigurationsaufgabe.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Sie haben die VVols Funktion für den Cluster aktiviert.</p>
@@ -1353,6 +1353,7 @@ Wenn die VVols Funktion aktiviert ist, startet das Element Cluster den VASA Prov
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Dieses Verfahren beschreibt die in Version 6.7 von vSphere verfügbaren Schritte. Ihre vSphere-Benutzeroberfläche kann sich je nach installierter Version von vSphere leicht von der Beschreibung unterscheiden. Weitere Hilfe finden Sie in der Dokumentation zu VMware vCenter.</p>
 </div>
 <div class="admonitionblock important">
@@ -1456,7 +1457,7 @@ Aktualisieren Sie gegebenenfalls den Speicheranbieter, um den aktuellen Status d
 </div>
 </li>
 <li>
-<p>Siehe  a storage container and associated VVol datastore Für die nächsten Schritte.</p>
+<p>Siehe <a href="#erstellung-eines-storage-containers-und-zugehöriger-vvol-datastore">Erstellung eines Storage-Containers und zugehöriger VVol Datastore</a> Für die nächsten Schritte.</p>
 </li>
 </ol>
 </div>
@@ -1602,13 +1603,13 @@ Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswäh
 <div class="ulist">
 <ul>
 <li>
-<p>VVols</p>
+<p><a href="#monitoring-von-vvols">Monitoring von VVols</a></p>
 </li>
 <li>
-<p>storage containers</p>
+<p><a href="#monitoring-von-storage-containern">Monitoring von Storage-Containern</a></p>
 </li>
 <li>
-<p>protocol endpoints</p>
+<p><a href="#überwachen-von-protokollendpunkten">Überwachen von Protokollendpunkten</a></p>
 </li>
 </ul>
 </div>
@@ -1618,7 +1619,7 @@ Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswäh
 <p>Sie können allgemeine Daten für alle aktiven virtuellen Volumes im Cluster oder detaillierte Daten für jedes virtuelle Volume prüfen. Das Plug-in überwacht die Effizienz, Performance, Ereignisse und QoS des virtuellen Volumes sowie zugehörige Snapshots, VMs und Bindungen.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Sie haben VMs eingeschaltet, sodass Details zum virtuellen Volume angezeigt werden können.</p>
@@ -1770,10 +1771,10 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <h2 id="erstellen-eines-vvol-datastore-für-einen-storage-container">Erstellen eines VVol Datastore für einen Storage-Container</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Nachdem Sie einen Storage Container erstellt haben, müssen Sie auch einen Datastore für virtuelle Volumes erstellen, der den Storage-Container im NetApp Element-Cluster in vCenter darstellt. Dieses Verfahren kann als Alternative zur Erstellung eines Datenspeichers aus dem verwendet werden  a storage container and associated VVol datastore,Storage Container Erstellen assistent. Sie müssen mindestens einen VVol Datastore erstellen, um mit der Bereitstellung von VVol-gestützten Virtual Machines zu beginnen.</p>
+<p>Nachdem Sie einen Storage Container erstellt haben, müssen Sie auch einen Datastore für virtuelle Volumes erstellen, der den Storage-Container im NetApp Element-Cluster in vCenter darstellt. Dieses Verfahren kann als Alternative zur Erstellung eines Datenspeichers aus dem verwendet werden <a href="#erstellung-eines-storage-containers-und-zugehöriger-vvol-datastore">Storage Container Erstellen</a> assistent. Sie müssen mindestens einen VVol Datastore erstellen, um mit der Bereitstellung von VVol-gestützten Virtual Machines zu beginnen.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Ein vorhandener Storage-Container in der virtuellen Umgebung.</p>
@@ -1839,7 +1840,7 @@ Sie müssen keine Protokoll-Endpunkt-LUNs (PE) manuell erstellen. Sie werden bei
 <p>Sie können Speichercontainer aus dem Plug-in-Erweiterungspunkt löschen.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Alle Volumes wurden aus dem Storage-Container entfernt.</p>

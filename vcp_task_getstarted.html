@@ -1196,7 +1196,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 14:06:28 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:12:38 +0000">12/14/2022</time>
     
   
 
@@ -1220,31 +1220,31 @@
 <div class="ulist">
 <ul>
 <li>
-<p>for installation</p>
+<p><a href="#installation-vorbereiten">Installation vorbereiten</a></p>
 </li>
 <li>
-<p>the management node</p>
+<p><a href="#installieren-sie-den-management-node">Installieren Sie den Management-Node</a></p>
 </li>
 <li>
-<p>the plug-in with vCenter</p>
+<p><a href="#registrieren-sie-das-plug-in-mit-vcenter">Registrieren Sie das Plug-in mit vCenter</a></p>
 </li>
 <li>
-<p>vCenter properties for a dark site HTTP server</p>
+<p><a href="#ändern-sie-die-vcenter-eigenschaften-für-einen-http-server-mit-dunkler-site">Ändern Sie die vCenter-Eigenschaften für einen HTTP-Server mit dunkler Site</a></p>
 </li>
 <li>
-<p>the plug-in and verify successful installation</p>
+<p><a href="#greifen-sie-auf-das-plug-in-zu-und-überprüfen-sie-die-erfolgreiche-installation">Greifen Sie auf das Plug-in zu und überprüfen Sie die erfolgreiche Installation</a></p>
 </li>
 <li>
-<p>storage clusters for use with the plug-in</p>
+<p><a href="#fügen-sie-storage-cluster-zur-verwendung-mit-dem-plug-in-hinzu">Fügen Sie Storage-Cluster zur Verwendung mit dem Plug-in hinzu</a></p>
 </li>
 <li>
-<p>QoSSIOC settings using the plug-in</p>
+<p><a href="#konfigurieren-sie-die-qossioc-einstellungen-mithilfe-des-plug-ins">Konfigurieren Sie die QoSSIOC-Einstellungen mithilfe des Plug-ins</a></p>
 </li>
 <li>
-<p>user accounts</p>
+<p><a href="#benutzerkonten-konfigurieren">Benutzerkonten konfigurieren</a></p>
 </li>
 <li>
-<p>datastores and volumes</p>
+<p><a href="#erstellen-von-datastores-und-volumes">Erstellen von Datastores und Volumes</a></p>
 </li>
 </ul>
 </div>
@@ -1276,7 +1276,7 @@
 <p>Beim Bereitstellen des vCenter Plug-in-Pakets im vSphere Web Client wird das Paket als Erweiterung auf vCenter Server registriert. Nach Abschluss der Registrierung ist das Plug-in für jeden vSphere Web Client verfügbar, der eine Verbindung zu Ihrer vSphere Umgebung herstellt.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Stellen Sie für vSphere 6.5 und 6.7 sicher, dass Sie sich vom vSphere Web Client abgemeldet haben. Der Web-Client für diese Versionen erkennt Updates, die während dieses Prozesses an Ihrem Plug-in vorgenommen wurden, wenn Sie sich nicht abmelden. Für vSphere 7.0 müssen Sie sich nicht vom Web-Client abmelden.</p>
@@ -1299,6 +1299,7 @@
 </ul>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Sie müssen das vCenter Plug-in auf jedem vCenter Server registrieren, auf dem Sie das Plug-in verwenden müssen.</p>
 </div>
 <div class="paragraph">
@@ -1403,7 +1404,7 @@ Der von Ihnen eingegebene Benutzername und das Kennwort müssen für einen Benut
 <img src="/us-en/vcp/images/note.svg" alt="Anmerkung">
 </td>
 <td class="content">
-Bei den meisten Installationen wird der Standardpfad verwendet. Um die URL anzupassen, wenn Sie einen HTTP- oder HTTPS-Server (dunkle Site) verwenden oder den ZIP-Dateinamen oder die Netzwerkeinstellungen geändert haben, wählen Sie <strong>Benutzerdefinierte URL</strong> aus. Weitere Schritte, wenn Sie eine URL anpassen möchten, finden Sie unter  vCenter properties for a dark site HTTP server,Ändern Sie die vCenter-Eigenschaft für einen HTTP-Server mit dunklem Standort.
+Bei den meisten Installationen wird der Standardpfad verwendet. Um die URL anzupassen, wenn Sie einen HTTP- oder HTTPS-Server (dunkle Site) verwenden oder den ZIP-Dateinamen oder die Netzwerkeinstellungen geändert haben, wählen Sie <strong>Benutzerdefinierte URL</strong> aus. Weitere Schritte, wenn Sie eine URL anpassen möchten, finden Sie unter <a href="#ändern-sie-die-vcenter-eigenschaften-für-einen-http-server-mit-dunkler-site">Ändern Sie die vCenter-Eigenschaft für einen HTTP-Server mit dunklem Standort</a>.
 </td>
 </tr>
 </table>
@@ -1473,6 +1474,7 @@ Mit dieser Aktion wird die Installation im vSphere Web Client abgeschlossen. Wen
 <p>Wenn Sie während der vCenter Plug-in-Registrierung eine URL für einen internen HTTP-Server (Dark Site) anpassen möchten, müssen Sie die Eigenschaftendatei von vSphere Web Client ändern <code>webclient.properties</code>. Sie können die Änderungen mit vCSA oder Windows vornehmen.</p>
 </div>
 <div class="paragraph">
+<div class="title">Was Sie benötigen</div>
 <p>Berechtigungen zum Herunterladen von Software von der NetApp Support-Website.</p>
 </div>
 <div class="olist arabic">
@@ -1669,7 +1671,7 @@ Wenn die vCenter-Plug-in-Symbole nicht angezeigt werden, lesen Sie den <a href="
 <p>Nachdem eine Verbindung zum Cluster hergestellt wurde, kann der Cluster dann mit dem NetApp Element Management Extension Point verwaltet werden.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Mindestens ein Cluster muss verfügbar sein und seine IP- oder FQDN-Adresse bekannt sein.</p>
@@ -1695,6 +1697,7 @@ Sie müssen mindestens einen Cluster hinzufügen, um die NetApp Element-Manageme
 </table>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>In diesem Verfahren wird beschrieben, wie ein Cluster-Profil hinzugefügt wird, sodass das Cluster durch das Plug-in gemanagt werden kann. Sie können die Anmeldedaten des Cluster-Administrators nicht mit dem Plug-in ändern.</p>
 </div>
 <div class="paragraph">
@@ -1778,6 +1781,7 @@ Der vSphere HTML5 Web-Client und der Flash Web-Client haben separate Datenbanken
 <p>Sie können eine automatische Servicequalität basierend auf der Storage-I/O-Steuerung einrichten <a href="vcp_concept_qossioc.html">"(QoSSIOC)"</a> Für einzelne Volumes und vom Plug-in kontrollierte Datastores. Dazu müssen Sie die QoSSIOC- und vCenter-Anmeldeinformationen konfigurieren, die es dem QoSSIOC-Service ermöglichen, mit vCenter zu kommunizieren.</p>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Nachdem Sie gültige QoSSIOC-Einstellungen für den Managementknoten konfiguriert haben, werden diese Einstellungen als Standard verwendet. Die QoSSIOC-Einstellungen werden auf die letzten bekannten gültigen QoSSIOC-Einstellungen zurückgesetzt, bis Sie gültige QoSSIOC-Einstellungen für einen neuen Managementknoten bereitstellen. Sie müssen die QoSSIOC-Einstellungen für den konfigurierten Management-Node löschen, bevor Sie die QoSSIOC-Anmeldeinformationen für einen neuen Management-Node festlegen.</p>
 </div>
 <div class="olist arabic">

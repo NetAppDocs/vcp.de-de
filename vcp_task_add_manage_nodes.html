@@ -1196,7 +1196,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 14:06:28 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:12:38 +0000">12/14/2022</time>
     
   
 
@@ -1214,19 +1214,19 @@
 <div class="ulist">
 <ul>
 <li>
-<p>a node to a cluster</p>
+<p><a href="#fügen-sie-einem-cluster-einen-node-hinzu">Fügen Sie einem Cluster einen Node hinzu</a></p>
 </li>
 <li>
-<p>node details</p>
+<p><a href="#zeigen-sie-node-details-an">Zeigen Sie Node-Details an</a></p>
 </li>
 <li>
-<p>a node</p>
+<p><a href="#starten-sie-einen-node-neu">Starten Sie einen Node neu</a></p>
 </li>
 <li>
-<p>down a node</p>
+<p><a href="#fahren-sie-einen-node-herunter">Fahren Sie einen Node herunter</a></p>
 </li>
 <li>
-<p>a node from a cluster</p>
+<p><a href="#entfernen-eines-node-aus-einem-cluster">Entfernen eines Node aus einem Cluster</a></p>
 </li>
 </ul>
 </div>
@@ -1239,7 +1239,7 @@
 <p>Mit dem vCenter Plug-in können Sie Ihrem Cluster Storage Nodes hinzufügen.</p>
 </div>
 <div class="ulist">
-<div class="title">Was Sie und#8217;ll benötigen</div>
+<div class="title">Was Sie benötigen</div>
 <ul>
 <li>
 <p>Der Node, den Sie hinzufügen, wurde eingerichtet, eingeschaltet und konfiguriert.</p>
@@ -1262,6 +1262,7 @@ Wenn der dem hinzuzufügenden Node eine andere größere oder kleinere Version d
 </table>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Nodes müssen die Erstkonfiguration erfordern, wenn sie zum ersten Mal eingeschaltet sind. Wenn der Knoten eingerichtet und konfiguriert wurde, registriert er sich auf dem Cluster, der identifiziert wurde, wenn der Knoten konfiguriert wurde, und erscheint in der Liste der ausstehenden Knoten auf der Seite <strong>Cluster &gt; Knoten</strong> des Plugin Erweiterungspunkts.</p>
 </div>
 <div class="paragraph">
@@ -1384,9 +1385,11 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <p>Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster neu starten.</p>
 </div>
 <div class="paragraph">
+<div class="title">Was Sie benötigen</div>
 <p>Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.</p>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Zum Neustart des Clusters können Sie alle Cluster-Nodes auswählen und einen Neustart durchführen.</p>
 </div>
 <div class="admonitionblock important">
@@ -1471,6 +1474,7 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <p>Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten in einem Cluster herunterfahren. Zum Herunterfahren des Clusters können Sie alle Cluster-Nodes auswählen und gleichzeitig das Herunterfahren durchführen.</p>
 </div>
 <div class="paragraph">
+<div class="title">Was Sie benötigen</div>
 <p>Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.</p>
 </div>
 <div class="admonitionblock note">
@@ -1556,9 +1560,11 @@ Wenn ein Node unter jeder Art von Herunterfahren länger als 5.5 Minuten ausgefa
 <p>Sie können Nodes aus einem Cluster ohne Serviceunterbrechungen entfernen, wenn ihr Storage nicht mehr benötigt wird oder Wartungsmaßnahmen erforderlich sind.</p>
 </div>
 <div class="paragraph">
+<div class="title">Was Sie benötigen</div>
 <p>Sie haben alle Laufwerke im Node aus dem Cluster entfernt. Sie können den Node bis zum nicht entfernen <code>RemoveDrives</code> Der Prozess ist abgeschlossen, und alle Daten wurden vom Node migriert.</p>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Mindestens zwei FC Nodes sind für FC-Konnektivität in einem NetApp Element Cluster erforderlich. Wenn nur ein FC-Node verbunden ist, löst das System im Ereignisprotokoll Warnmeldungen aus, bis Sie dem Cluster weitere FC-Node hinzufügen, obwohl der gesamte FC-Netzwerk-Traffic weiterhin mit nur einem FC-Node ausgeführt wird.</p>
 </div>
 <div class="olist arabic">

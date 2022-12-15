@@ -1196,7 +1196,7 @@
 <p class="page-details">
   
     
-    <time datetime="2022-11-15 14:06:28 +0000">11/15/2022</time>
+    <time datetime="2022-12-14 18:12:38 +0000">12/14/2022</time>
     
   
 
@@ -1218,22 +1218,22 @@
 <div class="title">Optionen</div>
 <ul>
 <li>
-<p>a volume snapshot</p>
+<p><a href="#erstellen-eines-volume-snapshots">Erstellen eines Volume-Snapshots</a></p>
 </li>
 <li>
-<p>volume snapshot details</p>
+<p><a href="#details-zu-volume-snapshots-anzeigen">Details zu Volume Snapshots anzeigen</a></p>
 </li>
 <li>
-<p>a volume from a snapshot</p>
+<p><a href="#klonen-eines-volumes-aus-einem-snapshot">Klonen eines Volumes aus einem Snapshot</a></p>
 </li>
 <li>
-<p>back a volume to a snapshot</p>
+<p><a href="#führen-sie-ein-rollback-eines-volumes-zu-einem-snapshot-durch">Führen Sie ein Rollback eines Volumes zu einem Snapshot durch</a></p>
 </li>
 <li>
-<p>up a volume snapshot to an external object store</p>
+<p><a href="#sichern-sie-einen-volume-snapshot-auf-einem-externen-objektspeicher">Sichern Sie einen Volume Snapshot auf einem externen Objektspeicher</a></p>
 </li>
 <li>
-<p>a volume snapshot</p>
+<p><a href="#löschen-sie-einen-volume-snapshot">Löschen Sie einen Volume-Snapshot</a></p>
 </li>
 </ul>
 </div>
@@ -1637,13 +1637,13 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <div class="ulist">
 <ul>
 <li>
-<p>up a volume snapshot to an Amazon S3 object store</p>
+<p><a href="#sichern-sie-einen-volume-snapshot-in-einem-amazon-s3-objektspeicher">Sichern Sie einen Volume Snapshot in einem Amazon S3-Objektspeicher</a></p>
 </li>
 <li>
-<p>up a volume snapshot to an OpenStack Swift object store</p>
+<p><a href="#sichern-sie-einen-volume-snapshot-in-einem-openstack-swift-objektspeicher">Sichern Sie einen Volume Snapshot in einem OpenStack Swift Objektspeicher</a></p>
 </li>
 <li>
-<p>up a volume snapshot to a cluster running Element software</p>
+<p><a href="#Sichern Sie einen Volume Snapshot auf einem Cluster">auf dem Element Software ausgeführt wird</a></p>
 </li>
 </ul>
 </div>
@@ -1837,9 +1837,11 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <p>Sie können einen Volume Snapshot, der sich auf einem Cluster befindet, auf dem die NetApp Element Software ausgeführt wird, in einem Remote Element Cluster sichern.</p>
 </div>
 <div class="paragraph">
+<div class="title">Was Sie benötigen</div>
 <p>Sie müssen ein Volume auf dem Ziel-Cluster von gleicher oder größerer Größe wie der Snapshot erstellen, den Sie für das Backup verwenden.</p>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Wenn Sie ein Backup von einem Cluster auf ein anderes durchführen, generiert das System einen Schlüssel, der als Authentifizierung zwischen den Clustern verwendet werden soll. Mit diesem Massenvolumen-Schreibschlüssel kann sich das Quellcluster mit dem Ziel-Cluster authentifizieren und bietet beim Schreiben auf das Ziel-Volume Sicherheit. Im Rahmen des Backup- oder Wiederherstellungsprozesses müssen Sie vor dem Start des Vorgangs einen Schreibschlüssel für das Massenvolumen vom Zielvolume generieren.</p>
 </div>
 <div class="olist arabic">
@@ -1978,6 +1980,7 @@ Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cl
 <p>Sie können einen Volume-Snapshot von einem Cluster löschen, auf dem NetApp Element Software ausgeführt wird, mit dem Plug-in-Erweiterungspunkt. Wenn Sie einen Snapshot löschen, entfernt das System ihn sofort.</p>
 </div>
 <div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
 <p>Sie können Snapshots löschen, die aus dem Quellcluster repliziert werden. Wenn ein Snapshot beim Löschen mit dem Zielcluster synchronisiert wird, wird die synchrone Replikation abgeschlossen und der Snapshot wird aus dem Quellcluster gelöscht. Der Snapshot wird nicht aus dem Ziel-Cluster gelöscht.</p>
 </div>
 <div class="paragraph">
