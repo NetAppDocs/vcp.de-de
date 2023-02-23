@@ -22,15 +22,24 @@ Das System meldet bei jeder Warnmeldung Fehlercodes, mit denen Sie feststellen k
 
 In der folgenden Liste werden die verschiedenen Typen von Systemwarnmeldungen aufgeführt.
 
-* *AuthentifizierungServiceFault*: Der Authentifizierungsdienst auf einem oder mehreren Cluster-Knoten funktioniert nicht wie erwartet.
+* *AuthentifizierungServiceFault*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Der Authentifizierungsdienst auf einem oder mehreren Clusterknoten funktioniert nicht wie erwartet.
 
-* *VerfügbarVirtualNetworkIPAdresseLow*: Die Anzahl der virtuellen Netzwerkadressen im Block der IP-Adressen ist gering.
 +
-*Zur Auflösung*: Fügen Sie dem Block der virtuellen Netzwerkadressen weitere IP-Adressen hinzu.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *BlockClusterFull*: Es gibt nicht genügend freien Speicherplatz, um einen Single Node-Verlust zu unterstützen. Weitere Informationen zu Cluster-Auslastungsstufen finden Sie in der GetClusterFullThreshold API-Methode. Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+* *VerfügbarVirtualNetworkIPAdresseLow*
++
+Die Anzahl der virtuellen Netzwerkadressen im Block der IP-Adressen ist gering.
+
++
+Um diesen Fehler zu beheben, fügen Sie dem Block der virtuellen Netzwerkadressen weitere IP-Adressen hinzu.
+
+* * BlockClusterFull*
++
+Es ist nicht ausreichend freier Block-Speicherplatz zur Unterstützung eines Single-Node-Verlusts vorhanden. Weitere Informationen zu Cluster-Auslastungsstufen finden Sie in der GetClusterFullThreshold API-Methode. Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Stage3Low (Warnung): Benutzerdefinierter Schwellenwert wurde überschritten. Passen Sie Cluster-Volleinstellungen an oder fügen Sie weitere Nodes hinzu.
 ** Stage4Critical (Fehler): Es gibt nicht genügend Speicherplatz zur Wiederherstellung nach einem Ausfall eines 1 Node. Das Erstellen von Volumes, Snapshots und Klonen ist nicht zulässig.
@@ -38,35 +47,56 @@ In der folgenden Liste werden die verschiedenen Typen von Systemwarnmeldungen au
 
 
 +
-*Zur Auflösung*: Löschen oder löschen Sie Volumes oder fügen Sie dem Speicher-Cluster einen weiteren Speicherknoten hinzu.
+Löschen oder löschen Sie Volumes, um diesen Fehler zu beheben, oder fügen Sie dem Storage-Cluster einen weiteren Storage-Node hinzu.
 
-* *BlocksDegraded*: Block-Daten werden aufgrund eines Fehlers nicht mehr vollständig repliziert.
+* *BlocksDegradiert*
 +
-[cols="25,75"]
+Blockdaten werden aufgrund eines Ausfalls nicht mehr vollständig repliziert.
+
++
 |===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Auf nur zwei vollständige Kopien der Blockdaten kann zugegriffen werden. 
+ a| 
+Warnung
+ a| 
+Auf nur zwei vollständige Kopien der Blockdaten kann zugegriffen werden.
 
 
-| Fehler | Auf nur eine vollständige Kopie der Blockdaten kann zugegriffen werden. 
+
+ a| 
+Fehler
+ a| 
+Auf nur eine vollständige Kopie der Blockdaten kann zugegriffen werden.
 
 
-| Kritisch | Auf vollständige Kopien der Blockdaten kann nicht zugegriffen werden. 
+
+ a| 
+Kritisch
+ a| 
+Auf vollständige Kopien der Blockdaten kann nicht zugegriffen werden.
+
 |===
 +
-
-NOTE: Der Warnstatus kann nur auf einem Triple Helix-System auftreten.
+*Hinweis:* der Warnstatus kann nur auf einem Triple Helix System auftreten.
 
 +
-*Zur Lösung*: Stellen Sie alle Offline-Knoten oder Blockdienste wieder her oder wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+Um diesen Fehler zu beheben, stellen Sie alle Offline Nodes oder Block-Services wieder her oder wenden Sie sich an den NetApp Support, um Unterstützung zu erhalten.
 
-* *BlockServiceTooFull*: Ein Blockservice verbraucht zu viel Platz.
+* *BlockServiceTooFull*
 +
-*Zur Auflösung*: Fügen Sie mehr bereitgestellte Kapazität hinzu.
+Ein Block-Service benötigt zu viel Speicherplatz.
 
-* *BlockServiceUnHealthy*: Ein Blockservice wurde als ungesund erkannt:
++
+Um diesen Fehler zu beheben, fügen Sie mehr bereitgestellte Kapazität hinzu.
+
+* *BlockServiceUnHealthy*
++
+Ein Blockdienst wurde als fehlerhaft erkannt:
+
 +
 ** Schweregrad = Warnung: Es werden keine Maßnahmen ergriffen. Dieser Warnzeitraum läuft in cTimeUntilBSIsKilledMSec=330000 Millisekunden ab.
 ** Schweregrad = Fehler: Das System setzt Daten automatisch zurück und repliziert seine Daten auf andere gesunde Laufwerke.
@@ -74,27 +104,59 @@ NOTE: Der Warnstatus kann nur auf einem Triple Helix-System auftreten.
 
 
 +
-*Zur Lösung*: Prüfen Sie auf Probleme mit der Netzwerkverbindung und Hardwarefehler. Es gibt weitere Fehler, wenn bestimmte Hardwarekomponenten ausgefallen sind. Der Fehler wird gelöscht, wenn der Blockservice aufgerufen wird oder wenn der Dienst deaktiviert wurde.
+Prüfen Sie auf Probleme mit der Netzwerkverbindung und Hardwarefehler. Es gibt weitere Fehler, wenn bestimmte Hardwarekomponenten ausgefallen sind. Der Fehler wird gelöscht, wenn der Blockservice aufgerufen wird oder wenn der Dienst deaktiviert wurde.
 
-* *ClockSkewExceedsFaultThreshold*: Zeitskew zwischen dem Cluster-Master und dem Knoten, der ein Token enthält, überschreitet den empfohlenen Schwellenwert. Storage Cluster kann die Zeitverzerrung zwischen den Nodes nicht automatisch korrigieren.
+* *BmcSelfTestFailed*
 +
-*Zum Auflösen*: Verwenden Sie NTP-Server, die intern zu Ihrem Netzwerk sind, anstatt die Installationsstandards. Wenn Sie einen internen NTP-Server verwenden, wenden Sie sich an den NetApp Support.
+Der Baseboard Management Controller (BMC) hat einen Selbsttest nicht bestanden.
 
-* *ClusterCannotSync*: Es gibt einen nicht-Speicherplatz-Zustand und Daten auf den Offline-Blockspeicherlaufwerken können nicht mit Laufwerken synchronisiert werden, die noch aktiv sind.
 +
-*Zur Auflösung*: Mehr Speicherplatz hinzufügen.
+Wenden Sie sich an den NetApp Support, wenn Sie Hilfe benötigen.
 
-* *ClusterFull*: Es gibt keinen freien Speicherplatz mehr im Speicher-Cluster.
 +
-*Zur Auflösung*: Mehr Speicherplatz hinzufügen.
+Bei einem Upgrade auf Element 12.5 oder höher wird der `BmcSelfTestFailed` Ein Fehler wird nicht bei einem Knoten generiert, der bereits über einen BMC-Fehler verfügt, oder wenn der BMC eines Knotens während des Upgrades ausfällt. Die BMCs, die die Selbsttests während des Upgrades nicht bestanden haben, geben eine aus `BmcSelfTestFailed` Warnfehler, nachdem das gesamte Cluster das Upgrade abgeschlossen hat.
 
-* *ClusterIOPSAreOverProvisioned*: Cluster-IOPS werden überprovisioniert. Die Summe aller minimalen QoS-IOPS ist größer als die erwarteten IOPS des Clusters. Eine minimale QoS kann nicht für alle Volumes gleichzeitig aufrechterhalten werden.
+* *ClockSkewExceedsFaultThreshold*
 +
-*Zur Auflösung*: Die Mindestwerte für QoS-IOPS-Einstellungen für Volumes senken.
+Zeitverzerrung zwischen dem Cluster-Master und dem Node, der ein Token enthält, übersteigt den empfohlenen Schwellenwert. Storage Cluster kann die Zeitverzerrung zwischen den Nodes nicht automatisch korrigieren.
 
-* *DeableDriveSecurityFailed*: Das Cluster ist nicht so konfiguriert, dass die Laufwerksicherheit aktiviert ist (Verschlüsselung im Ruhezustand), aber mindestens ein Laufwerk hat die Laufwerkssicherheit aktiviert, was bedeutet, dass die Deaktivierung der Laufwerksicherheit auf diesen Laufwerken fehlgeschlagen ist. Dieser Fehler wird mit dem Schweregrad „Warnung“ protokolliert.
 +
-*Zur Lösung*: Überprüfen Sie die Fehlerdetails aus dem Grund, warum die Sicherheit des Antriebs nicht deaktiviert werden konnte. Mögliche Gründe sind:
+Um diesen Fehler zu beheben, verwenden Sie NTP-Server, die intern zu Ihrem Netzwerk sind, anstatt die Installationsstandards. Wenn Sie einen internen NTP-Server verwenden, wenden Sie sich an den NetApp Support.
+
+* * ClusterCannotSync*
++
+Es ist ein nicht genügend Speicherplatz vorhanden, und Daten auf den Offline-Blockspeicherlaufwerken können nicht mit Laufwerken synchronisiert werden, die noch aktiv sind.
+
++
+Um diesen Fehler zu beheben, fügen Sie mehr Speicher hinzu.
+
+* * ClusterFull*
++
+Es ist kein freier Speicherplatz im Storage-Cluster mehr verfügbar.
+
++
+Um diesen Fehler zu beheben, fügen Sie mehr Speicher hinzu.
+
+* *ClusterIOPSAreüberProvistiert*
++
+Cluster-IOPS werden überprovisioniert. Die Summe aller minimalen QoS-IOPS ist größer als die erwarteten IOPS des Clusters. Eine minimale QoS kann nicht für alle Volumes gleichzeitig aufrechterhalten werden.
+
++
+Senken Sie zur Behebung dieses Problems die Mindesteinstellungen für QoS-IOPS für Volumes.
+
+* *CpuThermalEventThreshold*
++
+Die Anzahl der thermischen CPU-Ereignisse auf einer oder mehreren CPUs überschreitet den konfigurierten Schwellenwert.
+
++
+Wenn innerhalb von zehn Minuten keine neuen thermischen CPU-Ereignisse erkannt werden, löst sich die Warnung.
+
+* *AbleDriveSecurityFailed*
++
+Das Cluster ist nicht für das Aktivieren der Laufwerksicherheit konfiguriert (Verschlüsselung im Ruhezustand), aber mindestens ein Laufwerk ist die Laufwerksicherheit aktiviert, was bedeutet, dass die Laufwerksicherheit auf diesen Laufwerken deaktiviert ist. Dieser Fehler wird mit dem Schweregrad „`Warnung`“ protokolliert.
+
++
+Um diesen Fehler zu beheben, überprüfen Sie die Fehlerdetails aus dem Grund, warum die Laufwerksicherheit nicht deaktiviert werden konnte. Mögliche Gründe sind:
 
 +
 ** Der Verschlüsselungsschlüssel konnte nicht erworben werden. Untersuchen Sie das Problem mit dem Zugriff auf den Schlüssel oder den externen Schlüsselserver.
@@ -102,25 +164,43 @@ NOTE: Der Warnstatus kann nur auf einem Triple Helix-System auftreten.
 
 
 +
-Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherweise ausgetauscht werden. Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht erfolgreich deaktiviert, selbst wenn der richtige Authentifizierungsschlüssel angegeben ist. Entfernen Sie die Laufwerke aus dem System, indem Sie sie auf verfügbar verschieben, löschen Sie sie sicher auf dem Laufwerk, und verschieben Sie sie wieder in aktiv.
+Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherweise ausgetauscht werden.
 
-* *DiscconnectedClusterPair*: Ein Clusterpaar ist getrennt oder falsch konfiguriert.
 +
-*Zum Auflösen*: Prüfen Sie die Netzwerkverbindung zwischen den Clustern.
+Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht erfolgreich deaktiviert, selbst wenn der richtige Authentifizierungsschlüssel angegeben ist. Entfernen Sie die Laufwerke aus dem System, indem Sie sie auf verfügbar verschieben, löschen Sie sie sicher auf dem Laufwerk, und verschieben Sie sie wieder in aktiv.
 
-* *DisconnectedRemoteNode*: Ein Remote-Knoten ist entweder getrennt oder falsch konfiguriert.
+* *DisconnectedClusterpaar*
 +
-*Zum Auflösen*: Prüfen Sie die Netzwerkverbindung zwischen den Knoten.
+Ein Cluster-Paar ist getrennt oder falsch konfiguriert.
 
-* *VerbindungSnapMirrorEndpoint*: Ein Remote-SnapMirror-Endpunkt ist getrennt oder falsch konfiguriert.
 +
-*Zur Lösung*: Prüfen Sie die Netzwerkverbindung zwischen dem Cluster und dem Remote SnapMirrorEndpoint.
+Überprüfen Sie die Netzwerkverbindung zwischen den Clustern.
 
-* *DriveVerfügbar*: Ein oder mehrere Laufwerke sind im Cluster verfügbar. Im Allgemeinen sollten alle Cluster alle Laufwerke hinzugefügt werden und keine im Status „verfügbar“. Sollte dieser Fehler unerwartet auftreten, wenden Sie sich an den NetApp Support.
+* *Verbindung abschaltenRemoteNode*
 +
-*Zur Auflösung*: Fügen Sie dem Speicher-Cluster alle verfügbaren Laufwerke hinzu.
+Ein Remote-Knoten ist entweder getrennt oder falsch konfiguriert.
 
-* *DriveFailed*: Das Cluster gibt diesen Fehler zurück, wenn ein oder mehrere Laufwerke ausgefallen sind und einer der folgenden Bedingungen anzeigt:
++
+Überprüfen Sie die Netzwerkverbindung zwischen den Nodes.
+
+* *DemconnectedSnapMirrorEndpoint*
++
+Ein Remote-SnapMirror-Endpunkt wird getrennt oder falsch konfiguriert.
+
++
+Überprüfen Sie die Netzwerkverbindung zwischen dem Cluster und dem Remote-SnapMirrorEndpoint.
+
+* *Auffahrt verfügbar*
++
+Ein oder mehrere Laufwerke sind im Cluster verfügbar. Im Allgemeinen sollten alle Cluster alle Laufwerke hinzugefügt werden und keine im Status „verfügbar“. Sollte dieser Fehler unerwartet auftreten, wenden Sie sich an den NetApp Support.
+
++
+Um diesen Fehler zu beheben, fügen Sie alle verfügbaren Laufwerke zum Speicher-Cluster hinzu.
+
+* * Auffahrt nicht möglich*
++
+Das Cluster gibt diesen Fehler zurück, wenn ein oder mehrere Laufwerke ausgefallen sind und einer der folgenden Bedingungen anzeigt:
+
 +
 ** Der Laufwerksmanager kann nicht auf das Laufwerk zugreifen.
 ** Der Slice- oder Block-Service ist zu oft ausgefallen, vermutlich aufgrund von Lese- oder Schreibfehlern des Laufwerks und kann nicht neu gestartet werden.
@@ -131,7 +211,7 @@ Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherw
 
 
 +
-*Zur Lösung*:
+So lösen Sie dieses Problem:
 
 +
 ** Überprüfen Sie die Netzwerkverbindung für den Node.
@@ -139,67 +219,97 @@ Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherw
 ** Stellen Sie sicher, dass der Authentifizierungsschlüssel verfügbar ist.
 
 
-* *DriveHealthFault*: Ein Laufwerk hat die SMART Health Check nicht bestanden und infolgedessen werden die Funktionen des Laufwerks verringert. Es gibt einen kritischen Schweregrad für diesen Fehler:
+* *DriveHealthFault*
++
+Die SMART-Integritätsprüfung auf einem Laufwerk ist fehlgeschlagen, sodass die Funktionen des Laufwerks verringert werden. Es gibt einen kritischen Schweregrad für diesen Fehler:
+
 +
 ** Laufwerk mit serieller Verbindung: <Seriennummer> in Steckplatz: <Node-Steckplatz><Laufwerksfach> hat die INTELLIGENTE allgemeine Integritätsprüfung nicht bestanden.
 
 
 +
-*Zum Auflösen*: Ersetzen Sie das Laufwerk.
+Um diesen Fehler zu beheben, ersetzen Sie das Laufwerk.
 
-* *DriveWearFault*: Die verbleibende Lebensdauer eines Laufwerks ist unter die Schwellenwerte gesunken, aber es funktioniert noch. Es gibt zwei mögliche Schweregrade für diesen Fehler: Kritisch und Warnung:
+* *DriveWearFault*
++
+Die Restlebensdauer eines Laufwerks ist unter die Schwellenwerte gesunken, funktioniert aber immer noch.Es gibt zwei mögliche Schweregrade für diesen Fehler: Kritisch und Warnung:
+
 +
 ** Laufwerk mit serieller Verbindung: <Seriennummer> im Steckplatz: <Node-Steckplatz><Laufwerk-Steckplatz> verfügt über einen kritischen Verschleiß.
 ** Laufwerk mit serieller Verbindung: <Seriennummer> im Steckplatz: <Node-Steckplatz><Laufwerksfach> verfügt über geringe Verschleißreserven.
 
 
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, tauschen Sie das Laufwerk bald aus.
+Um diesen Fehler zu beheben, tauschen Sie das Laufwerk bald aus.
 
-* *DuplicateClusterMasterCandidates*: Es wurde mehr als ein Speicher-Cluster-Master-Kandidat erkannt.
+* * DuplicateClusterMasterCandidates*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Es wurden mehr als ein Master-Kandidat für Speichercluster erkannt.
 
-* *EnableDriveSecurityFailed*: Das Cluster ist so konfiguriert, dass es Laufwerkssicherheit benötigt (Verschlüsselung im Ruhezustand), die Laufwerkssicherheit konnte jedoch auf mindestens einem Laufwerk nicht aktiviert werden. Dieser Fehler wird mit dem Schweregrad „Warnung“ protokolliert.
 +
-*Zur Lösung*: Prüfen Sie die Fehlerdetails aus dem Grund, warum die Laufwerksicherheit nicht aktiviert werden konnte. Mögliche Gründe sind:
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *EnableDriveSecurityFailed*
++
+Das Cluster ist so konfiguriert, dass es Laufwerkssicherheit (Verschlüsselung im Ruhezustand) benötigt, die Laufwerkssicherheit konnte jedoch auf mindestens einem Laufwerk nicht aktiviert werden. Dieser Fehler wird mit dem Schweregrad „`Warnung`“ protokolliert.
+
++
+Um diesen Fehler zu beheben, überprüfen Sie die Fehlerdetails aus dem Grund, warum die Laufwerksicherheit nicht aktiviert werden konnte. Mögliche Gründe sind:
 
 +
 ** Der Verschlüsselungsschlüssel konnte nicht erworben werden. Untersuchen Sie das Problem mit dem Zugriff auf den Schlüssel oder den externen Schlüsselserver.
-** Der Vorgang zum Aktivieren ist auf dem Laufwerk fehlgeschlagen. Stellen Sie fest, ob der falsche Schlüssel möglicherweise erfasst wurde.
-+
-Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherweise ausgetauscht werden.
-
+** Der Vorgang zum Aktivieren ist auf dem Laufwerk fehlgeschlagen. Stellen Sie fest, ob der falsche Schlüssel möglicherweise erfasst wurde. Wenn keiner dieser Gründe den Fehler Gründe hat, muss das Laufwerk möglicherweise ausgetauscht werden.
 
 
 +
 Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht erfolgreich aktiviert, selbst wenn der richtige Authentifizierungsschlüssel angegeben ist. Entfernen Sie die Laufwerke aus dem System, indem Sie sie auf verfügbar verschieben, löschen Sie sie sicher auf dem Laufwerk, und verschieben Sie sie wieder in aktiv.
 
-* *EnsembleDegraded*: Netzwerk-Konnektivität oder Strom wurde an einen oder mehrere der Ensemble-Knoten verloren.
+* *EnsembleDegraded*
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, stellen Sie die Netzwerkverbindung oder den Strom wieder her.
+Die Netzwerk-Konnektivität oder -Stromversorgung wurde auf einen oder mehrere der Ensemble-Knoten verloren.
 
-* *Ausnahme*: Ein Fehler wurde gemeldet, der nicht ein routinemäßiger Fehler ist. Diese Fehler werden nicht automatisch aus der Fehlerwarteschlange gelöscht.
 +
-*Zur Lösung* Wenden Sie sich an den NetApp Support.
+Um diesen Fehler zu beheben, stellen Sie die Netzwerkverbindung oder den Netzstrom wieder her.
 
-* *AusfallenSpaceTooFull*: Ein Blockservice reagiert nicht auf Datenschreibanfragen. Dadurch verfügt der Slice Service über keinen freien Speicherplatz zum Speichern ausgefallener Schreibvorgänge.
+* *Ausnahme*
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, stellen Sie die Blockdienste-Funktionalität wieder her, damit Schreibvorgänge normal weitergeführt werden und der fehlerhafte Speicherplatz aus dem Schichtdienst entfernt wird.
+Ein Fehler wurde gemeldet, der sich nicht auf einen Routinefehler ausstellt. Diese Fehler werden nicht automatisch aus der Fehlerwarteschlange gelöscht.
 
-* *FanSensor*: Ein Lüftersensor ist ausgefallen oder fehlt.
 +
-*Um diesen Fehler zu beheben*: Ersetzen Sie eine fehlerhafte Hardware, um diesen Fehler zu beheben.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *Fiber ChannelAccessDegraded*: Ein Fibre Channel-Knoten reagiert nicht über einen bestimmten Zeitraum auf andere Knoten im Speicher-Cluster. In diesem Status gilt der Node als nicht ansprechbar und generiert einen Cluster-Fehler.
+* *AusfallenSpaceTooFull*
 +
-*Zur Lösung*: Prüfen Sie die Netzwerkverbindung.
+Ein Blockservice reagiert nicht auf Datenschreibanfragen. Dadurch verfügt der Slice Service über keinen freien Speicherplatz zum Speichern ausgefallener Schreibvorgänge.
 
-* *Fiber ChannelAccessUnverfügbar*: Alle Fibre Channel-Knoten reagieren nicht. Die Node-IDs werden angezeigt.
 +
-*Zur Lösung*: Prüfen Sie die Netzwerkverbindung.
+Um diesen Fehler zu beheben, stellen Sie die Funktion zur Wiederherstellung von Blockdiensten wieder her, damit Schreibvorgänge normal fortgesetzt werden und der fehlerhafte Speicherplatz aus dem Schichtdienst entfernt werden kann.
 
-* *FiberChannelActiveIxL*: Die Anzahl der iXL Nexus nähert sich dem unterstützten Limit von 8000 aktiven Sitzungen pro Fibre Channel-Knoten.
+* *FanSensor*
++
+Ein Lüftersensor ist ausgefallen oder fehlt.
+
++
+Um diesen Fehler zu beheben, ersetzen Sie eine fehlerhafte Hardware.
+
+* *Fiber ChannelAccessDegraded*
++
+Ein Fibre Channel-Node reagiert nicht auf andere Nodes im Storage-Cluster über einen bestimmten Zeitraum. In diesem Status gilt der Node als nicht ansprechbar und generiert einen Cluster-Fehler.
+
++
+Überprüfen Sie die Netzwerkverbindung.
+
+* *FaserChannelAccessUnverfügbar*
++
+Alle Fibre-Channel-Nodes reagieren nicht mehr. Die Node-IDs werden angezeigt.
+
++
+Überprüfen Sie die Netzwerkverbindung.
+
+* *FiberChannelActiveIxL*
++
+Die Anzahl der iXL-Nexus nähert sich dem unterstützten Limit von 8000 aktiven Sitzungen pro Fibre-Channel-Node.
+
 +
 ** Best Practice-Grenze ist 5500.
 ** Warngrenze ist 7500.
@@ -207,9 +317,12 @@ Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht
 
 
 +
-*Um aufzulösen*: TSenken Sie den iXL Nexus unter dem Best Practice Limit von 5500.
+Um diesen Fehler zu beheben, reduzieren Sie die Anzahl der iXL Nexus unter dem Best Practice Limit von 5500.
 
-* *Fibre ChannelConfig*: Dieser Clusterfehler zeigt eine der folgenden Bedingungen an:
+* *Fiber ChannelConfig*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** An einem PCI-Steckplatz befindet sich ein unerwarteter Fibre Channel-Port.
 ** Es gibt ein unerwartetes Fibre Channel HBA-Modell.
@@ -219,18 +332,24 @@ Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht
 
 
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *Fiber ChannelIOPS*: Die Gesamtzahl der IOPS nähert sich dem IOPS-Limit für Fibre Channel Nodes im Cluster. Die Grenzen sind:
+* *FiberChannelIOPS*
++
+Die IOPS-Gesamtzahl nähert sich dem IOPS-Limit für Fibre Channel Nodes im Cluster. Die Grenzen sind:
+
 +
 ** FC0025: 50.000 IOPS bei 4-KB-Blockgröße pro Fibre Channel Node.
 ** FCN001: Grenzwert von 625.000 OPS bei einer Blockgröße von 4 KB pro Fibre Channel Node.
 
 
 +
-*Zur Behebung*: Zur Behebung dieses Fehlers verteilen Sie die Last auf alle verfügbaren Fibre-Channel-Knoten.
+Um diesen Fehler zu beheben, verteilen Sie die Last auf alle verfügbaren Fibre Channel Nodes.
 
-* *FiberChannelStaticIxL*: Die Anzahl der iXL Nexus nähert sich dem unterstützten Limit von 16000 statischen Sitzungen pro Fibre Channel-Knoten.
+* *FiberChannelStaticIxL*
++
+Die Anzahl der iXL-Nexus nähert sich dem unterstützten Limit von 16000 statischen Sitzungen pro Fibre-Channel-Node.
+
 +
 ** Best Practice-Grenze ist 11000.
 ** Warngrenze ist 15000.
@@ -238,25 +357,47 @@ Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht
 
 
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, reduzieren Sie die Anzahl der iXL Nexus unter dem Best Practice Limit von 11000.
+Um diesen Fehler zu beheben, reduzieren Sie die Anzahl der iXL Nexus unter dem Best Practice Limit von 11000.
 
-* *FileSystemkapazitätNiedrig*: Auf einem der Dateisysteme ist nicht genügend Platz vorhanden.
+* *DateiSystemkapazitätNiedrig*
 +
-*Um zu lösen*: Mehr Kapazität zum Dateisystem hinzufügen.
+Auf einem der Dateisysteme ist nicht genügend Platz vorhanden.
 
-* *FipsDrivesMismatch*: Ein nicht-FIPS-Laufwerk wurde physisch in einen FIPS-fähigen Storage-Node eingesetzt oder ein FIPS-Laufwerk wurde physisch in einen nicht FIPS-Storage-Node eingesetzt. Pro Node wird ein einziger Fehler generiert und alle betroffenen Laufwerke aufgelistet.
 +
-*Um diesen Fehler zu beheben*: Entfernen oder ersetzen Sie das nicht übereinstimmende Laufwerk oder die betreffenden Laufwerke.
+Um diesen Fehler zu beheben, fügen Sie dem Dateisystem mehr Kapazität hinzu.
 
-* *FipsDrivesOutOfCompliance*: Das System hat erkannt, dass die Verschlüsselung im Ruhezustand deaktiviert wurde, nachdem die FIPS-Laufwerke-Funktion aktiviert wurde. Dieser Fehler wird auch generiert, wenn die FIPS-Laufwerksfunktion aktiviert ist und ein Laufwerk oder ein Node außerhalb von FIPS im Storage-Cluster vorhanden ist.
+* *FileSystemIsReadOnly*
 +
-*Zur Auflösung*: Aktivieren Sie Verschlüsselung im Ruhezustand oder entfernen Sie die nicht-FIPS-Hardware aus dem Speicher-Cluster.
+Ein Dateisystem ist in einen schreibgeschützten Modus umgestiegen.
 
-* *FipsSelfTestFailure*: Das FIPS-Subsystem hat einen Fehler während des Selbsttests erkannt.
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *HardwareConfigMismatch*: Dieser Clusterfehler zeigt eine der folgenden Bedingungen an:
+* *FipsDrivesMismatch*
++
+Ein Laufwerk ohne FIPS wurde physisch in einen FIPS-fähigen Storage-Node eingesetzt oder ein FIPS-Laufwerk wurde physisch in einen Storage-Node außerhalb von FIPS eingesetzt. Pro Node wird ein einziger Fehler generiert und alle betroffenen Laufwerke aufgelistet.
+
++
+Um diesen Fehler zu beheben, entfernen oder ersetzen Sie das nicht übereinstimmende Laufwerk oder die betreffenden Laufwerke.
+
+* *FipsDriveOutOfCompliance*
++
+Das System hat erkannt, dass die Verschlüsselung im Ruhezustand nach Aktivierung der FIPS-Festplattenfunktion deaktiviert wurde. Dieser Fehler wird auch generiert, wenn die FIPS-Laufwerksfunktion aktiviert ist und ein Laufwerk oder ein Node außerhalb von FIPS im Storage-Cluster vorhanden ist.
+
++
+Um diesen Fehler zu beheben, aktivieren Sie die Verschlüsselung im Ruhezustand oder entfernen Sie die nicht-FIPS-Hardware aus dem Storage-Cluster.
+
+* *FipsSelfTestFailure*
++
+Das FIPS-Subsystem hat während des Self-Tests einen Ausfall erkannt.
+
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *HardwareConfigMismatch*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Die Konfiguration stimmt nicht mit der Knotendefinition überein.
 ** Für diesen Node-Typ gibt es eine falsche Laufwerksgröße.
@@ -266,28 +407,52 @@ Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht
 
 
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *IdPCertificateExpiration*: Das SSL-Zertifikat des Clusterdienstleisters zur Verwendung mit einem Drittanbieter-Identitätsanbieter (IdP) nähert sich dem Ablauf oder ist bereits abgelaufen. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+* *IdPCertificateExpiration*
 +
-[cols="25,75"]
+Das SSL-Zertifikat des Dienstanbieters des Clusters zur Verwendung mit einem Drittanbieter-Identitätsanbieter (IdP) nähert sich dem Ablaufdatum oder ist bereits abgelaufen. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+
++
 |===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Das Zertifikat läuft innerhalb von 30 Tagen ab. 
+ a| 
+Warnung
+ a| 
+Das Zertifikat läuft innerhalb von 30 Tagen ab.
 
 
-| Fehler | Das Zertifikat läuft innerhalb von 7 Tagen ab. 
+
+ a| 
+Fehler
+ a| 
+Das Zertifikat läuft innerhalb von 7 Tagen ab.
 
 
-| Kritisch | Das Zertifikat läuft innerhalb von 3 Tagen ab oder ist bereits abgelaufen. 
+
+ a| 
+Kritisch
+ a| 
+Das Zertifikat läuft innerhalb von 3 Tagen ab oder ist bereits abgelaufen.
+
 |===
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, aktualisieren Sie das SSL-Zertifikat, bevor es abläuft. Verwenden Sie die `UpdateIdpConfiguration` API-Methode mit `refreshCertificateExpirationTime=true` Um das aktualisierte SSL-Zertifikat bereitzustellen.
+Um diesen Fehler zu beheben, aktualisieren Sie das SSL-Zertifikat, bevor es abläuft. Verwenden Sie die UpdateIdpConfiguration API-Methode mit `refreshCertificateExpirationTime=true` Um das aktualisierte SSL-Zertifikat bereitzustellen.
 
-* *Inkonsistent BondModes*: Die Bond-Modi auf dem VLAN-Gerät fehlen. Dieser Fehler zeigt den erwarteten Bond-Modus und den derzeit verwendeten Bond-Modus an.
-* *Inkonsistent Mtus*: Dieser Clusterfehler weist auf eine der folgenden Bedingungen hin:
+* *Inkonsistenz BondModes*
++
+Die Bond-Modi auf dem VLAN-Gerät fehlen. Dieser Fehler zeigt den erwarteten Bond-Modus und den derzeit verwendeten Bond-Modus an.
+
+
+
+* *Inkonsistent Mtus*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Bond1G-Diskrepanz: Inkonsistente MTUs wurden an Bond1G-Schnittstellen erkannt.
 ** Bond10G-Diskrepanz: Inkonsistente MTUs wurden an Bond10G-Schnittstellen erkannt.
@@ -296,88 +461,203 @@ Sie können versuchen, ein Laufwerk wiederherzustellen, das die Sicherheit nicht
 +
 Dieser Fehler zeigt den betreffenden Node oder die betreffenden Knoten zusammen mit dem zugehörigen MTU-Wert an.
 
-* *Inkonsistent RoutingRules*: Die Routingregeln für diese Schnittstelle sind inkonsistent.
-* *IncommenSubnetMasks*: Die Netzwerkmaske auf dem VLAN-Gerät stimmt nicht mit der intern aufgezeichneten Netzwerkmaske für das VLAN überein. Dieser Fehler zeigt die erwartete Netzwerkmaske und die aktuell verwendete Netzwerkmaske an.
-* *IncorrectBondPortCount*: Die Anzahl der Bond-Ports ist falsch.
-* *InvalidConfiguredFibreChannelNodeCount*: Eine der beiden erwarteten Fibre-Channel-Knotenverbindungen ist beeinträchtigt. Dieser Fehler wird angezeigt, wenn nur ein Fibre-Channel-Knoten verbunden ist.
+* *UnstimmigeDie Routenregeln*
 +
-*Zur Lösung*: Prüfen Sie die Cluster-Netzwerkverbindung und die Netzwerkverkabelung und überprüfen Sie auf fehlgeschlagene Dienste. Falls keine Netzwerk- oder Serviceprobleme auftreten, wenden Sie sich an den NetApp Support, um einen Fibre Channel-Node zu ersetzen.
+Die Routingregeln für diese Schnittstelle sind inkonsistent.
 
-* *IrqBalanceFailed*: Beim Versuch, Interrupts auszugleichen, trat eine Ausnahme auf.
+* *Inkonsistent SubnetMasken*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Die Netzwerkmaske auf dem VLAN-Gerät stimmt nicht mit der intern aufgezeichneten Netzwerkmaske für das VLAN überein. Dieser Fehler zeigt die erwartete Netzwerkmaske und die aktuell verwendete Netzwerkmaske an.
 
-* *KmipCertificateFault*:
+* *IncorrectBondPortCount*
++
+Die Anzahl der Bond-Ports ist falsch.
+
+* *InvalidConfiguredFiberChannelNodeCount*
++
+Eine der beiden erwarteten Fibre-Channel-Node-Verbindungen ist beeinträchtigt. Dieser Fehler wird angezeigt, wenn nur ein Fibre-Channel-Knoten verbunden ist.
+
++
+Um diesen Fehler zu beheben, überprüfen Sie die Cluster-Netzwerkkonnektivität und die Netzwerkverkabelung und überprüfen Sie, ob Services ausgefallen sind. Falls keine Netzwerk- oder Serviceprobleme auftreten, wenden Sie sich an den NetApp Support, um einen Fibre Channel-Node zu ersetzen.
+
+* *IrqBalanceFailed*
++
+Beim Versuch, Interrupts auszugleichen, ist eine Ausnahme aufgetreten.
+
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *KmZertifizierungFault*
 +
 ** Das Zertifikat der Root Certification Authority (CA) nähert sich dem Ablaufdatum.
 +
-*Um diesen Fehler zu beheben*: Erwerben Sie ein neues Zertifikat von der Root CA mit einem Ablaufdatum von mindestens 30 Tagen und verwenden Sie ModifyKeyServerKmip, um das aktualisierte Root CA-Zertifikat bereitzustellen.
+Um diesen Fehler zu beheben, erwerben Sie ein neues Zertifikat von der Root CA mit Ablaufdatum mindestens 30 Tage aus und verwenden Sie ModifyKeyServerkmip, um das aktualisierte Root CA-Zertifikat bereitzustellen.
 
 ** Das Clientzertifikat nähert sich dem Ablaufdatum.
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, erstellen Sie einen neuen CSR mit GetClientCertificateSigningRequest, lassen Sie ihn unterzeichnen, um sicherzustellen, dass das neue Ablaufdatum mindestens 30 Tage abgelaufen ist, und verwenden Sie ModifyKeyServerKmip, um das auslaufende KMIP-Client-Zertifikat durch das neue Zertifikat zu ersetzen.
+Um diesen Fehler zu beheben, erstellen Sie einen neuen CSR mit GetClientCertificateSigningRequest, lassen Sie ihn unterzeichnen, um sicherzustellen, dass das neue Ablaufdatum mindestens 30 Tage beträgt, und verwenden Sie ModifyKeyServerkmip, um das auslaufende KMIP-Clientzertifikat durch das neue Zertifikat zu ersetzen.
 
 ** Das Zertifikat der Root Certification Authority (CA) ist abgelaufen.
 +
-*Um diesen Fehler zu beheben*: Erwerben Sie ein neues Zertifikat von der Root CA mit einem Ablaufdatum von mindestens 30 Tagen und verwenden Sie ModifyKeyServerKmip, um das aktualisierte Root CA-Zertifikat bereitzustellen.
+Um diesen Fehler zu beheben, erwerben Sie ein neues Zertifikat von der Root CA mit Ablaufdatum mindestens 30 Tage aus und verwenden Sie ModifyKeyServerkmip, um das aktualisierte Root CA-Zertifikat bereitzustellen.
 
 ** Client-Zertifikat ist abgelaufen.
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, erstellen Sie eine neue CSR mit `GetClientCertificateSigningRequest`, Haben sie unterzeichnet, um sicherzustellen, dass das neue Ablaufdatum ist mindestens 30 Tage aus, und verwenden `ModifyKeyServerKmip` Um das abgelaufene KMIP-Client-Zertifikat durch das neue Zertifikat zu ersetzen.
+Um diesen Fehler zu beheben, erstellen Sie einen neuen CSR mit GetClientCertificateSigningRequest, lassen Sie ihn unterzeichnen, um sicherzustellen, dass das neue Ablaufdatum mindestens 30 Tage beträgt, und verwenden Sie ModifyKeyServerkmip, um das abgelaufene KMIP-Clientzertifikat durch das neue Zertifikat zu ersetzen.
 
 ** Fehler bei der Root Certification Authority (CA)-Zertifizierung.
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, überprüfen Sie, ob das richtige Zertifikat geliefert wurde, und nehmen Sie das Zertifikat bei Bedarf von der Root-CA wieder auf. Nutzung `ModifyKeyServerKmip` So installieren Sie das richtige KMIP-Client-Zertifikat:
+Um diesen Fehler zu beheben, überprüfen Sie, ob das richtige Zertifikat bereitgestellt wurde und, falls erforderlich, das Zertifikat von der Stammzertifizierungsstelle erneut erwerben. Verwenden Sie ModifyKeyServerkmip, um das richtige KMIP-Client-Zertifikat zu installieren.
 
 ** Fehler beim Client-Zertifikat.
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, überprüfen Sie, ob das korrekte KMIP-Clientzertifikat installiert ist. Die Root-CA des Client-Zertifikats sollte auf dem EKS installiert werden. Nutzung `ModifyKeyServerKmip` So installieren Sie das richtige KMIP-Client-Zertifikat:
+Um diesen Fehler zu beheben, überprüfen Sie, ob das korrekte KMIP-Client-Zertifikat installiert ist. Die Root-CA des Client-Zertifikats sollte auf dem EKS installiert werden. Verwenden Sie ModifyKeyServerkmip, um das richtige KMIP-Client-Zertifikat zu installieren.
 
 
 
-* *KmipServerFault*:
+* *KmipServerFault*
 +
 ** Verbindungsfehler
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, überprüfen Sie, ob der externe Schlüsselserver aktiv ist und über das Netzwerk erreichbar ist. Nutzung `TestKeyServerKimp` Und `TestKeyProviderKmip` Zum Testen der Verbindung.
+Um diesen Fehler zu beheben, überprüfen Sie, ob der externe Schlüsselserver aktiv ist und über das Netzwerk erreichbar ist. Verwenden Sie TestKeyServerKimp und TestKeyProviderKmip, um Ihre Verbindung zu testen.
 
 ** Authentifizierungsfehler
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, überprüfen Sie, ob die richtige Root-CA- und KMIP-Client-Zertifikate verwendet werden und ob der private Schlüssel und das KMIP-Client-Zertifikat übereinstimmen.
+Um diesen Fehler zu beheben, überprüfen Sie, ob die richtige Root-CA- und KMIP-Client-Zertifikate verwendet werden und ob der private Schlüssel und das KMIP-Client-Zertifikat übereinstimmen.
 
 ** Serverfehler
 +
-*Zur Behebung*: Um diesen Fehler zu beheben, überprüfen Sie die Details auf den Fehler. Möglicherweise ist aufgrund des zurückgegebenen Fehlers eine Fehlerbehebung auf dem externen Schlüsselserver erforderlich.
+Um diesen Fehler zu beheben, überprüfen Sie die Details auf den Fehler. Möglicherweise ist aufgrund des zurückgegebenen Fehlers eine Fehlerbehebung auf dem externen Schlüsselserver erforderlich.
 
 
 
-* *SpeichereEccThreshold*: Es wurden eine große Anzahl korrigierbarer oder nicht korrigierbarer ECC-Fehler erkannt. Wenn ein Schweregrad des Typs Fehler zurückgegeben wird, ist dies wahrscheinlich auf einen DIMM-Fehler zurückzuführen.
+* * MemoryEccThreshold*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
-
-* *Speichernutzung*: Speichernutzung ist über normal. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
-+
-
-NOTE: Weitere Informationen zum Fehler finden Sie in der Überschrift Details.
+Es wurden eine große Anzahl von korrigierbaren oder nicht korrigierbaren ECC-Fehlern erkannt. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
 
 +
-[cols="25,75"]
 |===
+
+
+| Ereignis | Schweregrad | Beschreibung 
+
+
+ a| 
+Ein einzelnes DIMM cErrorCount erreicht cDimmCorrectableErrWarnThreshold.
+ a| 
+Warnung
+ a| 
+Korrigierbare ECC-Speicherfehler über dem Schwellenwert auf DIMM: <Prozessor> <DIMM Slot>
+
+
+
+ a| 
+Ein einzelnes DIMM cErrorCount bleibt über cDimmCorrectableErrWarnThreshold bis cErrorFaultTimer für das DIMM abläuft.
+ a| 
+Fehler
+ a| 
+Korrektur von ECC-Speicherfehlern über dem Schwellenwert auf DIMM: <Processor> <DIMM>
+
+
+
+ a| 
+Ein Speicher-Controller meldet cErrorCount über cMemCtlrCorrectableErrWarnThreshold und cMemCtlrCorrectableErrWarnDauer wird angegeben.
+ a| 
+Warnung
+ a| 
+Korrigierbare ECC-Speicherfehler oberhalb des Schwellenwerts für Speicher-Controller: <Prozessor> <Speicher-Controller>
+
+
+
+ a| 
+Ein Speicher-Controller meldet cErrorCount über cMemCtlrCorrectableErrWarnThreshold bis cErrorFaultTimer für den Speicher-Controller abläuft.
+ a| 
+Fehler
+ a| 
+Korrektur von ECC-Speicherfehlern über dem Schwellenwert auf DIMM: <Processor> <DIMM>
+
+
+
+ a| 
+Ein einzelnes DIMM meldet einen uErrorCount über Null, aber kleiner als cDimmUncorrectTableErrFaultThreshold.
+ a| 
+Warnung
+ a| 
+Nicht korrigierbarer ECC-Speicherfehler auf DIMM: <Prozessor> <DIMM Slot> erkannt
+
+
+
+ a| 
+Ein einzelnes DIMM meldet einen uErrorCount von mindestens cDimmUncorrectTableErrFaultThreshold.
+ a| 
+Fehler
+ a| 
+Nicht korrigierbarer ECC-Speicherfehler auf DIMM: <Prozessor> <DIMM Slot> erkannt
+
+
+
+ a| 
+Ein Speicher-Controller meldet einen uErrorCount über Null, aber kleiner als cMemCtlrUncorregictErrFaultThreshold.
+ a| 
+Warnung
+ a| 
+Nicht korrigierbarer ECC-Speicherfehler auf Speichercontroller: <Prozessor> <Speichercontroller> erkannt
+
+
+
+ a| 
+Ein Speicher-Controller meldet einen uErrorCount von mindestens cMemCtlrUncorregictErrFaultThreshold.
+ a| 
+Fehler
+ a| 
+Nicht korrigierbarer ECC-Speicherfehler auf Speichercontroller: <Prozessor> <Speichercontroller> erkannt
+
+|===
++
+Um diesen Fehler zu beheben, wenden Sie sich an den NetApp Support.
+
+* *SpeichernUserageThreshold*
++
+Die Speicherauslastung ist über dem Normalwert. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+
++
+
+NOTE: Weitere Informationen zum Fehlertyp finden Sie in der Überschrift *Details* im Fehlerfehler.
+
++
+|===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Der Systemspeicher ist schwach. 
+ a| 
+Warnung
+ a| 
+Der Systemspeicher ist schwach.
 
 
-| Fehler | Der Systemspeicher ist sehr gering. 
+
+ a| 
+Fehler
+ a| 
+Der Systemspeicher ist sehr gering.
 
 
-| Kritisch | Der Systemspeicher wird vollständig verbraucht. 
+
+ a| 
+Kritisch
+ a| 
+Der Systemspeicher wird vollständig verbraucht.
+
 |===
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Um diesen Fehler zu beheben, wenden Sie sich an den NetApp Support.
 
-* *MetadataClusterFull*: Es gibt nicht genügend freien Metadaten-Speicherplatz, um einen einzelnen Node-Verlust zu unterstützen. Siehe `GetClusterFullThreshold` API-Methode für Details zu Cluster-Auslastungsstufen. Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+* * MetadataClusterFull*
++
+Es ist nicht ausreichend freier Speicherplatz für Metadaten vorhanden, um einen Ausfall eines einzelnen Nodes zu unterstützen. Weitere Informationen zu Cluster-Auslastungsstufen finden Sie in der GetClusterFullThreshold API-Methode. Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Stage3Low (Warnung): Benutzerdefinierter Schwellenwert wurde überschritten. Passen Sie Cluster-Volleinstellungen an oder fügen Sie weitere Nodes hinzu.
 ** Stage4Critical (Fehler): Es gibt nicht genügend Speicherplatz zur Wiederherstellung nach einem Ausfall eines 1 Node. Das Erstellen von Volumes, Snapshots und Klonen ist nicht zulässig.
@@ -385,13 +665,19 @@ NOTE: Weitere Informationen zum Fehler finden Sie in der Überschrift Details.
 
 
 +
-*Zur Auflösung*: Löschen oder löschen Sie Volumes oder fügen Sie dem Speicher-Cluster einen weiteren Speicherknoten hinzu.
+Löschen oder löschen Sie Volumes, um diesen Fehler zu beheben, oder fügen Sie dem Storage-Cluster einen weiteren Storage-Node hinzu.
 
-* *MtuCheckFailure*: Ein Netzwerkgerät ist nicht für die richtige MTU-Größe konfiguriert.
+* *MtuCheckFailure*
 +
-*Zum Auflösen*: Stellen Sie sicher, dass alle Netzwerkschnittstellen und Switch-Ports für Jumbo Frames konfiguriert sind (MTUs bis 9000 Byte).
+Ein Netzwerkgerät ist nicht für die richtige MTU-Größe konfiguriert.
 
-* *NetworkConfig*: Dieser Clusterfehler weist auf eine der folgenden Bedingungen hin:
++
+Um diesen Fehler zu beheben, stellen Sie sicher, dass alle Netzwerkschnittstellen und Switch-Ports für Jumbo Frames konfiguriert sind (MTUs mit einer Größe von bis zu 9000 Byte).
+
+* *NetworkConfig*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Eine erwartete Schnittstelle ist nicht vorhanden.
 ** Es ist eine doppelte Schnittstelle vorhanden.
@@ -400,159 +686,306 @@ NOTE: Weitere Informationen zum Fehler finden Sie in der Überschrift Details.
 
 
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *NoVerfügbarVirtualNetworkIPAdddresses*: Es gibt keine verfügbaren virtuellen Netzwerkadressen im Block der IP-Adressen.
+* *NoVerfügbarVirtualNetzwerkIPAddresses*
 +
-[listing]
-----
- virtualNetworkID # TAG(###) has no available storage IP addresses. Additional nodes cannot be added to the cluster.
-----
-+
-*Zur Auflösung*: Fügen Sie dem Block der virtuellen Netzwerkadressen weitere IP-Adressen hinzu.
+Im Block der IP-Adressen sind keine virtuellen Netzwerkadressen verfügbar.
 
-* *NodeHardwareFault (Netzwerkschnittstelle <Name> ist ausgefallen oder das Kabel ist nicht angeschlossen)*: Eine Netzwerkschnittstelle ist entweder ausgefallen oder das Kabel ist nicht angeschlossen.
 +
-*Zum Auflösen*: Überprüfen Sie die Netzwerkverbindung für den Knoten oder Knoten.
+** VirtualNetworkID # TAG(\###) hat keine Speicher-IP-Adressen. Dem Cluster können keine weiteren Nodes hinzugefügt werden.
 
-* *NodeHardwareFault (Laufwerksverschlüsselungsstatus entspricht dem Verschlüsselungsstatus des Node für das Laufwerk im Steckplatz <Node-Steckplatz><Laufwerkseinschub>)*: Ein Laufwerk entspricht nicht den Verschlüsselungsfunktionen des Speicherknoten, in dem es installiert ist.
-* *NodeHardwareFault (Falscher <Laufwerkstyp> Laufwerksgröße <tatsächliche Größe> für das Laufwerk in Steckplatz <Node-Steckplatz><Laufwerkseinschub> für diesen Node-Typ - erwartet <erwartete Größe>)*: Ein Storage-Node enthält ein Laufwerk, das die falsche Größe für diesen Node hat.
-* *NodeHardwareFault (nicht unterstütztes Laufwerk in Slot <Node Slot><Drive Slot> gefunden; Laufwerksstatistiken und Integritätsinformationen sind nicht verfügbar)*: Ein Speicherknoten enthält ein Laufwerk, das nicht unterstützt wird.
-* *NodeHardwareFault (das Laufwerk in Slot <Node Slot><Drive Slot> sollte die Firmware-Version <erwartete Version> verwenden, verwendet aber nicht unterstützte Version <tatsächliche Version>)*: Ein Speicherknoten enthält ein Laufwerk mit einer nicht unterstützten Firmware-Version.
-* *NoteWartungs-Modus*: Ein Knoten wurde in den Wartungsmodus versetzt. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+
 +
-[cols="25,75"]
+Um diesen Fehler zu beheben, fügen Sie dem Block der virtuellen Netzwerkadressen weitere IP-Adressen hinzu.
+
+* *NodeHardwareFault (Netzwerkschnittstelle <Name> ist ausgefallen oder das Kabel ist nicht angeschlossen)*
++
+Eine Netzwerkschnittstelle ist entweder ausgefallen oder das Kabel ist nicht angeschlossen.
+
++
+Um diesen Fehler zu beheben, überprüfen Sie die Netzwerkverbindung für den Knoten oder Knoten.
+
+* *NodeHardwareFault (Laufwerksverschlüsselungsstatus entspricht dem Verschlüsselungsstatus des Node für das Laufwerk in Steckplatz <Node-Steckplatz><Laufwerkseinschub>)*
++
+Ein Laufwerk entspricht nicht den Verschlüsselungsfunktionen des in installierten Storage-Nodes.
+
+* *NodeHardwareFault (Falscher <Laufwerkstyp> Laufwerksgröße <tatsächliche Größe> für das Laufwerk in Steckplatz <Node-Steckplatz><Laufwerkseinschub> für diesen Node-Typ - erwartete <erwartete Größe>)*
++
+Ein Storage-Node enthält ein Laufwerk, das die falsche Größe für diesen Node hat.
+
+* *NodeHardwareFault (nicht unterstütztes Laufwerk in Steckplatz <Node Slot><Drive Slot> gefunden; Laufwerksstatistiken und Integritätsinformationen sind nicht verfügbar)*
++
+Ein Storage-Node enthält ein Laufwerk, das nicht unterstützt wird.
+
+* *NodeHardwareFault (das Laufwerk in Slot <Node Slot><Drive Slot> sollte die Firmware-Version <erwartete Version> verwenden, wird aber nicht unterstützte Version <tatsächliche Version> verwenden)*
++
+Ein Speicherknoten enthält ein Laufwerk, auf dem eine nicht unterstützte Firmware-Version ausgeführt wird.
+
+* *NoteWartungs-Modus*
++
+Ein Node wurde im Wartungsmodus versetzt. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+
++
 |===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Gibt an, dass sich der Node noch im Wartungsmodus befindet. 
+ a| 
+Warnung
+ a| 
+Gibt an, dass sich der Node noch im Wartungsmodus befindet.
 
 
-| Fehler | Zeigt an, dass der Wartungsmodus nicht deaktiviert wurde, wahrscheinlich aufgrund von fehlgeschlagenen oder aktiven Standardys. 
+
+ a| 
+Fehler
+ a| 
+Zeigt an, dass der Wartungsmodus nicht deaktiviert wurde, wahrscheinlich aufgrund von fehlgeschlagenen oder aktiven Standardys.
+
 |===
 +
-*Zum Auflösen*: Den Wartungsmodus nach Abschluss der Wartung deaktivieren. Wenn der Fehler auf der Fehlerebene weiterhin besteht, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+Um diesen Fehler zu beheben, deaktivieren Sie den Wartungsmodus nach Abschluss der Wartung. Wenn der Fehler auf der Fehlerebene weiterhin besteht, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *NodeOffline*: Element Software kann nicht mit dem angegebenen Knoten kommunizieren. Überprüfen Sie die Netzwerkverbindung.
-* *NotusingLACPBondMode*: LACP Bonding Mode ist nicht konfiguriert.
+* *NodeOffline*
 +
-*Zur Behebung*: Verwenden Sie LACP Bonding bei der Bereitstellung von Storage-Nodes. Bei LACP ist es möglicherweise zu Performance-Problemen kommen, wenn LACP nicht aktiviert und ordnungsgemäß konfiguriert ist.
+Element Software kann nicht mit dem angegebenen Node kommunizieren. Überprüfen Sie die Netzwerkverbindung.
 
-* *NtpServerUnaptable*: Der Speicher-Cluster kann nicht mit dem angegebenen NTP-Server oder Servern kommunizieren.
+* *NotusingLACPBondMode*
 +
-*Zum Auflösen*: Überprüfen Sie die Konfiguration für den NTP-Server, das Netzwerk und die Firewall.
+LACP Bonding-Modus ist nicht konfiguriert.
 
-* *NtpTimeNotInSync*: Der Unterschied zwischen Speicherclusterzeit und der angegebenen NTP-Serverzeit ist zu groß. Der Speichercluster kann die Differenz nicht automatisch korrigieren.
 +
-*Zum Auflösen*: Verwenden Sie NTP-Server, die intern zu Ihrem Netzwerk sind, anstatt die Installationsstandards. Wenn Sie interne NTP-Server verwenden und das Problem weiterhin besteht, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+Um diesen Fehler zu beheben, verwenden Sie LACP Bonding bei der Implementierung von Storage-Nodes. Es kann zu Performance-Problemen kommen, wenn LACP nicht aktiviert und ordnungsgemäß konfiguriert ist.
 
-* *NvramDeviceStatus*: Ein NVRAM-Gerät hat einen Fehler, ist ausgefallen oder ist ausgefallen. Dieser Fehler weist folgende Schweregrade auf:
+* *NtpServerUnerreichbar*
 +
-[cols="25,75"]
+Das Storage-Cluster kann nicht mit dem angegebenen NTP-Server oder den angegebenen Servern kommunizieren.
+
++
+Um diesen Fehler zu beheben, überprüfen Sie die Konfiguration für den NTP-Server, das Netzwerk und die Firewall.
+
+* *NtpTimeNotInSync*
++
+Der Unterschied zwischen der Storage-Cluster-Zeit und der angegebenen NTP-Serverzeit ist zu groß. Der Speichercluster kann die Differenz nicht automatisch korrigieren.
+
++
+Um diesen Fehler zu beheben, verwenden Sie NTP-Server, die intern zu Ihrem Netzwerk sind, anstatt die Installationsstandards. Wenn Sie interne NTP-Server verwenden und das Problem weiterhin besteht, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *NvramDeviceStatus*
++
+Ein NVRAM-Gerät weist einen Fehler auf, ist ausgefallen oder ist ausgefallen. Dieser Fehler weist folgende Schweregrade auf:
+
++
 |===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Die Hardware hat eine Warnung erkannt. Dieser Zustand kann vorübergehend sein, z. B. eine Temperaturwarnung. * NvmLifetimeError * nvmLifetimeStatus * energySourceLifeTimeStatus * EnergiengySourceTemperatureStatus * warnThresholdExceedexklert 
+ a| 
+Warnung
+ a| 
+Die Hardware hat eine Warnung erkannt. Dieser Zustand kann vorübergehend sein, z. B. eine Temperaturwarnung.
+
+** NvmLifetimeFehler
+** NvmLifetimeStatus
+** EnergiengySourceLifetimeStatus
+** EnergiengySourceTemperatureStatus
+** WarningThresholdExceped
 
 
-| Fehler | Die Hardware hat einen Fehler oder kritischen Status erkannt. Der Cluster-Master versucht, das Slice-Laufwerk aus dem Betrieb zu entfernen (dies erzeugt ein Ereignis zum Entfernen des Laufwerks). Wenn sekundäre Schichtdienste nicht verfügbar sind, wird das Laufwerk nicht entfernt. Zusätzlich zu den Warnungsebene-Fehlern zurückgegebene Fehler: * Der Mount-Punkt für NVRAM-Gerät existiert nicht. * Die NVRAM-Gerätepartition ist nicht vorhanden. * NVRAM-Gerätepartition ist vorhanden, aber nicht angehängt. 
 
 
-| Kritisch | Die Hardware hat einen Fehler oder kritischen Status erkannt. Der Cluster-Master versucht, das Slice-Laufwerk aus dem Betrieb zu entfernen (dies erzeugt ein Ereignis zum Entfernen des Laufwerks). Wenn sekundäre Schichtdienste nicht verfügbar sind, wird das Laufwerk nicht entfernt. * Persistenz verloren * armStatusSaveNArmed * csaveStatusError 
+ a| 
+Fehler
+ a| 
+Die Hardware hat einen Fehler oder kritischen Status erkannt. Der Cluster-Master versucht, das Slice-Laufwerk aus dem Betrieb zu entfernen (dies erzeugt ein Ereignis zum Entfernen des Laufwerks). Wenn sekundäre Schichtdienste nicht verfügbar sind, wird das Laufwerk nicht entfernt. Zusätzlich zu den Warnungsebenen-Fehlern zurückgegebene Fehler:
+
+** Der Mount-Punkt für NVRAM-Gerät ist nicht vorhanden.
+** Die NVRAM-Gerätepartition ist nicht vorhanden.
+** Die NVRAM-Gerätepartition ist vorhanden, aber nicht angehängt.
+
+
+
+
+ a| 
+Kritisch
+ a| 
+Die Hardware hat einen Fehler oder kritischen Status erkannt. Der Cluster-Master versucht, das Slice-Laufwerk aus dem Betrieb zu entfernen (dies erzeugt ein Ereignis zum Entfernen des Laufwerks). Wenn sekundäre Schichtdienste nicht verfügbar sind, wird das Laufwerk nicht entfernt.
+
+** Persistenz verloren
+** ArmStatusSaveNArmed
+** CsaveStatusfehler
+
+
 |===
 +
-*Zur Auflösung*: Ersetzen Sie eine fehlerhafte Hardware im Knoten. Falls das Problem dadurch nicht behoben werden kann, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+Ersetzen Sie alle fehlerhaften Hardware im Node. Falls das Problem dadurch nicht behoben werden kann, wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *PowerSupplyError*: Dieser Clusterfehler weist auf eine der folgenden Bedingungen hin:
+* *PowerSupplyError*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Es ist kein Netzteil vorhanden.
 ** Ein Netzteil ist fehlgeschlagen.
 ** Ein Netzteileingang fehlt oder außerhalb des zulässigen Bereichs liegt.
+
+
 +
-*Zur Auflösung*: Überprüfen Sie, ob alle Knoten mit redundanter Stromversorgung versorgt werden. Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+Um diesen Fehler zu beheben, überprüfen Sie, ob alle Knoten mit redundanter Stromversorgung versorgt werden. Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-
-
-* *ProvisionedSpaceTooFull*: Die insgesamt bereitgestellte Kapazität des Clusters ist zu voll.
+* *ProvisionedSpaceTooFull*
 +
-*Zur Auflösung*: Fügen Sie mehr bereitgestellten Speicherplatz hinzu, oder löschen und löschen Sie Volumes.
+Die insgesamt bereitgestellte Kapazität des Clusters ist zu voll.
 
-* *RemoteRepAsyncDelayExceped*: Die konfigurierte asynchrone Verzögerung für die Replikation wurde überschritten. Überprüfen Sie die Netzwerkverbindung zwischen Clustern.
-* *RemoteRepClusterFull*: Die Volumes haben die Remote-Replikation angehalten, da der Ziel-Storage-Cluster zu voll ist.
 +
-*Zur Auflösung*: Geben Sie Speicherplatz auf dem Ziel-Storage-Cluster frei.
+Um diesen Fehler zu beheben, fügen Sie mehr bereitgestellten Speicherplatz hinzu oder löschen und löschen Sie Volumes.
 
-* *RemoteRepSnapshotClusterFull*: Die Volumes haben die Remote-Replikation von Snapshots unterbrochen, weil der Ziel-Storage-Cluster zu voll ist.
+* *EntferntRepAsyncDelayExceeded*
 +
-*Zur Auflösung*: Geben Sie Speicherplatz auf dem Ziel-Storage-Cluster frei.
+Die konfigurierte asynchrone Verzögerung der Replikation wurde überschritten. Überprüfen Sie die Netzwerkverbindung zwischen Clustern.
 
-* *RemoteRepSnapshotsExceedededeLimit*: Die Volumes haben die Remote-Replikation von Snapshots angehalten, da das Ziel-Speicher-Cluster-Volume seine Snapshot-Grenze überschritten hat.
+* *EntfernteRepClusterFull*
 +
-*Zur Auflösung*: Erhöhen Sie die Snapshot-Grenze auf dem Ziel-Speicher-Cluster.
+Die Remote-Replikation der Volumes wurde angehalten, da der Ziel-Storage-Cluster zu voll ist.
 
-* *PlaneActionError*: Mindestens eine der geplanten Aktivitäten lief, war aber gescheitert. Der Fehler wird gelöscht, wenn die geplante Aktivität erneut ausgeführt wird und erfolgreich ist, wenn die geplante Aktivität gelöscht wird oder wenn die Aktivität angehalten und fortgesetzt wird.
-* *SensorReadingFailed*: Der Baseboard Management Controller (BMC) Selbsttest ist fehlgeschlagen oder ein Sensor konnte nicht mit dem BMC kommunizieren.
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Um diesen Fehler zu beheben, geben Sie Speicherplatz auf dem Ziel-Storage-Cluster frei.
 
-* *ServiceNotRunning*: Ein erforderlicher Dienst läuft nicht.
+* *EntfernteRepSnapshotClusterFull*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Die Remote-Replizierung der Snapshots wurde durch die Volumes unterbrochen, weil der Ziel-Storage-Cluster zu voll ist.
 
-* *SliceServiceTooFull*: Ein Schichtdienst hat ihm zu wenig Kapazität zugewiesen.
 +
-*Zur Auflösung*: Fügen Sie mehr bereitgestellte Kapazität hinzu.
+Um diesen Fehler zu beheben, geben Sie Speicherplatz auf dem Ziel-Storage-Cluster frei.
 
-* *SliceServiceUnHealthy*: Das System hat erkannt, dass ein Schichtdienst ungesund ist und ihn automatisch stillsetzt.
+* *EntferntRepSnapshotsExceedLimit*
++
+Die Volumes haben die Remote-Replizierung von Snapshots angehalten, da das Ziel-Storage-Cluster-Volume seine Snapshot-Grenze überschritten hat.
+
++
+Um diesen Fehler zu beheben, erhöhen Sie die Snapshot-Grenze auf dem Ziel-Speicher-Cluster.
+
+* *Fehler beim PlaneActionError*
++
+Mindestens eine der geplanten Aktivitäten wurde ausgeführt, ist aber fehlgeschlagen.
+
++
+Der Fehler wird gelöscht, wenn die geplante Aktivität erneut ausgeführt wird und erfolgreich ist, wenn die geplante Aktivität gelöscht wird oder wenn die Aktivität angehalten und fortgesetzt wird.
+
+* *SensorReadingFailed*
++
+Ein Sensor konnte nicht mit dem Baseboard Management Controller (BMC) kommunizieren.
+
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *ServiceNotRunning*
++
+Ein erforderlicher Dienst wird nicht ausgeführt.
+
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *SliceServiceTooFull*
++
+Einem Schichtdienst ist zu wenig provisionierte Kapazität zugewiesen.
+
++
+Um diesen Fehler zu beheben, fügen Sie mehr bereitgestellte Kapazität hinzu.
+
+* *SchliceServiceUngesund*
++
+Das System hat erkannt, dass ein Schichtdienst ungesund ist und ihn automatisch stillsetzt.
+
 +
 ** Schweregrad = Warnung: Es werden keine Maßnahmen ergriffen. Dieser Warnzeitraum läuft in 6 Minuten ab.
 ** Schweregrad = Fehler: Das System setzt Daten automatisch zurück und repliziert seine Daten auf andere gesunde Laufwerke.
 
 
 +
-*Zur Lösung*: Prüfen Sie auf Probleme mit der Netzwerkverbindung und Hardwarefehler. Es gibt weitere Fehler, wenn bestimmte Hardwarekomponenten ausgefallen sind. Der Fehler wird gelöscht, wenn der Schichtdienst verfügbar ist oder wenn der Dienst deaktiviert wurde.
+Prüfen Sie auf Probleme mit der Netzwerkverbindung und Hardwarefehler. Es gibt weitere Fehler, wenn bestimmte Hardwarekomponenten ausgefallen sind. Der Fehler wird gelöscht, wenn der Schichtdienst verfügbar ist oder wenn der Dienst deaktiviert wurde.
 
-* *SshEnabled*: Der SSH-Dienst ist auf einem oder mehreren Knoten im Speicher-Cluster aktiviert.
+* *Sshenenabled*
 +
-*Zum Beheben*: Deaktivieren Sie den SSH-Service auf den entsprechenden Nodes oder kontaktieren Sie den NetApp Support.
+Der SSH-Service ist auf einem oder mehreren Nodes im Storage-Cluster aktiviert.
 
-* *SslCertificateExpiration*: Das mit diesem Knoten verknüpfte SSL-Zertifikat nähert sich dem Ablauf oder ist abgelaufen. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
 +
-[cols="25,75"]
+Um diesen Fehler zu beheben, deaktivieren Sie den SSH-Service auf dem entsprechenden Node oder Nodes oder wenden Sie sich an den NetApp Support, um Unterstützung zu erhalten.
+
+* *SslCertificateExpiration*
++
+Das mit diesem Knoten verknüpfte SSL-Zertifikat nähert sich dem Ablaufdatum oder ist abgelaufen. Dieser Fehler nutzt die folgenden Schweregrade auf der Grundlage der Dringlichkeit:
+
++
 |===
+
+
 | Schweregrad | Beschreibung 
 
 
-| Warnung | Das Zertifikat läuft innerhalb von 30 Tagen ab. 
+ a| 
+Warnung
+ a| 
+Das Zertifikat läuft innerhalb von 30 Tagen ab.
 
 
-| Fehler | Das Zertifikat läuft innerhalb von 7 Tagen ab. 
+
+ a| 
+Fehler
+ a| 
+Das Zertifikat läuft innerhalb von 7 Tagen ab.
 
 
-| Kritisch | Das Zertifikat läuft innerhalb von 3 Tagen ab oder ist bereits abgelaufen. 
+
+ a| 
+Kritisch
+ a| 
+Das Zertifikat läuft innerhalb von 3 Tagen ab oder ist bereits abgelaufen.
+
 |===
 +
-*Zur Auflösung*: Erneuern Sie das SSL-Zertifikat. Wenden Sie sich bei Bedarf an den NetApp Support, um Hilfe zu erhalten.
+Um diesen Fehler zu beheben, erneuern Sie das SSL-Zertifikat. Wenden Sie sich bei Bedarf an den NetApp Support, um Hilfe zu erhalten.
 
-* *Strandecacity*: Ein einzelner Node macht mehr als die Hälfte der Storage Cluster-Kapazität aus. Um die Datenredundanz aufrechtzuerhalten, reduziert das System die Kapazität des größten Node, sodass einige seiner Blockkapazitäten ungenutzt (nicht verwendet) sind.
+* * Stranddecacity*
 +
-*Zur Lösung*: Fügen Sie weitere Laufwerke zu bestehenden Storage Nodes hinzu oder fügen Sie dem Cluster Storage Nodes hinzu.
+Ein einzelner Node verursacht mehr als die Hälfte der Storage-Cluster-Kapazität.
 
-* *TempSensor*: Ein Temperatursensor meldet höhere als normale Temperaturen. Dieser Fehler kann in Verbindung mit PowerSupplyError oder FanSensor Fehlern ausgelöst werden.
 +
-*Zur Behebung*: Prüfen Sie auf Luftstrombehinderungen in der Nähe des Lagerclusters. Wenden Sie sich bei Bedarf an den NetApp Support, um Hilfe zu erhalten.
+Um die Datenredundanz aufrechtzuerhalten, reduziert das System die Kapazität des größten Node, sodass einige seiner Blockkapazitäten ungenutzt (nicht verwendet) sind.
 
-* *Upgrade*: Ein Upgrade läuft bereits seit mehr als 24 Stunden.
 +
-*Zur Behebung*: Führen Sie das Upgrade fort oder wenden Sie sich an den NetApp Support.
+Fügen Sie zur Behebung dieses Fehlers weitere Laufwerke zu vorhandenen Speicher-Nodes hinzu oder fügen Sie dem Cluster Storage-Nodes hinzu.
 
-* *UnresponsivveService*: Ein Dienst reagiert nicht mehr.
+* *TempSensor*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Ein Temperatursensor meldet höhere Temperaturen als normale Temperaturen. Dieser Fehler kann in Verbindung mit PowerSupplyError oder FanSensor Fehlern ausgelöst werden.
 
-* *VirtualNetworkConfig*: Dieser Clusterfehler weist auf eine der folgenden Bedingungen hin:
++
+Um diesen Fehler zu beheben, prüfen Sie, ob Luftstrombehinderungen in der Nähe des Storage-Clusters vorhanden sind. Wenden Sie sich bei Bedarf an den NetApp Support, um Hilfe zu erhalten.
+
+* *Upgrade*
++
+Ein Upgrade läuft seit mehr als 24 Stunden.
+
++
+Setzen Sie das Upgrade fort, oder wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *UnresponsiveService*
++
+Ein Dienst reagiert nicht mehr.
+
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
+
+* *VirtualNetworkConfig*
++
+Dieser Cluster-Fehler gibt eine der folgenden Bedingungen an:
+
 +
 ** Eine Schnittstelle ist nicht vorhanden.
 ** Ein falscher Namespace auf einer Schnittstelle.
@@ -563,19 +996,17 @@ NOTE: Weitere Informationen zum Fehler finden Sie in der Überschrift Details.
 
 
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-* *VolumesDegradiert*: Sekundäre Volumen haben das Replizieren und Synchronisieren noch nicht abgeschlossen. Die Meldung wird gelöscht, wenn die Synchronisierung abgeschlossen ist.
-* *VolumesOffline*: Ein oder mehrere Volumes im Speicher-Cluster sind offline. Der volumendegestufte Fehler wird ebenfalls vorhanden sein.
+* *VolumesDegradiert*
 +
-*Zur Behebung*: Wenden Sie sich an den NetApp Support.
+Die Replikation und Synchronisierung der sekundären Volumes ist nicht abgeschlossen. Die Meldung wird gelöscht, wenn die Synchronisierung abgeschlossen ist.
 
+* *VolumesOffline*
++
+Ein oder mehrere Volumes im Storage-Cluster sind offline. Der Fehler *volumeDegraded* ist ebenfalls vorhanden.
 
++
+Wenden Sie sich an den NetApp Support, um Hilfe zu erhalten.
 
-
-
-== Weitere Informationen
-
-* https://docs.netapp.com/us-en/hci/index.html["NetApp HCI-Dokumentation"^]
-* https://www.netapp.com/data-storage/solidfire/documentation["Seite „SolidFire und Element Ressourcen“"^]
 
