@@ -10,11 +10,13 @@ keywords: netapp, hci, kubernetes, on premise, cloud services
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ../media/
+:imagesdir: ./media/
 
 
 [role="lead"]
 Bevor Sie zum Managen Ihres NetApp HCI oder SolidFire All-Flash-Array-Storage das NetApp Element Plug-in für VMware vCenter Server verwenden, müssen Sie sicherstellen, dass Ihr System die Plug-in-Anforderungen erfüllt.
+
+Für vCenter Server 8.0 und 7.0 ist dies möglich <<create_vcp_role,Erstellen Sie eine „VCP Rolle“ in vCenter>> Für ein Element Plug-in-Benutzerkonto und Zuweisen von Berechtigungen zum Registrieren oder Aktualisieren des Element Plug-ins für vCenter Server und Ausführen von Element Plug-in-Verwaltungsaufgaben.
 
 [role="tabbed-block"]
 ====
@@ -96,6 +98,90 @@ Das Plug-in unterstützt folgende Hauptversionen:
 == Anforderungen an Netzwerk-Ports
 
 Sie müssen einige TCP-Ports über die Edge-Firewall Ihres Datacenters zulassen, sodass Sie das System Remote managen und Clients außerhalb Ihres Datacenters eine Verbindung zu Ressourcen herstellen können. Eine umfassende Liste der in NetApp HCI- und SolidFire-Systemen verwendeten Ports finden Sie hier link:https://docs.netapp.com/us-en/hci/docs/hci_prereqs_required_network_ports.html["Seite"].
+
+
+
+== (Optional) Erstellen Sie eine „VCP Rolle“ in vCenter
+
+Für vCenter Server 8.0 und 7.0 können Sie in vCenter für ein Element Plug-in-Benutzerkonto eine „VCP-Rolle“ erstellen und Berechtigungen zur Registrierung oder Aktualisierung des Element Plug-in für vCenter Server zuweisen sowie Element Plug-in-Verwaltungsaufgaben durchführen.
+
+.Schritte
+. Melden Sie sich beim vSphere Web Client als Administrator an.
+. Wählen Sie * Administration*.
+. Wählen Sie *Single Sign On* > *Benutzer und Gruppen*.
+. Wählen Sie die Registerkarte *Users* aus und wählen Sie in der Liste *Domain* die Zieldomäne aus.
+. Wählen Sie *Hinzufügen*.
+. Füllen Sie die Felder im Fenster *Benutzer hinzufügen* aus und wählen Sie *Hinzufügen*.
++
+image:vcp_add_user.PNG["Screenshot der Felder „Benutzer hinzufügen“"]
+
+. Wählen Sie *Zugriffskontrolle* > *Rollen* und dann *Neu*.
+. Führen Sie im Fenster *Neue Rolle* die folgenden Schritte aus:
++
+.. Geben Sie unter *Rollenname* „VCProle“ ein.
+.. Ender eine Beschreibung.
+.. Wählen Sie aus der Liste *Show* die Berechtigungen für Ihre vCenter Server-Version aus:
++
+... Wählen Sie die Berechtigungen für vCenter Server 8.0 aus:
++
+**** Kryptografische Vorgänge > VM registrieren
+**** Datastore > Alles Auswählen
+**** Nebenstelle > Alle Auswählen
+**** Host > Konfiguration > Einstellungen ändern
+**** Host > Konfiguration > Verbindung
+**** Host > Konfiguration > Wartung
+**** Host > Konfiguration > Konfiguration der Speicherpartition
+**** Host > Konfiguration > Systemmanagement
+**** Host > Konfiguration > Systemressourcen
+**** Privilege.Task.Update.Task.Update.Label > Privilege.Task.Update.Task.Update.Label
+**** Aufgaben > Alle Auswählen
+**** Virtuelle Maschine > Inventar bearbeiten > Registrieren
+**** VM-Storage-Richtlinien > VM-Storage-Richtlinien Berechtigungen anzeigen > VM-Storage-Richtlinien anzeigen
+
+
+... Wählen Sie die Berechtigungen für vCenter Server 7.x:
++
+**** Kryptografische Vorgänge > VM registrieren
+**** Datastore > Alles Auswählen
+**** Nebenstelle > Alle Auswählen
+**** Host > Konfiguration > Einstellungen ändern
+**** Host > Konfiguration > Verbindung
+**** Host > Konfiguration > Wartung
+**** Host > Konfiguration > Konfiguration der Speicherpartition
+**** Host > Konfiguration > Systemmanagement
+**** Host > Konfiguration > Systemressourcen
+**** Plug-In > Alles Auswählen
+**** Geplante Aufgabe > Alle auswählen
+**** Speicheransichten > Alle Auswählen
+**** Aufgaben > Alle Auswählen
+
+
+
+
+.. Wählen Sie *Erstellen*.
+
+
++
+image:vcp_create_vcprole.PNG["Screenshot der Felder „Neue Rolle“"]
+
+. Wählen Sie *Globale Berechtigungen*, und wählen Sie *Hinzufügen*.
+. Führen Sie im Fenster *Berechtigung hinzufügen* die folgenden Schritte aus:
++
+--
+.. Wählen Sie die Zieldomain aus der Liste *Domain* aus.
+.. Geben Sie im Feld *Benutzer/Gruppe* die Element Plug-in-Benutzer-ID ein.
+.. Wählen Sie *VCProle* aus der Liste *Rolle* aus.
+.. Wählen Sie *an Kinder weitergeben* und wählen Sie *OK*.
+
+
+--
++
+image:vcp_assign_vcprole.PNG["Screenshot der Felder „Berechtigung hinzufügen“"]
+
++
+Sie können sich jetzt über das „vcpuser“-Konto beim vSphere Web Client anmelden.
+
+
 
 
 

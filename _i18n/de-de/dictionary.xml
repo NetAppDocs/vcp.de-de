@@ -2761,4 +2761,52 @@
   <block id="9451a3dfb762350c7cbcbe9ee518b8af" category="paragraph">Die Replikation und Synchronisierung der sekundären Volumes ist nicht abgeschlossen. Die Meldung wird gelöscht, wenn die Synchronisierung abgeschlossen ist.</block>
   <block id="f18e735235d5a307ceb3e60d3161fa15" category="list-text">*VolumesOffline*</block>
   <block id="bd0e78ee6b3a04179ae19c5baa7233f3" category="paragraph">Ein oder mehrere Volumes im Storage-Cluster sind offline. Der Fehler *volumeDegraded* ist ebenfalls vorhanden.</block>
+  <block id="644c5c3e42ab1df305052c80680df2ca" category="inline-xref">Erstellen Sie eine „VCP Rolle“ in vCenter</block>
+  <block id="d64a2b92e4ea6060988dc03f5e5113fa" category="paragraph">Für vCenter Server 8.0 und 7.0 ist dies möglich <block ref="80e1b054839423dbd44653f6cd7557e3" category="inline-xref-macro-rx"></block> Für ein Element Plug-in-Benutzerkonto und Zuweisen von Berechtigungen zum Registrieren oder Aktualisieren des Element Plug-ins für vCenter Server und Ausführen von Element Plug-in-Verwaltungsaufgaben.</block>
+  <block id="7cc7fd4493e163c595e2dabf484d9c9a" category="section-title">(Optional) Erstellen Sie eine „VCP Rolle“ in vCenter</block>
+  <block id="050119bbf4fa875736755d8256c34fed" category="paragraph">Für vCenter Server 8.0 und 7.0 können Sie in vCenter für ein Element Plug-in-Benutzerkonto eine „VCP-Rolle“ erstellen und Berechtigungen zur Registrierung oder Aktualisierung des Element Plug-in für vCenter Server zuweisen sowie Element Plug-in-Verwaltungsaufgaben durchführen.</block>
+  <block id="d5bb073b6bd682a668721b757a9e61de" category="list-text">Melden Sie sich beim vSphere Web Client als Administrator an.</block>
+  <block id="8524fc8052d7c8f5a5557839d96cd0f7" category="list-text">Wählen Sie * Administration*.</block>
+  <block id="bc729d3b22ea3e08238255fb733b75e4" category="list-text">Wählen Sie *Single Sign On* &gt; *Benutzer und Gruppen*.</block>
+  <block id="ebd11e76c0b736dd6dc24addd8e6608f" category="list-text">Wählen Sie die Registerkarte *Users* aus und wählen Sie in der Liste *Domain* die Zieldomäne aus.</block>
+  <block id="fa12509cfb8e8ccded16e2a254e988c4" category="list-text">Wählen Sie *Hinzufügen*.</block>
+  <block id="09166198be13ed464f3dba33744e2b11" category="list-text">Füllen Sie die Felder im Fenster *Benutzer hinzufügen* aus und wählen Sie *Hinzufügen*.</block>
+  <block id="7f0e45b2a7b37d33b8e5ec6012c42841" category="inline-image-macro">Screenshot der Felder „Benutzer hinzufügen“</block>
+  <block id="e0cecd6609fe5cb500562692e5b44586" category="paragraph"><block ref="e0cecd6609fe5cb500562692e5b44586" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="cbf6f433c2146e5cb893afde836b7584" category="list-text">Wählen Sie *Zugriffskontrolle* &gt; *Rollen* und dann *Neu*.</block>
+  <block id="f34080b41d0f41a6c1144b3336935b25" category="list-text">Führen Sie im Fenster *Neue Rolle* die folgenden Schritte aus:</block>
+  <block id="23a1a1c1bda77f4c3673f7fbe4ca2878" category="list-text">Geben Sie unter *Rollenname* „VCProle“ ein.</block>
+  <block id="8051682eea92ae27fbd88fda94829d22" category="list-text">Ender eine Beschreibung.</block>
+  <block id="cbef7f3bcab72196c6bc5c548e2ed7f7" category="list-text">Wählen Sie aus der Liste *Show* die Berechtigungen für Ihre vCenter Server-Version aus:</block>
+  <block id="45db17c966a6c26ef47a4ba1c610215f" category="list-text">Wählen Sie die Berechtigungen für vCenter Server 8.0 aus:</block>
+  <block id="74f62e29bec771603bb7251042c8ded8" category="list-text">Kryptografische Vorgänge &gt; VM registrieren</block>
+  <block id="5014a958f399385be4f44a0520625edd" category="list-text">Datastore &gt; Alles Auswählen</block>
+  <block id="bd14c779d6a491d4992aebb056db7d55" category="list-text">Nebenstelle &gt; Alle Auswählen</block>
+  <block id="61249cd3896c13e946979764cc0c9063" category="list-text">Host &gt; Konfiguration &gt; Einstellungen ändern</block>
+  <block id="0b23b0d39406a9b3915a59b194bf63e5" category="list-text">Host &gt; Konfiguration &gt; Verbindung</block>
+  <block id="256d33dbb5c1c290b364b11571a9d57f" category="list-text">Host &gt; Konfiguration &gt; Wartung</block>
+  <block id="092c601502be0f60d8c97c58fe469f3f" category="list-text">Host &gt; Konfiguration &gt; Konfiguration der Speicherpartition</block>
+  <block id="e722e18169e2f876c6e8b936c2ee4c57" category="list-text">Host &gt; Konfiguration &gt; Systemmanagement</block>
+  <block id="1ec37c60f04ba576cbdb4dc7597a3a62" category="list-text">Host &gt; Konfiguration &gt; Systemressourcen</block>
+  <block id="d79c90f48cef0babeb322f302fa6191f" category="list-text">Privilege.Task.Update.Task.Update.Label &gt; Privilege.Task.Update.Task.Update.Label</block>
+  <block id="294ef7232b74c7e7748074ee0e298862" category="list-text">Aufgaben &gt; Alle Auswählen</block>
+  <block id="7de295a163b1ed913ab7bcbcfee0029a" category="list-text">Virtuelle Maschine &gt; Inventar bearbeiten &gt; Registrieren</block>
+  <block id="c1165f36f2062c025c4da87ce3b31703" category="list-text">VM-Storage-Richtlinien &gt; VM-Storage-Richtlinien Berechtigungen anzeigen &gt; VM-Storage-Richtlinien anzeigen</block>
+  <block id="77cd5b8cd461de562694a99ba9dee580" category="list-text">Wählen Sie die Berechtigungen für vCenter Server 7.x:</block>
+  <block id="cb63c230d719fa24116203b496dee10d" category="list-text">Host &gt; Konfiguration &gt; Systemressourcen</block>
+  <block id="5dc59e217df09f6415678f6607f5df72" category="list-text">Plug-In &gt; Alles Auswählen</block>
+  <block id="9af128212a39b4bf7fbdef0570e64c29" category="list-text">Geplante Aufgabe &gt; Alle auswählen</block>
+  <block id="117fe7a1900288d871a49853a8b64f59" category="list-text">Speicheransichten &gt; Alle Auswählen</block>
+  <block id="bf18811faac9b8e4fcaebab51afd1113" category="list-text">Wählen Sie *Erstellen*.</block>
+  <block id="138f8f5d73de2cb5fb20f743a7f5dc45" category="inline-image-macro">Screenshot der Felder „Neue Rolle“</block>
+  <block id="f45b7593c255832f87fd8eff35a580ac" category="paragraph"><block ref="f45b7593c255832f87fd8eff35a580ac" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="0f7d1490dda99e395678a3cf9e7c62a8" category="list-text">Wählen Sie *Globale Berechtigungen*, und wählen Sie *Hinzufügen*.</block>
+  <block id="fdd8b6bb99fb0bd050cf23d180fa409d" category="list-text">Führen Sie im Fenster *Berechtigung hinzufügen* die folgenden Schritte aus:</block>
+  <block id="91c619d30319a7c8737a0afb04770a94" category="list-text">Wählen Sie die Zieldomain aus der Liste *Domain* aus.</block>
+  <block id="e63d96af7b54d58a62c992b3f3beea69" category="list-text">Geben Sie im Feld *Benutzer/Gruppe* die Element Plug-in-Benutzer-ID ein.</block>
+  <block id="37518f126d566dda3513459fc2d4a601" category="list-text">Wählen Sie *VCProle* aus der Liste *Rolle* aus.</block>
+  <block id="b1b266d490da6f5aec9dc67b1ef044d7" category="list-text">Wählen Sie *an Kinder weitergeben* und wählen Sie *OK*.</block>
+  <block id="94ca762adece646829ae29b252ee07c1" category="inline-image-macro">Screenshot der Felder „Berechtigung hinzufügen“</block>
+  <block id="5e636586f9af12688faa4fc928306db1" category="paragraph"><block ref="5e636586f9af12688faa4fc928306db1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="091b350d4631df39f5b5dc80970dd512" category="paragraph">Sie können sich jetzt über das „vcpuser“-Konto beim vSphere Web Client anmelden.</block>
 </blocks>
