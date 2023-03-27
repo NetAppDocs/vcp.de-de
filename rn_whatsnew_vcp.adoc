@@ -14,7 +14,13 @@ keywords: netapp, vcp, vcenter, plugin, element, new, whats new
 
 
 [role="lead"]
-Das NetApp Element Plug-in für vCenter Server 5.0 enthält die Remote-Plug-in-Architektur, mit der die Plug-in-Funktionen in einen vSphere Client integriert werden können, ohne innerhalb des vCenter Servers ausgeführt zu werden. Die Remote-Architektur unterstützt Plug-in-Isolierung und ermöglicht die horizontale Skalierung von Plug-ins für große vSphere Umgebungen. Das Remote-Element-Plug-in wird in einem Docker Container innerhalb eines Management-Node zusammen mit Managementservices implementiert. link:vcp_concept_remote_plugin_architecture.html["Weitere Informationen ."]
+Das NetApp Element Plug-in für vCenter Server 5.1 verbessert die Sicherheit und Leistung. https://library.netapp.com/ecm/ecm_download_file/ECMLP2885734["Weitere Informationen ."^].
+
+
+
+== NetApp Element Plug-in für vCenter Server 5.0
+
+Das NetApp Element Plug-in für vCenter Server 5.0 enthält die Remote-Plug-in-Architektur, mit der die Plug-in-Funktionen in einen vSphere Client integriert werden können, ohne innerhalb des vCenter Servers ausgeführt zu werden. Die Remote-Architektur unterstützt Plug-in-Isolierung und ermöglicht die horizontale Skalierung von Plug-ins für große vSphere Umgebungen. Das Remote-Element-Plug-in wird in einem Docker Container innerhalb eines Management-Node zusammen mit Managementservices implementiert. link:vcp_concept_remote_plugin_architecture.html["Weitere Informationen ."].
 
 Das Element vCenter Plug-in 5.0 unterstützt VMware vSphere 8.0, 7.0 und 7.0 Update 1, 2 und 3, einschließlich vCenter Server, ESXi und vSphere HTML5 Web Client.
 

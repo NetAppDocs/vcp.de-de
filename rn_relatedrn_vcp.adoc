@@ -59,7 +59,8 @@ NOTE: Sie werden aufgefordert, sich mit Ihren Anmeldedaten für die NetApp Suppo
 
 == NetApp Element Plug-in für VMware vCenter Server
 
-* https://library.netapp.com/ecm/ecm_download_file/ECMLP2884992["VCenter Plug-in 5.0 – Versionshinweise"^] _NEU_
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP2885734["Versionshinweise zu vCenter Plug-in 5.1"^] _NEU_
+* https://library.netapp.com/ecm/ecm_download_file/ECMLP2884992["VCenter Plug-in 5.0 – Versionshinweise"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2884458["VCenter Plug-in 4.10 – Versionshinweise"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2881904["VCenter Plug-in 4.9 – Versionshinweise"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2879296["VCenter Plug-in 4.8 – Versionshinweise"^]

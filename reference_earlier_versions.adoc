@@ -14,14 +14,17 @@ summary: Die Dokumentation ist für Versionen vor Version 4.6 des NetApp Element
 
 
 [role="lead"]
-Außerdem ist die Dokumentation für Versionen verfügbar, die vor Version 5.0 des NetApp Element Plug-ins für VMware vCenter Server liegen.
+Die Dokumentation ist auch für Versionen vor Version 5.1 des NetApp Element-Plug-ins für VMware vCenter Server verfügbar.
 
 
-NOTE: Das link:index.html["Link zur Dokumentation"] Für Element vCenter Plug-in 5.0 umfasst außerdem Versionen 4.6, 4.7, 4.8, 4.9 und 4.10.
+NOTE: Das link:index.html["Link zur Dokumentation"] Für Element vCenter Plug-in 5.1 umfasst außerdem Versionen 4.6, 4.7, 4.8, 4.9 und 4.10 Und 5.0.
 
 [cols="4*"]
 |===
 | Version | Versionshinweise zum Plug-in | Versionshinweise zu Managementservices | Benutzerhandbuch 
+
+
+| 5.0 | https://library.netapp.com/ecm/ecm_download_file/ECMLP2884992["PDF"^] | https://library.netapp.com/ecm/ecm_download_file/ECMLP2884992["2.21.61"^] | link:index.html["Verlinken"] 
 
 
 | 4.10 | https://library.netapp.com/ecm/ecm_download_file/ECMLP2884458["PDF"^] | https://library.netapp.com/ecm/ecm_download_file/ECMLP2884458["2.21.61"^] | link:index.html["Verlinken"] 

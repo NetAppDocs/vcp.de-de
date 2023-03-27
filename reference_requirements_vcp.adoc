@@ -16,7 +16,7 @@ keywords: netapp, hci, kubernetes, on premise, cloud services
 [role="lead"]
 Bevor Sie zum Managen Ihres NetApp HCI oder SolidFire All-Flash-Array-Storage das NetApp Element Plug-in für VMware vCenter Server verwenden, müssen Sie sicherstellen, dass Ihr System die Plug-in-Anforderungen erfüllt.
 
-Für vCenter Server 8.0 und 7.0 ist dies möglich <<create_vcp_role,Erstellen Sie eine „VCP Rolle“ in vCenter>> Für ein Element Plug-in-Benutzerkonto und Zuweisen von Berechtigungen zum Registrieren oder Aktualisieren des Element Plug-ins für vCenter Server und Ausführen von Element Plug-in-Verwaltungsaufgaben.
+Für vCenter Server 8.0 und 7.0 ist dies möglich <<create_vcp_role,Erstellen Sie eine „VCP Rolle“ in vCenter>> Für ein Element Plug-in-Benutzerkonto und die Zuweisung von Berechtigungen zum Registrieren oder Aktualisieren des Element Plug-ins für vCenter Server sowie zum Ausführen von Element Plug-in-Verwaltungsaufgaben.
 
 [role="tabbed-block"]
 ====
@@ -103,7 +103,7 @@ Sie müssen einige TCP-Ports über die Edge-Firewall Ihres Datacenters zulassen,
 
 == (Optional) Erstellen Sie eine „VCP Rolle“ in vCenter
 
-Für vCenter Server 8.0 und 7.0 können Sie in vCenter für ein Element Plug-in-Benutzerkonto eine „VCP-Rolle“ erstellen und Berechtigungen zur Registrierung oder Aktualisierung des Element Plug-in für vCenter Server zuweisen sowie Element Plug-in-Verwaltungsaufgaben durchführen.
+Für vCenter Server 8.0 und 7.0 können Sie eine „VCP-Rolle“ in vCenter für ein Element Plug-in-Benutzerkonto erstellen und Berechtigungen zur Registrierung oder Aktualisierung des Element Plug-in für vCenter Server zuweisen sowie Element Plug-in-Verwaltungsaufgaben durchführen.
 
 .Schritte
 . Melden Sie sich beim vSphere Web Client als Administrator an.
