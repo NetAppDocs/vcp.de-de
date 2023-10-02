@@ -47,6 +47,7 @@ link:https://www.netapp.com/company/legal/privacy-policy/["https://www.netapp.co
 
 In den Benachrichtigungsdateien finden Sie Informationen zu Urheberrechten und Lizenzen von Drittanbietern, die in der NetApp Software verwendet werden.
 
+* link:media/mgmt_svcs_2.24_notice.pdf["Hinweis zu Managementservices 2.24.40 (NetApp Element-Plug-in für VMware vCenter Server 5.2.12)"^]
 * link:media/mgmt_svcs_2.23_notice.pdf["Hinweis zu Managementservices 2.23.64 (NetApp Element-Plug-in für VMware vCenter Server 5.1.12)"^]
 * link:media/mgmt_svcs_2.22_notice.pdf["Hinweis zu Management Services 2.22.7 (NetApp Element-Plug-in für VMware vCenter Server 5.0.37)"^]
 * link:media/mgmt_svcs_2.21_notice.pdf["Hinweis zu Management Services 2.21.61 (NetApp Element Plug-in für VMware vCenter Server 4.10.12)"^]

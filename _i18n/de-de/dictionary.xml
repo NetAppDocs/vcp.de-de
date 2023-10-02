@@ -1434,7 +1434,6 @@
   <block id="ec039d5a9609896b1378c280f9eb795e" category="paragraph">Vergewissern Sie sich, dass Ihr System die Anforderungen für die Verwendung von Element vCenter Plug-in 5.0 oder höher erfüllt.</block>
   <block id="87e51067c2a7529e01c8fa57d7d29919" category="paragraph">Zur Verwendung des Element vCenter Plug-ins ist VMware vSphere 8.0 und 7.0 erforderlich, einschließlich vCenter und ESXi mit konfiguriertem iSCSI-Netzwerkadapter.</block>
   <block id="39bb4a890cda10e989012ed844843a1a" category="paragraph">Das Plug-in unterstützt die folgenden gängigen Versionen von VMware Software:</block>
-  <block id="a293a3d51c53fc838afbc761865ddaa8" category="list-text">VSphere 8.0 einschließlich vCenter Server, ESXi, VMFS5 und VMFS6 Datastores</block>
   <block id="9cf493ed2f9140046fab3919844fdd27" category="list-text">VSphere 7.0 und 7.0 Update 1, 2 und 3, einschließlich vCenter Server, ESXi und VMFS5 und VMFS6 Datastores</block>
   <block id="92a2b5cb9c6906035c2864fa225e1940" category="inline-link">Artikel</block>
   <block id="1400ae8c17045a12d78fd12af11a1d4c" category="admonition">VMware vSphere 6.5 und 6.7 haben den Support-Status am 15. Oktober 2022 beendet. Ab Element Plug-in 5.0 werden vSphere 6.5 und 6.7 nicht mehr unterstützt. Weitere Informationen finden Sie hier<block ref="6a2f70d2ba0033763d7682575dc0f9df" category="inline-link-rx"></block>.</block>
@@ -1480,7 +1479,6 @@
   <block id="4eed15839b8c708f78b2b696364ff0aa" category="list-text"><block ref="4eed15839b8c708f78b2b696364ff0aa" category="inline-link-rx"></block></block>
   <block id="3938cfdbe176bad61cedb25bdb572858" category="section-title">NetApp Element Software</block>
   <block id="1dea56720635d200a6c7b3a71efca6ab" category="inline-link">Versionshinweise zu NetApp Element Software 12.7</block>
-  <block id="3e51721b09445e45502532be5e6096fc" category="list-text"><block ref="939f531b35412529043c2c302552fa24" category="inline-link-rx"></block> _NEU_</block>
   <block id="875455659aea2dfd3f63e40de150b31c" category="inline-link">Versionshinweise zu NetApp Element Software 12.5</block>
   <block id="6a881248d046a90f573e41d5ebe1362e" category="list-text"><block ref="6a881248d046a90f573e41d5ebe1362e" category="inline-link-rx"></block></block>
   <block id="56570048e2475ec7b64ee91388743714" category="inline-link">Versionshinweise zu NetApp Element Software 12.3.2</block>
@@ -2472,7 +2470,6 @@
   <block id="be11c74c1dd7f307bb80183a90dc2067" category="sidebar">Los geht's</block>
   <block id="4b983fff716674f120176e09551dd445" category="sidebar">Produktübersicht</block>
   <block id="5aa6ea991a62f7c634596fc6b1987052" category="sidebar">Plug-in installieren und implementieren</block>
-  <block id="2f1a3e62508d88ddc31f1aa72a8334d4" category="sidebar">Know-How</block>
   <block id="33871b6190a8d5adbe8b15282054766c" category="sidebar">Was ist neu</block>
   <block id="7d0ee6fed10d3d4e5c9ee496729ab519" category="sidebar">Versionshinweise</block>
   <block id="09a3438150481f613a24e724fafccaaa" category="sidebar">SolidFire All-Flash-Storage-Systeme</block>
@@ -2796,18 +2793,14 @@
   <block id="94ca762adece646829ae29b252ee07c1" category="inline-image-macro">Screenshot der Felder „Berechtigung hinzufügen“</block>
   <block id="5e636586f9af12688faa4fc928306db1" category="paragraph"><block ref="5e636586f9af12688faa4fc928306db1" category="inline-image-macro-rx" type="image"></block></block>
   <block id="091b350d4631df39f5b5dc80970dd512" category="paragraph">Sie können sich jetzt über das „vcpuser“-Konto beim vSphere Web Client anmelden.</block>
-  <block id="b66c8a9d68bd0aeaa399e0f8ae04a674" category="paragraph">Sie können ein Upgrade des NetApp Element Plug-ins für vCenter Server durchführen, indem Sie die für Ihre Installation beschriebenen Schritte ausführen. Das NetApp Element vCenter Plug-in 5.1 ist außerhalb der Element und NetApp HCI Versionen als Teil eines Management-Services-Bundles verfügbar.</block>
   <block id="9fbd9fb1c98fdc3b7aeb8cf30510365b" category="list-text">Wenn Sie von Element Plug-in für vCenter 4.x auf 5.x aktualisieren, gehen die bereits mit dem Plug-in konfigurierten Cluster verloren, da die Daten nicht von einer vCenter-Instanz in ein Remote-Plug-in kopiert werden können. Sie müssen die Cluster dem Remote-Plug-in erneut hinzufügen. Dies ist eine einmalige Aktivität beim Upgrade von einem lokalen auf ein Remote-Plug-in.</block>
   <block id="54db42757b5d75d2f660dc70f35850cf" category="inline-link">Versionshinweise zu vCenter Plug-in 5.1</block>
   <block id="410ecb079e286058eeb2bc6b56d9379c" category="list-text"><block ref="410ecb079e286058eeb2bc6b56d9379c" category="inline-link-rx"></block></block>
   <block id="a03e0fc189a20ac61004659572cb08f7" category="paragraph">Bei vSphere 6.7 und älteren Versionen hat die Deinstallation des Plug-ins die gleiche Wirkung wie das Deaktivieren des Plug-ins, entfernt jedoch nicht alle lokal installierten Dateien und Ordner. Informationen zum Entfernen aller Plug-in-Dateien finden Sie in den Anweisungen auf <block ref="fa2a18d6b355d33b924c5f0014a5db48" category="inline-link-macro-rx"></block>.</block>
-  <block id="892ff8e8ba8a88084fa51c3657a81ab8" category="paragraph">Die Dokumentation ist auch für Versionen vor Version 5.1 des NetApp Element-Plug-ins für VMware vCenter Server verfügbar.</block>
-  <block id="5fd41756fdaa6f29377e51f411e6ef7b" category="admonition">Das <block ref="f85d5f4f47d1b49f55d365d260fa53d2" category="inline-link-macro-rx"></block> Für Element vCenter Plug-in 5.1 umfasst außerdem Versionen 4.6, 4.7, 4.8, 4.9 und 4.10 Und 5.0.</block>
   <block id="336669dbe720233ed5577ddf81b653d3" category="cell">5.0</block>
   <block id="ccdedb9c7dac93213366653d125b0ffe" category="cell"><block ref="ccdedb9c7dac93213366653d125b0ffe" category="inline-link-rx"></block></block>
   <block id="db26a1619b3544de39b9ae935f1f5853" category="paragraph">Für vCenter Server 8.0 und 7.0 ist dies möglich <block ref="80e1b054839423dbd44653f6cd7557e3" category="inline-xref-macro-rx"></block> Für ein Element Plug-in-Benutzerkonto und die Zuweisung von Berechtigungen zum Registrieren oder Aktualisieren des Element Plug-ins für vCenter Server sowie zum Ausführen von Element Plug-in-Verwaltungsaufgaben.</block>
   <block id="905117ce83c2d95fd055b77e296e775c" category="paragraph">Für vCenter Server 8.0 und 7.0 können Sie eine „VCP-Rolle“ in vCenter für ein Element Plug-in-Benutzerkonto erstellen und Berechtigungen zur Registrierung oder Aktualisierung des Element Plug-in für vCenter Server zuweisen sowie Element Plug-in-Verwaltungsaufgaben durchführen.</block>
-  <block id="61ad36f15eb6ab7927cdc50f6e089a98" category="list-text"><block ref="410ecb079e286058eeb2bc6b56d9379c" category="inline-link-rx"></block> _NEU_</block>
   <block id="d59048f21fd887ad520398ce677be586" category="inline-link">Weitere Informationen .</block>
   <block id="29d500d8439e3dd944e651a8cafac013" category="paragraph">Das NetApp Element Plug-in für vCenter Server 5.1 verbessert die Sicherheit und Leistung.<block ref="8f4569e0d2bf7d4026fc97d3aaa16f27" category="inline-link-rx"></block>.</block>
   <block id="91b1f6d002234f22dafb0acd912c78a9" category="section-title">NetApp Element Plug-in für vCenter Server 5.0</block>
@@ -2824,4 +2817,32 @@
   <block id="dd38f906b37d412de7d1c1dcf4cbf31c" category="paragraph"><block ref="dd38f906b37d412de7d1c1dcf4cbf31c" category="inline-link-macro-rx"></block></block>
   <block id="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-macro"><block ref="8acb58cbd50ef1b468a020ee0bd351d3" category="inline-link-rx"></block></block>
   <block id="2352c4e1f4d0024ade0869e00e6243f4" category="paragraph"><block ref="2352c4e1f4d0024ade0869e00e6243f4" category="inline-link-macro-rx"></block></block>
+  <block id="c383a818c3a85c8ddf42d50823c74c87" category="list-text">*Systemzustand der benutzerdefinierten Schutzdomäne*: Zeigt den Integritätsstatus der benutzerdefinierten Schutzdomäne für den Cluster an, wenn eine benutzerdefinierte Schutzdomäne auf dem Cluster konfiguriert ist.</block>
+  <block id="e8337edeb04bc8a7d5079c3ae42aca9e" category="paragraph">Die folgenden Daten zeigen den Schutz an, der gegen den Ausfall einer der benutzerdefinierten Schutzdomänen für das Cluster verfügbar ist.</block>
+  <block id="1b15621f73b7acf776f4bab322f48c37" category="list-text">*Schutzstufe*: Gibt den Status des gesamten Schutzniveaus an.</block>
+  <block id="e953d3ede945712963b8633a34a16147" category="list-text">*Block Capacity*: Zeigt den aktuellen Status des Schutzniveaus des Block Services Subsystems an.</block>
+  <block id="0903e7a25b6fe3c4c1c292bfb50b6305" category="paragraph">Sie gibt außerdem den Schwellenwert für die Gesamtkapazität an, bei dem die Ausfallsicherheit verloren geht.</block>
+  <block id="3def03a8540a1fa0cd5fddb64be14a52" category="list-text">*Metadaten-Kapazität*: Zeigt den aktuellen Status des Metadaten-Services-Subsystems an.</block>
+  <block id="9055d5b4f435ab7f0fd544794b6cd19f" category="list-text">*Ensemble Nodes*: Gibt den aktuellen Status des Schutzniveaus des Teilsystems Ensemblemitglieder an.</block>
+  <block id="939f531b35412529043c2c302552fa24" category="list-text"><block ref="939f531b35412529043c2c302552fa24" category="inline-link-rx"></block></block>
+  <block id="ce397f79b5032c3e327db3efe5a6048a" category="inline-link">Versionshinweise zu vCenter Plug-in 5.2</block>
+  <block id="4718467fa890cd0dcf159b3d461cedbe" category="list-text"><block ref="6bd87cf3d55c2ead3ab585e965bea4db" category="inline-link-rx"></block> _NEU_</block>
+  <block id="0d8e7da83905e55b509122516259e079" category="paragraph">Sie können ein Upgrade des NetApp Element Plug-ins für vCenter Server durchführen, indem Sie die für Ihre Installation beschriebenen Schritte ausführen. Das NetApp Element vCenter Plug-in 5.2 ist außerhalb der Element und NetApp HCI Versionen als Teil eines Management-Services-Bundles verfügbar.</block>
+  <block id="6bd87cf3d55c2ead3ab585e965bea4db" category="list-text"><block ref="6bd87cf3d55c2ead3ab585e965bea4db" category="inline-link-rx"></block></block>
+  <block id="ce4da9d1400f05b36779b0eb51082347" category="inline-link">Erfahren Sie mehr über benutzerdefinierte Schutzdomänen</block>
+  <block id="c671ce05a947b4fc3538276dc92df5bc" category="paragraph"><block ref="94416f01b8f87d5b898c4987d363cee6" category="inline-link-rx"></block>.</block>
+  <block id="93fa53865774995b6cd95dfc1939095f" category="list-text">VSphere 8.0 Update 1, einschließlich vCenter Server, ESXi und VMFS5- und VMFS6-Datastores</block>
+  <block id="faf6c38631911f7840c3498b4ec9f746" category="inline-link-macro">Hinweis zu Managementservices 2.24.40 (NetApp Element-Plug-in für VMware vCenter Server 5.2.12)</block>
+  <block id="25ca5b0e8a707ce2e66aeb1f6f90e710" category="list-text"><block ref="25ca5b0e8a707ce2e66aeb1f6f90e710" category="inline-link-macro-rx"></block></block>
+  <block id="fb7ee1da3ef0eafb228b5df1bc76e51a" category="paragraph">Die Dokumentation ist auch für Versionen vor Version 5.2 des NetApp Element-Plug-ins für VMware vCenter Server verfügbar.</block>
+  <block id="514f715e57edd4343e805d5f5384b20e" category="admonition">Das <block ref="f85d5f4f47d1b49f55d365d260fa53d2" category="inline-link-macro-rx"></block> Für Element vCenter Plug-in 5.2 umfasst außerdem Versionen 5.1, 5.0, 4.10, 4.9 und 4.8 4.7 und 4.6.</block>
+  <block id="43ff194f410f3e93a8680bef5ba51e50" category="cell">5.1</block>
+  <block id="8ef365dbc309c214b67cabb8e4667395" category="cell"><block ref="8ef365dbc309c214b67cabb8e4667395" category="inline-link-rx"></block></block>
+  <block id="f8d3d7b8669323aed37a5ab85af833f2" category="inline-link">2.23.64</block>
+  <block id="6770db097fe40e46c77f186c92635e8d" category="cell"><block ref="6770db097fe40e46c77f186c92635e8d" category="inline-link-rx"></block></block>
+  <block id="5c6a9de58feba2a173cb8abb3af2ec85" category="paragraph">Das NetApp Element Plug-in für vCenter Server 5.2 enthält Verbesserungen der Supportfähigkeit und eine Erweiterung der Anzeige der benutzerdefinierten Schutzdomänen.</block>
+  <block id="c43b3da83b1c4add892ede9398b1570e" category="paragraph">Mit Version 5.2 zeigt das Plug-in die Integritätsinformationen der benutzerdefinierten Schutzdomäne an, wenn eine benutzerdefinierte Schutzdomäne auf einem Element-Software-Cluster konfiguriert ist. <block ref="a4fc86d509d3502936ee9fca7d20341d" category="inline-link-macro-rx"></block>.</block>
+  <block id="cc3e6fea6638b2b1b2791804af52ec8c" category="paragraph">Das Element vCenter Plug-in 5.2 ist mit Version 2.24.40 der Management-Services verfügbar.</block>
+  <block id="910e8449099d39f06d7f2cd8d6feea1c" category="section-title">NetApp Element Plug-in für vCenter Server 5.1</block>
+  <block id="6b51db420393cbff0d9f09dfeb229ecb" category="sidebar">Neuerungen in NetApp HCI</block>
 </blocks>

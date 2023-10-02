@@ -61,6 +61,20 @@ NOTE: Die Funktion der Sicherungsdomänen ist nicht mit Clustern mit zwei Knoten
 ** *Metadatenkapazität*: Gibt an, ob es genügend Metadaten-Kapazität zur Heilung nach einem Ausfall gibt, während gleichzeitig die Datenverfügbarkeit nicht unterbrochen wird. „Normal“ (grün) zeigt an, dass das Cluster über ausreichende Metadaten verfügt, um die ausgewählte Überwachungsebene beizubehalten. Voll (rot) zeigt an, dass das Cluster nicht mehr in der Lage ist, den ausgewählten Monitoring-Level zu überwachen und dass eine Korrekturmaßnahme erforderlich ist.
 
 
+* *Systemzustand der benutzerdefinierten Schutzdomäne*: Zeigt den Integritätsstatus der benutzerdefinierten Schutzdomäne für den Cluster an, wenn eine benutzerdefinierte Schutzdomäne auf dem Cluster konfiguriert ist.
++
+Die folgenden Daten zeigen den Schutz an, der gegen den Ausfall einer der benutzerdefinierten Schutzdomänen für das Cluster verfügbar ist.
+
++
+** *Schutzstufe*: Gibt den Status des gesamten Schutzniveaus an.
+** *Block Capacity*: Zeigt den aktuellen Status des Schutzniveaus des Block Services Subsystems an.
++
+Sie gibt außerdem den Schwellenwert für die Gesamtkapazität an, bei dem die Ausfallsicherheit verloren geht.
+
+** *Metadaten-Kapazität*: Zeigt den aktuellen Status des Metadaten-Services-Subsystems an.
+** *Ensemble Nodes*: Gibt den aktuellen Status des Schutzniveaus des Teilsystems Ensemblemitglieder an.
+
+
 * *Bereitgestellte IOPS*: Eine Zusammenfassung, wie die IOPS des Volumes auf dem Cluster überprovisioniert werden können. Bereitgestellte IOPS-Berechnungen basieren auf der Summe der minimalen IOPS-Werte, der maximalen IOPS-Werte und des IOPS-Burst für alle Volumes im Cluster geteilt durch die für das Cluster ermittelten maximalen IOPS-Werte.
 +
 
