@@ -1,0 +1,3351 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head class="at-element-marker">
+  <title>Remote-Replizierung zwischen Clustern</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Remote-Replizierung zwischen Clustern" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/de-de/vcp/vcp_task_protect_remote_replication.html" />
+	<meta property="og:description" content="Durch die Echtzeitreplizierung können Remote-Kopien von Volume-Daten schnell erstellt werden." />
+  <meta property="og:image" content="https://docs.netapp.com/de-de/vcp/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="Durch die Echtzeitreplizierung können Remote-Kopien von Volume-Daten schnell erstellt werden.">
+  <meta name="keywords" content=" netapp, hci, vcp, vcenter, element, protect, replication, remote, cluster"><!-- Icons -->
+  <link rel="icon" href="/de-de/vcp/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/de-de/vcp/css/ie-netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/de-de/vcp/css/ie-landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/de-de/vcp/css/ie-tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel="canonical" href="https://docs.netapp.com/de-de/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="x-default" href="https://docs.netapp.com/us-en/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="de" href="https://docs.netapp.com/de-de/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="en" href="https://docs.netapp.com/us-en/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="ja" href="https://docs.netapp.com/ja-jp/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="ko" href="https://docs.netapp.com/ko-kr/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="zh-Hans" href="https://docs.netapp.com/zh-cn/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="zh-Hant" href="https://docs.netapp.com/zh-tw/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="es" href="https://docs.netapp.com/es-es/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="fr" href="https://docs.netapp.com/fr-fr/vcp/vcp_task_protect_remote_replication.html" />
+  <link rel="alternate" hreflang="it" href="https://docs.netapp.com/it-it/vcp/vcp_task_protect_remote_replication.html" />
+  <!-- Top level site integrations -->
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/72570c5c-fe30-465f-b0e0-b77f7fb4ae34/OtAutoBlock.js"></script>
+    <script type="text/javascript" src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" charset="UTF-8" data-document-language="true" data-domain-script="72570c5c-fe30-465f-b0e0-b77f7fb4ae34"></script>
+    <script type="text/javascript">function OptanonWrapper() { }</script>
+    <script type="text/plain" class="optanon-category-C0002" src="https://assets.adobedtm.com/60287eadf1ee/c284da483c83/launch-e9ff3acac59f.min.js"></script>
+    <script class="optanon-category-C0001">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.setAttributeNode(d.createAttribute('data-ot-ignore'));j.setAttribute('class','optanon-category-C0001');j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl+'';f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MD73T9M');</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      const MASTHEAD_OFFSET = 65;
+      const SECTIONS = $("main h2, main h3");
+      // PAGE NAV - Init
+      if (SECTIONS.length == 0) {
+        // remove if there is no elements
+        /*
+        $("#ie-right-navbar").remove();
+        $("#ie-right-navbar-collapse").remove();
+        */
+      } else {
+        $(".page-nav-title").css('display', 'block');
+        for (var i = 0; i < SECTIONS.length; i++) {
+          var sectionId = $(SECTIONS[i]).attr('id');
+          var sectionName = $(SECTIONS[i]).text();
+          var subClass = $(SECTIONS[i]).is("h3") ? ' page-nav__sublink' : '';
+          $("#page-menu").append('<li class="page-nav-item"><a href="#' + sectionId + '" class="page-nav__link' + subClass + '">' + sectionName + '</a></li>');
+        }
+      }
+    });
+  </script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/de-de/vcp/js/na-search.js'></script><script src='/de-de/vcp/js/ie-clouddocs.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script>
+    /*
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+      */
+  </script>
+  <script src='/de-de/vcp/js/custom-dropdown.js'></script>
+  <script src='/de-de/vcp/js/FileSaver.min.js'></script>
+  <script src='/de-de/vcp/js/jszip-utils.min.js'></script>
+  <script src='/de-de/vcp/js/jszip.min.js'></script><script src='/de-de/vcp/js/ie-pdf-ux.js'></script></head>
+
+
+  <body class role="document" data-flavor="">
+    <div class="skip-to-main">
+      <a href="#main" >Skip to main content</a>
+    </div><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MD73T9M"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="page" class="">
+      <div id="ie-phone-menu" class=""></div>
+      <div id="ie-content-wrap" class="">
+        <nav id="ie-new-header">
+    <ul>
+        <li id="ie-phone-menu-button">
+            <a href="#">
+                <image id="" src="/de-de/vcp/images/hamburger.svg" alt="menu" />
+            </a>
+        </li>
+
+        <li>
+            <a href="https://www.netapp.com/de/index.aspx">
+                <image id="ie-header-logo" src="/de-de/vcp/images/netapp_logo.svg" alt="netapp" />
+            </a>
+        </li>
+        <li id="ie-header-docs">
+            <a href="https://www.netapp.com/de/support-and-training/documentation/">Dokumente</a>
+        </li>
+
+        <!-- Empty container to push header left with or without lang selector -->
+        <li id="empty-container" style="margin-left: auto">
+        </li>
+        <!-- Start Language Selector --><li id="ie-language-dropdown">
+            <div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+                <div class="custom-dropdown-select custom-dropdown-select-lang">
+                    <img src="/de-de/vcp/images/language_white_24dp.svg" class="n-globe__icon" />
+                    <span class="lang-name">Deutsch</span>
+                    <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu"><li>
+                        <a href="https://docs.netapp.com/de-de/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/us-en/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">English</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ja-jp/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">日本語</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/ko-kr/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">한국어</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-cn/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/zh-tw/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/es-es/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">Español</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/fr-fr/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">Français</span></a>
+                    </li><li>
+                        <a href="https://docs.netapp.com/it-it/vcp/vcp_task_protect_remote_replication.html"
+                            target="_self"><span translate="no" class="notranslate">Italiano</span></a>
+                    </li></ul>
+            </div>
+            </li>
+        <!-- End Language Selector -->
+
+
+        <li id="ie-allnetapp">
+            <div id="allnetapp-dropdown" class="custom-dropdown custom-dropdown-allnetapp">
+                <div class="custom-dropdown-select custom-dropdown-select-allnetapp">
+                    <img src="/de-de/vcp/images/apps_white_24dp.svg" alt="" class="allnetapp-icon" />
+                    <span class="allnetapp-name">NetApp Komplettlösung</span>
+                    <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown header invisible" />
+                    <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup header" />
+                    </button>
+                </div>
+
+                <ul class="custom-dropdown-menu allnetapp-dropdown">
+                    <li>
+                        <a href="https://bluexp.netapp.com/de/"
+                            target="_self"><span translate="no" class="notranslate">BlueXP</span></a>
+                    </li>
+                    <li>
+                        <a href="https://mysupport.netapp.com/site/"
+                            target="_self"><span translate="no" class="notranslate">Support</span></a>
+                    </li>
+                    <li>
+                        <a href="https://kb.netapp.com/"
+                            target="_self"><span translate="no" class="notranslate">Knowledge Base</span></a>
+                    </li>
+                    <li>
+                        <a href="https://www.netapp.com/de/support-and-training/netapp-learning-services/"
+                            target="_self"><span translate="no" class="notranslate">Training</span></a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+
+    </ul>
+</nav>
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+
+<div id="ie-new-sidebar-collapse" style="display: none">
+    <img id="sidebar-expand" class="ie-searchbox-icon" src="/de-de/vcp/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-new-sidebar">
+    <div id="ie-product-identity-lockup">
+        <div id="sidebar-collapse" class="">
+            <img src="/de-de/vcp/images/double_arrow.svg" alt="" />
+        </div>
+        <div id="ie-breadcrumb" class="">
+  <ul class="ie-breadcrumb">
+    <li class="">
+      <a href="https://docs.netapp.com">Gesamte Dokumentation</a>
+    </li>
+    
+    
+
+    
+  </ul>
+  
+  <div class="ie-product-name" >
+    <!--<a href="/de-de/vcp/">-->
+      VCP
+    <!--</a>-->
+  </div>
+</div>
+
+            
+
+        
+        
+
+<div id="ie-searchbox" class="ie-searchbox-sidebar ">
+    <img class="ie-searchbox-icon" src="/de-de/vcp/images/loupe.svg" alt=""/>
+    <div id="react-search" 
+        data-search-html="/de-de/vcp/search.html" 
+        data-type="widget"
+        data-placeholder="Dokumentation durchsuchen"
+        data-no-results-found="Keine Ergebnisse gefunden für {query}"
+        data-did-you-mean="Suchen Sie nach {suggestion}."
+        data-no-results-found-did-you-mean="Es wurden keine Ergebnisse für {query} gefunden. Meinten Sie {suggestion}?"
+        data-results-found="{hitCount} Ergebnisse gefunden"
+        data-error-message="Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+        data-error-reset="Suche zurücksetzen"
+        data-sk-es-pf-indexes="" 
+        data-flavor="">
+    </div>
+</div>
+        
+    </div>
+    <div id="ie-new-toc"><script>
+  let sidebarAccordion = true;
+
+  /* specific css rules for Mac */
+  if(navigator.platform.match('Mac') !== null) {
+    document.body.setAttribute('class', 'OSX');
+  }
+
+</script>
+
+<div id="ie-sidebar-container">
+  <ul id="ie-sidebar-list" ><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server-Dokumentation"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/index.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/index.html">
+        NetApp Element Plug-in für VMware vCenter Server-Dokumentation
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Produktübersicht über das NetApp Element Plug-in für VMware vCenter Server"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/concept_vcp_product_overview.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/concept_vcp_product_overview.html">
+        Produktübersicht über das NetApp Element Plug-in für VMware vCenter Server
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Versionshinweise"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Versionshinweise</div>-->
+         Versionshinweise
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Neuerungen im NetApp Element Plug-in für VMware vCenter Server"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/rn_whatsnew_vcp.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/rn_whatsnew_vcp.html">
+        Neuerungen im NetApp Element Plug-in für VMware vCenter Server
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Weitere Release-Informationen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/rn_relatedrn_vcp.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/rn_relatedrn_vcp.html">
+        Weitere Release-Informationen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Konzepte"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Konzepte</div>-->
+         Konzepte
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher</div>-->
+         NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überblick über die Remote Plug-in-Architektur"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_remote_plugin_architecture.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/de-de/vcp/vcp_concept_remote_plugin_architecture.html">
+        Überblick über die Remote Plug-in-Architektur
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Remote Plugin Erweiterungspunkt"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_remote_plugin_extension_point.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/de-de/vcp/vcp_concept_remote_plugin_extension_point.html">
+        NetApp Element Remote Plugin Erweiterungspunkt
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-2  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version</div>-->
+         NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erweiterter Punkt für die NetApp Element-Konfiguration"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_config_extension_point.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/de-de/vcp/vcp_concept_config_extension_point.html">
+        Erweiterter Punkt für die NetApp Element-Konfiguration
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erweiterter Punkt für das NetApp Element-Management"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_management_extension_point.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/de-de/vcp/vcp_concept_management_extension_point.html">
+        Erweiterter Punkt für das NetApp Element-Management
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benutzerkonten"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_accounts.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_concept_accounts.html">
+        Benutzerkonten
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sicherungsdomänen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_protection_domains.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_concept_protection_domains.html">
+        Sicherungsdomänen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Linked Mode und das vCenter Plug-in"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_linkedmode.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_concept_linkedmode.html">
+        Linked Mode und das vCenter Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="QoSSIOC"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_qossioc.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_concept_qossioc.html">
+        QoSSIOC
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Virtuelle Volumes (VVols)"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_concept_vvols.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_concept_vvols.html">
+        Virtuelle Volumes (VVols)
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Anforderungen vor der Implementierung"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/reference_requirements_vcp.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/reference_requirements_vcp.html">
+        Anforderungen vor der Implementierung
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="NetApp Element-Plug-in für vCenter Server installieren und konfigurieren"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> NetApp Element-Plug-in für vCenter Server installieren und konfigurieren</div>-->
+         NetApp Element-Plug-in für vCenter Server installieren und konfigurieren
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installation und Konfiguration von Element Plug-in 5.0 und höher für vCenter Server 7.0 und höher"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_getstarted_5_0.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_getstarted_5_0.html">
+        Installation und Konfiguration von Element Plug-in 5.0 und höher für vCenter Server 7.0 und höher
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Installieren und konfigurieren Sie Element Plug-in 4.10 und früher"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_getstarted.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_getstarted.html">
+        Installieren und konfigurieren Sie Element Plug-in 4.10 und früher
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Aktualisieren Sie das Plug-in"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/task_vcp_upgrades.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/task_vcp_upgrades.html">
+        Aktualisieren Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Management von Storage mit dem vCenter Plug-in"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Management von Storage mit dem vCenter Plug-in</div>-->
+         Management von Storage mit dem vCenter Plug-in
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Verwalten von Clustern"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_clusters_manage.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_clusters_manage.html">
+        Verwalten von Clustern
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Managen von Datastores"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_datastores_manage.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_datastores_manage.html">
+        Managen von Datastores
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Volumes managen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_volumes_manage.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_volumes_manage.html">
+        Volumes managen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Benutzerkonten erstellen und verwalten"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_create_manage_user_accounts.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_create_manage_user_accounts.html">
+        Benutzerkonten erstellen und verwalten
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von Zugriffsgruppen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_create_manage_access_groups.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_create_manage_access_groups.html">
+        Erstellung und Management von Zugriffsgruppen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und Verwalten von Initiatoren"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_create_manage_initiators.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_create_manage_initiators.html">
+        Erstellen und Verwalten von Initiatoren
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Einrichten und Managen von QoSSIOC für Element Volumes und VMware Datastores"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_qossioc.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_qossioc.html">
+        Einrichten und Managen von QoSSIOC für Element Volumes und VMware Datastores
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von QoS-Richtlinien für Volumes"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_qos_policies.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_qos_policies.html">
+        Erstellung und Management von QoS-Richtlinien für Volumes
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Management von Cluster-Hardware und virtuellen Netzwerken"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Management von Cluster-Hardware und virtuellen Netzwerken</div>-->
+         Management von Cluster-Hardware und virtuellen Netzwerken
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Übersicht über Cluster-Hardware und virtuelle Netzwerke managen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_manage_cluster_overview.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_manage_cluster_overview.html">
+        Übersicht über Cluster-Hardware und virtuelle Netzwerke managen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Hinzufügen und Verwalten von Laufwerken"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_add_manage_drive.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_add_manage_drive.html">
+        Hinzufügen und Verwalten von Laufwerken
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Hinzufügen und Managen von Nodes"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_add_manage_nodes.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_add_manage_nodes.html">
+        Hinzufügen und Managen von Nodes
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und managen Sie virtuelle Netzwerke"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_create_manage_vlans.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_create_manage_vlans.html">
+        Erstellen und managen Sie virtuelle Netzwerke
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie die System-Performance"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Überwachen Sie die System-Performance</div>-->
+         Überwachen Sie die System-Performance
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie die System-Performance mit Berichtsoptionen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_intro.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_intro.html">
+        Überwachen Sie die System-Performance mit Berichtsoptionen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_overview.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_overview.html">
+        Überwachen Sie den allgemeinen Cluster-Zustand auf der Seite Übersicht
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie Systemmeldungen"
+      data-li-level="2" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_alerts.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_alerts.html">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Überwachen Sie Systemmeldungen</div>-->
+         Überwachen Sie Systemmeldungen
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Liste der Systemwarnmeldungen"
+      data-li-level="3#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_reference_reports_alert_errors.html" 
+    ><a class="ie-sidebar-menuitem-3 " href="/de-de/vcp/vcp_reference_reports_alert_errors.html">
+        Liste der Systemwarnmeldungen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie Ereignisprotokolle zur Fehlerbehebung"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_event_logs.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_event_logs.html">
+        Überwachen Sie Ereignisprotokolle zur Fehlerbehebung
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monitoring der Volume Performance"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_volume_performance.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_volume_performance.html">
+        Monitoring der Volume Performance
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_iscsi.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_iscsi.html">
+        Überwachen Sie iSCSI-Sitzungen, um den Verbindungsstatus zu ermitteln
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Überwachen der VM-Performance mit QoSSIOC-Ereignissen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_reports_qossioc.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_reports_qossioc.html">
+        Überwachen der VM-Performance mit QoSSIOC-Ereignissen
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sicherung von Daten mit dem vCenter Plug-in"
+      data-li-level="1" 
+      class=" sidebar-folder    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="" 
+    ><a class="ie-sidebar-menuitem-1  ie-sidebar-button " href="#">
+        <img class="ie-sidebar-icon ie-sidebar-button open" src="/de-de/vcp/images/link_expand.svg" alt="" />
+        <img class="ie-sidebar-icon ie-sidebar-button close" src="/de-de/vcp/images/link_collapse.svg" alt="" />
+        <!--<div class="" style="display: inline;"> Sicherung von Daten mit dem vCenter Plug-in</div>-->
+         Sicherung von Daten mit dem vCenter Plug-in
+      </a>
+      <ul class="">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sichern Sie Daten mit der Übersicht über das vCenter Plug-in"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_protect_overview.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_protect_overview.html">
+        Sichern Sie Daten mit der Übersicht über das vCenter Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellung und Management von Volume Snapshots"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_protect_snapshots_volume.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_protect_snapshots_volume.html">
+        Erstellung und Management von Volume Snapshots
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen und Verwalten von Gruppen-Snapshots"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_protect_snapshots_group.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_protect_snapshots_group.html">
+        Erstellen und Verwalten von Gruppen-Snapshots
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Erstellen von Snapshot-Zeitplänen"
+      data-li-level="2#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_protect_snapshots_schedules.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_protect_snapshots_schedules.html">
+        Erstellen von Snapshot-Zeitplänen
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Remote-Replizierung zwischen Clustern"
+      data-li-level="2#" 
+      class="  ie-sidebar-selected    "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_protect_remote_replication.html" 
+    ><a class="ie-sidebar-menuitem-2 " href="/de-de/vcp/vcp_task_protect_remote_replication.html">
+        Remote-Replizierung zwischen Clustern
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Richten Sie virtuelle Volumes mit dem vCenter Plug-in ein und managen Sie sie"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_task_configure_manage_vvols.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/vcp_task_configure_manage_vvols.html">
+        Richten Sie virtuelle Volumes mit dem vCenter Plug-in ein und managen Sie sie
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Registrieren Sie das Plug-in"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/task_vcp_unregister.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/task_vcp_unregister.html">
+        Registrieren Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Entfernen Sie das Plug-in"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/task_vcp_remove.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/task_vcp_remove.html">
+        Entfernen Sie das Plug-in
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Fehler beim Plug-in beheben"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/vcp_reference_troubleshoot_vcp.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/vcp_reference_troubleshoot_vcp.html">
+        Fehler beim Plug-in beheben
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Frühere Versionen der NetApp Element-Plug-in-Dokumentation"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/reference_earlier_versions.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/reference_earlier_versions.html">
+        Frühere Versionen der NetApp Element-Plug-in-Dokumentation
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rechtliche Hinweise"
+      data-li-level="1#" 
+      class="   "
+      dale-page-url="/vcp_task_protect_remote_replication.html" 
+      dale-entry-url="/legal-notices.html" 
+    ><a class="ie-sidebar-menuitem-1 " href="/de-de/vcp/legal-notices.html">
+        Rechtliche Hinweise
+      </a></li></ul>
+</div>
+<script>
+
+  $(".ie-sidebar-button").click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    expandedLI = $('li.ie-sidebar-expand')
+
+    const li = $(this).closest("li");
+
+    const parentsLI = $(li).parents('li');
+
+    expandedLI.map(element => {
+      if (sidebarAccordion && !li.hasClass('ie-sidebar-expand') && jQuery.inArray(expandedLI[element], parentsLI) == -1) {
+        $(expandedLI[element]).toggleClass('ie-sidebar-expand');
+        $(expandedLI[element]).children("ul").animate({ height: 'toggle' }, 400, function () {
+          $(li).children("ul").toggleClass('ie-sidebar-open');
+
+        })
+      }
+
+    })
+
+    $(li).toggleClass('ie-sidebar-expand');
+    $(li).children("ul").animate({ height: 'toggle' }, 400, function () {
+      $(li).children("ul").toggleClass('ie-sidebar-open');
+    })
+  });
+
+
+  
+    $("li.ie-sidebar-selected").parents('ul').toggleClass("ie-sidebar-open");
+    $("li.ie-sidebar-selected").toggleClass("ie-sidebar-expand")
+    $("ul.ie-sidebar-open").parent().toggleClass("ie-sidebar-expand");
+    $("li.ie-sidebar-selected").children('ul').toggleClass("ie-sidebar-open")
+  
+  
+</script>
+    </div>
+</div>
+<script>
+
+    
+    let sidebarScrollTopPosition = 0;
+    $("#ie-new-toc").on("scroll", function () {
+        if (sidebarScrollTopPosition == 0) {
+            $.cookie("sidebarScroll", $("#ie-new-toc").scrollTop(), {
+                path: "/de-de/vcp"
+            });
+        }
+
+        if ($("#ie-new-toc").scrollTop() > 0) {
+            $('#ie-product-identity-lockup').addClass('ie-addShadow');
+        } else {
+            $('#ie-product-identity-lockup').removeClass('ie-addShadow');
+        }
+    });
+
+    $(function () {
+        if ($.cookie("sidebarScroll")) {
+            $("#ie-new-toc").scrollTop($.cookie("sidebarScroll"));
+        }
+    });
+
+    function setSidebarBottom() {
+        const footerGap = PXinViewport($(".n-footer"));
+        document.getElementById("ie-new-sidebar").style.bottom = Math.max(0, footerGap) + "px";
+    }
+
+    window.onscroll = () => {
+        setSidebarBottom();
+    };
+
+    $("#sidebar-collapse").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        if ($.cookie("sidebarScroll")) {
+            sidebarScrollTopPosition = $.cookie("sidebarScroll");
+        }
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 350, function () {
+            $("#ie-new-sidebar-collapse").show();
+            $("#ie-new-sidebar").removeClass("open")
+            $("#ie-new-sidebar").addClass("close")
+            $("#ie-new-sidebar").removeAttr("style")
+        });
+        $(".ie-content-pane").animate({ width: (width + sidebarWidth), marginLeft: (marginLeft - sidebarWidth) }, 350, function () {
+            resizeContent()
+        })
+
+    });
+    $("#sidebar-expand").click(function (e) {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        e.preventDefault();
+        const width = $(".ie-content-pane").width();
+        const marginLeft = parseInt($(".ie-content-pane").css('marginLeft'));
+
+        $("#ie-new-sidebar").animate({ width: 'toggle' }, 250, function () {
+            $('#ie-new-sidebar').css('display', 'flex');
+            $("#ie-new-sidebar-collapse").hide();
+            $("#ie-new-sidebar").removeClass("close")
+            $("#ie-new-sidebar").addClass("open")
+            setSidebarBottom();
+
+            if (sidebarScrollTopPosition != 0) {
+                $.cookie("sidebarScroll", sidebarScrollTopPosition, {
+                    path: "/de-de/vcp"
+                })
+                $("#ie-new-toc").scrollTop(sidebarScrollTopPosition);
+                sidebarScrollTopPosition = 0;
+            }
+        });
+        $(".ie-content-pane").animate({ width: (width - sidebarWidth), 'marginLeft': (marginLeft + sidebarWidth) }, 250, function () {
+            resizeContent()
+        })
+    });
+    function resizeContent() {
+        const sidebarWidth = $("#ie-new-sidebar").width() - $("#ie-new-sidebar-collapse").width();
+        const rightNavbarVisible =  $("#ie-right-navbar").css('display') && $("#ie-right-navbar").css('display') != 'none';
+        const sidebarVisible = $("#ie-new-sidebar").css('display') != 'none';
+        const rightNavbarWidth = $("#ie-right-navbar").width();
+        const rightNavbarCollapseWidth = $("#ie-right-navbar-collapse").width();
+        const rightNavbarCollapseVisible = $("#ie-right-navbar-collapse").css('display') && $("#ie-right-navbar-collapse").css('display') != 'none';
+        
+        if (rightNavbarVisible && sidebarVisible) {
+            $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarWidth}px)`)
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+        } else if (sidebarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${sidebarWidth}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${sidebarWidth + rightNavbarCollapseWidth}px)`)
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar").width()}px)`)
+            }
+
+        } else if (rightNavbarVisible) {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            $(".ie-content-pane").width(`calc(100% - ${rightNavbarWidth}px)`)
+        } else {
+            $(".ie-content-pane").css('marginLeft', `${$("#ie-new-sidebar-collapse").width()}px`)
+            if (rightNavbarCollapseVisible) {
+                $(".ie-content-pane").width(`calc(100% - ${rightNavbarCollapseWidth}px)`);
+            } else {
+                $(".ie-content-pane").width(`calc(100% - ${$("#ie-new-sidebar-collapse").width()}px) `);
+            }
+            
+        }
+    }
+    $(window).on("resize load", function () {
+        setSidebarBottom();
+        resizeContent()
+    });
+
+
+</script>
+
+<div class="ie-content-pane ie-component-detail-content ie-component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <!-- include utility.html -->
+      <div class="ie-info-disclaimer">
+    <span>
+      <div class="ie-info-disclaimer-container">
+        <div class="ie-info-disclaimer-icon">
+          <img src="/de-de/vcp/images/notification-icons.svg" class="luci-icon" alt="" />
+        </div>
+        <div class="ie-info-disclaimer-content">
+          <span> Die deutsche Sprachversion wurde als Serviceleistung für Sie durch maschinelle Übersetzung erstellt. Bei eventuellen Unstimmigkeiten hat die englische Sprachversion Vorrang. </span>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </span>
+  </div><div class="ie-component-detail-heading-wrap">
+  <h1 class="ie-component-detail-heading">Remote-Replizierung zwischen Clustern</h1>
+</div>
+
+<div id="ie-byline">
+  
+<div class="page-details">
+    
+        
+            <time datetime="2022-12-14 18:12:38 +0000">12/14/2022</time>
+        
+    
+    
+        <span>Beitragende
+        </span>
+    
+    
+</div>
+<div class="page-controls">
+    <div id="contribute-dropdown" class="custom-dropdown custom-dropdown-contrib" >
+        <div class="custom-dropdown-select custom-dropdown-select-contrib">
+        <span class="contrib-name"><img src="/de-de/vcp/images/discuss-sm.svg" alt="" class="github-icon" />Änderungen vorschlagen</span>
+        <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevrondown invisible" />
+        <img src="/de-de/vcp/images/dropdown-arrow.svg" alt="" class="custom-icon chevronup" />
+        </div>
+        <ul class="custom-dropdown-menu suggested-changes-dropdown"><li>
+                <a target="_blank" href="https://github.com/NetAppDocs/vcp.de-de/issues/new?template=new-from-page.yml&page-url=https://docs.netapp.com/de-de/vcp/vcp_task_protect_remote_replication.html&page-title=Remote-Replizierung zwischen Clustern" class="page-nav-contribute-link" role="button">Dokumentationsänderungen anfordern</a>
+            </li><li> 
+                <a target="_blank" href="https://github.com/NetAppDocs/vcp/blob/main/vcp_task_protect_remote_replication.adoc" class="page-nav-contribute-link" role="button">Diese Seite bearbeiten</a>
+            </li><li><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  >So können Sie beitragen</a></li>
+        </ul>
+    </div>
+    <div id="pdf-control-container">
+        <div class="n-pdf-header">
+            <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+                <img class="adobe-icon" src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>PDFs<img src="/de-de/vcp/images/dropdown-arrow.svg" class="custom-icon" alt="" />
+            </a>
+        </div>
+        <div class="n-pdf-body-container">
+            <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+                    
+                    
+                    
+                    <a target="_blank" class="pdf-download-link" href="/de-de/vcp/pdfs/fullsite-sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_Dokumentation.pdf" >
+                    <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>PDF dieser Dokumentationssite</a>
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Versionshinweise.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Versionshinweise
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Konzepte.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Konzepte
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_5_0_oder_höher.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            NetApp Element Plug-in für VMware vCenter Server 5.0 oder höher
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_VMware_vCenter_Server_4_10_oder_eine_frühere_Version.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            NetApp Element Plug-in für VMware vCenter Server 4.10 oder eine frühere Version
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/NetApp_Element_Plug_in_für_vCenter_Server_installieren_und_konfigurieren.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            NetApp Element-Plug-in für vCenter Server installieren und konfigurieren
+          </a>
+          
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Management_von_Storage_mit_dem_vCenter_Plug_in.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Management von Storage mit dem vCenter Plug-in
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Management_von_Cluster_Hardware_und_virtuellen_Netzwerken.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Management von Cluster-Hardware und virtuellen Netzwerken
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Überwachen_Sie_die_System_Performance.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Überwachen Sie die System-Performance
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Überwachen_Sie_Systemmeldungen.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Überwachen Sie Systemmeldungen
+          </a>
+          
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" class="pdf-download-link"
+            
+              href="/de-de/vcp/pdfs/sidebar/Sicherung_von_Daten_mit_dem_vCenter_Plug_in.pdf" 
+            
+          >
+            <img src="/de-de/vcp/images/pdf-icon.png" alt="" width="16" height="16"/>
+            Sicherung von Daten mit dem vCenter Plug-in
+          </a>
+          
+
+
+
+
+
+
+
+
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+</li></ul>
+            <div class="zip-pdf-link-container" style="display: none;">   
+                <a href="#" id="zipPdf">
+                <img src="/de-de/vcp/images/pdf-zip.png" alt="" width="16" height="16"/>
+                <pre>Sammlung separater PDF-Dokumente<span class="zip-size"></span></pre>
+                </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+        </div>
+    </div>        
+<script>
+$("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+$("#toggleButtonPdf").on('click', function(e){ 
+    e.stopPropagation();
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+});
+
+//hide is by clicking outside pdfcontainer
+$(document).on('click', function (e) {
+    if ($('#toggleContainerPdf').is(':visible') && !$('.n-pdf-body-container').is(e.target) && !$('.n-pdf-body-container').has(e.target).length)  {
+        
+        $("#toggleContainerPdf").toggle('display');
+        $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+        $("#toggleButtonPdf").removeClass("active");
+    }
+});
+</script>
+<script>
+    function getPdfLocation() {
+        const pdfLocation = window.scrollX + document.querySelector('#pdf-control-container').getBoundingClientRect().left
+        if (pdfLocation < 450) {
+            $(".n-pdf-body-container").addClass("block")
+        } else {
+            $(".n-pdf-body-container").removeClass("block")
+        }
+    
+    }
+    $( window ).on( "resize", function() {
+        getPdfLocation()
+} );
+</script>
+<script>
+    const pdfButtonWidth =  $(".n-pdf-header").width();
+    const pdfMenuWidth = $(".n-pdf-body-container").width();
+    $(".n-pdf-body-container").css('margin-left', `calc(${pdfButtonWidth - pdfMenuWidth}px)`);
+</script>
+</div>
+
+    
+
+</div>
+
+
+
+
+<div class="content-to-index">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph lead">
+<p>Für Cluster mit NetApp Element Software ermöglicht Echtzeitreplizierung die schnelle Erstellung von Remote-Kopien von Volume-Daten. Ein Storage-Cluster kann mit bis zu vier anderen Storage-Clustern gekoppelt werden.</p>
+</div>
+<div class="paragraph">
+<p>Sie können Volume-Daten für Failover- und Failback-Szenarien synchron oder asynchron von einem Cluster in einem Cluster-Paar replizieren. Zunächst müssen zwei NetApp Element Cluster gekoppelt werden und dann Volumes auf jedem Cluster gekoppelt werden, um die Echtzeitreplizierung nutzen zu können.</p>
+</div>
+<div class="ulist">
+<div class="title">Was Sie benötigen</div>
+<ul>
+<li>
+<p>Stellen Sie sicher, dass Sie dem Plug-in mindestens einen Cluster hinzugefügt haben.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass alle Node-IP-Adressen in Management- und Storage-Netzwerken für gepaarte Cluster miteinander verbunden sind.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass die MTU aller gekoppelten Nodes gleich ist und End-to-End-Unterstützung zwischen den Clustern bietet.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass der Unterschied zwischen den NetApp Element Softwareversionen auf den Clustern nicht größer als eine Hauptversion ist. Wenn der Unterschied größer ist, muss ein Cluster aktualisiert werden, um die Datenreplizierung durchzuführen.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+WAN Accelerator Appliances wurden von NetApp bei der Datenreplizierung nicht für den Einsatz qualifiziert. Diese Appliances beeinträchtigen die Komprimierung und Deduplizierung, wenn sie zwischen zwei Clustern, bei denen Daten repliziert werden, bereitgestellt werden. Stellen Sie sicher, dass Sie die Auswirkungen jeder WAN Accelerator Appliance vollständig qualifizieren, bevor Sie sie in einer Produktionsumgebung bereitstellen.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p><a href="#paar-cluster">Paar Cluster</a></p>
+</li>
+<li>
+<p><a href="#paar-volumes">Paar Volumes</a></p>
+</li>
+<li>
+<p><a href="#volume-replizierung-validieren">Volume-Replizierung validieren</a></p>
+</li>
+<li>
+<p><a href="#löschen-einer-volume-beziehung-nach-der-replikation">Löschen einer Volume-Beziehung nach der Replikation</a></p>
+</li>
+<li>
+<p><a href="#managen-sie-volume-beziehungen">Managen Sie Volume-Beziehungen</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="paar-cluster">Paar Cluster</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie müssen zwei Cluster als ersten Schritt mit der Echtzeitreplizierungsfunktion koppeln. Nachdem Sie zwei Cluster miteinander verbunden haben, können Sie aktive Volumes auf einem Cluster konfigurieren, sodass sie kontinuierlich zu einem zweiten Cluster repliziert werden. Dadurch profitieren Sie von kontinuierlicher Datensicherung (CDP).</p>
+</div>
+<div class="paragraph">
+<p>Sie können ein Quell- und Zielcluster mithilfe des MVIP des Zielclusters koppeln, wenn Cluster Admin Zugriff auf beide Cluster hat. Wenn der Cluster-Admin-Zugriff nur auf einem Cluster in einem Cluster-Paar verfügbar ist, kann auf dem Ziel-Cluster ein Kopplungsschlüssel verwendet werden, um die Cluster-Paarung abzuschließen.</p>
+</div>
+<div class="ulist">
+<div class="title">Was Sie benötigen</div>
+<ul>
+<li>
+<p>Sie benötigen Cluster-Administratorrechte für ein oder beide Cluster, die gekoppelt werden.</p>
+</li>
+<li>
+<p>Vergewissern Sie sich, dass zwischen Clustern weniger als 2000 ms Latenz für die hin- und Rückfahrt vorhanden ist.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass der Unterschied zwischen den NetApp Element Softwareversionen auf den Clustern nicht größer als eine Hauptversion ist.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass alle Node-IPs auf gepaarten Clustern miteinander verbunden sind.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Die Cluster-Paarung erfordert eine vollständige Konnektivität zwischen den Nodes im Managementnetzwerk. Zur Replizierung ist die Verbindung zwischen den einzelnen Nodes im Storage-Cluster-Netzwerk erforderlich.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Ein NetApp Element Cluster kann mit bis zu vier anderen Clustern zur Replizierung von Volumes gekoppelt werden. Sie können Cluster auch innerhalb der Cluster-Gruppe miteinander kombinieren.</p>
+</div>
+<div class="paragraph">
+<p>Wählen Sie eine der folgenden Methoden:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#cluster-mit-bekannten-anmeldedaten-koppeln">Cluster mit bekannten Anmeldedaten koppeln</a></p>
+</li>
+<li>
+<p><a href="#koppeln-sie-cluster-mit-einem-kopplschlüssel">Koppeln Sie Cluster mit einem Kopplschlüssel</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="cluster-mit-bekannten-anmeldedaten-koppeln">Cluster mit bekannten Anmeldedaten koppeln</h3>
+<div class="paragraph">
+<p>Sie können zwei Cluster für die Echtzeitreplikation koppeln, indem Sie das MVIP eines Clusters verwenden, um eine Verbindung mit dem anderen Cluster herzustellen. Der Cluster-Admin-Zugriff auf beiden Clustern ist erforderlich, um diese Methode zu verwenden.</p>
+</div>
+<div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
+<p>Der Cluster Admin-Benutzername und das Passwort werden verwendet, um den Clusterzugriff zu authentifizieren, bevor die Cluster gekoppelt werden können.</p>
+</div>
+<div class="paragraph">
+<p>Wenn der MVIP nicht bekannt ist oder der Zugriff auf das Cluster nicht verfügbar ist, können Sie das Cluster koppeln, indem Sie einen Kopplschlüssel generieren und den Schlüssel zum Pairing der beiden Cluster verwenden. Anweisungen hierzu finden Sie unter <a href="#koppeln-sie-cluster-mit-einem-kopplschlüssel">Koppeln Sie Cluster mit einem Kopplschlüssel</a>.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie in Ihrem vSphere Web Client die Registerkarte <strong>Protection</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Konfiguration &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Konfiguration &gt; Schutz</strong> aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Cluster-Paare</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Cluster Pairing Erstellen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie eine der folgenden Optionen:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Registrierter Cluster</strong>: Wenn der Remote-Cluster der Paarung von der gleichen Instanz des Element vCenter Plug-ins gesteuert wird, wählen Sie dieses aus.</p>
+</li>
+<li>
+<p><strong>Bondentialed Cluster</strong>: Wenn der Remote-Cluster bekannte Anmeldeinformationen hat, die sich außerhalb der Element vCenter-Plug-in-Konfiguration befinden, wählen Sie diese Option aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wenn Sie <strong>Registrierter Cluster</strong> ausgewählt haben, wählen Sie aus der Liste der verfügbaren Cluster einen Cluster aus und klicken Sie auf <strong>Pair</strong>.</p>
+</li>
+<li>
+<p>Wenn Sie <strong>Bondentialed Cluster</strong> ausgewählt haben, gehen Sie wie folgt vor:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Geben Sie die MVIP-Adresse des Remote-Clusters ein.</p>
+</li>
+<li>
+<p>Geben Sie einen Benutzernamen für den Cluster-Administrator ein.</p>
+</li>
+<li>
+<p>Geben Sie ein Cluster-Administrator-Passwort ein.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Pairing Starten</strong>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Nachdem die Aufgabe abgeschlossen ist und die Seite „Cluster-Paare“ angezeigt wird, überprüfen Sie, ob das Cluster-Paar verbunden ist.</p>
+</li>
+<li>
+<p>(Optional) Stellen Sie auf dem Remote-Cluster sicher, dass das Cluster-Paar über die Element-UI oder die Plug-in-Erweiterungspunkte verbunden ist:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beginnend mit Element vCenter Plug-in 5.0, wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz &gt; Cluster-Paare</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz &gt; Cluster-Paare</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="koppeln-sie-cluster-mit-einem-kopplschlüssel">Koppeln Sie Cluster mit einem Kopplschlüssel</h3>
+<div class="paragraph">
+<p>Wenn Sie Cluster-Admin-Zugriff auf ein lokales Cluster, nicht jedoch auf das Remote-Cluster haben, können Sie die Cluster mit einem Kopplschlüssel koppeln. Ein Kopplungsschlüssel wird auf einem lokalen Cluster generiert und dann sicher an einen Clusteradministrator an einem Remote-Standort gesendet, um eine Verbindung herzustellen und die Cluster-Paarung zur Echtzeitreplizierung abzuschließen.</p>
+</div>
+<div class="paragraph">
+<p>Dieses Verfahren beschreibt die Cluster-Paarung zwischen zwei Clustern mithilfe von vCenter am lokalen und Remote-Standort. Alternativ können Sie für Cluster nutzen, die nicht über das vCenter Plug-in gesteuert werden <a href="https://docs.netapp.com/us-en/element-software/storage/task_replication_pair_cluster_using_pairing_key.html">"Starten oder Abschließen der Cluster-Paarung"</a> Verwenden der Element Web UI.</p>
+</div>
+<div id="open_protection_tab" class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Cluster-Paare</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Cluster Pairing Erstellen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Unzugänglicher Cluster</strong> Aus.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Schlüssel Generieren</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Diese Aktion generiert einen Textschlüssel für das Pairing und erstellt ein nicht konfiguriertes Clusterpaar auf dem lokalen Cluster. Wenn Sie den Vorgang nicht abschließen, müssen Sie das Cluster-Paar manuell löschen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Kopieren Sie den Cluster-Kopplungsschlüssel in die Zwischenablage.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Schließen</strong>.</p>
+</li>
+<li>
+<p>Der Kopplungsschlüssel kann dem Clusteradministrator am Remote-Cluster-Standort zugänglich gemacht werden.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Der Cluster-Kopplungsschlüssel enthält eine Version des MVIP, Benutzernamen, Kennwort und Datenbankinformationen, um Volume-Verbindungen für die Remote-Replikation zu ermöglichen. Dieser Schlüssel sollte sicher behandelt werden und nicht so gespeichert werden, dass ein versehentlicher oder ungesicherter Zugriff auf den Benutzernamen oder das Kennwort möglich wäre.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Ändern Sie keine Zeichen im Kopplungsschlüssel. Der Schlüssel wird ungültig, wenn er geändert wird.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Von vCenter, das den Remote-Cluster enthält, <a href="#open_protection_tab">Öffnen Sie die Registerkarte Schutz</a>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Alternativ können Sie die Paarung über die Element-Benutzeroberfläche abschließen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Cluster-Paare</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie * Complete Cluster Pairing* Aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Warten Sie, bis der Ladespinner verschwindet, bevor Sie mit dem nächsten Schritt fortfahren. Wenn während des Pairing-Prozesses ein unerwarteter Fehler auftritt, überprüfen und löschen Sie alle nicht konfigurierten Cluster-Paare auf dem lokalen oder Remote-Cluster manuell, und führen Sie die Kopplung erneut aus.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Fügen Sie den Kopplschlüssel aus dem lokalen Cluster in das Feld * Cluster Pairing Key* ein.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Cluster-Paar</strong>.</p>
+</li>
+<li>
+<p>Nachdem die Aufgabe abgeschlossen ist und Sie die Seite <strong>Cluster-Paar</strong> sehen, überprüfen Sie, ob das Cluster-Paar verbunden ist.</p>
+</li>
+<li>
+<p>Um zu überprüfen, ob das Cluster-Paar verbunden ist, verwenden Sie das Remote-Cluster <a href="#open_protection_tab">Öffnen Sie die Registerkarte Schutz</a> Oder die Element UI verwenden.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="überprüfen-sie-die-cluster-paarverbindungen">Überprüfen Sie die Cluster-Paarverbindungen</h3>
+<div class="paragraph">
+<p>Nach Abschluss der Cluster-Paarung möchten Sie möglicherweise die Verbindung zum Cluster-Paar überprüfen, um den Erfolg der Replizierung zu gewährleisten.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Wählen Sie auf dem lokalen Cluster die Option <strong>Data Protection</strong> &gt; <strong>Cluster Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Vergewissern Sie sich, dass das Cluster-Paar verbunden ist.</p>
+</li>
+<li>
+<p>Navigieren Sie zurück zum lokalen Cluster und dem Fenster <strong>Cluster-Paare</strong>, und überprüfen Sie, ob das Cluster-Paar verbunden ist.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="paar-volumes">Paar Volumes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nachdem Sie eine Verbindung zwischen den Clustern in einem Cluster-Paar hergestellt haben, können Sie ein Volume auf einem Cluster mit einem Volume auf dem anderen Cluster des Paars koppeln.</p>
+</div>
+<div class="paragraph">
+<p>Sie können das Volume mit einer der folgenden Methoden koppeln:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#paarung-von-volumes-mit-bekannten-anmeldedaten">Paarung von Volumes mit bekannten Anmeldedaten</a>: Bekannte Anmeldeinformationen für beide Cluster verwenden</p>
+</li>
+<li>
+<p><a href="#koppeln-von-volumes-mithilfe-eines-kopplschlüssels">Koppeln von Volumes mithilfe eines Kopplschlüssels</a>: Verwenden Sie einen Kopplungsschlüssel, wenn Cluster-Anmeldeinformationen nur auf dem Quellcluster verfügbar sind.</p>
+</li>
+<li>
+<p><a href="#erstellung-von-ziel-volumes-und-kopplung-mit-lokalen-volumes">Erstellung von Ziel-Volumes und Kopplung mit lokalen Volumes</a>: Wenn Sie die Anmeldeinformationen für beide Cluster kennen, erstellen Sie ein Replikationsziel-Volume auf dem Remote-Cluster, um es mit dem Quellcluster zu koppeln.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Nachdem eine Verbindung zur Volume-Kopplung hergestellt wurde, müssen Sie ermitteln, welches Volume das Replikationsziel ist:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#weisen-sie-gepaarten-volumes-eine-replikationsquelle-und-ein-replikationsziel-zu">Weisen Sie gepaarten Volumes eine Replikationsquelle und ein Replikationsziel zu</a></p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Was Sie benötigen</div>
+<ul>
+<li>
+<p>Sie sollten eine Verbindung zwischen Clustern in einem Cluster-Paar hergestellt haben.</p>
+</li>
+<li>
+<p>Sie müssen über Administratorrechte für einen oder beide Cluster verfügen, die gekoppelt werden.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="paarung-von-volumes-mit-bekannten-anmeldedaten">Paarung von Volumes mit bekannten Anmeldedaten</h3>
+<div class="paragraph">
+<p>Sie können ein lokales Volume mit einem anderen Volume auf einem Remote-Cluster kombinieren. Verwenden Sie diese Methode, wenn auf beiden Clustern Zugriff auf Clusteradministrator besteht, auf denen Volumes gekoppelt werden sollen. Diese Methode verwendet die Volume-ID des Volume des Remote-Clusters, um eine Verbindung zu initiieren.</p>
+</div>
+<div class="ulist">
+<div class="title">Bevor Sie beginnen</div>
+<ul>
+<li>
+<p>Sie haben die Anmeldedaten für den Cluster-Admin für das Remote-Cluster.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, gekoppelt sind.</p>
+</li>
+<li>
+<p>Sie kennen die Remote-Volume-ID, es sei denn, Sie beabsichtigen, während dieses Prozesses ein neues Volume zu erstellen.</p>
+</li>
+<li>
+<p>Wenn Sie beabsichtigen, dass das lokale Volume die Quelle ist, stellen Sie sicher, dass der Zugriffsmodus des Volumes auf Lesen/Schreiben eingestellt ist.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte <strong>Management</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Management &gt; Management</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Verwaltung</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie in der <strong>Active</strong>-Ansicht das Kontrollkästchen für das Volume, das Sie koppeln möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Volume Pairing</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie eine der folgenden Optionen:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Volume Creation</strong>: Um ein Replikationszielvolume auf dem Remote Cluster zu erstellen, wählen Sie dieses aus. Diese Methode kann nur auf Remote-Clustern verwendet werden, die über ein Element vCenter Plug-in gesteuert werden.</p>
+</li>
+<li>
+<p><strong>Volume Selection</strong>: Wenn der Remote Cluster für das Zielvolume über ein Element vCenter Plug-in gesteuert wird, wählen Sie dieses aus.</p>
+</li>
+<li>
+<p><strong>Volume ID</strong>: Wenn der Remote-Cluster für das Ziel-Volume bereits bekannte Anmeldedaten hat, die sich außerhalb der Element vCenter-Plug-in-Konfiguration befinden, wählen Sie diese Option aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie einen Replikationsmodus aus:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Real-Time (Synchronous)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.</p>
+</li>
+<li>
+<p><strong>Echtzeit (Asynchron)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.</p>
+</li>
+<li>
+<p><strong>Nur Snapshots</strong>: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wenn Sie als Kopplungsmodus <strong>Volume Creation</strong> ausgewählt haben, gehen Sie folgendermaßen vor:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Durch diese Aktion werden die verfügbaren Konten auf dem Cluster ausgefüllt, der im nächsten Schritt ausgewählt werden soll.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie für das Replikationsziel-Volume ein Konto im Zielcluster aus.</p>
+</li>
+<li>
+<p>Geben Sie einen Namen für das Replikationsziel ein.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Die Volume-Größe kann während dieses Prozesses nicht angepasst werden.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Wenn Sie als Option „Kopplungsmodus“ * ausgewählt haben, gehen Sie wie folgt vor:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Wählen Sie ein gekoppeltes Cluster aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Durch diese Aktion werden die verfügbaren Volumes auf dem Cluster ausgefüllt, die im nächsten Schritt ausgewählt werden sollen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>(Optional) Wählen Sie die Option <strong>Remote-Volume auf Replikationsziel setzen</strong> aus, wenn Sie das Remote-Volume als Ziel in der Volume-Kopplung festlegen möchten. Wenn das lokale Volume auf Lesen/Schreiben eingestellt ist, wird es zur Quelle im Paar.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Sie können im Pairing-Prozess auch die Replikationsquelle und das Ziel später von <strong>Volumes</strong> &gt; <strong>Aktionen</strong> &gt; <strong>Bearbeiten</strong> zuweisen. Sie müssen eine Quelle und ein Ziel zuweisen, um die Kopplung abzuschließen.
+</td>
+</tr>
+</table>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Wählen Sie ein Volume aus der Liste der verfügbaren Volumes aus.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Wenn Sie <strong>Volume ID</strong> als Kopplungsmodus ausgewählt haben, gehen Sie wie folgt vor:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.</p>
+</li>
+<li>
+<p>Wenn das Cluster nicht beim Plug-in registriert ist, geben Sie eine Benutzer-ID des Cluster-Administrators und ein Cluster-Administrator-Passwort ein.</p>
+</li>
+<li>
+<p>Geben Sie eine Volume-ID ein.</p>
+</li>
+<li>
+<p>Wählen Sie die Option <strong>Remote-Volume auf Replikationsziel setzen</strong> aus, wenn Sie das Remote-Volume als Ziel in der Volume-Kopplung festlegen möchten. Wenn das lokale Volume auf Lesen/Schreiben eingestellt ist, wird es zur Quelle im Paar.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Sie können im Pairing-Prozess auch die Replikationsquelle und das Ziel später von <strong>Volumes</strong> &gt; <strong>Aktionen</strong> &gt; <strong>Bearbeiten</strong> zuweisen. Sie müssen eine Quelle und ein Ziel zuweisen, um die Kopplung abzuschließen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Paar</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status auf der Seite Volume-Paare sehen.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn Sie noch kein Volume als Replikationsziel zugewiesen haben, ist die Pairing-Konfiguration nicht abgeschlossen. Das Volume-Paar zeigt PausedMisfigured an, bis die Quelle und das Ziel des Volume-Paars zugewiesen sind. Sie müssen eine Quelle und ein Ziel zuweisen, um die Volume-Kopplung abzuschließen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie auf einem Cluster * Schutz* &gt; <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Überprüfen Sie den Status der Volume-Kopplung.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="koppeln-von-volumes-mithilfe-eines-kopplschlüssels">Koppeln von Volumes mithilfe eines Kopplschlüssels</h3>
+<div class="paragraph">
+<p>Sie können ein lokales Volume mithilfe eines Kopplschlüssels mit einem anderen Volume auf einem Remote-Cluster koppeln. Verwenden Sie diese Methode, wenn nur auf den Quell-Cluster Zugriff auf den Cluster auf den Cluster besteht. Diese Methode generiert einen Kopplungsschlüssel, der auf dem Remote-Cluster zum Abschließen des Volume-Paars verwendet werden kann.</p>
+</div>
+<div class="ulist">
+<div class="title">Bevor Sie beginnen</div>
+<ul>
+<li>
+<p>Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, gekoppelt sind.</p>
+</li>
+<li>
+<p><strong>Best Practices</strong>: Legen Sie das Quellvolume auf Lesen/Schreiben und das Zielvolume auf Replikationsziel fest. Das Ziel-Volume sollte keine Daten enthalten und genau die Merkmale des Quell-Volume aufweisen, wie beispielsweise die Größe, die 512-e-Einstellung und die QoS-Konfiguration. Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Das Zielvolumen ist möglicherweise größer oder gleich dem Quellvolume, kann aber nicht kleiner sein.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
+<p>Dieses Verfahren beschreibt die Volume-Paarung zwischen zwei Volumes mithilfe von vCenter am lokalen und Remote-Standort. Bei Volumes, die nicht vom vCenter Plug-in gesteuert werden, können Sie die Volume-Paarung abwechselnd über die Element Web-Benutzeroberfläche starten oder abschließen.</p>
+</div>
+<div class="paragraph">
+<p>Anweisungen zum Starten oder Abschließen der Volume-Kopplung über die Element Web-Benutzeroberfläche finden Sie unter <a href="https://docs.netapp.com/us-en/element-software/storage/task_replication_pair_volumes_using_a_pairing_key.html" target="_blank" rel="noopener">"NetApp Element Softwaredokumentation"</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Der Kopplungsschlüssel für das Volume enthält eine verschlüsselte Version der Volume-Informationen und kann vertrauliche Informationen enthalten. Teilen Sie diesen Schlüssel nur auf sichere Weise.
+</td>
+</tr>
+</table>
+</div>
+<div id="open_management" class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte <strong>Management</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Management &gt; Management</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Verwaltung</strong> aus.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie in der <strong>Active</strong>-Ansicht das Kontrollkästchen für das Volume, das Sie koppeln möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Volume Pairing</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Unzugänglicher Cluster</strong> Aus.</p>
+</li>
+<li>
+<p>Wählen Sie einen Replikationsmodus aus:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Real-Time (Synchronous)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.</p>
+</li>
+<li>
+<p><strong>Echtzeit (Asynchron)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.</p>
+</li>
+<li>
+<p><strong>Nur Snapshots</strong>: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Schlüssel Generieren</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Diese Aktion generiert einen Textschlüssel für das Koppeln und erstellt ein nicht konfiguriertes Volume-Paar auf dem lokalen Cluster. Wenn Sie dies nicht tun, müssen Sie das Volume-Paar manuell löschen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Kopieren Sie den Kopplungsschlüssel in die Zwischenablage.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Schließen</strong>.</p>
+</li>
+<li>
+<p>Der Kopplungsschlüssel kann dem Clusteradministrator am Remote-Cluster-Standort zugänglich gemacht werden.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Der Volume-Kopplungsschlüssel sollte sicher behandelt und nicht so gespeichert werden, dass ein versehentlicher oder ungesicherter Zugriff möglich wäre.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Ändern Sie keine Zeichen im Kopplungsschlüssel. Der Schlüssel wird ungültig, wenn er geändert wird.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Von vCenter, das den Remote-Cluster enthält, <a href="#open_management">Öffnen Sie die Registerkarte Verwaltung</a>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie in der <strong>Active</strong>-Ansicht das Kontrollkästchen für die Lautstärke, die Sie koppeln möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Volume Pairing</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie * Complete Cluster Pairing* Aus.</p>
+</li>
+<li>
+<p>Fügen Sie den Kopplschlüssel aus dem anderen Cluster in die Box <strong>Pairing Key</strong> ein.</p>
+</li>
+<li>
+<p>Wählen Sie * Pairing Abschließen*.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status der Seite Volume-Paare sehen. Wenn während des Pairing-Prozesses ein unerwarteter Fehler auftritt, überprüfen und löschen Sie alle nicht konfigurierten Cluster-Paare auf dem lokalen oder Remote-Cluster manuell, und führen Sie die Kopplung erneut aus.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie noch kein Volume als Replikationsziel zugewiesen haben, ist die Pairing-Konfiguration nicht abgeschlossen. Das Volume-Paar zeigt „PausedMisfigured“ an, bis die Quelle und das Ziel des Volume-Paars zugewiesen sind. Sie müssen eine Quelle und ein Ziel zuweisen, um die Volume-Kopplung abzuschließen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie auf einem Cluster * Schutz* &gt; <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Überprüfen Sie den Status der Volume-Kopplung.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Volumes, die über einen Kopplungschlüssel gekoppelt werden, werden angezeigt, nachdem der Pairing-Prozess am Remote-Standort abgeschlossen wurde.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="erstellung-von-ziel-volumes-und-kopplung-mit-lokalen-volumes">Erstellung von Ziel-Volumes und Kopplung mit lokalen Volumes</h3>
+<div class="paragraph">
+<p>Sie können zwei oder mehr lokale Volumes mit den zugehörigen Ziel-Volumes auf einem Remote-Cluster kombinieren. Bei diesem Prozess wird für jedes ausgewählte lokale Quell-Volume ein Replikationsziel-Volume auf dem Remote-Cluster erstellt. Verwenden Sie diese Methode, wenn auf beiden Clustern, auf denen Volumes gekoppelt werden sollen, der Remote-Cluster über das Plug-in gesteuert wird, Zugriff erhält.</p>
+</div>
+<div class="paragraph">
+<p>Diese Methode verwendet die Volume-ID jedes Volumes im Remote-Cluster, um eine oder mehrere Verbindungen zu initiieren.</p>
+</div>
+<div class="ulist">
+<div class="title">Bevor Sie beginnen</div>
+<ul>
+<li>
+<p>Stellen Sie sicher, dass Sie über die Anmeldedaten für den Cluster-Admin für das Remote-Cluster verfügen.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass die Cluster, die die Volumes enthalten, mit dem Plug-in gekoppelt sind.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass das Remote-Cluster über das Plug-in gesteuert wird.</p>
+</li>
+<li>
+<p>Stellen Sie sicher, dass der Zugriffsmodus jedes lokalen Volumes auf Lesen/Schreiben eingestellt ist.</p>
+</li>
+</ul>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie vom vCenter aus, das den lokalen Cluster enthält, die Registerkarte <strong>Management</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Management &gt; Management</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Verwaltung</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie aus der <strong>Active</strong>-Ansicht zwei oder mehr Volumes aus, die Sie koppeln möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Volume Pairing</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie einen <strong>Replikationsmodus</strong> aus:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Real-Time (Synchronous)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf den Quell- und Zielclustern übernommen wurden.</p>
+</li>
+<li>
+<p><strong>Echtzeit (Asynchron)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.</p>
+</li>
+<li>
+<p><strong>Nur Snapshots</strong>: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie in der Dropdown-Liste ein gekoppeltes Cluster aus.</p>
+</li>
+<li>
+<p>Wählen Sie für das Replikationsziel-Volume ein Konto im Zielcluster aus.</p>
+</li>
+<li>
+<p>(Optional) Geben Sie ein Präfix oder Suffix für die neuen Volume-Namen auf dem Ziel-Cluster ein.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Ein Beispiel für einen Volume-Namen mit dem geänderten Namen wird angezeigt.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Paare Erstellen</strong>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Nachdem Sie die Kopplung bestätigt haben, beginnen die beiden Cluster den Prozess der Verbindung der Volumes. Während des Pairings können Sie Fortschrittsmeldungen in der Spalte Volume-Status auf der Seite Volume-Paare sehen. Nach Abschluss des Prozesses werden neue Ziel-Volumes auf dem Remote-Cluster erstellt und verbunden.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie auf einem Cluster * Schutz* &gt; <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Überprüfen Sie den Status der Volume-Kopplung.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="weisen-sie-gepaarten-volumes-eine-replikationsquelle-und-ein-replikationsziel-zu">Weisen Sie gepaarten Volumes eine Replikationsquelle und ein Replikationsziel zu</h3>
+<div class="paragraph">
+<p>Wenn Sie während der Volume-Paarung kein Volume zum Replikationsziel zugewiesen haben, ist die Konfiguration nicht abgeschlossen. Mit diesem Verfahren können Sie ein Quell-Volume und sein Replikationsziel-Volume zuweisen. Eine Replikationsquelle oder ein Replikationsziel kann ein Volume in einem Volume-Paar sein.</p>
+</div>
+<div class="paragraph">
+<p>Darüber hinaus können Sie diese Vorgehensweise zum Umleiten von Daten von einem Quell-Volume zu einem Remote-Ziel-Volume verwenden, falls das Quell-Volume nicht mehr verfügbar ist.</p>
+</div>
+<div class="paragraph">
+<div class="title">Bevor Sie beginnen</div>
+<p>Sie haben Zugriff auf die Cluster, die die Quell- und Ziel-Volumes enthalten.</p>
+</div>
+<div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
+<p>Dieses Verfahren beschreibt das Zuweisen von Quell- und Replikations-Volumes zwischen zwei Clustern mit vCenter an den lokalen und Remote-Standorten. Alternativ können Sie für Volumes, die nicht über das vCenter Plug-in gesteuert werden, auch diese Volumes verwenden <a href="https://docs.netapp.com/us-en/element-software/storage/task_replication_assign_replication_source_and_target_to_paired_volumes.html">"Weisen Sie ein Quell- oder Replikationsvolume zu"</a> Verwenden der Element Web UI.</p>
+</div>
+<div class="paragraph">
+<p>Ein Replikationsquellvolume hat Lese-/Schreibzugriff auf ein Konto. Auf ein Replikationsziel kann nur von der Replikationsquelle als Lese-/Schreibzugriff zugegriffen werden.</p>
+</div>
+<div class="paragraph">
+<p><strong>Best Practices</strong>: Das Zielvolume sollte keine Daten enthalten und die genauen Eigenschaften des Quellvolumens aufweisen, wie Größe, 512e Einstellung und QoS-Konfiguration. Das Zielvolumen ist möglicherweise größer oder gleich dem Quellvolume, kann aber nicht kleiner sein.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Wählen Sie den Cluster aus, der das gepaarte Volume enthält, das Sie als Replikationsquelle verwenden möchten, und wählen Sie den Erweiterungspunkt des Plug-in aus:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beginnend mit dem Element vCenter Plug-in 5.0 vom <strong>NetApp Remote Plugin &gt; Management</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher <strong>NetApp Element Management</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie im Erweiterungspunkt für Ihre Element Plug-in für vCenter Server Version die Registerkarte <strong>Management</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie in der <strong>Active</strong>-Ansicht das Kontrollkästchen für das zu bearbeitende Volume.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Bearbeiten</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie aus der Dropdown-Liste Zugriff die Option <strong>Lesen/Schreiben</strong> aus.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie die Quell- und Zielzuweisung umkehren, führt diese Aktion dazu, dass das Volume-Paar „PausedMisfigured“ anzeigt, bis ein neues Replikationsziel zugewiesen ist. Durch das Ändern des Zugriffs wird die Volume-Replizierung angehalten, und die Datenübertragung wird beendet. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>OK</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie den Cluster aus, der das gepaarte Volume enthält, das Sie als Replikationsziel verwenden möchten:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Verwaltung &gt; Verwaltung</strong> aus.</p>
+</li>
+<li>
+<p>Beginnend mit dem Element vCenter Plug-in 5.0 vom <strong>NetApp Remote Plugin &gt; Management &gt; Management</strong>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volumes</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie in der <strong>Active</strong>-Ansicht das Kontrollkästchen für das zu bearbeitende Volumen.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Bearbeiten</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie in der Dropdown-Liste <strong>Zugriff</strong> die Option <strong>Replikationsziel</strong> aus.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie ein vorhandenes Volume als Replikationsziel zuweisen, werden die Daten auf diesem Volume überschrieben. Als Best Practice empfiehlt es sich, ein neues Volume als Replikationsziel zu verwenden.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>OK</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="volume-replizierung-validieren">Volume-Replizierung validieren</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nach der Replizierung eines Volumes sollten Sie sicherstellen, dass die Quell- und Ziel-Volumes aktiv sind. Im aktiven Zustand werden Volumes gekoppelt. Die Daten werden vom Quell- auf das Ziel-Volume gesendet, und die Daten werden im synchronen Modus gespeichert.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Vergewissern Sie sich, dass der Volume-Status aktiv ist.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="löschen-einer-volume-beziehung-nach-der-replikation">Löschen einer Volume-Beziehung nach der Replikation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nach Abschluss der Replikation können Sie die Volume-Pairing-Beziehung nicht mehr benötigen, um die Volume-Beziehung zu löschen.</p>
+</div>
+<div class="paragraph">
+<p>Siehe <a href="#löschen-sie-ein-volume-paar">Löschen Sie ein Volume-Paar</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="managen-sie-volume-beziehungen">Managen Sie Volume-Beziehungen</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können Volume-Beziehungen auf unterschiedliche Weise verwalten, z. B. die Unterbrechung der Replikation, das Umkehren der Volume-Paarung, das Ändern des Replikationsmodus, das Löschen eines Volume-Paares oder das Löschen eines Cluster-Paars.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#unterbrechen-sie-die-replikation">Unterbrechen Sie die Replikation</a></p>
+</li>
+<li>
+<p><a href="#ändern-sie-den-modus-der-replikation">Ändern Sie den Modus der Replikation</a></p>
+</li>
+<li>
+<p><a href="#löschen-sie-ein-volume-paar">Löschen Sie ein Volume-Paar</a></p>
+</li>
+<li>
+<p><a href="#löschen-eines-cluster-paares">Löschen eines Cluster-Paares</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="unterbrechen-sie-die-replikation">Unterbrechen Sie die Replikation</h3>
+<div class="paragraph">
+<p>Sie können die Eigenschaften des Volume-Paars bearbeiten, um die Replikation manuell anzuhalten.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie das Kontrollkästchen für das Volume-Paar, das Sie bearbeiten möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Bearbeiten</strong>.</p>
+</li>
+<li>
+<p>Starten Sie den Replikationsprozess manuell.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie die Volume-Replikation manuell unterbrechen oder fortsetzen, wird die Übertragung der Daten beendet oder fortgesetzt. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Änderungen Speichern</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ändern-sie-den-modus-der-replikation">Ändern Sie den Modus der Replikation</h3>
+<div class="paragraph">
+<p>Sie können die Volume-Paar-Eigenschaften bearbeiten, um Änderungen am Replikationsmodus der Volume-Paar-Beziehung vorzunehmen.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie das Kontrollkästchen für das Volume-Paar, das Sie bearbeiten möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Bearbeiten</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie einen neuen Replikationsmodus aus:</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/important.svg" alt="Wichtig">
+</td>
+<td class="content">
+Wenn Sie den Modus der Replikation ändern, ändert sich der Modus sofort. Vergewissern Sie sich, dass Sie diese Änderungen an beiden Standorten koordiniert haben.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Real-Time (Synchronous)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie sowohl auf den Quell- als auch auf den Ziel-Clustern festgelegt sind.</p>
+</li>
+<li>
+<p><strong>Echtzeit (Asynchron)</strong>: Schreibvorgänge werden dem Client bestätigt, nachdem sie auf dem Quellcluster erstellt wurden.</p>
+</li>
+<li>
+<p><strong>Nur Snapshots</strong>: Nur Snapshots, die auf dem Quellcluster erstellt wurden, werden repliziert. Aktive Schreibvorgänge vom Quell-Volume werden nicht repliziert.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie <strong>Änderungen Speichern</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="löschen-sie-ein-volume-paar">Löschen Sie ein Volume-Paar</h3>
+<div class="paragraph">
+<p>Sie können ein Volume-Paar löschen, wenn Sie eine Paarverbindung zwischen zwei Volumes entfernen möchten.</p>
+</div>
+<div class="paragraph">
+<div class="title">Über diese Aufgabe</div>
+<p>Dieses Verfahren beschreibt das Löschen einer Volume-Pairing-Beziehung zwischen zwei Volumes, die vCenter auf den lokalen und Remote-Standorten verwenden.</p>
+</div>
+<div class="paragraph">
+<p>Für Volumes, die nicht über das vCenter Plug-in gesteuert werden, steht eine andere Möglichkeit zur Verfügung <a href="https://docs.netapp.com/us-en/element-software/storage/task_replication_delete_volume_relationship_after_replication.html">"Löschen eines Volume-Paares Ende"</a> Verwenden der Element Web UI.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Wenn zwei oder mehr Cluster hinzugefügt werden, stellen Sie sicher, dass der Cluster, den Sie für die Aufgabe verwenden möchten, in der Navigationsleiste ausgewählt ist.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Volume Pairs</strong> aus.</p>
+</li>
+<li>
+<p>Wählen Sie ein oder mehrere Volume-Paare aus, die Sie löschen möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Löschen</strong>.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Details der einzelnen Volume-Paare.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Bei Clustern, die nicht vom Plug-in verwaltet werden, wird mit dieser Aktion nur das Volume-Paar gelöscht, das auf dem lokalen Cluster endet. Sie müssen das Ende des Volume-Paars manuell vom Remote-Cluster löschen, um die Pairing-Beziehung vollständig zu entfernen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>(Optional für Cluster, die vom Plug-in verwaltet werden) Aktivieren Sie das Kontrollkästchen für <strong>Replikationszielzugriff auf</strong> ändern und wählen Sie einen neuen Zugriffsmodus für das Replikationsziel-Volume aus. Dieser neue Zugriffsmodus wird angewendet, nachdem die Volume-Pairing-Beziehung entfernt wurde.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Ja</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="löschen-eines-cluster-paares">Löschen eines Cluster-Paares</h3>
+<div class="paragraph">
+<p>Sie können eine Cluster-Pairing-Beziehung zwischen zwei Clustern mithilfe von vCenter an den lokalen und Remote-Standorten löschen. Um eine Cluster-Pairing-Beziehung vollständig zu entfernen, müssen Sie das Cluster-Paar-Ende sowohl vom lokalen als auch vom Remote-Cluster entfernen.</p>
+</div>
+<div class="paragraph">
+<p>Mit dem vCenter Plug-in können Sie ein Cluster-Paar-Ende löschen</p>
+</div>
+<div class="paragraph">
+<p>Alternativ können Sie für Cluster nutzen, die nicht über das vCenter Plug-in gesteuert werden <a href="https://docs.netapp.com/us-en/element-software/storage/task_replication_delete_cluster_pair.html">"Löschen eines Clusterpaars Ende"</a> Verwenden der Element Web UI.</p>
+</div>
+<div class="olist arabic">
+<div class="title">Schritte</div>
+<ol class="arabic">
+<li>
+<p>Öffnen Sie im vCenter, das den lokalen Cluster enthält, die Registerkarte <strong>Schutz</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ab Element vCenter Plug-in 5.0 wählen Sie <strong>NetApp Element Remote Plugin &gt; Verwaltung &gt; Schutz</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie für Element vCenter Plug-in 4.10 und früher die Option <strong>NetApp Element-Verwaltung &gt; Schutz</strong> aus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wählen Sie die Unterregisterkarte <strong>Cluster-Paare</strong> aus.</p>
+</li>
+<li>
+<p>Aktivieren Sie das Kontrollkästchen für das Cluster-Paar, das Sie löschen möchten.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Aktionen</strong>.</p>
+</li>
+<li>
+<p>Wählen Sie <strong>Löschen</strong>.</p>
+</li>
+<li>
+<p>Bestätigen Sie die Aktion.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/vcp/images/note.svg" alt="Hinweis">
+</td>
+<td class="content">
+Durch diese Aktion wird nur das Cluster-Paar gelöscht, das auf dem lokalen Cluster endet. Sie müssen das Cluster-Paarende manuell vom Remote-Cluster löschen, um die Pairing-Beziehung vollständig zu entfernen.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Wiederholen Sie die Schritte aus dem Remote-Cluster in der Cluster-Paarung.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="meldungen-und-warnungen-zum-volume-pairing">Meldungen und Warnungen zum Volume-Pairing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sie können die Informationen für Volumes anzeigen, die gekoppelt wurden oder sich gerade im Prozess der Kopplung befinden, auf der Seite Volume Pairs auf der Registerkarte Schutz über das Plug-in-Erweiterungspunkt. Beginnend mit dem Element vCenter Plug-in 5.0, wählen Sie die Registerkarte Verwaltung aus dem NetApp Element Remote Plugin Erweiterungspunkt. Wählen Sie für Element vCenter Plug-in 4.10 und frühere Versionen den NetApp Element Management Extension Point aus.</p>
+</div>
+<div class="paragraph">
+<p>Das System zeigt Pairing- und Fortschrittsmeldungen in der Spalte Volume-Status an.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#meldungen-zur-volume-kopplung">Meldungen zur Volume-Kopplung</a></p>
+</li>
+<li>
+<p><a href="#warnungen-zum-volume-pairing">Warnungen zum Volume-Pairing</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="meldungen-zur-volume-kopplung">Meldungen zur Volume-Kopplung</h3>
+<div class="paragraph">
+<p>Sie können Meldungen während des ersten Pairing-Prozesses auf der Seite Volume Pairs auf der Registerkarte Schutz vom Plug-in-Erweiterungspunkt anzeigen. Diese Meldungen werden in der Spalte „Volume Status“ angezeigt und können sowohl am Quell- als auch am Zielende der Kopplung angezeigt werden.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>PausedDisconnected</strong>: Quell-Replikation oder Sync-RPCs ist abgelaufen. Die Verbindung zum Remote-Cluster wurde unterbrochen. Überprüfen Sie die Netzwerkverbindungen mit dem Cluster.</p>
+</li>
+<li>
+<p><strong>ResumingConnected</strong>*: Die Synchronisierung der Remote-Replikation ist jetzt aktiv. Mit dem Synchronisierungsprozess beginnen und auf Daten warten.</p>
+</li>
+<li>
+<p><strong>ResumingRRSync</strong>*: Eine einzige Helix-Kopie der Volume-Metadaten wird auf dem gepaarten Cluster erstellt.</p>
+</li>
+<li>
+<p><strong>ResumingLocalSync</strong>*: Eine doppelte Helix-Kopie der Volume-Metadaten wird auf das gepaarte Cluster erstellt.</p>
+</li>
+<li>
+<p><strong>ResumingDataTransfer</strong>*: Die Datenübertragung wurde wieder aufgenommen.</p>
+</li>
+<li>
+<p><strong>Active</strong>: Volumen werden gekoppelt und Daten werden vom Quell- zum Zielvolume gesendet und die Daten sind synchron.</p>
+</li>
+<li>
+<p><strong>Idle</strong>: Es findet keine Replikationsaktivität statt.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>*Dieser Prozess wird vom Zielvolumen angetrieben und wird möglicherweise nicht auf dem Quellvolumen angezeigt.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="warnungen-zum-volume-pairing">Warnungen zum Volume-Pairing</h3>
+<div class="paragraph">
+<p>Sie können Warnmeldungen anzeigen, nachdem Sie Volumes auf der Seite Volume Pairs auf der Registerkarte Schutz über den Plug-in-Erweiterungspunkt gepaart haben. Diese Meldungen werden in der Spalte „Volume Status“ angezeigt und können sowohl am Quell- als auch am Zielende der Kopplung angezeigt werden.</p>
+</div>
+<div class="paragraph">
+<p>Diese Meldungen können an den Quell- und Zielenden der Kopplung angezeigt werden, sofern nichts anderes angegeben ist.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>PausedClusterFull</strong>: Da der Zielcluster voll ist, können die Quellreplikation und die Massendatenübertragung nicht fortgesetzt werden. Die Meldung wird nur am Quellende des Paares angezeigt.</p>
+</li>
+<li>
+<p><strong>PausedExceedMaxSnapshotCount</strong>: Das Ziel-Volume hat bereits die maximale Anzahl an Snapshots und kann keine zusätzlichen Snapshots replizieren.</p>
+</li>
+<li>
+<p><strong>PausedManual</strong>: Die lokale Lautstärke wurde manuell angehalten. Sie muss aufgehoben werden, bevor die Replikation fortgesetzt wird.</p>
+</li>
+<li>
+<p><strong>PausedManualRemote</strong>: Fernlautstärke befindet sich im manuellen Pausenmodus. Um das Remote-Volume vor dem Fortschreiten der Replikation zu unterbrechen, ist ein manueller Eingriff erforderlich.</p>
+</li>
+<li>
+<p><strong>PausedUnkonfiguriert</strong>: Warten auf eine aktive Quelle und Ziel. Manuelle Eingriffe sind erforderlich, um die Replikation fortzusetzen.</p>
+</li>
+<li>
+<p><strong>PausedQoS</strong>: Ziel-QoS konnte eingehende I/O nicht aufrechterhalten. Automatische Wiederaufnahme der Replikation. Die Meldung wird nur am Quellende des Paares angezeigt.</p>
+</li>
+<li>
+<p><strong>PausedSlowLink</strong>: Langsame Verbindung erkannt und gestoppt Replikation. Automatische Wiederaufnahme der Replikation. Die Meldung wird nur am Quellende des Paares angezeigt.</p>
+</li>
+<li>
+<p><strong>PausedVolumeSizeMatch</strong>: Das Zielvolumen ist kleiner als das Quellvolumen.</p>
+</li>
+<li>
+<p><strong>PausedXCopy</strong>: Ein SCSI XCOPY Befehl wird an ein Quell-Volume ausgegeben. Der Befehl muss abgeschlossen sein, bevor die Replikation fortgesetzt werden kann. Die Meldung wird nur am Quellende des Paares angezeigt.</p>
+</li>
+<li>
+<p><strong>StoppedMisfigured</strong>: Es wurde ein permanenter Konfigurationsfehler erkannt. Das entfernte Volume wurde gelöscht oder entpaart. Es ist keine Korrekturmaßnahme möglich; es muss eine neue Paarung eingerichtet werden.</p>
+</li>
+</ul>
+</div>
+<h2 id="weitere-informationen" class="discrete">Weitere Informationen</h2>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.netapp.com/us-en/hci/index.html" target="_blank" rel="noopener">"NetApp HCI-Dokumentation"</a></p>
+</li>
+<li>
+<p><a href="https://www.netapp.com/data-storage/solidfire/documentation" target="_blank" rel="noopener">"Seite „SolidFire und Element Ressourcen“"</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  
+  <!-- Start Page Toolbar -->
+<div id="ie-right-navbar-collapse" class="close">
+  <img id="navbar-expand" class="ie-searchbox-icon" src="/de-de/vcp/images/double_arrow.svg" alt="" />
+</div>
+<div id="ie-right-navbar" class="open">
+  <div id="right-navbar-collapse">
+    <img src="/de-de/vcp/images/double_arrow.svg" alt="" />
+  </div>
+  <div class="page-nav-container">
+    <nav class="page-nav-fixed">
+      <div class="page-nav-title">Auf dieser seite</div>
+      <div class="page-nav-links">
+        <ul class="page-nav-inner" id="page-menu"></ul>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+<script>
+  resizeContent();
+  function setRightBarHeight() {
+    var h = 0;
+
+    // header 1
+    h += PXinViewport($('.n-footer'));
+    h += PXinViewport($('#ie-new-header'));
+
+    if ($('#ie-right-navbar').length) {
+      $('#ie-right-navbar').css({ height: `calc(100vh - ${h}px)` });
+    }
+    if ($('.page-nav-links').length) {
+      h += 98;
+      $('.page-nav-links').css({ height: `calc(100vh - ${h}px)` });
+    }
+  }
+
+  $(document).ready(function () {
+    // PAGE NAV - Click
+    const MASTHEAD_OFFSET = 65;
+    const SECTIONS = $("main h2, main h3");
+    let calculateActiveSection = false;
+    setTimeout(() => {
+      calculateActiveSection = true;
+    }, 100)
+
+    $(".page-nav__link").click(function (event) {
+      calculateActiveSection = false;
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      var target = $(event.target);
+      target.addClass('page-nav__link--active');
+      location.hash = event.target.hash;
+      setTimeout(() => {
+        calculateActiveSection = true;
+      }, 100)
+
+    });
+
+    // PAGE NAV - Scroll
+    $(window).on('resize scroll', function () {
+      if (calculateActiveSection) {
+        var activeSection = getActiveSection(SECTIONS, MASTHEAD_OFFSET);
+        if (activeSection) {
+          var activeHref = $(activeSection).attr('id');
+          $(".page-nav__link").removeClass('page-nav__link--active');
+          $("#page-menu a[href=#" + activeHref + "]").addClass('page-nav__link--active');
+          if (location.hash != "#" + activeHref) {
+            if (history.replaceState) {
+              history.replaceState(null, null, "#" + activeHref);
+            }
+          }
+        }
+      }
+    });
+
+    $(".n-pdf-button").click(function () {
+      $(this).toggleClass("active");
+    });
+
+    $.fn.isVisibleAndInViewport = function () {
+      var elementTop = $(this).offset().top;
+      var elementBottom = elementTop + $(this).outerHeight();
+
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+
+      return elementBottom > viewportTop && elementTop < viewportBottom && $(this).is(":visible");
+    };
+
+
+    $(window).on('resize scroll', function () {
+      setRightBarHeight();
+    });
+
+    $(window).trigger('resize');
+
+
+  });
+
+  $("#right-navbar-collapse").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 350, function () {
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+    });
+    $(".ie-content-pane").animate({ width: (width + rightNavbarWidth) }, 350, function () {
+      resizeContent()
+      setSidebarBottom();
+    })
+
+  });
+  $("#navbar-expand").click(function (e) {
+    const rightNavbarWidth = $("#ie-right-navbar").width() - $("#ie-right-navbar-collapse").width();
+    e.preventDefault();
+    const width = $(".ie-content-pane").width();
+    $("#ie-right-navbar").animate({ width: 'toggle' }, 250, function () {
+      $("#ie-right-navbar-collapse").removeClass("open")
+      $("#ie-right-navbar-collapse").addClass("close")
+      $("#ie-right-navbar").removeClass("close")
+      $("#ie-right-navbar").addClass("open")
+      setRightBarHeight();
+      setSidebarBottom();
+    });
+    $(".ie-content-pane").animate({ width: (width - rightNavbarWidth) }, 250, function () {
+      resizeContent()
+    })
+  });
+
+  function navbarResize() {
+    const rightNavbarResized = $("#ie-right-navbar-collapse").hasClass('resized');
+    if (window.innerWidth < 1024) {
+      $("#ie-right-navbar").removeClass("open")
+      $("#ie-right-navbar").addClass("close")
+      $("#ie-right-navbar").removeAttr("style")
+      $("#ie-right-navbar-collapse").removeClass("close")
+      $("#ie-right-navbar-collapse").addClass("open")
+      $("#ie-right-navbar-collapse").addClass("resized")
+    } else {
+      if (rightNavbarResized) {
+        $('#ie-right-navbar').removeClass('close');
+        $('#ie-right-navbar').addClass('open');
+        $("#ie-right-navbar-collapse").removeClass("resized")
+        $("#ie-right-navbar-collapse").removeClass("open")
+        $("#ie-right-navbar-collapse").addClass("close")
+      }
+    }
+    resizeContent()
+  }
+  navbarResize();
+  $(window).on('resize load', function () {
+    navbarResize()
+  });
+
+  function getActiveSection(sections, offset) {
+    var scrollPosition = $(window).scrollTop() + offset + 5;
+    var activeSection;
+    for (var i = 0; i < sections.length; i++) {
+      var el = $(sections[i]);
+      var activePosition = el.offset().top;
+      if (activePosition > scrollPosition) {
+        break;
+      }
+
+      activeSection = sections[i];
+    }
+
+    return activeSection;
+  }
+
+  $("a[href*=#]:not([href=#])").click(function () {
+    setTimeout(() => {
+      $(window).trigger('scroll');
+    }, 105)
+  })
+
+  const hashOnLoad = location.href.split("#")[1];
+  setTimeout(function () {
+    if (hashOnLoad) {
+      $(".page-nav__link").removeClass('page-nav__link--active');
+      $("#page-menu a[href=#" + hashOnLoad + "]").addClass('page-nav__link--active');
+    }
+  }, 100)
+
+</script>
+
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+        <div class="n-footer__left">
+          <li class="n-footer__copyright-link">
+                    <a href="https://www.netapp.com/company/legal/copyright/">© 2024 NetApp, Inc.</a>
+          </li>
+        </div>
+        <div class="n-footer__center">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Nutzungsbedingungen</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Datenschutzrichtlinie</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Richtlinie zu Cookies</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Cookie-Einstellungen</a>
+            </li>
+          </ul>
+       </div>
+        <div class="n-footer__right">
+              <li class="n-footer__copyright-link">
+                <a target="_self" href="javascript:netapp_mailto()">Feedback zu dieser Seite senden</a>
+              </li>
+        </div>
+     </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/de-de/vcp/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/de-de/vcp/js/prism.js'></script>
+      <script type="text/javascript" src='/de-de/vcp/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/de-de/vcp/js/ie-tabbed-blocks.js'></script>
+    <script src='/de-de/vcp/js/ie-sidebar.js'></script>
+  </body>
+
+</html>
