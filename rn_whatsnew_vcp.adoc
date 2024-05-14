@@ -14,6 +14,14 @@ keywords: netapp, vcp, vcenter, plugin, element, new, whats new
 
 
 [role="lead"]
+Das NetApp Element Plug-in für vCenter Server 5.3 verbessert die Sicherheit und Leistung. https://library.netapp.com/ecm/ecm_download_file/ECMLP3316480["Weitere Informationen ."^].
+
+Das Element vCenter Plug-in 5.3 ist mit Version 2.25.42 der Management-Services verfügbar.
+
+
+
+== NetApp Element Plug-in für vCenter Server 5.2
+
 Das NetApp Element Plug-in für vCenter Server 5.2 enthält Verbesserungen der Supportfähigkeit und eine Erweiterung der Anzeige der benutzerdefinierten Schutzdomänen.
 
 Mit Version 5.2 zeigt das Plug-in die Integritätsinformationen der benutzerdefinierten Schutzdomäne an, wenn eine benutzerdefinierte Schutzdomäne auf einem Element-Software-Cluster konfiguriert ist. link:vcp_task_reports_overview.html#reporting-overview-page-data["Weitere Informationen ."].

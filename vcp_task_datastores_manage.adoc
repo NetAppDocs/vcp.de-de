@@ -86,12 +86,38 @@ TIP: Verwenden Sie für jeden Datenspeicher in einem Datacenter einen eindeutige
 NOTE: Sie benötigen mindestens einen verbundenen Host, bevor Sie einen neuen Datastore erstellen können. Wenn Ihr Host über mehrere Initiatoren verfügt, wählen Sie einen Initiator oder den Host aus, um alle Initiatoren auszuwählen. Wenn Sie den verknüpften vCenter-Modus verwenden, können Sie nur Hosts auswählen, die dem vCenter-Server zur Verfügung stehen, dem das Cluster zugewiesen ist.
 
 . Wählen Sie *Weiter*.
-. Wählen Sie im Fensterbereich *Volume konfigurieren* ein vorhandenes Volume aus und fahren Sie mit dem nächsten Schritt fort, oder erstellen Sie ein neues Volume für den neuen Datenspeicher:
+. Wählen Sie im Bereich *Configure Volume* ein vorhandenes Volume aus oder erstellen Sie ein neues Volume für den neuen Datastore:
 +
+[role="tabbed-block"]
+====
+.Wählen Sie ein vorhandenes Volume aus
+--
+Wenn Sie ein vorhandenes Volume auswählen, müssen Sie die folgenden Voraussetzungen erfüllen:
 
-NOTE: Wenn Sie ein vorhandenes Volume auswählen, um einen neuen Datenspeicher zu erstellen, gehen die vorhandenen Daten verloren. Informationen zu vorhandenen VMFS-Volumes finden Sie in der VMware Dokumentation über https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.storage.doc/GUID-EEFEB765-A41F-4B6D-917C-BB9ABB80FC80.html["Mounten einer VMFS-Datastore-Kopie"^] Und https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.storage.doc/GUID-EBAB0D5A-3C77-4A9B-9884-3D4AD69E28DC.html["Managen doppelter VMFS-Datenspeicher"^].
-
+** So verwenden Sie eine Zugriffsgruppe für Volumes:
 +
+... Erstellen Sie ein neues Volume mit aktivierter 512e-Funktion.
+... Fügen Sie das Volume einer Zugriffsgruppe hinzu, die einen oder mehrere Ziel-Host-Initiatoren enthält.
+
+
+** So verwenden Sie CHAP:
++
+... Stellen Sie sicher, dass CHAP für jeden iSCSI-Adapter des Zielhosts konfiguriert ist.
+... Erstellen Sie ein neues Volume mit aktivierter 512e-Funktion mit einer der folgenden Optionen:
++
+**** Verwenden Sie ein Konto mit den entsprechenden CHAP-Einstellungen für jeden Zielhost.
+**** Erstellen Sie ein Konto und konfigurieren Sie die Ziel- und Initiatorgeheimnisse.
+
+
+... Zeigen Sie die Volume-Details an.
+... Fügen Sie den Volume-IQN zu jeder statischen Erkennungstabelle für den iSCSI-Adapter des Zielhosts hinzu.
+
+
+
+
+--
+.Erstellen Sie ein neues Volume
+--
 .. Geben Sie einen Namen für das Volume ein, das den Datenspeicher unterstützt.
 .. Wählen Sie in der Kontoliste ein Benutzerkonto aus.
 .. Geben Sie die Gesamtgröße des Volumes ein, die erstellt werden sollen.
@@ -118,6 +144,8 @@ TIP: Volumes mit einem IOPS-Wert von max oder Burst über 20,000 IOPS erfordern 
 
 
 
+--
+====
 . Wählen Sie *Weiter*.
 . Konfigurieren Sie den Berechtigungstyp für den Host-Zugriff, indem Sie eine der folgenden Optionen auswählen:
 +
