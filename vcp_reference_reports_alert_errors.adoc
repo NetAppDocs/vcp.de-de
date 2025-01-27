@@ -101,10 +101,10 @@ Ein Blockdienst wurde als fehlerhaft erkannt:
 ** Schweregrad = Warnung: Es werden keine Maßnahmen ergriffen. Dieser Warnzeitraum läuft in cTimeUntilBSIsKilledMSec=330000 Millisekunden ab.
 ** Schweregrad = Fehler: Das System setzt Daten automatisch zurück und repliziert seine Daten auf andere gesunde Laufwerke.
 ** Schweregrad = kritisch: Es gibt fehlerhafte Blockdienste auf mehreren Knoten, die größer oder gleich der Replikationszahl sind (2 für Doppelhelix). Die Daten sind nicht verfügbar, und die bin-Synchronisierung wird nicht beendet.
-
-
 +
 Prüfen Sie auf Probleme mit der Netzwerkverbindung und Hardwarefehler. Es gibt weitere Fehler, wenn bestimmte Hardwarekomponenten ausgefallen sind. Der Fehler wird gelöscht, wenn der Blockservice aufgerufen wird oder wenn der Dienst deaktiviert wurde.
+
+
 
 * *BmcSelfTestFailed*
 +
@@ -208,12 +208,9 @@ Das Cluster gibt diesen Fehler zurück, wenn ein oder mehrere Laufwerke ausgefal
 ** Der Master-Service für den Node ist nicht verfügbar (alle Laufwerke im Node gelten als fehlend/ausgefallen).
 ** Das Laufwerk ist gesperrt und der Authentifizierungsschlüssel für das Laufwerk kann nicht erworben werden.
 ** Das Laufwerk ist gesperrt, und der Entsperrvorgang schlägt fehl.
-
-
 +
 So lösen Sie dieses Problem:
 
-+
 ** Überprüfen Sie die Netzwerkverbindung für den Node.
 ** Ersetzen Sie das Laufwerk.
 ** Stellen Sie sicher, dass der Authentifizierungsschlüssel verfügbar ist.
@@ -237,10 +234,10 @@ Die Restlebensdauer eines Laufwerks ist unter die Schwellenwerte gesunken, funkt
 +
 ** Laufwerk mit serieller Verbindung: <Seriennummer> im Steckplatz: <Node-Steckplatz><Laufwerk-Steckplatz> verfügt über einen kritischen Verschleiß.
 ** Laufwerk mit serieller Verbindung: <Seriennummer> im Steckplatz: <Node-Steckplatz><Laufwerksfach> verfügt über geringe Verschleißreserven.
-
-
 +
 Um diesen Fehler zu beheben, tauschen Sie das Laufwerk bald aus.
+
+
 
 * * DuplicateClusterMasterCandidates*
 +

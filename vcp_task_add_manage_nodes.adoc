@@ -109,9 +109,6 @@ Zum Neustart des Clusters können Sie alle Cluster-Nodes auswählen und einen Ne
 
 IMPORTANT: Mit dieser Methode werden alle Netzwerkdienste auf einem Node neu gestartet, was zu einem vorübergehenden Verlust der Netzwerkverbindung führt.
 
-
-NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
-
 .Schritte
 . Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
 +
@@ -141,10 +138,6 @@ Mit dem Plug-in-Erweiterungspunkt können Sie einen oder mehrere aktive Knoten i
 
 .Was Sie benötigen
 Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.
-
-.Über diese Aufgabe
-
-NOTE: Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.
 
 .Schritte
 . Öffnen Sie in Ihrem vSphere Web Client die Registerkarte *Cluster*:
