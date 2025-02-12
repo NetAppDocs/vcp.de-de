@@ -833,7 +833,6 @@
   <block id="eacfad1499ca901255b178282af10724" category="paragraph">Sie haben I/O gestoppt und alle iSCSI-Sitzungen getrennt, wenn Sie mehr als einen Knoten gleichzeitig neu starten.</block>
   <block id="056633f97280a78a0b53f18470ad585a" category="paragraph">Zum Neustart des Clusters können Sie alle Cluster-Nodes auswählen und einen Neustart durchführen.</block>
   <block id="d98cefed931537819de0b2f9849667b3" category="admonition">Mit dieser Methode werden alle Netzwerkdienste auf einem Node neu gestartet, was zu einem vorübergehenden Verlust der Netzwerkverbindung führt.</block>
-  <block id="54901669f6ee1692cfa5c4342dec9cf6" category="admonition">Diese Funktion ist in SolidFire Enterprise SDS-Clustern nicht verfügbar.</block>
   <block id="d12b0c2106484859adaa58fb0301d427" category="list-text">Aktivieren Sie in der *Active*-Ansicht das Kontrollkästchen für jeden Knoten, den Sie neu starten möchten.</block>
   <block id="2ea9d7e19b043d5cc28569d3750b300c" category="list-text">Klicken Sie Auf *Aktionen*.</block>
   <block id="f07022f87adadf12f55f40e181ebf796" category="list-text">Wählen Sie *Neustart*.</block>
@@ -2880,4 +2879,6 @@
   <block id="7cf6790535f5cb85bde6ce82d5227fce" category="section-title">NetApp Element Plug-in für vCenter Server 5.3</block>
   <block id="e6282772fca5835069b1c98cf6db2c43" category="paragraph">Sie können ein Upgrade des NetApp Element Plug-ins für vCenter Server durchführen, indem Sie die für Ihre Installation beschriebenen Schritte ausführen. Das NetApp Element vCenter Plug-in 5.4 ist außerhalb der Element und NetApp HCI Versionen als Teil eines Management-Services-Bundles verfügbar.</block>
   <block id="912995e99772bb097b2c7b32940725bb" category="list-text"><block ref="912995e99772bb097b2c7b32940725bb" category="inline-link-rx"></block></block>
+  <block id="6db7dd4182be7a1979ad403111fa8618" category="inline-link">Versionshinweise zu NetApp Element Software 12.8</block>
+  <block id="7d776811219f8ebb17adecaa976bd578" category="list-text"><block ref="53e04163346326834efd61306c0800b5" category="inline-link-rx"></block> _NEU_</block>
 </blocks>
